@@ -6,8 +6,8 @@ const Header = ({ showNav, setShowNav }) => {
     setShowNav(!showNav);
   }
   return (
-    <div className="w-[100vw] h-[66px] bg-[#3C8DBC] flex items-center justify-between fixed -translate-y-full">
-      <div className="flex items-center">
+    <div className="w-[100vw] h-[66px] bg-[#3C8DBC] flex items-center justify-between fixed -translate-y-full ">
+      <div className="flex items-center transition-all">
         {!showNav && (
           <Link to="/Home">
             <div className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] w-[66px]">
@@ -26,25 +26,41 @@ const Header = ({ showNav, setShowNav }) => {
           className="flex items-center justify-center text-white font-bold text-[20px] h-full w-[66px]"
           onClick={handleShowNav}
         >
-          <svg
-            width="30"
-            height="30"
-            viewBox="0 0 30 30"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g clip-path="url(#clip0_65_1885)">
+          {!showNav && (
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 30 30"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_65_1885)">
+                <path
+                  d="M3.75 22.5H20V20H3.75V22.5ZM3.75 16.25H16.25V13.75H3.75V16.25ZM3.75 7.5V10H20V7.5H3.75ZM26.25 19.4875L21.775 15L26.25 10.5125L24.4875 8.75L18.2375 15L24.4875 21.25L26.25 19.4875Z"
+                  fill="#FFFAFA"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_65_1885">
+                  <rect width="30" height="30" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+          )}
+          {showNav && (
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
-                d="M3.75 22.5H20V20H3.75V22.5ZM3.75 16.25H16.25V13.75H3.75V16.25ZM3.75 7.5V10H20V7.5H3.75ZM26.25 19.4875L21.775 15L26.25 10.5125L24.4875 8.75L18.2375 15L24.4875 21.25L26.25 19.4875Z"
-                fill="#FFFAFA"
+                d="M20 2.01429L17.9857 0L10 7.98571L2.01429 0L0 2.01429L7.98571 10L0 17.9857L2.01429 20L10 12.0143L17.9857 20L20 17.9857L12.0143 10L20 2.01429Z"
+                fill="white"
               />
-            </g>
-            <defs>
-              <clipPath id="clip0_65_1885">
-                <rect width="30" height="30" fill="white" />
-              </clipPath>
-            </defs>
-          </svg>
+            </svg>
+          )}
         </div>
       </div>
       <div className=" flex items-center justify-between gap-3 mr-4">

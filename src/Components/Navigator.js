@@ -27,7 +27,7 @@ const Navigator = ({ showNav }) => {
       <div
         className={` ${
           showNav ? "" : "Navigator"
-        } flex flex-col gap-y-3 pt-3 items-center justify-start fixed w-[250px] h-[100vh] bg-[#367FA9]`}
+        } flex flex-col gap-y-3 pt-3 items-center justify-start fixed w-[250px] h-[100vh] bg-[#367FA9] transition-all`}
       >
         <div className="w-[236px] flex flex-col items-start justify-between gap-y-1 ">
           <div className="flex w-full justify-between items-center">
@@ -52,7 +52,7 @@ const Navigator = ({ showNav }) => {
           <div
             className={`${
               shadow1 ? "Nav_item" : ""
-            }  rounded-md bg-[#3C8DBC]  w-[236px] h-[50px] flex pl-2 justify-between items-center text-[16px] font-bold text-white`}
+            }  rounded-md bg-[#3C8DBC]  w-[236px] h-[50px] flex pl-2 justify-between items-center text-[16px] font-bold text-white transition-all`}
             onClick={handleOnClick1}
           >
             <span>Home</span>
@@ -76,7 +76,7 @@ const Navigator = ({ showNav }) => {
           <div
             className={`${
               shadow2 ? "Nav_item" : ""
-            }  rounded-md bg-[#3C8DBC] text-white w-[236px] h-[50px] flex pl-2 justify-between items-center text-[16px] font-bold`}
+            }  rounded-md bg-[#3C8DBC] text-white w-[236px] h-[50px] flex pl-2 justify-between items-center text-[16px] font-bold transition-all`}
             onClick={handleOnClick2}
           >
             <span>Printing</span>
@@ -100,7 +100,7 @@ const Navigator = ({ showNav }) => {
           <div
             className={`${
               shadow3 ? "Nav_item" : ""
-            }  rounded-md bg-[#3C8DBC] text-white w-[236px] h-[50px] flex pl-2 justify-between items-center text-[16px] font-bold`}
+            }  rounded-md bg-[#3C8DBC] text-white w-[236px] h-[50px] flex pl-2 justify-between items-center text-[16px] font-bold transition-all`}
             onClick={handleOnClick3}
           >
             <span>Support</span>

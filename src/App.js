@@ -19,7 +19,6 @@ function App() {
         {/* Content */}
         <div className="Main ml-[66px] w-full">
           <Routes>
-            <Route path="/SPS-Demo" element={<Home></Home>}></Route>
             <Route path="/Home" element={<Home></Home>}></Route>
             <Route path="/Printing" element={<Printing></Printing>}></Route>
             <Route path="/Support" element={<Support></Support>}></Route>
