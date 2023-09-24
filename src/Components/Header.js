@@ -1,24 +1,30 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Header = ({ showNav, setShowNav }) => {
+const Header = ({ hideNav, setShowNav, handleOnClick1 }) => {
   function handleShowNav() {
-    setShowNav(!showNav);
+    setShowNav(!hideNav);
   }
   return (
     <div className="w-[100vw] h-[66px] bg-[#3C8DBC] flex items-center justify-between fixed -translate-y-full ">
       <div className="flex items-center transition-all">
-        {!showNav && (
+        {!hideNav && (
           <Link to="/Home">
-            <div className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] w-[66px]">
+            <div
+              className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] w-[66px]"
+              onClick={handleOnClick1}
+            >
               BK
             </div>
           </Link>
         )}
-        {showNav && (
+        {hideNav && (
           <Link to="/Home">
-            <div className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] w-[250px]">
-              HCMUT - Printer
+            <div
+              className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] w-[250px]"
+              onClick={handleOnClick1}
+            >
+              Smart Printing System
             </div>
           </Link>
         )}
@@ -26,7 +32,7 @@ const Header = ({ showNav, setShowNav }) => {
           className="flex items-center justify-center text-white font-bold text-[20px] h-full w-[66px]"
           onClick={handleShowNav}
         >
-          {!showNav && (
+          {!hideNav && (
             <svg
               width="30"
               height="30"
@@ -47,7 +53,7 @@ const Header = ({ showNav, setShowNav }) => {
               </defs>
             </svg>
           )}
-          {showNav && (
+          {hideNav && (
             <svg
               width="20"
               height="20"

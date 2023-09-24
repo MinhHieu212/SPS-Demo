@@ -1,38 +1,25 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Navigator = ({ showNav }) => {
-  const [shadow1, setShadow1] = useState(true);
-  const [shadow2, setShadow2] = useState(false);
-  const [shadow3, setShadow3] = useState(false);
-
-  const handleOnClick1 = (e) => {
-    setShadow1(true);
-    setShadow2(false);
-    setShadow3(false);
-  };
-  const handleOnClick2 = (e) => {
-    setShadow1(false);
-    setShadow2(true);
-    setShadow3(false);
-  };
-  const handleOnClick3 = (e) => {
-    setShadow1(false);
-    setShadow2(false);
-    setShadow3(true);
-  };
-
+const Navigator = ({
+  hideNav,
+  shadow1,
+  shadow2,
+  shadow3,
+  handleOnClick1,
+  handleOnClick2,
+  handleOnClick3,
+}) => {
   return (
     <div>
       <div
         className={` ${
-          showNav ? "" : "Navigator"
+          hideNav ? "" : "Navigator"
         } flex flex-col gap-y-3 pt-3 items-center justify-start fixed w-[250px] h-[100vh] bg-[#367FA9] transition-all`}
       >
         <div className="w-[236px] flex flex-col items-start justify-between gap-y-1 ">
           <div className="flex w-full justify-between items-center">
             <div className="text-white fon onClick={handleOnClick}t-bold">
-              {" "}
               Nguyen Anh Kim Minh
             </div>
 
