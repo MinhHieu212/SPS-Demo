@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Navigator = ({ showNav }) => {
+  const [shadow1, setShadow1] = useState(true);
+  const [shadow2, setShadow2] = useState(false);
+  const [shadow3, setShadow3] = useState(false);
+
+  const handleOnClick1 = (e) => {
+    setShadow1(true);
+    setShadow2(false);
+    setShadow3(false);
+  };
+  const handleOnClick2 = (e) => {
+    setShadow1(false);
+    setShadow2(true);
+    setShadow3(false);
+  };
+  const handleOnClick3 = (e) => {
+    setShadow1(false);
+    setShadow2(false);
+    setShadow3(true);
+  };
+
   return (
     <div>
       <div
@@ -11,7 +31,10 @@ const Navigator = ({ showNav }) => {
       >
         <div className="w-[236px] flex flex-col items-start justify-between gap-y-1 ">
           <div className="flex w-full justify-between items-center">
-            <div className="text-white font-bold"> Nguyen Anh Kim Minh</div>
+            <div className="text-white fon onClick={handleOnClick}t-bold">
+              {" "}
+              Nguyen Anh Kim Minh
+            </div>
 
             <div className="border border-gray-300 mr-[6px] h-11 w-11 rounded-full overflow-hidden">
               <img
@@ -26,7 +49,12 @@ const Navigator = ({ showNav }) => {
           </div>
         </div>
         <Link to="/Home">
-          <div className="Nav_item rounded-md bg-[#3C8DBC]  w-[236px] h-[50px] flex pl-2 justify-between items-center text-[16px] font-bold">
+          <div
+            className={`${
+              shadow1 ? "Nav_item" : ""
+            }  rounded-md bg-[#3C8DBC]  w-[236px] h-[50px] flex pl-2 justify-between items-center text-[16px] font-bold text-white`}
+            onClick={handleOnClick1}
+          >
             <span>Home</span>
             <div className="h-full flex justify-center items-center w-[66px]">
               <svg
@@ -45,18 +73,23 @@ const Navigator = ({ showNav }) => {
           </div>
         </Link>
         <Link to="/Printing">
-          <div className="Nav_item rounded-md bg-[#3C8DBC]  w-[236px] h-[50px] flex pl-2 justify-between items-center text-[16px] font-bold">
+          <div
+            className={`${
+              shadow2 ? "Nav_item" : ""
+            }  rounded-md bg-[#3C8DBC] text-white w-[236px] h-[50px] flex pl-2 justify-between items-center text-[16px] font-bold`}
+            onClick={handleOnClick2}
+          >
             <span>Printing</span>
             <div className="h-full flex justify-center items-center w-[66px]">
               <svg
                 width="21"
-                height="18"
-                viewBox="0 0 21 18"
+                height="19"
+                viewBox="0 0 21 19"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M12 0C7.03 0 3 4.03 3 9H0L3.89 12.89L3.96 13.03L8 9H5C5 5.13 8.13 2 12 2C15.87 2 19 5.13 19 9C19 12.87 15.87 16 12 16C10.07 16 8.32 15.21 7.06 13.94L5.64 15.36C7.27 16.99 9.51 18 12 18C16.97 18 21 13.97 21 9C21 4.03 16.97 0 12 0ZM11 5V10L15.28 12.54L16 11.33L12.5 9.25V5H11Z"
+                  d="M17.7917 5.33333H3.20837C1.47921 5.33333 0.083374 6.72917 0.083374 8.45833V14.7083H4.25004V18.875H16.75V14.7083H20.9167V8.45833C20.9167 6.72917 19.5209 5.33333 17.7917 5.33333ZM14.6667 16.7917H6.33337V11.5833H14.6667V16.7917ZM17.7917 9.5C17.2188 9.5 16.75 9.03125 16.75 8.45833C16.75 7.88542 17.2188 7.41667 17.7917 7.41667C18.3646 7.41667 18.8334 7.88542 18.8334 8.45833C18.8334 9.03125 18.3646 9.5 17.7917 9.5ZM16.75 0.125H4.25004V4.29167H16.75V0.125Z"
                   fill="white"
                 />
               </svg>
@@ -64,7 +97,12 @@ const Navigator = ({ showNav }) => {
           </div>
         </Link>
         <Link to="/Support">
-          <div className="Nav_item rounded-md bg-[#3C8DBC]  w-[236px] h-[50px] flex pl-2 justify-between items-center text-[16px] font-bold">
+          <div
+            className={`${
+              shadow3 ? "Nav_item" : ""
+            }  rounded-md bg-[#3C8DBC] text-white w-[236px] h-[50px] flex pl-2 justify-between items-center text-[16px] font-bold`}
+            onClick={handleOnClick3}
+          >
             <span>Support</span>
             <div className="h-full flex justify-center items-center w-[66px]">
               <svg
