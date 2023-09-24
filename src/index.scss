@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#ECF0F5] font-body;
+  }
+}
+
+.Nav_item {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.281);
+  color: white;
+}
+
+.Navigator {
+  transform: translateX(-184px);
+}
+
+@media screen and (max-width: 400px) {
+  .Navigator {
+    transform: translateX(-250px);
+  }
+  .Main {
+    margin-left: 0px;
+  }
+  #userName {
+    display: none;
+  }
+}
