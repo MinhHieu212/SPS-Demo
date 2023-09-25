@@ -60,7 +60,7 @@ function App() {
         setShowNav={setHideNav}
         handleOnClick1={handleOnClick1}
       ></Header>
-      <div className="Body w-full flex mt-[66px]">
+      <div className="w-full flex mt-[66px]">
         <Navigator
           hideNav={hideNav}
           shadow1={shadow1}
@@ -70,7 +70,7 @@ function App() {
           handleOnClick2={handleOnClick2}
           handleOnClick3={handleOnClick3}
         ></Navigator>
-        <div className={`Main ${pl} w-full`}>
+        <div className={`Main_Container ${pl} w-full`}>
           <Routes>
             <Route path="/" element={<Home></Home>}></Route>
             <Route path="/SPS-Demo" element={<Home></Home>}></Route>

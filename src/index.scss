@@ -8,23 +8,23 @@
   }
 }
 
-.Nav_item {
+.Navigator_Option {
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
   background-color: #2679a8;
 }
 
-.Navigator {
+.Navigator_Containter {
   transform: translateX(-184px);
 }
 
-@media screen and (max-width: 400px) {
-  .Navigator {
+@media screen and (max-width: 393px) {
+  .Navigator_Containter {
     transform: translateX(-250px);
   }
-  .Main {
+  .Main_Container {
     margin-left: 0px;
   }
-  #userName {
+  .Header_UserName {
     display: none;
   }
 }
