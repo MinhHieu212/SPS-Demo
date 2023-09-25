@@ -32,7 +32,7 @@ function App() {
   // const [shadows, setShadows] = useState({ shadow1: true, shadow2: false, shadow3: false });
 
   // const handleOnClick = (selectedShadow) => {
-  //          setShadows({ shadow1: false, shadow2: false, shadow3: false, [selectedShadow]: true });
+  //       setShadows({ shadow1: false, shadow2: false, shadow3: false, [selectedShadow]: true });
   // };
 
   useEffect(() => {

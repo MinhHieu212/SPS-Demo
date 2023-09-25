@@ -17,7 +17,7 @@ const Navigator = ({
     >
       <div className="Navigator_UserInfo w-[236px] flex flex-col items-start justify-between gap-y-1 ">
         <div className="flex w-full justify-between items-center">
-          <div className="Navigator_UserName text-white fon onClick={handleOnClick}t-bold">
+          <div className="Navigator_UserName text-white font-semibold ">
             Nguyen Anh Kim Minh
           </div>
           <div className="border border-gray-300 mr-[6px] h-11 w-11 rounded-full overflow-hidden">

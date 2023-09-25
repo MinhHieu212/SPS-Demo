@@ -11,7 +11,7 @@ const Header = ({ hideNav, setShowNav, handleOnClick1 }) => {
         {!hideNav && (
           <Link to="/Home">
             <div
-              className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] w-[66px]"
+              className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] w-[66px] bg-gradient-to-r from-cyan-500 to-#3C8DBC"
               onClick={handleOnClick1}
             >
               BK
@@ -21,7 +21,7 @@ const Header = ({ hideNav, setShowNav, handleOnClick1 }) => {
         {hideNav && (
           <Link to="/Home">
             <div
-              className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] w-[250px]"
+              className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] w-[250px] bg-gradient-to-r from-cyan-500 to-#3C8DBC"
               onClick={handleOnClick1}
             >
               Smart Printing System
@@ -149,7 +149,7 @@ const Header = ({ hideNav, setShowNav, handleOnClick1 }) => {
             </clipPath>
           </defs>
         </svg>
-        <span className="Header_UserName text-white pr-3 ">
+        <span className="Header_UserName text-white pr-3 font-semibold ">
           Nguyen Anh Kim Minh
         </span>
       </div>
