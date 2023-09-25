@@ -2,20 +2,22 @@
 import { Link } from "react-router-dom";
 
 const Navigator = ({
-  hideNav,
+  showNav,
   shadow1,
   shadow2,
   shadow3,
   handleOnClick1,
   handleOnClick2,
   handleOnClick3,
+  elementRef,
 }) => {
   return (
     <div
-      className={` ${hideNav ? "" : "Navigator_Containter"} 
-        flex flex-col gap-y-3 pt-3 items-center justify-start fixed w-[250px] h-[100vh] bg-[#367FA9] transition-all`}
+      className={`Navigator_Containter ${showNav ? "" : "NavigatorHide"} 
+        flex flex-col gap-y-3  items-center justify-start fixed w-[250px] h-[100vh] bg-[#367FA9] transition-all`}
+      ref={elementRef}
     >
-      <div className="Navigator_UserInfo w-[236px] flex flex-col items-start justify-between gap-y-1 ">
+      <div className="Navigator_UserInfo mt-3 w-[236px] flex flex-col items-start justify-between gap-y-1 ">
         <div className="flex w-full justify-between items-center">
           <div className="Navigator_UserName text-white font-semibold ">
             Nguyen Anh Kim Minh
@@ -36,7 +38,7 @@ const Navigator = ({
         <div
           className={`${
             shadow1 ? "Navigator_Option" : ""
-          }  rounded-md bg-[#3C8DBC]  w-[236px] h-[50px] flex pl-2 justify-between items-center text-[16px] font-bold text-white transition-all`}
+          }  rounded-md bg-[#3C8DBC]  w-[236px] h-[50px] flex pl-2 justify-between items-center text-[16px] font-bold text-white transition-all bg-gradient-to-r from-cyan-500 to-#3C8DBC`}
           onClick={handleOnClick1}
         >
           <span>Home</span>
@@ -60,7 +62,7 @@ const Navigator = ({
         <div
           className={`${
             shadow2 ? "Navigator_Option" : ""
-          }  rounded-md bg-[#3C8DBC] text-white w-[236px] h-[50px] flex pl-2 justify-between items-center text-[16px] font-bold transition-all`}
+          }  rounded-md bg-[#3C8DBC] text-white w-[236px] h-[50px] flex pl-2 justify-between items-center text-[16px] font-bold transition-all bg-gradient-to-r from-cyan-500 to-#3C8DBC`}
           onClick={handleOnClick2}
         >
           <span>Printing</span>
@@ -84,7 +86,7 @@ const Navigator = ({
         <div
           className={`${
             shadow3 ? "Navigator_Option" : ""
-          }  rounded-md bg-[#3C8DBC] text-white w-[236px] h-[50px] flex pl-2 justify-between items-center text-[16px] font-bold transition-all`}
+          }  rounded-md bg-[#3C8DBC] text-white w-[236px] h-[50px] flex pl-2 justify-between items-center text-[16px] font-bold transition-all bg-gradient-to-r from-cyan-500 to-#3C8DBC`}
           onClick={handleOnClick3}
         >
           <span>Support</span>

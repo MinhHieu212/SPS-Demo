@@ -1,27 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Header = ({ hideNav, setShowNav, handleOnClick1 }) => {
+const Header = ({ showNav, setShowNav, handleOnClick1 }) => {
   function handleShowNav() {
-    setShowNav(!hideNav);
+    setShowNav(!showNav);
   }
   return (
     <div className="Header_container w-[100vw] h-[66px] bg-[#3C8DBC] flex items-center justify-between fixed -translate-y-full ">
       <div className="Header_SystemName flex items-center transition-all">
-        {!hideNav && (
+        {!showNav && (
           <Link to="/Home">
             <div
-              className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] w-[66px] bg-gradient-to-r from-cyan-500 to-#3C8DBC"
+              className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] w-[66px] bg-gradient-to-br from-cyan-500 to-#3C8DBC"
               onClick={handleOnClick1}
             >
               BK
             </div>
           </Link>
         )}
-        {hideNav && (
+        {showNav && (
           <Link to="/Home">
             <div
-              className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] w-[250px] bg-gradient-to-r from-cyan-500 to-#3C8DBC"
+              className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] w-[250px] bg-gradient-to-br from-cyan-500 to-#3C8DBC"
               onClick={handleOnClick1}
             >
               Smart Printing System
@@ -29,10 +29,11 @@ const Header = ({ hideNav, setShowNav, handleOnClick1 }) => {
           </Link>
         )}
         <div
-          className="Header_MenuIcon flex items-center justify-center text-white font-bold text-[20px] h-full w-[66px]"
+          id="Header_MenuIcon"
+          className="Header_MenuIcon flex items-center justify-center text-white font-bold text-[20px] h-[66px] w-[66px]"
           onClick={handleShowNav}
         >
-          {!hideNav && (
+          {!showNav && (
             <svg
               width="30"
               height="30"
@@ -53,7 +54,7 @@ const Header = ({ hideNav, setShowNav, handleOnClick1 }) => {
               </defs>
             </svg>
           )}
-          {hideNav && (
+          {showNav && (
             <svg
               width="20"
               height="20"

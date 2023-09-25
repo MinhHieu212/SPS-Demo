@@ -5,10 +5,10 @@ import Support from "./Page/Support";
 import { useEffect, useState } from "react";
 import Navigator from "./Components/Navigator";
 import Header from "./Components/Header";
+import { useRef } from "react";
 
 function App() {
-  const [hideNav, setHideNav] = useState(false);
-
+  const [showNav, setshowNav] = useState(false);
   const [shadow1, setShadow1] = useState(true);
   const [shadow2, setShadow2] = useState(false);
   const [shadow3, setShadow3] = useState(false);
@@ -35,40 +35,59 @@ function App() {
   //       setShadows({ shadow1: false, shadow2: false, shadow3: false, [selectedShadow]: true });
   // };
 
+  const elementRef = useRef();
+
+  const handleOnClickOut = (e) => {
+    if (
+      elementRef.current &&
+      !elementRef.current.contains(e.target) &&
+      !e.target.matches("#Header_MenuIcon") &&
+      !e.target.matches("svg") &&
+      !e.target.matches("path") &&
+      window.innerWidth <= 849
+    ) {
+      setshowNav(false);
+    }
+  };
+
   useEffect(() => {
     if (window.innerWidth >= 849) {
-      setHideNav(true);
-      // layout
+      setshowNav(true);
     } else {
-      setHideNav(false);
+      setshowNav(false);
     }
+    document.addEventListener("click", handleOnClickOut);
+    return () => {
+      document.removeEventListener("click", handleOnClickOut);
+    };
   }, []);
 
   const [pl, setPl] = useState("ml-[66px]");
 
   useEffect(() => {
     setPl("ml-[66px]");
-    if (window.innerWidth >= 849 && hideNav) {
+    if (window.innerWidth >= 849 && showNav) {
       setPl("ml-[250px]");
     }
-  }, [hideNav]);
+  }, [showNav]);
 
   return (
     <div>
       <Header
-        hideNav={hideNav}
-        setShowNav={setHideNav}
+        showNav={showNav}
+        setShowNav={setshowNav}
         handleOnClick1={handleOnClick1}
       ></Header>
       <div className="w-full flex mt-[66px]">
         <Navigator
-          hideNav={hideNav}
+          showNav={showNav}
           shadow1={shadow1}
           shadow2={shadow2}
           shadow3={shadow3}
           handleOnClick1={handleOnClick1}
           handleOnClick2={handleOnClick2}
           handleOnClick3={handleOnClick3}
+          elementRef={elementRef}
         ></Navigator>
         <div className={`Main_Container ${pl} w-full`}>
           <Routes>

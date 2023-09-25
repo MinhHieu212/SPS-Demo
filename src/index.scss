@@ -9,16 +9,16 @@
 }
 
 .Navigator_Option {
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.466);
   background-color: #2679a8;
 }
 
-.Navigator_Containter {
+.NavigatorHide {
   transform: translateX(-184px);
 }
 
 @media screen and (max-width: 400px) {
-  .Navigator_Containter {
+  .NavigatorHide {
     transform: translateX(-250px);
   }
   .Main_Container {
