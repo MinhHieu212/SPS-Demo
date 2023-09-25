@@ -6,8 +6,8 @@ const Header = ({ hideNav, setShowNav, handleOnClick1 }) => {
     setShowNav(!hideNav);
   }
   return (
-    <div className="w-[100vw] h-[66px] bg-[#3C8DBC] flex items-center justify-between fixed -translate-y-full ">
-      <div className="flex items-center transition-all">
+    <div className="Header_container w-[100vw] h-[66px] bg-[#3C8DBC] flex items-center justify-between fixed -translate-y-full ">
+      <div className="Header_SystemName flex items-center transition-all">
         {!hideNav && (
           <Link to="/Home">
             <div
@@ -29,7 +29,7 @@ const Header = ({ hideNav, setShowNav, handleOnClick1 }) => {
           </Link>
         )}
         <div
-          className="flex items-center justify-center text-white font-bold text-[20px] h-full w-[66px]"
+          className="Header_MenuIcon flex items-center justify-center text-white font-bold text-[20px] h-full w-[66px]"
           onClick={handleShowNav}
         >
           {!hideNav && (
@@ -69,7 +69,7 @@ const Header = ({ hideNav, setShowNav, handleOnClick1 }) => {
           )}
         </div>
       </div>
-      <div className=" flex items-center justify-between gap-3 mr-4">
+      <div className="Header_UserInfo flex items-center justify-between gap-3 mr-4">
         <svg
           width="40"
           height="40"
@@ -149,8 +149,7 @@ const Header = ({ hideNav, setShowNav, handleOnClick1 }) => {
             </clipPath>
           </defs>
         </svg>
-        <span className="text-white pr-3" id="userName">
-          {" "}
+        <span className="Header_UserName text-white pr-3 ">
           Nguyen Anh Kim Minh
         </span>
       </div>
