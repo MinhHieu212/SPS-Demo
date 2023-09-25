@@ -73,7 +73,7 @@ function App() {
         <div className={`Main_Container ${pl} w-full`}>
           <Routes>
             <Route path="/" element={<Home></Home>}></Route>
-            <Route path="/SPS-Demo" element={<Home></Home>}></Route>
+            <Route path="/SPS-SYSTEM-FE" element={<Home></Home>}></Route>
             <Route path="/Home" element={<Home></Home>}></Route>
             <Route path="/Printing" element={<Printing></Printing>}></Route>
             <Route path="/Support" element={<Support></Support>}></Route>
