@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/SPS-SYSTEM-FE/static/css/main.f7d20cb5.css",
-    "main.js": "/SPS-SYSTEM-FE/static/js/main.b09ca9a6.js",
+    "main.css": "/SPS-SYSTEM-FE/static/css/main.d259d278.css",
+    "main.js": "/SPS-SYSTEM-FE/static/js/main.57c69e41.js",
     "static/js/787.2bd50fdf.chunk.js": "/SPS-SYSTEM-FE/static/js/787.2bd50fdf.chunk.js",
     "index.html": "/SPS-SYSTEM-FE/index.html",
-    "main.f7d20cb5.css.map": "/SPS-SYSTEM-FE/static/css/main.f7d20cb5.css.map",
-    "main.b09ca9a6.js.map": "/SPS-SYSTEM-FE/static/js/main.b09ca9a6.js.map",
+    "main.d259d278.css.map": "/SPS-SYSTEM-FE/static/css/main.d259d278.css.map",
+    "main.57c69e41.js.map": "/SPS-SYSTEM-FE/static/js/main.57c69e41.js.map",
     "787.2bd50fdf.chunk.js.map": "/SPS-SYSTEM-FE/static/js/787.2bd50fdf.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f7d20cb5.css",
-    "static/js/main.b09ca9a6.js"
+    "static/css/main.d259d278.css",
+    "static/js/main.57c69e41.js"
   ]
 }
