@@ -1,39 +1,40 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Header.scss";
 
-const Header = ({ showNav, setShowNav, handleOnClick1 }) => {
-  function handleShowNav() {
-    setShowNav(!showNav);
+const Header = ({ showSideBar, setShowSideBar, handleOnClickHome }) => {
+  function handleShowSideBar() {
+    setShowSideBar(!showSideBar);
   }
   return (
-    <div className="Header_container w-[100vw] h-[66px] bg-[#3C8DBC] flex items-center justify-between fixed -translate-y-full ">
+    <div className="Header_container w-[100vw] h-[66px] bg-[#3C8DBC] flex items-center justify-between fixed z-50 -translate-y-full ">
       <div className="Header_SystemName flex items-center transition-all">
-        {!showNav && (
+        {!showSideBar && (
           <Link to="/Home">
             <div
               className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] w-[66px] bg-gradient-to-br from-cyan-500 to-#3C8DBC"
-              onClick={handleOnClick1}
+              onClick={handleOnClickHome}
             >
               BK
             </div>
           </Link>
         )}
-        {showNav && (
+        {showSideBar && (
           <Link to="/Home">
             <div
               className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] w-[250px] bg-gradient-to-br from-cyan-500 to-#3C8DBC"
-              onClick={handleOnClick1}
+              onClick={handleOnClickHome}
             >
               Smart Printing System
             </div>
           </Link>
         )}
         <div
-          id="Header_MenuIcon"
-          className="Header_MenuIcon flex items-center justify-center text-white font-bold text-[20px] h-[66px] w-[66px]"
-          onClick={handleShowNav}
+          id="Header_SideBarIcon"
+          className="Header_MenuIcon flex items-center justify-center text-white font-bold text-[20px] h-[66px] w-[66px] cursor-pointer"
+          onClick={handleShowSideBar}
         >
-          {!showNav && (
+          {!showSideBar && (
             <svg
               width="30"
               height="30"
@@ -41,7 +42,7 @@ const Header = ({ showNav, setShowNav, handleOnClick1 }) => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g clip-path="url(#clip0_65_1885)">
+              <g clipPath="url(#clip0_65_1885)">
                 <path
                   d="M3.75 22.5H20V20H3.75V22.5ZM3.75 16.25H16.25V13.75H3.75V16.25ZM3.75 7.5V10H20V7.5H3.75ZM26.25 19.4875L21.775 15L26.25 10.5125L24.4875 8.75L18.2375 15L24.4875 21.25L26.25 19.4875Z"
                   fill="#FFFAFA"
@@ -54,7 +55,7 @@ const Header = ({ showNav, setShowNav, handleOnClick1 }) => {
               </defs>
             </svg>
           )}
-          {showNav && (
+          {showSideBar && (
             <svg
               width="20"
               height="20"
@@ -78,7 +79,7 @@ const Header = ({ showNav, setShowNav, handleOnClick1 }) => {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g clip-path="url(#clip0_65_512)">
+          <g clipPath="url(#clip0_65_512)">
             <path
               d="M20.1105 0L9.65009 5.92058V16.8231L0 22.2383V34.0072L10.3131 39.8556L19.9632 34.3682L29.7606 40L39.8527 34.0794L40 22.1661L30.2026 16.8231L30.2762 5.84838L20.1105 0Z"
               fill="white"
@@ -150,9 +151,11 @@ const Header = ({ showNav, setShowNav, handleOnClick1 }) => {
             </clipPath>
           </defs>
         </svg>
-        <span className="Header_UserName text-white pr-3 font-semibold ">
-          Nguyen Anh Kim Minh
-        </span>
+        <Link to="/Login">
+          <span className="Header_UserName text-white pr-3 font-semibold cursor-pointer">
+            Đăng nhập
+          </span>
+        </Link>
       </div>
     </div>
   );
