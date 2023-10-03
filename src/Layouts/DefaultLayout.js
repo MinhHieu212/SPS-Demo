@@ -6,36 +6,6 @@ import { useRef } from "react";
 import React from "react";
 
 const DefaultLayout = ({ children }) => {
-  const [shadowHome, setShadowHome] = useState(true);
-  const [shadowPrinting, setShadowPrinting] = useState(false);
-  const [shadowHistory, setShadowHistory] = useState(false);
-  const [shadowSupport, setShadowSupport] = useState(false);
-
-  const handleOnClickHome = (e) => {
-    setShadowHome(true);
-    setShadowPrinting(false);
-    setShadowHistory(false);
-    setShadowSupport(false);
-  };
-  const handleOnClickPrinting = (e) => {
-    setShadowHome(false);
-    setShadowPrinting(true);
-    setShadowHistory(false);
-    setShadowSupport(false);
-  };
-  const handleOnClickHistory = (e) => {
-    setShadowHome(false);
-    setShadowPrinting(false);
-    setShadowHistory(true);
-    setShadowSupport(false);
-  };
-  const handleOnClickSupport = (e) => {
-    setShadowHome(false);
-    setShadowPrinting(false);
-    setShadowHistory(false);
-    setShadowSupport(true);
-  };
-
   // State for Sidebar
   const elementRef = useRef();
   const [showSideBar, setshowSideBar] = useState(false);
@@ -84,21 +54,9 @@ const DefaultLayout = ({ children }) => {
       <Header
         showSideBar={showSideBar}
         setShowSideBar={setshowSideBar}
-        handleOnClickHome={handleOnClickHome}
       ></Header>
       <div className="w-full flex mt-[66px]">
-        <SideBar
-          showSideBar={showSideBar}
-          shadowHome={shadowHome}
-          shadowPrinting={shadowPrinting}
-          shadowHistory={shadowHistory}
-          shadowSupport={shadowSupport}
-          handleOnClickHome={handleOnClickHome}
-          handleOnClickPrinting={handleOnClickPrinting}
-          handleOnClickHistory={handleOnClickHistory}
-          handleOnClickSupport={handleOnClickSupport}
-          elementRef={elementRef}
-        ></SideBar>
+        <SideBar showSideBar={showSideBar} elementRef={elementRef}></SideBar>
         <div className={`Main_Container ${marginLeft} w-full`}>{children}</div>
       </div>
     </div>

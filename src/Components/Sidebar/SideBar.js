@@ -1,13 +1,25 @@
-import React from "react";
+import "./SideBar.scss";
+import React, { useEffect, useState } from "react";
 import StudentInfo from "./StudentInfo";
 import SidebarItem from "./SidebarItem";
 import {
-  // StudentSideBarOption,
+  StudentSideBarOption,
   SPSOSideBarOption,
-  // StaffSideBarOption,
+  StaffSideBarOption,
 } from "./SidebarItemList";
 
 const SideBar = ({ showSideBar, elementRef }) => {
+  let [userPosition, setUserPosition] = useState("SPSO");
+  let [userSideBar, setUserSideBar] = useState(StudentSideBarOption);
+
+  //Configure the SideBar according to permissions
+  useEffect(() => {
+    setUserPosition("SPSO");
+    if (userPosition === "SPSO") setUserSideBar(SPSOSideBarOption);
+    else if (userPosition === "Staff") setUserSideBar(StaffSideBarOption);
+    else setUserSideBar(StudentSideBarOption);
+  }, [userPosition]);
+
   return (
     <div
       className={`SideBar_Containter ${showSideBar ? "" : "SideBarHide"} 
@@ -19,7 +31,7 @@ const SideBar = ({ showSideBar, elementRef }) => {
 
       {/* Sidebar Item (Pages) */}
       <nav className="flex flex-col gap-y-3">
-        {SPSOSideBarOption.map((item, index) => {
+        {userSideBar.map((item, index) => {
           return (
             <SidebarItem
               title={item.title}
