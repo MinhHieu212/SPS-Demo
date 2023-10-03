@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        body: ["DM Sans", "sans-serif", "p-5"],
+        body: ["Roboto Condensed", "sans-serif", "p-5"],
       },
     },
   },

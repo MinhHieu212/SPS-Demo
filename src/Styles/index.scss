@@ -8,23 +8,20 @@
   }
 }
 
-.Navigator_Option {
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+.SideBar_Option {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.466);
   background-color: #2679a8;
 }
 
-.Navigator_Containter {
+.SideBarHide {
   transform: translateX(-184px);
 }
 
-@media screen and (max-width: 393px) {
-  .Navigator_Containter {
+@media screen and (max-width: 400px) {
+  .SideBarHide {
     transform: translateX(-250px);
   }
   .Main_Container {
     margin-left: 0px;
-  }
-  .Header_UserName {
-    display: none;
   }
 }

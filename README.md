@@ -1,3 +1,3 @@
 # Github deploy
 
-    Visit project: https://minhhieu212.github.io/SPS-Demo/
+    Visit project: https://minhhieu212.github.io/SPS-SYSTEM-FE/
