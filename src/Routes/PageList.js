@@ -21,7 +21,7 @@ const publicRoutes = [
     layout: "default",
   },
   {
-    path: "/SPS-SYSTEM-FE",
+    path: "/SPS-FE-Project",
     component: Home,
     layout: "default",
   },
