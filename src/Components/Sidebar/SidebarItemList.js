@@ -7,7 +7,7 @@ import {
   MangageIcon,
   ReportIcon,
   ActivitiesIcon,
-} from "../Icons/Icons";
+} from "../../Assets/Icons/Icons";
 
 export const StudentSideBarOption = [
   { title: "Trang chủ", icon: <HomeIcon />, to: "/Home" },
@@ -15,6 +15,7 @@ export const StudentSideBarOption = [
   { title: "Lịch sử", icon: <HistoryIcon />, to: "/History" },
   { title: "Hướng dẫn", icon: <SupportIcon />, to: "/Support" },
 ];
+
 export const SPSOSideBarOption = [
   { title: "Trang chủ", icon: <HomeIcon />, to: "/Home" },
   { title: "In Tài Liệu", icon: <PrintingIcon />, to: "/Printing" },

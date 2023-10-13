@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { HcmutIcon, MenuIcon, CloseIcon } from "../Icons/Icons";
+import { HcmutIcon, MenuIcon, CloseIcon } from "../../Assets/Icons/Icons";
 import "./Header.scss";
 
 const Header = ({ showSideBar, setShowSideBar }) => {
