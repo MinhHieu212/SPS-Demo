@@ -13,15 +13,15 @@ const publicRoutes = [
   {
     path: "/",
     component: Home,
-    layout: "default",
-  },
-  {
-    path: "/Home",
-    component: Home,
-    layout: "default",
+    layout: "beforeLogin",
   },
   {
     path: "/SPS-FE-Project",
+    component: Home,
+    layout: "beforeLogin",
+  },
+  {
+    path: "/Home",
     component: Home,
     layout: "default",
   },

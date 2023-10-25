@@ -35,11 +35,9 @@ const Header = ({ showSideBar, setShowSideBar }) => {
       </div>
       <div className="Header_UserInfo flex items-center justify-between gap-3 mr-4">
         {<HcmutIcon />}
-        <Link to="/Login">
-          <span className="Header_UserName text-white pr-3 font-semibold cursor-pointer">
-            Đăng nhập
-          </span>
-        </Link>
+        <span className="Header_UserName text-white pr-3 font-semibold cursor-pointer">
+          Nguyễn Văn Anh Khoa
+        </span>
       </div>
     </div>
   );

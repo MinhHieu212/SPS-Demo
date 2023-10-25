@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { publicRoutes } from "./Routes/PageList";
 import DefaultLayout from "./Layouts/DefaultLayout";
+import BeforeLogin from "./Layouts/BeforeLogin";
 import EmptyLayout from "./Layouts/EmptyLayout";
 
 function App() {
@@ -8,7 +9,14 @@ function App() {
     <div>
       <Routes>
         {publicRoutes.map((route, index) => {
-          const Layout = route.layout ? DefaultLayout : EmptyLayout;
+          let Layout;
+          if (!route.layout) {
+            Layout = EmptyLayout;
+          } else if (route.layout === "beforeLogin") {
+            Layout = BeforeLogin;
+          } else {
+            Layout = DefaultLayout;
+          }
           const Page = route.component;
 
           return (
