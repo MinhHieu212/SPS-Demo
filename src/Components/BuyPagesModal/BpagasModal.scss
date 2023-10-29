@@ -1,0 +1,12 @@
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+@media screen and (max-width: 400px) {
+  .containerModal {
+    width: 380px;
+  }
+  .numberInput {
+    width: 150px;
+  }
+}

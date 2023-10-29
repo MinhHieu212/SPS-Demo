@@ -17,11 +17,13 @@ const PopoverBase = ({ element, children }) => {
   return (
     <Popover open={openPopover} handler={setOpenPopover}>
       <PopoverHandler {...triggers}>
-        <Button variant="text">{element}</Button>
+        <Button variant="text" className="outline-none">
+          {element}
+        </Button>
       </PopoverHandler>
       <PopoverContent
         {...triggers}
-        className="z-50 max-w-[24rem] p-0 -translate-x-6"
+        className="z-50 max-w-[24rem] p-0 -translate-x-4"
       >
         {children}
       </PopoverContent>

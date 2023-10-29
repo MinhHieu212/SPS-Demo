@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import InfoField from "../Uitls/InfoField";
 import { useNavigate } from "react-router-dom";
 import PopoverBase from "../Popover/PopoverBase";
+import BpagasModal from "../BuyPagesModal/BpagasModal";
 
 function PopoverInfo({ children }) {
   const navigate = useNavigate();
-
+  const [openModal, setOpenModal] = useState(false);
   const handleLogout = () => {
     navigate("/");
   };
 
   const handleBuyPages = () => {
-    // TODO
+    // TODO for buy new Page
+    setOpenModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
   };
 
   return (
@@ -42,20 +48,23 @@ function PopoverInfo({ children }) {
               90
             </div>
           </div>
+
           <button
             onClick={handleBuyPages}
-            className="bg-[#367FA9] bg-gradient-to-br from-cyan-500 mb-2 mt-4 to-#3C8DBC w-full h-[45px] rounded-lg flex items-center justify-center text-white text-[16px] font-bold hover:bg-[#2c5d8d] hover:from-cyan-400 hover:to-[#345a96] transition-all duration-300"
+            className="bg-[#367FA9] bg-gradient-to-br outline-none from-cyan-500 mb-2 mt-4 to-#3C8DBC w-full h-[45px] rounded-lg flex items-center justify-center text-white text-[16px] font-bold hover:bg-[#2c5d8d] hover:from-cyan-400 hover:to-[#345a96] transition-all duration-300"
           >
             MUA THÊM GIẤY
           </button>
+
           <button
             onClick={handleLogout}
-            className="bg-gradient-to-br from-[#999292] to-[#B4AFAF] my-3 w-full h-[45px] rounded-lg flex items-center justify-center text-white text-[16px] font-bold hover:from-[#888181] hover:to-[#A09D9D] transition-all duration-300"
+            className="bg-gradient-to-br from-[#999292]  outline-none to-[#B4AFAF] my-3 w-full h-[45px] rounded-lg flex items-center justify-center text-white text-[16px] font-bold hover:from-[#888181] hover:to-[#A09D9D] transition-all duration-300"
           >
             ĐĂNG XUẤT
           </button>
         </div>
       </div>
+      <BpagasModal open={openModal} handleClose={handleClose}></BpagasModal>
     </PopoverBase>
   );
 }
