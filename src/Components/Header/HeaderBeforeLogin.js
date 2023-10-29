@@ -1,9 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { HcmutIcon } from "../../Assets/Icons/Icons";
 import "./Header.scss";
 
 const HeaderBeforeLogin = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    setTimeout(() => {
+      navigate("/Login");
+    }, 500);
+  };
+
   return (
     <div className="HeaderBeforeLogin_container w-[100vw] h-[66px] bg-[#3C8DBC] flex items-center justify-between fixed z-50  ">
       <div className="Header_SystemName flex items-center transition-all">
@@ -13,11 +21,12 @@ const HeaderBeforeLogin = () => {
       </div>
       <div className="Header_UserInfo flex items-center justify-between gap-3 mr-4">
         {<HcmutIcon />}
-        <Link to="/Login">
-          <span className="text-white pr-3 font-semibold cursor-pointer">
-            Đăng nhập
-          </span>
-        </Link>
+        <button
+          onClick={handleLogin}
+          className="text-white pr-3 font-semibold cursor-pointer"
+        >
+          Đăng nhập
+        </button>
       </div>
     </div>
   );
