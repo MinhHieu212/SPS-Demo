@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { HcmutIcon, MenuIcon, CloseIcon } from "../Icons/Icons";
+import { HcmutIcon, MenuIcon, CloseIcon } from "../../Assets/Icons/Icons";
 import "./Header.scss";
+import PopoverInfo from "../PopoverInfo/PopoverInfo";
 
 const Header = ({ showSideBar, setShowSideBar }) => {
   function handleShowSideBar() {
@@ -33,14 +34,14 @@ const Header = ({ showSideBar, setShowSideBar }) => {
           {showSideBar && <CloseIcon />}
         </div>
       </div>
-      <div className="Header_UserInfo flex items-center justify-between gap-3 mr-4">
-        {<HcmutIcon />}
-        <Link to="/Login">
+      <PopoverInfo>
+        <div className="Header_UserInfo flex items-center justify-between gap-3 mr-4">
+          {<HcmutIcon />}
           <span className="Header_UserName text-white pr-3 font-semibold cursor-pointer">
-            Đăng nhập
+            Nguyễn Văn Anh Khoa
           </span>
-        </Link>
-      </div>
+        </div>
+      </PopoverInfo>
     </div>
   );
 };

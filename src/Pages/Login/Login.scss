@@ -1,0 +1,12 @@
+@media screen and (max-width: 600px) {
+  .wrapperBox {
+    flex-direction: column;
+  }
+  .Wrapperlogin {
+    width: 100%;
+  }
+  .formContainer {
+    margin: 0 auto;
+    max-width: 390px;
+  }
+}
