@@ -3,7 +3,6 @@ import { publicRoutes } from "./Routes/PageList";
 import DefaultLayout from "./Layouts/DefaultLayout";
 import BeforeLogin from "./Layouts/BeforeLogin";
 import EmptyLayout from "./Layouts/EmptyLayout";
-
 function App() {
   return (
     <div>
