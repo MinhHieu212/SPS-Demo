@@ -19,7 +19,10 @@ const ConfirmCancelModal = ({ children }) => {
             Xác nhận hủy yêu cầu in cho file in hiện tại
           </div>
           <div className="flex items-center gap-3 justify-center w-full py-2">
-            <button className="bg-[#FF2121] p-3 w-[40%] block rounded-lg text-[16px] font-semibold text-white">
+            <button
+              className="bg-[#FF2121] p-3 w-[40%] block rounded-lg text-[16px] font-semibold text-white"
+              onClick={handleClose}
+            >
               Hủy bỏ
             </button>
             <button className="bg-[#1488DB] p-3 w-[40%] block rounded-lg text-[16px] font-semibold text-white">

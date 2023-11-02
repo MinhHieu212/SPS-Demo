@@ -24,16 +24,16 @@ const PrinterFilterModal = ({ children }) => {
   };
 
   return (
-    <div className="Wrapper relative z-10">
+    <div className="Wrapper relative z-10 w-full">
       <div className="Trigger" onClick={() => setOpen(!open)}>
         {children}
       </div>
       {open && (
-        <div className="content absolute z-10 top-[130%] right-0 h-[auto] p-3 bg-[#D9D9D9] rounded-lg min-h-[367px] w-[350px] md:w-[570px] text-[20px] shadow-md">
-          <div className="absolute w-[20px] h-[20px] rotate-45 bg-[#D9D9D9] top-[-10px] right-[20px] "></div>
+        <div className="content absolute z-10 top-[140%] right-0 h-[auto] p-3 bg-[#D9D9D9] rounded-lg min-h-[367px] w-[300px] md:w-[570px] text-[15px] md:text-[18px] shadow-lg">
+          <div className="absolute w-[20px] h-[20px] rotate-45 bg-[#D9D9D9] top-[-10px] right-[15px] "></div>
           <div className="flex-col flex md:flex-row items-end justify-center gap-3 mb-3">
-            <div className="bg-white w-[90%] mx-auto md:w-[48%] h-[200px] rounded-lg flex-col flex items-center shadow-lg">
-              <div className="text-[#1488DB] border-b-[3px] border-black h-[40px] flex items-center justify-center font-bold w-full my-2">
+            <div className="bg-white w-[90%] mx-auto md:w-[48%] h-[150px] md:h-[200px] rounded-lg flex-col flex items-center shadow-lg">
+              <div className="text-[#1488DB] border-b-[3px] text-[18px]  border-black h-[40px] flex items-center justify-center font-bold w-full my-2">
                 Lọc theo trạng thái
               </div>
               <div
@@ -61,8 +61,8 @@ const PrinterFilterModal = ({ children }) => {
                 Ngưng hoạt động
               </div>
             </div>
-            <div className="bg-white h-[200px] rounded-lg flex-col flex items-center shadow-lg w-[90%] mx-auto md:w-[48%]">
-              <div className="text-[#1488DB] border-b-[3px] border-black h-[40px] flex items-center justify-center font-bold w-full my-2">
+            <div className="bg-white h-[150px] md:h-[200px] rounded-lg flex-col flex items-center shadow-lg w-[90%] mx-auto md:w-[48%]">
+              <div className="text-[#1488DB] border-b-[3px] text-[18px]  border-black h-[40px] flex items-center justify-center font-bold w-full my-2">
                 Lọc theo vị trí
               </div>
               <select
@@ -111,7 +111,7 @@ const PrinterFilterModal = ({ children }) => {
           </div>
           <div className="flex items-end justify-center gap-3 md:flex-row flex-col">
             <div className="bg-white w-[90%] mx-auto md:w-[48%] h-[150px] rounded-lg flex-col flex items-center shadow-lg">
-              <div className="text-[#1488DB] border-b-[3px] border-black h-[40px] flex items-center justify-center font-bold w-full my-2">
+              <div className="text-[#1488DB] text-[18px]  border-b-[3px] border-black h-[40px] flex items-center justify-center font-bold w-full my-2">
                 Sắp xếp
               </div>
               <div
@@ -133,13 +133,13 @@ const PrinterFilterModal = ({ children }) => {
             </div>
             <div className=" w-[90%] mx-auto md:w-[48%] md:h-[150px] rounded-lg flex items-end justify-center gap-3">
               <button
-                className="bg-[#78A3AD] p-[10px] w-[40%] block rounded-lg text-[20px] font-semibold text-white"
+                className="bg-[#78A3AD] p-[10px] w-[40%] block rounded-lg text-[15px] md:text-[18px] font-semibold text-white"
                 onClick={cancelFilter}
               >
                 Hủy
               </button>
               <button
-                className="bg-[#066DCC] p-[10px] w-[40%] block rounded-lg text-[20px] font-semibold text-white"
+                className="bg-[#066DCC] p-[10px] w-[40%] block rounded-lg text-[15px] md:text-[18px] font-semibold text-white"
                 onClick={applyFilter}
               >
                 Áp dụng

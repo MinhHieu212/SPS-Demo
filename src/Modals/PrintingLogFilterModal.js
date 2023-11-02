@@ -33,11 +33,11 @@ const PrintingLogFilterModal = ({ children }) => {
         {children}
       </div>
       {open && (
-        <div className="content absolute z-10 top-[130%] right-0 h-[auto] p-3 bg-[#D9D9D9] rounded-lg min-h-[367px] w-[350px] md:w-[570px] text-[20px] shadow-md">
-          <div className="absolute w-[20px] h-[20px] rotate-45 bg-[#D9D9D9] top-[-10px] right-[20px] "></div>
+        <div className="content absolute z-10 top-[140%] right-0 h-[auto] p-3 bg-[#D9D9D9] rounded-lg min-h-[367px] w-[300px] md:w-[570px] text-[15px] md:text-[18px] shadow-md">
+          <div className="absolute w-[20px] h-[20px] rotate-45 bg-[#D9D9D9] top-[-10px] right-[15px] "></div>
           <div className="flex-col flex md:flex-row items-end justify-center gap-3 mb-3">
-            <div className="bg-white h-[200px] rounded-lg flex-col flex items-center shadow-lg w-[90%] gap-2 mx-auto md:w-[48%]">
-              <div className="text-[#1488DB] border-b-[3px] border-black h-[40px] flex items-center justify-center font-bold w-full my-2">
+            <div className="bg-white h-[170px] md:h-[200px] rounded-lg flex-col flex items-center shadow-lg w-[90%] gap-2 mx-auto md:w-[48%]">
+              <div className="text-[#1488DB] border-b-[3px] border-black h-[40px] flex items-center justify-center font-bold w-full my-2 text-[18px]">
                 Khoảng thời gian
               </div>
               <div className="flex items-center w-full px-3 justify-between">
@@ -57,8 +57,8 @@ const PrintingLogFilterModal = ({ children }) => {
                 />
               </div>
             </div>
-            <div className="bg-white h-[200px] rounded-lg flex-col flex items-center shadow-lg w-[90%] mx-auto md:w-[48%]">
-              <div className="text-[#1488DB] border-b-[3px] border-black h-[40px] flex items-center justify-center font-bold w-full my-2">
+            <div className="bg-white  h-[170px] md:h-[200px] rounded-lg flex-col flex items-center shadow-lg w-[90%] mx-auto md:w-[48%]">
+              <div className="text-[#1488DB] border-b-[3px] border-black h-[40px] flex items-center justify-center font-bold w-full my-2 text-[18px]">
                 Lọc theo vị trí
               </div>
               <select
@@ -106,8 +106,8 @@ const PrintingLogFilterModal = ({ children }) => {
             </div>
           </div>
           <div className="flex items-start justify-center gap-3 md:flex-row flex-col">
-            <div className="bg-white w-[90%] mx-auto md:w-[48%] h-[220px] rounded-lg flex-col flex items-center shadow-lg">
-              <div className="text-[#1488DB] border-b-[3px] border-black h-[40px] flex items-center justify-center font-bold w-full my-2">
+            <div className="bg-white w-[90%] mx-auto md:w-[48%] h-[170px] md:h-[220px] rounded-lg flex-col flex items-center shadow-lg">
+              <div className="text-[#1488DB] border-b-[3px] border-black h-[40px] flex items-center justify-center font-bold w-full my-2 text-[18px]">
                 Trạng thái
               </div>
               <div
@@ -144,9 +144,9 @@ const PrintingLogFilterModal = ({ children }) => {
               </div>
             </div>
 
-            <div className="w-[90%] md:w-[48%] flex flex-col gap-3">
-              <div className="bg-white w-full h-[auto] rounded-lg flex-col flex items-center shadow-lg">
-                <div className="text-[#1488DB] border-b-[3px] border-black h-[40px] flex items-center justify-center font-bold w-full my-2">
+            <div className="w-[100%] md:w-[48%] flex flex-col gap-3">
+              <div className="bg-white w-[90%]  h-[120px] md:h-[170px] mx-auto rounded-lg flex-col flex items-center shadow-lg">
+                <div className="text-[#1488DB] border-b-[3px] border-black h-[40px] flex items-center justify-center font-bold w-full my-2 text-[18px]">
                   Sắp xếp theo
                 </div>
                 <div
@@ -166,15 +166,15 @@ const PrintingLogFilterModal = ({ children }) => {
                   Cũ nhất
                 </div>
               </div>
-              <div className="Buttoms flex w-full mt-3 items-center justify-end gap-3 pr-2">
+              <div className="Buttoms flex mx-auto w-[90%] mt-1 md:mt-3 items-center justify-end gap-3 pr-2">
                 <button
-                  className="bg-[#78A3AD] p-[10px] block rounded-lg text-[20px]  w-[100px]  font-semibold text-white"
+                  className="bg-[#78A3AD] p-[10px] block rounded-lg text-[15px] md:text-[18px]  w-[100px]  font-semibold text-white"
                   onClick={cancelFilter}
                 >
                   Hủy
                 </button>
                 <button
-                  className="bg-[#066DCC] p-[10px]  block rounded-lg text-[20px] w-[100px] font-semibold text-white"
+                  className="bg-[#066DCC] p-[10px]  block rounded-lg text-[15px] md:text-[18px] w-[100px] font-semibold text-white"
                   onClick={applyFilter}
                 >
                   Áp dụng

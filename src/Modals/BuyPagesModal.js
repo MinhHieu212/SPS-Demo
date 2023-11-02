@@ -68,7 +68,7 @@ const BuyPagesModal = ({ children }) => {
               type="number"
               value={value}
               onChange={handleInputChange}
-              className="numberInput py-2 w-[150px] md:w-[200px] text-center font-bold text-[100px] text-black rounded-lg  outline-none"
+              className="numberInput py-2 w-[150px] md:w-[200px] text-center font-bold text-[100px] text-black rounded-lg outline-none border-none"
             />
             <button
               className="p-2 outline-none border-2 border-gray-500 rounded-lg"
