@@ -7,7 +7,7 @@ const BeforeLogin = ({ children }) => {
     <div>
       <HeaderBeforeLogin></HeaderBeforeLogin>
       <div className="w-full flex">
-        <div className={`Main_Container  w-full`}>{children}</div>
+        <div className={`Main_Container w-full mt-[66px]`}>{children}</div>
       </div>
     </div>
   );
