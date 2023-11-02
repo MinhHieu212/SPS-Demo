@@ -7,6 +7,7 @@ import Report from "../Pages/Report/Report";
 import Manage from "../Pages/Manage/Manage";
 import Config from "../Pages/Config/Config";
 import Activities from "../Pages/Activities/Activities";
+import Test from "../Pages/Test/Test";
 
 // no required login
 const publicRoutes = [
@@ -63,6 +64,10 @@ const publicRoutes = [
   {
     path: "/Login",
     component: Login,
+  },
+  {
+    path: "/Test",
+    component: Test,
   },
   {
     path: "*",

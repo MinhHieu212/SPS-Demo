@@ -149,17 +149,17 @@ export const CloseModalIcon = () => (
   >
     <path
       d="M22.5 7.5L7.5 22.5"
-      stroke="gray"
-      stroke-width="2"
+      stroke="white"
+      strokeWidth="2"
       stroke-linecap="round"
       stroke-linejoin="round"
     />
     <path
       d="M7.5 7.5L22.5 22.5"
-      stroke="gray"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      stroke="white"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
