@@ -1,68 +1,24 @@
-.instruction {
-    width: 85vw;
-    font-family: Roboto Condensed;
-    font-size: 40px;
-}
-.instruction > div{
-    // margin-left: 40px;
-    margin-left: 4vw;
-    // margin-top: 23px;
-    // margin-bottom: 23px;
-    margin-top: 3vw;
-    margin-bottom: 3vw;
-    font-size: 24px;
-    box-sizing: border-box;
-}
-.instruction div:first-child {
-    margin-top: 2vw;
-}
 h1 {
     color: #066DCC;
     text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-    // font-size: 30px;
-    font-size: 2.25rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-}
-.horizLine {
-    width: 85vw;
-    height: 4px;
-    margin-top: 10px;
-    margin-bottom: 0;
-    background-color: #000;
-    display: block;
 }
 ul a {
+    margin-left: 4rem;
     text-decoration: underline;
     color: #227F2B;
-}
-.guide ul li {
-    list-style-type: disc; /* Loại ký hiệu danh sách (ví dụ: bullet) */
-    // margin-left: 60px; /* Xóa khoảng trắng ngoài danh sách */
-    // padding-left: 10px; /* Xóa khoảng trắng bên trong danh sách */
-    margin-left: 2rem; 
-    padding-left: 0.5rem;
-}
-h2 {
-    font-size: 30px;
-    font-weight: 700;
 }
 .m-d.expand-list {
     margin: 0;
     padding: 0;
 }
 .m-d.expand-list > li{
-    width: 85vw;
     list-style-type: none;
     padding: 16px 0px;
     border-bottom: 1px solid #212121;
     position: relative;
 }
-  
 .m-d label[class^="tab"]{
-    width: 85vw;
-    display: inline-block;
+    display: block;
     border-radius: 10px;
     background: #C0DFF5;
     padding: 16px 20px;
@@ -75,11 +31,8 @@ h2 {
     border: none;
 }
 .m-d input[class^="tab"]{
-    width: 100%;
     height: 40px;
     position: absolute;
-    left: 0;
-    top: 0; 
 }
 .m-d input[class^="tab"]:hover {
     cursor: pointer;  
@@ -88,7 +41,6 @@ h2 {
     font-weight: bold;
 }
 .m-d .content{
-    width: 85vw;
     height: auto;
     max-height: 0;
     overflow: hidden;
@@ -96,60 +48,10 @@ h2 {
     transition: all 180ms ease-in-out 0ms; 
     text-align: justify;
 }
-  
-.m-d li[data-md-content="200"] input[class^="tab"]:checked ~ .content{
-    max-height: 200px;
-    transition: all 200ms ease-in-out 0ms;
-}
 .m-d li[data-md-content="300"] input[class^="tab"]:checked ~ .content{
     max-height: 300px;
     transition: all 250ms ease-in-out 0ms;
 }
-.m-d li[data-md-content="400"] input[class^="tab"]:checked ~ .content{
-    max-height: 400px;
-    transition: all 250ms ease-in-out 0ms;
-}
 .m-d input[class^="tab"]:checked ~ .content{
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
-.m-d .content ul li{
-    list-style-type: disc;
-}
-/*Mobile*/
-
-@media only screen and (max-width: 768px) {
-    .instruction > div{
-        font-size: 13px;
-    }
-    h1, h2 {
-        font-size: 18px;
-    }
-    .horizLine {
-        width: 75vw;
-    }
-    .instruction, .guide, .faq, .m-d {
-        width: 75vw;
-    }
-    .m-d input[class^="tab"] {
-        width: 75vw;
-    }
-    .m-d label[class^="tab"] {
-        width: 75vw;
-    }
-    .m-d input[class^="tab"]:checked ~ .content{
-        margin-bottom: 10px;
-    }
-    .m-d.expand-list > li{
-        width: 75vw;
-    }
-    .m-d .content {
-        width: 75vw;
-        transform: translateY(15px);
-    }
-}
-@media only screen and (max-width: 400px) {
-    .instruction > div{
-        margin-left: 10vw;
-    }
-}
-
