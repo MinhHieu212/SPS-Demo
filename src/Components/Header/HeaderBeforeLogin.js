@@ -23,7 +23,7 @@ const HeaderBeforeLogin = () => {
         {<HcmutIcon />}
         <button
           onClick={handleLogin}
-          className="text-white pr-3 font-semibold cursor-pointer"
+          className="text-white pr-5 font-semibold cursor-pointer"
         >
           Đăng nhập
         </button>

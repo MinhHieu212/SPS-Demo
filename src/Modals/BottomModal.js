@@ -6,7 +6,7 @@ import {
   Button,
 } from "@material-tailwind/react";
 
-const PopoverBase = ({ element, children }) => {
+const BottomModal = ({ element, children }) => {
   const [openPopover, setOpenPopover] = React.useState(false);
 
   const triggers = {
@@ -16,12 +16,14 @@ const PopoverBase = ({ element, children }) => {
 
   return (
     <Popover open={openPopover} handler={setOpenPopover}>
-      <PopoverHandler {...triggers}>
-        <Button variant="text">{element}</Button>
+      <PopoverHandler {...triggers} className="border-none outline-none">
+        <Button variant="text" className="outline-none border-none">
+          {element}
+        </Button>
       </PopoverHandler>
       <PopoverContent
         {...triggers}
-        className="z-50 max-w-[24rem] p-0 -translate-x-6"
+        className="z-50 max-w-[24rem] p-0 -translate-x-4"
       >
         {children}
       </PopoverContent>
@@ -29,4 +31,4 @@ const PopoverBase = ({ element, children }) => {
   );
 };
 
-export default PopoverBase;
+export default BottomModal;

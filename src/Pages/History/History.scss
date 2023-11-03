@@ -1,0 +1,75 @@
+.history-title {
+    border-bottom: 4px solid #1488DB;
+}
+
+.History {
+    width: 90%;
+    margin: 0 auto;
+}
+
+input {
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+input::placeholder {
+    font-size: 16px;
+}
+
+.input-wrapper {
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.title-wrapper {
+    padding: 14px 0;
+}
+
+.HistoryItem,
+.print-section {
+    width: 632px;
+
+}
+
+.HistoryItem>div,
+.print-section>div {
+    min-width: 15%;
+}
+.HistoryItem>div {
+    max-width: 15%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (min-width: 768px) {
+    .wrapper {
+        gap: 61px;
+    }
+
+    .input-wrapper {
+        gap: 40px;
+        margin-top: 0;
+    }
+
+    .title-wrapper {
+        padding: 16px 0;
+    }
+
+    .content-wrapper {
+        padding: 8px 0;
+    }
+    .HistoryItem,
+    .print-section {
+        width: 100%;
+    }
+
+}
+
+@media (min-width: 1024px) {
+    .History {
+        width: 80%;
+        margin: 0 auto;
+    }
+}

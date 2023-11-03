@@ -7,6 +7,10 @@ import Report from "../Pages/Report/Report";
 import Manage from "../Pages/Manage/Manage";
 import Config from "../Pages/Config/Config";
 import Activities from "../Pages/Activities/Activities";
+import Test from "../Pages/TestModal/Test";
+import ConfigFile from "../Pages/ConfigFile/ConfigFile";
+import Bkpay from "../Pages/Bkpay/BkPay";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 // no required login
 const publicRoutes = [
@@ -61,12 +65,25 @@ const publicRoutes = [
     layout: "default",
   },
   {
+    path: "/Printing/:PrinterID",
+    component: ConfigFile,
+    layout: "default",
+  },
+  {
     path: "/Login",
     component: Login,
   },
   {
+    path: "/Bkpay",
+    component: Bkpay,
+  },
+  {
+    path: "/Test",
+    component: Test,
+  },
+  {
     path: "*",
-    component: Error,
+    component: ErrorPage,
   },
 ];
 
