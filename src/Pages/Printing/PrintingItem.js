@@ -6,7 +6,10 @@ import { useNavigate } from "react-router-dom";
 function PrintingItem(props) {
   const navigate = useNavigate();
   return (
-    <div className="PrintingItem mt-3" onClick={() => navigate("/ConfigFile")}>
+    <div
+      className="PrintingItem mt-3"
+      onClick={() => navigate(`/Printing/${props.id}`)}
+    >
       <div className="bg-[#e6e6e6] flex rounded-xl wrap justify-evenly shadow-md">
         <div className="w-[30%] my-3 mx-1 md:m-3 shadow-lg bg-white py-2 px-1 rounded-xl text-center item flex flex-col justify-center items-center">
           <PrinterIcon></PrinterIcon>
