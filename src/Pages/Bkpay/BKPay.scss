@@ -1,0 +1,148 @@
+#slider-BKPay {
+  background: url('../../Assets/images/banner.png') top center / contain no-repeat;
+  padding-top: 25.5555555556%;
+}
+
+.account-item {
+  font-size: 8px;
+  padding: 2px 6px;
+}
+
+#container {
+  width: 95%;
+  padding: 8px;
+  margin: 0 auto;
+}
+
+#container .item {
+  padding: 4px 0;
+  display: block;
+}
+
+.account-item-separate::after {
+  content: "";
+  display: block;
+  position: absolute;
+  border-left: 1px solid #fff;
+  height: 12px;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#semester-code {
+  border: 1px solid gray;
+}
+
+label {
+  font-size: 8px;
+}
+
+.btn {
+  padding: 4px;
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+.title {
+  border-bottom: 2px solid #FFA20C;
+}
+
+.wrap {
+  min-width: 650px;
+}
+
+.BKPay-item-1,
+.BKPay-item-2,
+.BKPay-item-3,
+.payment-section {
+  width: 100%;
+}
+
+.BKPay-item-1>div {
+  min-width: 12.5%;
+  padding: 0 4px;
+}
+
+.BKPay-item-3>div,
+.BKPay-item-2>div {
+  padding: 0 2px;
+  overflow-wrap: break-word;
+}
+
+.BKPay-item-2 {
+  border-bottom: 1px dashed #ccc;
+}
+.BKPay-item-3 {
+  border-bottom: 1px solid #ccc;
+}
+.BKPay-item-3>div,
+.BKPay-item-2>div {
+  min-width: 11.25%;
+}
+
+.BKPay-item-3>div:first-child, .BKPay-item-3>div:last-child,
+.BKPay-item-2>div:first-child, .BKPay-item-2>div:last-child {
+  min-width: 5%;
+}
+.payment-section>div {
+  min-width: 12.5%;
+  padding: 0 4px;
+}
+
+.payment-section {
+  border-bottom: 1px solid #aaaaaa;
+}
+
+.BKPay-item-1 {
+  border-bottom: 1px solid #aaaaaa;
+  border-top: 1px solid #aaaaaa;
+}
+
+@media (min-width: 768px) {
+  .account-item {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .account-item::after {
+    height: 18px;
+  }
+
+  #container {
+    width: 95%;
+    margin: 0 auto;
+    padding: 24px;
+  }
+
+  label,
+  #semester-code {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .btn {
+    padding: 8px;
+  }
+
+  .title {
+    margin-top: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .account-item {
+    font-size: 18px;
+    padding: 12px 16px;
+  }
+
+  #container {
+    width: 75%;
+    margin: 0 auto;
+    padding: 24px;
+  }
+  label,
+  #semester-code {
+    font-size: 14px;
+  }
+}
