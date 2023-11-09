@@ -10,7 +10,7 @@ function PrintingItem(props) {
       className="PrintingItem mt-3"
       onClick={() => navigate(`/Printing/${props.id}`)}
     >
-      <div className="bg-[#e6e6e6] flex rounded-xl wrap justify-evenly shadow-md">
+      <div className="bg-[#e6e6e6] flex rounded-xl justify-evenly w-[100]shadow-md">
         <div className="w-[30%] my-3 mx-1 md:m-3 shadow-lg bg-white py-2 px-1 rounded-xl text-center item flex flex-col justify-center items-center">
           <PrinterIcon></PrinterIcon>
           <p className="text-[15px] lg:text-[20px] font-bold mt-auto">

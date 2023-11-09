@@ -151,8 +151,8 @@ export const CloseModalIcon = () => (
       d="M22.5 7.5L7.5 22.5"
       stroke="white"
       strokeWidth="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M7.5 7.5L22.5 22.5"
@@ -307,6 +307,30 @@ export const ActivitiesIcon = () => (
   </svg>
 );
 
+export const FileIcon = ({ fileName }) => (
+  <div className="flex flex-col justify-center items-center w-[100px] overflow-hidden relative">
+    <svg
+      width="50"
+      height="50"
+      viewBox="0 0 70 70"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M58.0503 25.0427C57.912 24.7261 57.7184 24.4367 57.4786 24.1881L39.9786 6.68808C39.7299 6.44828 39.4406 6.2547 39.124 6.11641C39.0365 6.07558 38.9432 6.05225 38.8498 6.02016C38.6058 5.93711 38.3517 5.88709 38.0944 5.87141C38.0332 5.86558 37.9778 5.8335 37.9165 5.8335H17.4998C14.2828 5.8335 11.6665 8.44975 11.6665 11.6668V58.3335C11.6665 61.5506 14.2828 64.1668 17.4998 64.1668H52.4998C55.7169 64.1668 58.3332 61.5506 58.3332 58.3335V26.2502C58.3332 26.1889 58.3011 26.1335 58.2952 26.0693C58.281 25.8118 58.2309 25.5576 58.1465 25.3139C58.1173 25.2206 58.0911 25.1302 58.0503 25.0427ZM48.3757 23.3335H40.8332V15.791L48.3757 23.3335ZM17.4998 58.3335V11.6668H34.9998V26.2502C34.9998 27.0237 35.3071 27.7656 35.8541 28.3126C36.4011 28.8595 37.143 29.1668 37.9165 29.1668H52.4998L52.5057 58.3335H17.4998Z"
+        fill="#1488DB"
+      />
+      <path
+        d="M23.3335 35.0002H46.6668V40.8335H23.3335V35.0002ZM23.3335 46.6668H46.6668V52.5002H23.3335V46.6668ZM23.3335 23.3335H29.1668V29.1668H23.3335V23.3335Z"
+        fill="#1488DB"
+      />
+    </svg>
+    <span className="text-[14px] font-bold w-[100%] truncate overflow-hidden">
+      {fileName}
+    </span>
+  </div>
+);
+
 export const ErrorIcon = () => (
   <svg
     width="44"
@@ -432,8 +456,8 @@ export const PrinterIcon = () => (
       d="M50.5859 19.1405H19.8242V6.01553C19.8242 5.3374 20.3875 4.79053 21.0875 4.79053H49.3281C50.0227 4.79053 50.5914 5.3374 50.5914 6.01553V19.1405H50.5859Z"
       fill="white"
       stroke="#78A3AD"
-      stroke-width="5"
-      stroke-miterlimit="10"
+      strokeWidth="5"
+      strokeMiterlimit="10"
     />
     <path
       d="M53.293 40.124H16.8437C16.2969 40.124 15.8594 39.6373 15.8594 39.0357V35.1967C15.8594 34.5951 16.3023 34.1084 16.8437 34.1084H53.2875C53.8344 34.1084 54.2719 34.5951 54.2719 35.1967V39.0357C54.2773 39.6373 53.8344 40.124 53.293 40.124Z"
@@ -469,23 +493,23 @@ export const InfoIcon = () => (
     <path
       d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
       stroke="black"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M12 8V12"
       stroke="black"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M12 16H12.01"
       stroke="black"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );

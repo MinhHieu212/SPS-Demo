@@ -55,7 +55,7 @@ const info = [
 ];
 const Printing = () => {
   return (
-    <div className="Printing max-w-[1280px] px-[10px] md:px-[32px] lg:px-[70px] mx-auto">
+    <div className="Printing w-full px-[10px] max-w-[1280px] md:px-[32px] lg:px-[70px] mx-auto">
       <h2 className="text-3xl lg:text-4xl font-semibold mt-4 printing-title border-b-4 border-black pb-2 md:pb-3">
         CHỌN MÁY IN
       </h2>
@@ -78,7 +78,7 @@ const Printing = () => {
         </div>
       </div>
       <hr className="sm-hr mt-4" />
-      {info.map((printer) => (
+      {info.map((printer, index) => (
         <PrintingItem
           id={printer.id}
           base={printer.base}
@@ -86,7 +86,8 @@ const Printing = () => {
           room={printer.room}
           status={printer.status}
           request={printer.request}
-        />
+          key={index}
+        ></PrintingItem>
       ))}
     </div>
   );

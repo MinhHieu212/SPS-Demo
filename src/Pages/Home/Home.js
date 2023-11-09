@@ -12,7 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 const Home = () => {
   return (
-    <div className="Home mb-3">
+    <div className="Home mb-5">
       <div id="slider" className="relative w-full min-h-[400px]">
         <div className="slider__content absolute text-center text-[#0f6cbf] left-1/2 top-1/2">
           <h1 className="slider__heading text-base text-[#2196f3] mb-1 md:text-3xl lg:text-4xl">
@@ -23,10 +23,10 @@ const Home = () => {
           </p>
         </div>
       </div>
-      <h2 className=" max-w-[1280px] mx-auto text-3xl lg:text-4xl text-center font-semibold text-[#367fa9] underline underline-offset-4 mt-[50px]">
+      <h2 className=" max-w-[1280px] mx-auto px-[10px] md:px-[32px] lg:px-[70px] text-3xl lg:text-4xl text-center font-semibold text-[#367fa9] underline underline-offset-4 mt-[50px]">
         DỊCH VỤ CỦA CHÚNG TÔI
       </h2>
-      <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row items-center justify-between w-[90%] gap-3 my-[25px]">
+      <div className="max-w-[1280px] px-[70px] mx-auto flex flex-col md:flex-row items-center justify-between w-[90%] gap-3 my-[25px]">
         <div className="relative w-[300px] md:w-[30%] h-[300px] lg:h-[400px] rounded-lg overflow-hidden shadow-lg">
           <img
             src="https://plus.unsplash.com/premium_photo-1680037568223-9fcccd15dff6?auto=format&fit=crop&q=60&w=400&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJpbnRpbmd8ZW58MHx8MHx8fDA%3D&fbclid=IwAR33AkO38AwFR5bVCRx9GWL0gPmGhKucS5hVDj0ZBk75QOgvMEagw63cjwQ"
@@ -58,7 +58,7 @@ const Home = () => {
           </p>
         </div>
       </div>
-      <div className="max-w-[1280px] mx-auto">
+      <div className="max-w-[1280px] px-[70px] mx-auto">
         <h2 className="text-3xl lg:text-4xl text-center mt-[50  px] font-semibold text-[#367fa9] underline underline-offset-4 mb-8 mt-[50px]">
           ĐẶC ĐIỂM NỔI BẬT
         </h2>
@@ -93,16 +93,16 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="w-[100%] mx-auto mt-[50px] overflow-hidden">
-        <div className="content-img mt-16"></div>
+      <div className="max-w-[1280px] px-[70px] mx-auto mt-[50px] overflow-hidden">
+        <div className="content-img mt-16 rounded-md overflow-hidden"></div>
       </div>
-      <div className="max-w-[1280px] mx-auto">
+      <div className="max-w-[1280px] px-[70px] mx-auto">
         <h2 className="text-3xl w-[80%] mx-auto lg:text-4xl text-center font-semibold text-[#367fa9] underline underline-offset-4 mt-[50px] mb-8">
           VÌ SAO SINH VIÊN NÊN SỬ DỤNG SMART PRINTING SYSTEM CỦA NHÀ TRƯỜNG?
         </h2>
         <div className="w-full ">
           <div className="flex flex-col mt-3 md:flex-row items-center justify-center">
-            <div className="w-[50%] md:w-[35%] flex items-center justify-center">
+            <div className="w-[50%] md:w-[35%] flex items-center justify-start">
               <FontAwesomeIcon
                 icon={faSchool}
                 size="6x"
@@ -124,7 +124,7 @@ const Home = () => {
           </div>
 
           <div className="flex flex-col mt-3 md:flex-row items-center justify-center">
-            <div className="w-[50%] md:w-[35%] flex items-center justify-center">
+            <div className="w-[50%] md:w-[35%] flex items-center justify-start">
               <FontAwesomeIcon
                 icon={faFileShield}
                 size="6x"
@@ -147,7 +147,7 @@ const Home = () => {
           </div>
 
           <div className="flex flex-col mt-3 md:flex-row items-center justify-center">
-            <div className="w-[50%] md:w-[35%] flex items-center justify-center">
+            <div className="w-[50%] md:w-[35%] flex items-center justify-start">
               <FontAwesomeIcon
                 icon={faGaugeHigh}
                 size="6x"

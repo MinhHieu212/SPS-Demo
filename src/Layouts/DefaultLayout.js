@@ -25,7 +25,7 @@ const DefaultLayout = ({ children }) => {
 
   useEffect(() => {
     // Show/hide SideBar when the App is opened ([desktop] != [tablet & phone])
-    if (window.innerWidth >= 849) {
+    if (window.innerWidth > 1280) {
       setshowSideBar(true);
     } else {
       setshowSideBar(false);
@@ -44,7 +44,7 @@ const DefaultLayout = ({ children }) => {
   // Handle new layout on Desktop when show the Sidebar
   useEffect(() => {
     setMarginLeft("ml-[66px]");
-    if (window.innerWidth >= 849 && showSideBar) {
+    if (window.innerWidth > 1280 && showSideBar) {
       setMarginLeft("ml-[250px]");
     }
   }, [showSideBar]);

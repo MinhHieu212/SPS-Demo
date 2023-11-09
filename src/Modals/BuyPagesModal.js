@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import CenterModal from "./CenterModal";
 import "./BuyPagesModal.scss";
+import { useNavigate } from "react-router-dom";
 
 const BuyPagesModal = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
+  const navigate = useNavigate();
 
   const handleClose = () => {
     setOpenModal(false);
@@ -32,18 +34,21 @@ const BuyPagesModal = ({ children }) => {
 
   const handleAccept = () => {
     console.log(value);
+    setTimeout(() => {
+      navigate("/Bkpay");
+    }, 1000);
   };
 
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
       <CenterModal open={openModal} handleClose={handleClose}>
-        <div className="containerModal w-[380px] md:w-[600px] mx-auto overflow-hidden rounded-lg bg-white">
+        <div className="containerModal w-[380px] md:w-[450px] mx-auto overflow-hidden rounded-lg bg-white">
           <div className="Title text-[24px] text-white pt-2 font-bold text-center border-b-2 border-gray-400  pb-2 bg-[#3C8DBC]">
             Bạn muốn mua thêm giấy in?
             <p className="text-[16px] ">Chọn số lượng tờ A4 bạn muốn mua</p>
           </div>
-          <div className="flex gap-3 items-center justify-center my-3 border-b-2 border-gray-400 pb-2 pt-4">
+          <div className="flex gap-3 items-center justify-center border-b-2 border-gray-400 ">
             <button
               className="p-2 outline-none border-2 border-gray-500 rounded-lg"
               onClick={decrementValue}
@@ -91,35 +96,35 @@ const BuyPagesModal = ({ children }) => {
               </svg>
             </button>
           </div>
-          <div className="text-center">
+          <div className="text-center mt-2">
             <div className="mb-2 flex justify-between px-10">
-              <span className="text-[#066DCC] text-[20px] font-bold mr-3">
+              <span className="text-[#066DCC] text-[18px] font-bold mr-3">
                 Giá mỗi tờ:
               </span>
-              <span className="text-[20px] font-semibold leading-7">
+              <span className="text-[18px] font-semibold leading-7">
                 1000 VNĐ
               </span>
             </div>
           </div>
           <div className="text-center">
             <div className="mb-2 flex justify-between px-10">
-              <span className="text-[#066DCC] text-[20px] font-bold mr-3">
+              <span className="text-[#066DCC] text-[18px] font-bold mr-3">
                 Thành tiền:
               </span>
-              <span className="text-[20px] font-semibold leading-7">
+              <span className="text-[18px] font-semibold leading-7">
                 {`${value * 1000}  VNĐ`}
               </span>
             </div>
           </div>
-          <div className="flex items-center gap-3 justify-center w-full py-3">
+          <div className="flex items-center gap-3 justify-center w-full py-2 mb-3">
             <button
-              className="bg-[#B4AFAF] p-3 w-[40%] block rounded-lg text-[16px] font-semibold text-white"
+              className="bg-[#B4AFAF] py-[12px] w-[40%] block rounded-lg text-[16px] font-semibold text-white"
               onClick={handleClose}
             >
               Hủy bỏ
             </button>
             <button
-              className="bg-[#1488DB] p-3 w-[40%] block rounded-lg text-[16px] font-semibold text-white"
+              className="bg-[#1488DB] py-[12px] w-[40%] block rounded-lg text-[16px] font-semibold text-white "
               onClick={handleAccept}
             >
               Xác nhận

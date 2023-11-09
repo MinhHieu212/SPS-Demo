@@ -64,16 +64,16 @@ const files = [
 ];
 const History = () => {
   return (
-    <div className="History max-w-[1280px]">
-      <h2 className="text-3xl lg:text-4xl font-semibold mt-4 printing-title border-b-4 border-black pb-2 md:pb-3">
+    <div className="History max-w-[1280px] px-[10px] md:px-[32px] lg:px-[70px]">
+      <h2 className="text-3xl lg:text-4xl font-semibold mt-4 printing-title border-b-4 border-black pb-2 md:pb-3  text-[#066DCC] ">
         LỊCH SỬ IN ẤN
       </h2>
-      <div className="flex flex-col md:flex-row mt-4 wrapper">
-        <div className="w-full md:w-1/2 relative">
-          <div className="bg-[#3C8DBC] text-white text-center text-xl font-bold rounded-lg title-wrapper">
+      <div className="flex flex-col md:flex-row mt-4 wrapper items-center">
+        <div className="w-full md:w-1/2 relative shadow-md">
+          <div className="bg-[#3C8DBC] text-white text-center text-xl font-bold title-wrapper">
             TỔNG SỐ TRANG ĐÃ IN
           </div>
-          <div className="bg-white flex flex-row text-base font-bold rounded-lg mt-2 content-wrapper">
+          <div className="bg-white flex flex-row text-base font-bold  content-wrapper">
             <div className="w-1/2 flex flex-col justify-evenly items-center">
               <p className="text-xl">Size A4</p>
               <p className="text-xl">300</p>
@@ -84,7 +84,7 @@ const History = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-full md:w-1/2 gap-4 mt-3">
+        <div className="flex flex-col w-full md:w-1/2 gap-4">
           <div className="w-full  border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white">
             <input
               type="text"
@@ -104,21 +104,22 @@ const History = () => {
         </div>
       </div>
       <div className="w-full overflow-x-auto">
-        <div className="flex flex-row justify-between items-center bg-[#3C8DBC] text-sm md:text-base lg:text-lg font-bold py-3 px-4 mt-8 rounded-md print-section">
-          <div>TÊN FILE</div>
-          <div>ID MÁY IN</div>
-          <div>VỊ TRÍ</div>
-          <div>NGÀY IN</div>
-          <div>TRẠNG THÁI</div>
-          <div>TÙY CHỌN</div>
+        <div className="flex flex-row justify-between items-center bg-[#3C8DBC] text-sm md:text-base lg:text-lg font-bold py-3 px-4 mt-8 rounded-sm print-section">
+          <div className="text-center">TÊN FILE</div>
+          <div className="text-center">ID MÁY IN</div>
+          <div className="text-center">VỊ TRÍ</div>
+          <div className="text-center">NGÀY IN</div>
+          <div className="text-center">TRẠNG THÁI</div>
+          <div className="text-center">TÙY CHỌN</div>
         </div>
-        {files.map((file) => (
+        {files.map((file, index) => (
           <HistoryItem
             fileName={file.fileName}
             printerId={file.printerId}
             position={file.position}
             date={file.date}
             status={file.status}
+            key={index}
           />
         ))}
       </div>

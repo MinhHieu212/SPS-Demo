@@ -1,57 +1,57 @@
 h1 {
-    color: #066DCC;
-    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  color: #066dcc;
+  // text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
 }
 ul a {
-    margin-left: 4rem;
-    text-decoration: underline;
-    color: #227F2B;
+  margin-left: 4rem;
+  text-decoration: underline;
+  color: #227f2b;
 }
 .m-d.expand-list {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
-.m-d.expand-list > li{
-    list-style-type: none;
-    padding: 16px 0px;
-    border-bottom: 1px solid #212121;
-    position: relative;
-}
-.m-d label[class^="tab"]{
-    display: block;
-    border-radius: 10px;
-    background: #C0DFF5;
-    padding: 16px 20px;
-    cursor: pointer;
-}
-.m-d input{
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border: none;
-}
-.m-d input[class^="tab"]{
-    height: 40px;
-    position: absolute;
-}
-.m-d input[class^="tab"]:hover {
-    cursor: pointer;  
+.m-d.expand-list > li {
+  list-style-type: none;
+  padding: 16px 0px;
+  border-bottom: 1px solid #212121;
+  position: relative;
 }
 .m-d label[class^="tab"] {
-    font-weight: bold;
+  display: block;
+  border-radius: 10px;
+  background: #c0dff5;
+  padding: 16px 20px;
+  cursor: pointer;
 }
-.m-d .content{
-    height: auto;
-    max-height: 0;
-    overflow: hidden;
-    transform: translateY(20px);
-    transition: all 180ms ease-in-out 0ms; 
-    text-align: justify;
+.m-d input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
 }
-.m-d li[data-md-content="300"] input[class^="tab"]:checked ~ .content{
-    max-height: 300px;
-    transition: all 250ms ease-in-out 0ms;
+.m-d input[class^="tab"] {
+  height: 40px;
+  position: absolute;
 }
-.m-d input[class^="tab"]:checked ~ .content{
-    margin-bottom: 15px;
+.m-d input[class^="tab"]:hover {
+  cursor: pointer;
+}
+.m-d label[class^="tab"] {
+  font-weight: bold;
+}
+.m-d .content {
+  height: auto;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(20px);
+  transition: all 180ms ease-in-out 0ms;
+  text-align: justify;
+}
+.m-d li[data-md-content="300"] input[class^="tab"]:checked ~ .content {
+  max-height: 300px;
+  transition: all 250ms ease-in-out 0ms;
+}
+.m-d input[class^="tab"]:checked ~ .content {
+  margin-bottom: 15px;
 }
