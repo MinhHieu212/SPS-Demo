@@ -136,7 +136,7 @@ const ConfigFile = () => {
 
         <div className="flex flex-col items-center justify-evenly w-[100%] lg:w-[80%] mt-3">
           <div className="w-full flex-col md:flex-row  items-center justify-between">
-            <span className="text-[#1488DB] mr-2">Tên têp</span>
+            <span className="text-[#1488DB] mr-5">Tên têp</span>
 
             <select
               name="files"
@@ -241,7 +241,7 @@ const ConfigFile = () => {
           <div className="w-full  flex flex-col items-center justify-between mt-3">
             <p className="text-[#1488DB] w-full">Chọn trang in:</p>
 
-            <div className="w-full flex flex-col md:fkex-row items-center justify-between mt-2">
+            <div className="w-full flex flex-col md:flex-row items-center justify-between mt-2">
               <div className="w-[90%] md:w-[45%]">
                 <span>In từ:</span>
                 <input

@@ -18,7 +18,7 @@ export const StudentSideBarOption = [
 
 export const SPSOSideBarOption = [
   { title: "Trang chủ", icon: <HomeIcon />, to: "/Home" },
-  { title: "Hệ thống máy in", icon: <MangageIcon />, to: "/Manage" },
+  { title: "Hệ thống máy in", icon: <MangageIcon />, to: "/ManageSpso" },
   { title: "Cấu hình hệ thống", icon: <ConfigIcon />, to: "/Config" },
   { title: "Hoạt động In Ấn", icon: <ActivitiesIcon />, to: "/Activities" },
   { title: "Báo cáo", icon: <ReportIcon />, to: "/Report" },
@@ -27,6 +27,6 @@ export const SPSOSideBarOption = [
 
 export const StaffSideBarOption = [
   { title: "Trang chủ", icon: <HomeIcon />, to: "/Home" },
-  { title: "Hệ thống máy in", icon: <MangageIcon />, to: "/Manage" },
+  { title: "Hệ thống máy in", icon: <MangageIcon />, to: "/ManageStaff" },
   { title: "Hướng dẫn", icon: <SupportIcon />, to: "/Support" },
 ];
