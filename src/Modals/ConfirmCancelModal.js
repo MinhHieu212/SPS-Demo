@@ -15,7 +15,7 @@ const ConfirmCancelModal = ({ children }) => {
           <div className="header bg-[#3C8DBC] text-white text-[24px] font-bold flex items-center justify-center h-[60px] w-full">
             XÁC NHẬN
           </div>
-          <div className="flex items-center justify-center text-[20px] font-semibold h-[100px] ">
+          <div className="flex items-center justify-center text-[16px] md:text-[20px] font-semibold h-[100px] ">
             Xác nhận hủy yêu cầu in cho file in hiện tại
           </div>
           <div className="flex items-center gap-3 justify-center w-full py-2">

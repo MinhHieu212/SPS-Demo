@@ -28,7 +28,7 @@ const Home = () => {
           DỊCH VỤ CỦA CHÚNG TÔI
         </h2>
         <div className="max-w-[1280px] px-[70px] mx-auto flex flex-col md:flex-row items-center justify-between w-[90%] gap-3 my-[25px]">
-          <div className="relative w-[300px] md:w-[30%] h-[300px] lg:h-[400px] rounded-lg overflow-hidden shadow-lg">
+          <div className="relative w-[300px] md:w-[30%] h-[280px] lg:h-[350px] rounded-lg overflow-hidden shadow-lg">
             <img
               src="https://plus.unsplash.com/premium_photo-1680037568223-9fcccd15dff6?auto=format&fit=crop&q=60&w=400&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJpbnRpbmd8ZW58MHx8MHx8fDA%3D&fbclid=IwAR33AkO38AwFR5bVCRx9GWL0gPmGhKucS5hVDj0ZBk75QOgvMEagw63cjwQ"
               alt=""
@@ -38,7 +38,7 @@ const Home = () => {
               Linh động trong tùy chọn in ấn
             </p>
           </div>
-          <div className="relative  w-[300px] md:w-[30%] h-[300px] lg:h-[400px] rounded-lg overflow-hidden shadow-lg">
+          <div className="relative  w-[300px] md:w-[30%] h-[280px] lg:h-[350px] rounded-lg overflow-hidden shadow-lg">
             <img
               src="https://images.unsplash.com/photo-1447069387593-a5de0862481e?auto=format&fit=crop&q=60&w=400&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aGlzdG9yeXxlbnwwfHwwfHx8MA%3D%3D&fbclid=IwAR2TTRb47Z3rxSPsHu3BPOcipaSBaCSL3MxmRcmBEtXz3RpmibwHC8aIE8Y"
               alt=""
@@ -48,7 +48,7 @@ const Home = () => {
               Xem lịch sử in ấn của bạn
             </p>
           </div>
-          <div className="relative  w-[300px] md:w-[30%] h-[300px] lg:h-[400px] rounded-lg overflow-hidden shadow-lg">
+          <div className="relative  w-[300px] md:w-[30%] h-[280px] lg:h-[350px] rounded-lg overflow-hidden shadow-lg">
             <img
               src="https://images.unsplash.com/photo-1580048915913-4f8f5cb481c4?auto=format&fit=crop&q=60&w=400&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzZ8fHBheW1lbnR8ZW58MHx8MHx8fDA%3D&fbclid=IwAR0cU5LfiJnLpvSu1mzTku2zeu06G_9i2ExmBBEK6jgcDAcjo6L1YAhgU-4"
               alt=""
@@ -63,31 +63,39 @@ const Home = () => {
           <h2 className="text-2xl md:text-3xl lg:text-4xl text-center mt-[50  px] font-semibold text-[#367fa9] underline underline-offset-4 mb-8 mt-[50px]">
             ĐẶC ĐIỂM NỔI BẬT
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-8 md:px-16 text-[18px] md:text-[24px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-8 md:px-16 text-[16px] md:text-[20px]">
             <div className="text-center border border-black rounded-2xl p-4 shadow-xl">
-              <FontAwesomeIcon icon={faShieldHalved} size="4x" />
-              <p className=" font-semibold my-2">Bảo mật</p>
+              <FontAwesomeIcon icon={faShieldHalved} size="3x" />
+              <p className=" text-[18px] md:text-[24px] mt-3  font-semibold my-2">
+                Bảo mật
+              </p>
               <p className="  font-normal">
                 Xác thực qua tài khoản của nhà trường
               </p>
             </div>
             <div className="text-center border border-black rounded-2xl p-4 shadow-xl">
-              <FontAwesomeIcon icon={faGauge} size="4x" />
-              <p className="  font-semibold my-2">Hiệu suất</p>
+              <FontAwesomeIcon icon={faGauge} size="3x" />
+              <p className=" text-[18px] md:text-[24px] mt-3   font-semibold my-2">
+                Hiệu suất
+              </p>
               <p className="  font-normal">
                 Hệ thống realtime, tốc độ phản hồi nhanh
               </p>
             </div>
             <div className="text-center border border-black rounded-2xl p-4 shadow-xl">
-              <FontAwesomeIcon icon={faDesktop} size="4x" />
-              <p className="  font-semibold my-2">Tương thích</p>
+              <FontAwesomeIcon icon={faDesktop} size="3x" />
+              <p className=" text-[18px] md:text-[24px] mt-3   font-semibold my-2">
+                Tương thích
+              </p>
               <p className="  font-normal">
                 Hiển thị tốt trên đa dạng thiết bị
               </p>
             </div>
             <div className="text-center border border-black rounded-2xl p-4 shadow-xl">
-              <FontAwesomeIcon icon={faHandPointer} size="4x" />
-              <p className="  font-semibold my-2">Dễ dùng</p>
+              <FontAwesomeIcon icon={faHandPointer} size="3x" />
+              <p className=" text-[18px] md:text-[24px] mt-3   font-semibold my-2">
+                Dễ dùng
+              </p>
               <p className="  font-normal">
                 Trải nghiệm người dùng tốt, sử dụng đơn giản
               </p>
