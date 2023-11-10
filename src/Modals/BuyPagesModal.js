@@ -41,7 +41,7 @@ const BuyPagesModal = ({ children }) => {
 
   return (
     <>
-      <div onClick={() => setOpenModal(true)}> {children}</div>
+      <div onClick={() => setOpenModal(true)}> {children} </div>
       <CenterModal open={openModal} handleClose={handleClose}>
         <div className="containerModal w-[380px] md:w-[450px] mx-auto overflow-hidden rounded-lg bg-white">
           <div className="Title text-[24px] text-white pt-2 font-bold text-center border-b-2 border-gray-400  pb-2 bg-[#3C8DBC]">
