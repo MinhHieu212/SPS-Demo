@@ -15,8 +15,8 @@ const InfoField = ({ fieldName, fieldValue }) => {
 
 export const InfoField2 = ({ fieldName, fieldValue }) => {
   return (
-    <div className="px-3 mb-2 text-[16px] md:text-[20px] flex items-center w-full">
-      <span className="text-[#066DCC] text-[20px] font-bold w-[40%]">
+    <div className="px-3 mb-2 text-[16px] md:text-[20px] flex items-center gap-3 w-full">
+      <span className="text-[#066DCC] text-[16px] md:text-[20px]  font-bold w-[40%]">
         {fieldName}:
       </span>
       <span className="text-[16px] md:text-[20px] font-semibold leading-7">

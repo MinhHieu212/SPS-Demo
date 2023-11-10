@@ -38,7 +38,7 @@ const Login = () => {
 
   return (
     <>
-      <div className="Wrapperlogin w-[85%] bg-white mx-auto mt-2">
+      <div className="Wrapperlogin w-[85%] bg-white mx-auto mt-2 shadow-sm">
         <div className="Title w-full h-[70px] bg-[#210F7A] flex items-center pl-[5px]">
           <HcmutLogo></HcmutLogo>
           <div className="text-white font-bold text-[26px] ml-[24px] tracking-widest">

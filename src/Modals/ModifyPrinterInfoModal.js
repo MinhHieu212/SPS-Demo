@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CenterModal from "./CenterModal";
 import InfoField from "../Utils/InfoField";
 
-const ModifyPrinterInfo = ({
+const ModifyPrinterInfoModal = ({
   children,
   PrinterProps = {
     printerId: "1234",
@@ -35,7 +35,7 @@ const ModifyPrinterInfo = ({
           </div>
           <div className="flex items-center justify-center text-[16px] md:text-[20px] font-semibold  ">
             <div className="flex w-full">
-              <div className="w-[60%] p-4">
+              <div className="w-[60%] p-3 md:p-4">
                 <p className="font-semibold text-[20] md:text-[24px] pb-2">
                   Thông tin máy in
                 </p>
@@ -56,15 +56,15 @@ const ModifyPrinterInfo = ({
                   fieldValue={printerInfo?.desc}
                 ></InfoField>
               </div>
-              <div className="w-[40%] p-4">
+              <div className="w-[40%]  p-3 md:p-4">
                 <p className="font-semibold text-[20] md:text-[24px] pb-2">
                   Loại file được in
                 </p>
-                <div className="w-full h-[200px] flex flex-col items-center justify-start overflow-y-scroll ">
+                <div className="w-full h-[200px] flex flex-col items-center justify-start overflow-y-scroll border-2 border-gray-400 rounded-md">
                   {fileTypes.map((type, index) => {
                     return (
                       <div
-                        className="p-2 bg-[#E6E6E6] rounded-md text-center w-[90%] h-[100px] mt-2"
+                        className="p-2 bg-[#E6E6E6] rounded-sm text-center w-[90%] h-[100px] mt-2"
                         key={index}
                       >
                         {type}
@@ -78,19 +78,29 @@ const ModifyPrinterInfo = ({
           <div className="flex justify-between items-center mb-2">
             <div className="w-1/2 pl-5">
               <div className="w-[200px] flex items-center">
-                <input type="radio" className="w-5 h-5" name="printerState" />
+                <input
+                  type="radio"
+                  className="w-5 h-5"
+                  name="printerState"
+                  id="enable"
+                />
                 <label
-                  htmlFor="printerState"
+                  htmlFor="enable"
                   className="ml-3 text-[16px] md:text-[20px] font-semibold"
                   ld
                 >
                   Hoạt động
                 </label>
               </div>
-              <div className="w-[200px] flex items-center mt-1">
-                <input type="radio" className="w-5 h-5" name="printerState" />
+              <div className="w-[200px] flex items-center">
+                <input
+                  type="radio"
+                  className="w-5 h-5"
+                  name="printerState"
+                  id="disable"
+                />
                 <label
-                  htmlFor="printerState"
+                  htmlFor="disable"
                   className="ml-3 text-[16px] md:text-[20px] font-semibold"
                 >
                   Vô hiệu hóa
@@ -98,7 +108,7 @@ const ModifyPrinterInfo = ({
               </div>
             </div>
             <div className="w-1/2 flex items-center justify-end pr-5">
-              <button className="bg-[#1488DB] h-[50px] p-3 w-[80%] md:w-[50%]  rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center">
+              <button className="bg-[#1488DB] h-[50px] p-3 w-[80%] md:w-[70%]  rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center">
                 Xác nhận
               </button>
             </div>
@@ -109,4 +119,4 @@ const ModifyPrinterInfo = ({
   );
 };
 
-export default ModifyPrinterInfo;
+export default ModifyPrinterInfoModal;
