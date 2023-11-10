@@ -13,7 +13,7 @@ import {
 const Home = () => {
   return (
     <div className="Home mb-5">
-      <div id="slider" className="relative w-full min-h-[400px] mb-2">
+      <div id="slider" className="relative w-full min-h-[400px] ">
         <div className="slider__content absolute text-center text-[#0f6cbf] left-1/2 top-1/2">
           <h1 className="slider__heading text-base text-[#2196f3] mb-1 md:text-3xl lg:text-4xl">
             TRƯỜNG ĐẠI HỌC BÁCH KHOA - ĐHQG TP.HCM

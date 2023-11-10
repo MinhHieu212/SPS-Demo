@@ -4,13 +4,14 @@ import Support from "../Pages/Support/Support";
 import History from "../Pages/History/History";
 import Login from "../Pages/Login/Login";
 import Report from "../Pages/Report/Report";
-import Manage from "../Pages/Manage/Manage";
 import Config from "../Pages/Config/Config";
 import Activities from "../Pages/Activities/Activities";
 import Test from "../Pages/TestModal/Test";
 import ConfigFile from "../Pages/ConfigFile/ConfigFile";
 import Bkpay from "../Pages/Bkpay/BkPay";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import ManageStaff from "../Pages/Manage/Manage";
+import ManageSpso from "../Pages/ManageSpso/ManageSpso";
 
 // no required login
 const publicRoutes = [
@@ -50,8 +51,13 @@ const publicRoutes = [
     layout: "default",
   },
   {
-    path: "/Manage",
-    component: Manage,
+    path: "/ManageStaff",
+    component: ManageStaff,
+    layout: "default",
+  },
+  {
+    path: "/ManageSpso",
+    component: ManageSpso,
     layout: "default",
   },
   {
