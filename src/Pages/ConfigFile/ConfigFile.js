@@ -36,15 +36,17 @@ const ConfigFile = () => {
   };
 
   return (
-    <div className="configFile max-w-[1280px] px-[10px] md:px-[32px] lg:px-[70px] w-full mx-auto mb-3">
+    <div className="configFile max-w-[1280px] px-[10px] md:px-[32px] lg:px-[70px] w-full mx-auto bg-[white] shadow-sm mb-5 min-h-[93vh]">
       <h2 className="w-full text-[#066DCC] text-3xl lg:text-4xl font-semibold mt-4 printing-title border-b-4 border-black pb-2 md:pb-3">
         CẤU HÌNH FILE IN
       </h2>
 
-      <div className="InfoPrinter text-[15px] md:text-[20px] font-semibold bg-white rounded-lg shadow-md relative w-full px-[24px] mt-[30px] flex flex-col lg:flex-row justify-between items-stretch py-[20px]">
-        <div className="font-bold uppercase">Thông tin máy in</div>
+      <div className="InfoPrinter text-[15px] md:text-[20px] font-semibold bg-[#f8f9fa] rounded-lg shadow-lg relative w-full px-[24px] mt-[30px] flex flex-col lg:flex-row justify-between items-stretch py-[20px]">
+        <div className="font-bold uppercase text-[18px] md:text-[24px]">
+          Thông tin máy in
+        </div>
 
-        <div className="flex items-center justify-between flex-wrap w-[100%] mt-3 lg:w-[80%]">
+        <div className="flex items-center justify-between flex-wrap w-[100%] gap-2 mt-3 lg:w-[80%]">
           <div>
             <span className="text-[#1488DB] mr-2">ID máy in:</span>
             <span className="">{printerInfo.id}</span>
@@ -64,14 +66,16 @@ const ConfigFile = () => {
         </div>
       </div>
 
-      <div className="UploadFile text-[15px] md:text-[20px] font-semibold bg-white rounded-lg shadow-md relative w-full px-[24px] mt-[30px] flex flex-col lg:flex-row justify-between items-stretch py-[20px]">
-        <div className="font-bold uppercase">Tải tệp in</div>
+      <div className="UploadFile text-[15px] md:text-[20px] font-semibold bg-[#f8f9fa] rounded-lg shadow-lg relative w-full px-[24px] mt-[30px] flex flex-col lg:flex-row justify-between items-stretch py-[20px]">
+        <div className="font-bold uppercase text-[18px] md:text-[24px]">
+          Tải tệp in
+        </div>
 
         <div className="flex items-center justify-evenly lg:w-[80%] w-[100%] mt-3">
           <div className="flex items-center justify-center w-full">
             <label
               htmlFor="dropzone-file"
-              className="flex flex-col items-center justify-center w-[100%] px-[20px] h-[120px] border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 overflow-x-scroll
+              className="flex flex-col items-center justify-center w-[100%] px-[20px] h-[120px] border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white overflow-x-scroll
               "
             >
               <div className="flex flex-col items-center justify-center ">
@@ -125,17 +129,19 @@ const ConfigFile = () => {
         </div>
       </div>
 
-      <div className="CongifFile text-[15px] md:text-[20px] font-semibold bg-white rounded-lg shadow-md relative w-full px-[24px] mt-[30px] flex flex-col lg:flex-row justify-between items-stretch py-[20px]">
-        <div className="font-bold uppercase">Cấu hình in</div>
+      <div className="CongifFile text-[15px] md:text-[20px] font-semibold bg-[#f8f9fa] rounded-lg shadow-lg relative w-full px-[24px] mt-[30px] flex flex-col lg:flex-row justify-between items-stretch py-[20px]">
+        <div className="font-bold uppercase text-[18px] md:text-[24px]">
+          Cấu hình in
+        </div>
 
         <div className="flex flex-col items-center justify-evenly w-[100%] lg:w-[80%] mt-3">
-          <div className="w-full flex items-center justify-between">
+          <div className="w-full flex-col md:flex-row  items-center justify-between">
             <span className="text-[#1488DB] mr-2">Tên têp</span>
 
             <select
               name="files"
               id="files"
-              className="w-[90%] border-2 border-gray-400 rounded-sm p-2"
+              className="w-[100%] md:w-[90%] border-2 border-gray-400 rounded-sm p-2"
             >
               {files?.map((file, index) => {
                 return (

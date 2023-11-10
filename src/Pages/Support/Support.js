@@ -2,11 +2,11 @@ import React from "react";
 import "./Support.scss";
 const Support = () => {
   return (
-    <div className="Support max-w-[1280px] px-[15px] md:px-[32px] lg:px-[70px] mx-auto">
+    <div className="Support max-w-[1280px] px-[15px] md:px-[32px] lg:px-[70px] mx-auto mb-5 bg-[white] shadow-sm min-h-[93vh]">
       <h1 className="text-3xl lg:text-4xl font-semibold mt-4 border-b-4 border-black pb-2 md:pb-3">
         HƯỚNG DẪN
       </h1>
-      <div className="guide text-1xl lg:text-2xl mt-4 pb-2 md:pb-3 items-center justify-evenly w-full mx-auto">
+      <div className="guide text-[16px] md:text-[20px] mt-4 pb-2 md:pb-3 items-center justify-evenly w-full mx-auto">
         <p>
           Để sử dụng được hệ thống, sinh viên / nhà quản lý / nhân viên quầy cần
           phải đăng nhập với tài khoản được cấp.
@@ -49,13 +49,13 @@ const Support = () => {
         </p>
       </div>
 
-      <div className="faq w-full text-1xl lg:text-2xl items-center justify-evenly mx-auto">
+      <div className="faq w-full text-[16px] md:text-[20px] items-center justify-evenly mx-auto">
         <h2 className="text-2xl lg:text-3xl font-bold mt-4 pb-1 md:pb-2">
           CÂU HỎI THƯỜNG GẶP
         </h2>
         <ul className="m-d expand-list">
           <li data-md-content="300">
-            <label className="tab" htmlFor="tab1">
+            <label className="tab text-[16px] md:text-[20px]" htmlFor="tab1">
               Giá tiền một trang a4 hay a3 có thay đổi theo thời gian?
             </label>
             <input type="checkbox" id="tab1" name="tab1" className="tab1" />
@@ -73,7 +73,7 @@ const Support = () => {
           </li>
 
           <li data-md-content="300">
-            <label className="tab" htmlFor="tab2">
+            <label className="tab text-[16px] md:text-[20px]" htmlFor="tab2">
               Tôi không phải sinh viên hay cán bộ nhà trường thì có được sử dụng
               không?
             </label>
@@ -92,7 +92,7 @@ const Support = () => {
           </li>
 
           <li data-md-content="300" className="mb-4">
-            <label className="tab" htmlFor="tab3">
+            <label className="tab text-[16px] md:text-[20px]" htmlFor="tab3">
               Các hình thức thanh toán khả dụng?
             </label>
             <input type="checkbox" id="tab3" name="tab3" className="tab3" />

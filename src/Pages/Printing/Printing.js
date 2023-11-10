@@ -55,8 +55,8 @@ const info = [
 ];
 const Printing = () => {
   return (
-    <div className="Printing w-full px-[10px] max-w-[1280px] md:px-[32px] lg:px-[70px] mx-auto">
-      <h2 className="text-3xl lg:text-4xl font-semibold mt-4 printing-title border-b-4 border-black pb-2 md:pb-3">
+    <div className="Printing w-full px-[10px] max-w-[1280px] bg-[white] shadow-sm md:px-[32px] lg:px-[70px] mx-auto mb-5 min-h-[93vh]">
+      <h2 className="text-3xl lg:text-4xl font-semibold mt-4 printing-title border-b-4 border-black pb-2 md:pb-3  text-[#066DCC] ">
         CHỌN MÁY IN
       </h2>
       <div className="flex flex-col md:flex-row mt-4 gap-4">

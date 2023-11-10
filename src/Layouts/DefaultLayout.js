@@ -17,6 +17,7 @@ const DefaultLayout = ({ children }) => {
       !e.target.matches("#Header_MenuIcon") &&
       !e.target.matches("svg") &&
       !e.target.matches("path") &&
+      // e.target.matches("overlay") &&
       window.innerWidth <= 849
     ) {
       setshowSideBar(false);
@@ -55,9 +56,17 @@ const DefaultLayout = ({ children }) => {
         showSideBar={showSideBar}
         setShowSideBar={setshowSideBar}
       ></Header>
-      <div className="w-full flex mt-[66px]">
+      <div className="w-full flex mt-[66px] relative">
         <SideBar showSideBar={showSideBar} elementRef={elementRef}></SideBar>
-        <div className={`Main_Container ${marginLeft} w-full`}>{children}</div>
+        <div className={`Main_Container ${marginLeft} w-full bg-[#f8f9fa]`}>
+          {children}
+        </div>
+        {/* {showSideBar && window.innerWidth <= 849 && (
+          <div
+            id="overlay"
+            className="overlay absolute inset-0 z-30 bg-slate-200"
+          ></div>
+        )} */}
       </div>
     </div>
   );
