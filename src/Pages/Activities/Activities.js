@@ -89,7 +89,7 @@ const Activities = () => {
 
       </div>
       <div className="w-full overflow-x-auto">
-        <div className="flex flex-row justify-between items-center bg-[#3C8DBC] text-sm md:text-base lg:text-lg font-bold py-3 px-4 mt-8 rounded-sm w-[714px] md:w-full text-white">
+        <div className="flex flex-row justify-between items-center bg-[#3C8DBC] text-base lg:text-lg font-bold py-3 px-4 mt-8 rounded-sm w-[714px] md:w-full text-white">
           <div className="min-w-[25%]">SINH VIÊN</div>
           <div className="min-w-[12.5%]">ID SINH VIÊN</div>
           <div className="min-w-[12.5%]">ID MÁY IN</div>
