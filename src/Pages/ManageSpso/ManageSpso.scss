@@ -1,0 +1,22 @@
+.manageSPSO-outer-flex {
+    gap: 24px;
+}
+.manageSPSO-inner-flex {
+    gap: 24px;
+}
+@media (min-width: 768px) {
+    .manageSPSO-outer-flex {
+        gap: 13px;
+    }
+    .manageSPSO-inner-flex {
+        gap: 10px;
+    }
+}
+@media (min-width: 1024px) {
+    .manageSPSO-outer-flex {
+        gap: 53px;
+    }
+    .manageSPSO-inner-flex {
+        gap: 42px;
+    }
+}

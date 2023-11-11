@@ -13,7 +13,7 @@ const HeaderBeforeLogin = () => {
   };
 
   return (
-    <div className="HeaderBeforeLogin_container w-[100vw] h-[55px] bg-[#3C8DBC] flex items-center justify-between fixed z-50  ">
+    <div className="HeaderBeforeLogin_container w-[100vw] h-[66px] md:h-[55px] bg-[#3C8DBC] flex items-center justify-between fixed z-50  ">
       <div className="Header_SystemName flex items-center transition-all">
         <div className="system_name  hidden md:flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[55px] w-[250px] bg-gradient-to-br from-cyan-500 to-#3C8DBC ">
           {"Smart Printing System"}

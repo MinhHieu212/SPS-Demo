@@ -10,7 +10,7 @@ import Test from "../Pages/TestModal/Test";
 import ConfigFile from "../Pages/ConfigFile/ConfigFile";
 import Bkpay from "../Pages/Bkpay/BkPay";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
-import ManageStaff from "../Pages/Manage/Manage";
+import ManageStaff from "../Pages/ManageStaff/ManageStaff";
 import ManageSpso from "../Pages/ManageSpso/ManageSpso";
 
 // no required login
