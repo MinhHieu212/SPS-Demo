@@ -63,7 +63,7 @@ const Login = () => {
               <div className="mt-[10px]">
                 <label
                   htmlFor="TenTaiKhoan"
-                  className="block font-semibold text-[#777777]"
+                  className="block font-semibold text-[#777777] text-[16px]"
                 >
                   Tên tài khoản
                 </label>
@@ -72,13 +72,13 @@ const Login = () => {
                   name="TenTaiKhoan"
                   id="TenTaiKhoan"
                   type="text"
-                  className="h-[30px] w-[314px] px-2 outline-none border border-[#dddddd] bg-[#ffffdd] rounded-[3px]"
+                  className="h-[30px] w-[314px] px-2 outline-none border border-[#dddddd] text-[16px] bg-[#ffffdd] rounded-[3px]"
                 />
               </div>
               <div className="mt-[10px]">
                 <label
                   htmlFor="MatKhau"
-                  className="block font-semibold text-[#777777]"
+                  className="block font-semibold text-[16px] text-[#777777]"
                 >
                   Mật khẩu
                 </label>
@@ -87,7 +87,7 @@ const Login = () => {
                   name="MatKhau"
                   id="MatKhau"
                   type="password"
-                  className="h-[30px] w-[314px] px-2 outline-none border border-[#dddddd] bg-[#ffffdd] rounded-[3px]"
+                  className="h-[30px] w-[314px] px-2 outline-none border border-[#dddddd] text-[16px] bg-[#ffffdd] rounded-[3px]"
                 />
               </div>
               <div className="mt-[10px] flex items-start border-b-2 border-[#990033] pb-[10px]">
