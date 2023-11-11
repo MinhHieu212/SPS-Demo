@@ -1,0 +1,27 @@
+.activity-inner-flex-input {
+    gap: 17px;
+}
+
+.activity-outer-flex-input {
+    gap: 17px;
+}
+
+@media (min-width: 768px) {
+    .activity-inner-flex-input {
+        gap: 19px;
+    }
+    
+    .activity-outer-flex-input {
+        gap: 104px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .activity-inner-flex-input {
+        gap: 19px;
+    }
+    
+    .activity-outer-flex-input {
+        gap: 104px;
+    }
+}
