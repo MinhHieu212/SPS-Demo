@@ -9,7 +9,7 @@ const Header = ({ showSideBar, setShowSideBar }) => {
     setShowSideBar(!showSideBar);
   }
   return (
-    <div className="Header_container w-[100vw] h-[55px] bg-[#3C8DBC] flex items-center justify-between shadow-md fixed z-50 -translate-y-full ">
+    <div className="Header_container w-[100vw] h-[66px] md:h-[55px] bg-[#3C8DBC] flex items-center justify-between shadow-md fixed z-50 -translate-y-full ">
       <div className="Header_SystemName flex items-center transition-all">
         {!showSideBar && (
           <Link to="/Home">

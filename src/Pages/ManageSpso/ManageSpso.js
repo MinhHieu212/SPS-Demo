@@ -8,69 +8,97 @@ const printers = [
     location: "CS2, H6, 311",
     date: "12-03-2022",
     queue: 18,
-    status: "Không hoạt động"
+    status: "Hoạt động",
   },
   {
     id: "12345678",
     location: "CS2, H6, 311",
     date: "12-03-2022",
     queue: 18,
-    status: "Hoạt động"
+    status: "Hoạt động",
   },
   {
     id: "12345678",
     location: "CS2, H6, 311",
     date: "12-03-2022",
     queue: 18,
-    status: "Hoạt động"
+    status: "Hoạt động",
   },
   {
     id: "12345678",
     location: "CS2, H6, 311",
     date: "12-03-2022",
     queue: 18,
-    status: "Hoạt động"
+    status: "Hoạt động",
   },
   {
     id: "12345678",
     location: "CS2, H6, 311",
     date: "12-03-2022",
     queue: 18,
-    status: "Hoạt động"
+    status: "Hoạt động",
   },
   {
     id: "12345678",
     location: "CS2, H6, 311",
     date: "12-03-2022",
     queue: 18,
-    status: "Hoạt động"
+    status: "Hoạt động",
   },
   {
     id: "12345678",
     location: "CS2, H6, 311",
     date: "12-03-2022",
     queue: 18,
-    status: "Hoạt động"
+    status: "Hoạt động",
   },
   {
     id: "12345678",
     location: "CS2, H6, 311",
     date: "12-03-2022",
     queue: 18,
-    status: "Hoạt động"
+    status: "Hoạt động",
   },
   {
     id: "12345678",
     location: "CS2, H6, 311",
     date: "12-03-2022",
     queue: 18,
-    status: "Hoạt động"
-  }
-]
+    status: "Hoạt động",
+  },
+  {
+    id: "12345678",
+    location: "CS2, H6, 311",
+    date: "12-03-2022",
+    queue: 18,
+    status: "Hoạt động",
+  },
+  {
+    id: "12345678",
+    location: "CS2, H6, 311",
+    date: "12-03-2022",
+    queue: 18,
+    status: "Hoạt động",
+  },
+  {
+    id: "12345678",
+    location: "CS2, H6, 311",
+    date: "12-03-2022",
+    queue: 18,
+    status: "Hoạt động",
+  },
+  {
+    id: "12345678",
+    location: "CS2, H6, 311",
+    date: "12-03-2022",
+    queue: 18,
+    status: "Hoạt động",
+  },
+];
 const ManageSpso = () => {
   return (
     <div className="Manage History max-w-[1280px] px-[10px] md:px-[32px] lg:px-[70px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
-      <h2 className="text-3xl lg:text-4xl font-semibold mt-4 printing-title border-b-4 border-black pb-2 md:pb-3  text-[#066DCC] ">
+      <h2 className="text-3xl lg:text-4xl font-semibold mt-4 printing-title border-b-4 border-black pb-2  md:pb-3  text-[#066DCC] ">
         QUẢN LÝ HỆ THỐNG MÁY IN
       </h2>
       <div className="flex flex-col-reverse md:flex-row mt-4 items-center manageSPSO-outer-flex">
@@ -104,20 +132,20 @@ const ManageSpso = () => {
         </div>
       </div>
       <div className="w-full overflow-x-auto">
-        <div className="flex flex-row justify-between items-center bg-[#3C8DBC] text-base lg:text-lg font-bold py-2 px-4 mt-8 rounded-sm w-[714px] md:w-full text-white">
-          <div className="w-[16%]">ID MÁY IN</div>
-          <div className="w-[16%]">VỊ TRÍ</div>
-          <div className="w-[16%]">THỜI GIAN KÍCH HOẠT</div>
-          <div className="w-[25%]">SỐ YÊU CẦU IN</div>
-          <div className="w-[27%]">TRẠNG THÁI</div>
+        <div className="flex flex-row justify-between items-center bg-[#3C8DBC] text-base lg:text-lg font-bold py-3 px-4 mt-8 rounded-sm w-[714px] md:w-full text-white">
+          <div className="text-center w-[10%]">ID MÁY IN</div>
+          <div className="text-center w-[20%]">VỊ TRÍ</div>
+          <div className="text-center w-[20%]"> KÍCH HOẠT</div>
+          <div className="text-center w-[25%]">SỐ YÊU CẦU IN</div>
+          <div className="text-center w-[25%]">TRẠNG THÁI</div>
         </div>
-        {printers.map(printer => (
+        {printers.map((printer) => (
           <ManageSpsoItem
-            id = {printer.id}
-            location = {printer.location}
-            date = {printer.date}
-            queue = {printer.queue}
-            status = {printer.status}
+            id={printer.id}
+            location={printer.location}
+            date={printer.date}
+            queue={printer.queue}
+            status={printer.status}
           />
         ))}
       </div>
