@@ -56,7 +56,7 @@ const DefaultLayout = ({ children }) => {
         showSideBar={showSideBar}
         setShowSideBar={setshowSideBar}
       ></Header>
-      <div className="w-full flex mt-[66px] relative">
+      <div className="w-full flex mt-[55px] relative">
         <SideBar showSideBar={showSideBar} elementRef={elementRef}></SideBar>
         <div className={`Main_Container ${marginLeft} w-full bg-[#f8f9fa]`}>
           {children}

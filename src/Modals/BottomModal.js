@@ -17,7 +17,7 @@ const BottomModal = ({ element, children }) => {
   return (
     <Popover open={openPopover} handler={setOpenPopover}>
       <PopoverHandler {...triggers} className="border-none outline-none">
-        <Button variant="text" className="outline-none border-none">
+        <Button variant="text" className="outline-none border-none h-[55px]">
           {element}
         </Button>
       </PopoverHandler>
