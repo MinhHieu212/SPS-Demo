@@ -48,16 +48,6 @@ const ManageStaff = () => {
         QUẢN LÝ MÁY IN
       </h2>
       <div className="flex flex-col md:flex-row mt-4 items-center gap-4">
-        <div className="w-full md:w-1/2 relative shadow-md">
-          <div className="bg-[#3C8DBC] text-white text-xl font-bold flex flex-row justify-center items-center text-center py-[14px] px-[8px]">
-            <p className="text-base lg:text-xl w-1/2">TỔNG SỐ</p>
-            <p className="text-base lg:text-xl w-1/2">ĐANG HOẠT ĐỘNG</p>
-          </div>
-          <div className="bg-white flex flex-row text-base font-bold justify-center items-center text-center py-[14px]">
-            <p className="text-base lg:text-xl w-1/2">{totalPrinters}</p>
-            <p className="text-base lg:text-xl w-1/2">{onlinePrinters}</p>
-          </div>
-        </div>
         <div className="w-full md:w-1/2 relative">
           <input
             type="text"
@@ -68,9 +58,19 @@ const ManageStaff = () => {
             <SearchIcon></SearchIcon>
           </div>
         </div>
+        <div className="w-full md:w-1/2 relative shadow-md">
+          <div className="bg-[#3C8DBC] text-white text-xl font-bold flex flex-row justify-center items-center text-center py-[14px] px-[8px]">
+            <p className="text-base lg:text-xl w-1/2">TỔNG SỐ</p>
+            <p className="text-base lg:text-xl w-1/2">ĐANG HOẠT ĐỘNG</p>
+          </div>
+          <div className="bg-white flex flex-row text-base font-bold justify-center items-center text-center py-[14px]">
+            <p className="text-base lg:text-xl w-1/2">{totalPrinters}</p>
+            <p className="text-base lg:text-xl w-1/2">{onlinePrinters}</p>
+          </div>
+        </div>
       </div>
       <div className="w-full overflow-x-auto">
-        <div className="text-white flex flex-row justify-between items-center bg-[#3C8DBC] text-sm md:text-base lg:text-lg font-bold py-3 px-4 mt-8 rounded-sm w-[714px] md:w-full">
+        <div className="text-white flex flex-row justify-between items-center bg-[#3C8DBC] text-base lg:text-lg font-bold py-3 px-4 mt-8 rounded-sm w-[714px] md:w-full">
           <div className="min-w-[25%]">ID MÁY IN</div>
           <div className="min-w-[25%]">SỐ YÊU CẦU IN</div>
           <div className="min-w-[25%]">LỊCH SỬ IN</div>
@@ -78,12 +78,12 @@ const ManageStaff = () => {
         </div>
         {printers.map(printer => (
           <ManageItem
-            id = {printer.id}
-            queue = {printer.queue}
-            status = {printer.status}
+            id={printer.id}
+            queue={printer.queue}
+            status={printer.status}
           />
         ))}
-        
+
       </div>
     </div>
   );
