@@ -1,0 +1,18 @@
+import React from "react";
+import "./Report.scss";
+
+function ReportItem(props) {
+    return (
+        <div className="ReportItem flex flex-row justify-between items-center bg-[#E7E5E5] text-sm md:text-base lg:text-lg font-bold py-3 px-4 mt-3 rounded-sm border-b-2 border-black w-[714px] md:w-full">
+            <div className="min-w-[10%] text-center">{props.time}</div>
+            <div className="min-w-[15%] text-center">{props.id}</div>
+            <div className="min-w-[15%] text-center">{props.location}</div>
+            <div className="min-w-[15%] text-center">{props.frequency}</div>
+            <div className="min-w-[15%] text-center">{props.a3}</div>
+            <div className="min-w-[15%] text-center">{props.a4}</div>
+            <div className="min-w-[15%] text-center">{props.maintenance}</div>
+        </div>
+    )
+}
+
+export default ReportItem;
