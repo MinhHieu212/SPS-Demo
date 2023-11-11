@@ -39,6 +39,8 @@ const printers = [
     status: "Hoạt động"
   }
 ]
+const totalPrinters = 15;
+const onlinePrinters = 8;
 const ManageStaff = () => {
   return (
     <div className="Manage History max-w-[1280px] px-[10px] md:px-[32px] lg:px-[70px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
@@ -52,8 +54,8 @@ const ManageStaff = () => {
             <p className="text-base lg:text-xl w-1/2">ĐANG HOẠT ĐỘNG</p>
           </div>
           <div className="bg-white flex flex-row text-base font-bold justify-center items-center text-center py-[14px]">
-            <p className="text-base lg:text-xl w-1/2">8</p>
-            <p className="text-base lg:text-xl w-1/2">2</p>
+            <p className="text-base lg:text-xl w-1/2">{totalPrinters}</p>
+            <p className="text-base lg:text-xl w-1/2">{onlinePrinters}</p>
           </div>
         </div>
         <div className="w-full md:w-1/2 relative">
@@ -68,7 +70,7 @@ const ManageStaff = () => {
         </div>
       </div>
       <div className="w-full overflow-x-auto">
-        <div className="flex flex-row justify-between items-center bg-[#3C8DBC] text-sm md:text-base lg:text-lg font-bold py-3 px-4 mt-8 rounded-sm w-[632px] md:w-full">
+        <div className="text-white flex flex-row justify-between items-center bg-[#3C8DBC] text-sm md:text-base lg:text-lg font-bold py-3 px-4 mt-8 rounded-sm w-[714px] md:w-full">
           <div className="min-w-[25%]">ID MÁY IN</div>
           <div className="min-w-[25%]">SỐ YÊU CẦU IN</div>
           <div className="min-w-[25%]">LỊCH SỬ IN</div>
