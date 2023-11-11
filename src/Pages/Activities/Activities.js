@@ -90,12 +90,12 @@ const Activities = () => {
       </div>
       <div className="w-full overflow-x-auto">
         <div className="flex flex-row justify-between items-center bg-[#3C8DBC] text-sm md:text-base lg:text-lg font-bold py-3 px-4 mt-8 rounded-sm w-[714px] md:w-full text-white">
-          <div className="min-w-[26%]">SINH VIÊN</div>
-          <div className="min-w-[12%]">ID SINH VIÊN</div>
-          <div className="min-w-[12%]">ID MÁY IN</div>
-          <div className="min-w-[12%]">VỊ TRÍ</div>
-          <div className="min-w-[12%]">NGÀY IN</div>
-          <div className="min-w-[26%]">TÊN FILE</div>
+          <div className="min-w-[25%]">SINH VIÊN</div>
+          <div className="min-w-[12.5%]">ID SINH VIÊN</div>
+          <div className="min-w-[12.5%]">ID MÁY IN</div>
+          <div className="min-w-[12.5%]">VỊ TRÍ</div>
+          <div className="min-w-[12.5%]">NGÀY IN</div>
+          <div className="min-w-[25%]">TÊN FILE</div>
         </div>
         {activities.map(activity => (
           <ActivityItem
