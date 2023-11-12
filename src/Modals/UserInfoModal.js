@@ -10,6 +10,9 @@ function UserBottomModal({ children }) {
   const elementRef = useRef();
 
   const handleLogout = () => {
+    localStorage.removeItem("Role");
+    localStorage.removeItem("MatKhau");
+    localStorage.removeItem("TenTaiKhoan");
     navigate("/");
   };
 

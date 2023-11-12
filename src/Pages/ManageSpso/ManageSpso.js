@@ -2,6 +2,7 @@ import React from "react";
 import { FilterIcon, SearchIcon } from "../../Assets/Icons/Icons";
 import "./ManageSpso.scss";
 import ManageSpsoItem from "./ManageSpsoItem";
+import { useNavigate } from "react-router";
 const printers = [
   {
     id: "12345678",
@@ -96,6 +97,12 @@ const printers = [
   },
 ];
 const ManageSpso = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("Role") !== "SPSO") {
+      navigate("/Error");
+    }
+  }, []);
   return (
     <div className="Manage History max-w-[1280px] px-[10px] md:px-[32px] lg:px-[70px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
       <h2 className="text-3xl lg:text-4xl font-semibold mt-4 printing-title border-b-4 border-black pb-2  md:pb-3  text-[#066DCC] ">

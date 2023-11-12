@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -25,6 +25,9 @@ const Login = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    localStorage.setItem("Role", data.TenTaiKhoan);
+    localStorage.setItem("TenTaiKhoan", data.TenTaiKhoan);
+    localStorage.setItem("MatKhau", data.MatKhau);
     setTimeout(() => {
       if (!Object.keys(errors).length) {
         navigate("/Home");

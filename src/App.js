@@ -23,7 +23,7 @@ function App() {
               key={index}
               path={route.path}
               element={
-                <Layout>
+                <Layout role={route.role}>
                   <Page />
                 </Layout>
               }

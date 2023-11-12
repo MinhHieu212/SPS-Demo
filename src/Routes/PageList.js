@@ -16,81 +16,51 @@ import ManageSpso from "../Pages/ManageSpso/ManageSpso";
 // no required login
 const publicRoutes = [
   {
-    path: "/",
-    component: Home,
-    layout: "beforeLogin",
-  },
-  {
-    path: "/SPS-FE-Project",
-    component: Home,
-    layout: "beforeLogin",
-  },
-  {
-    path: "/Home",
-    component: Home,
-    layout: "default",
-  },
-  {
-    path: "/Printing",
-    component: Printing,
-    layout: "default",
-  },
-  {
-    path: "/History",
-    component: History,
-    layout: "default",
-  },
-  {
-    path: "/Support",
-    component: Support,
-    layout: "default",
-  },
-  {
-    path: "/Config",
-    component: Config,
-    layout: "default",
-  },
-  {
-    path: "/ManageStaff",
-    component: ManageStaff,
-    layout: "default",
-  },
-  {
-    path: "/ManageSpso",
-    component: ManageSpso,
-    layout: "default",
-  },
-  {
-    path: "/Report",
-    component: Report,
-    layout: "default",
-  },
-  {
-    path: "/Activities",
-    component: Activities,
-    layout: "default",
-  },
-  {
+    role: "Student",
     path: "/Printing/:PrinterID",
     component: ConfigFile,
     layout: "default",
   },
   {
-    path: "/Login",
-    component: Login,
+    role: "Student",
+    path: "/Printing",
+    component: Printing,
+    layout: "default",
+  },
+  { role: "Student", path: "/History", component: History, layout: "default" },
+  { role: "Spso", path: "/Config", component: Config, layout: "default" },
+  {
+    role: "Staff",
+    path: "/ManageStaff",
+    component: ManageStaff,
+    layout: "default",
   },
   {
-    path: "/Bkpay",
-    component: Bkpay,
+    role: "Spso",
+    path: "/ManageSpso",
+    component: ManageSpso,
+    layout: "default",
+  },
+  { role: "Spso", path: "/Report", component: Report, layout: "default" },
+  {
+    role: "Spso",
+    path: "/Activities",
+    component: Activities,
+    layout: "default",
   },
   {
-    path: "/Test",
-    component: Test,
+    role: " ",
+    path: "/SPS-FE-Project",
+    component: Home,
+    layout: "beforeLogin",
   },
-  {
-    path: "*",
-    component: ErrorPage,
-  },
+  { role: "", path: "/", component: Home, layout: "beforeLogin" },
+  { role: "", path: "/Home", component: Home, layout: "default" },
+  { role: "", path: "/Support", component: Support, layout: "default" },
+  { role: "", path: "/Login", component: Login },
+  { role: "", path: "/Bkpay", component: Bkpay },
+  { role: "", path: "/Test", component: Test },
+  { role: "", path: "*", component: ErrorPage },
 ];
 
 // required login
