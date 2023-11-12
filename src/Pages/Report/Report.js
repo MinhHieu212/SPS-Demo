@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReportItem from "./ReportItem";
 import PaperChart from "./PaperChart";
+import { useNavigate } from "react-router";
 const data = [2478, 5267, 734, 784, 433, 769, 892, 133, 788, 820, 110, 120];
 const items = [
   {

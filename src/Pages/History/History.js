@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./History.scss";
 import HistoryItem from "./HistoryItem";
 import { FilterIcon, SearchIcon } from "../../Assets/Icons/Icons";
@@ -108,10 +108,7 @@ const files = [
 const History = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    if (
-      localStorage.getItem("Role") === "Staff" ||
-      localStorage.getItem("Role") === "SPSO"
-    ) {
+    if (localStorage.getItem("Role") !== "Student") {
       navigate("/Error");
     }
   }, []);

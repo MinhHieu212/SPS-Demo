@@ -81,10 +81,7 @@ const info = [
 const Printing = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    if (
-      localStorage.getItem("Role") === "Staff" ||
-      localStorage.getItem("Role") === "SPSO"
-    ) {
+    if (localStorage.getItem("Role") !== "Student") {
       navigate("/Error");
     }
   }, []);

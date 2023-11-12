@@ -15,7 +15,7 @@ const ErrorPage = () => {
             </p>
 
             <Link
-              to="/Home"
+              to="/"
               class="px-5 inline py-3 bg-[#367FA9]  text-sm font-medium leading-5 shadow-2xl text-white transition-all duration-400 border border-transparent rounded-lg focus:outline-none"
             >
               back to homepage

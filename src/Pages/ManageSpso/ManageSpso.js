@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FilterIcon, SearchIcon } from "../../Assets/Icons/Icons";
 import "./ManageSpso.scss";
 import ManageSpsoItem from "./ManageSpsoItem";

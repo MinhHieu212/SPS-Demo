@@ -12,6 +12,7 @@ import Bkpay from "../Pages/Bkpay/BkPay";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import ManageStaff from "../Pages/ManageStaff/ManageStaff";
 import ManageSpso from "../Pages/ManageSpso/ManageSpso";
+import HomeNoLogin from "../Pages/HomeNoLogin/HomeNoLogin";
 
 // no required login
 const publicRoutes = [
@@ -51,10 +52,10 @@ const publicRoutes = [
   {
     role: " ",
     path: "/SPS-FE-Project",
-    component: Home,
+    component: HomeNoLogin,
     layout: "beforeLogin",
   },
-  { role: "", path: "/", component: Home, layout: "beforeLogin" },
+  { role: "", path: "/", component: HomeNoLogin, layout: "beforeLogin" },
   { role: "", path: "/Home", component: Home, layout: "default" },
   { role: "", path: "/Support", component: Support, layout: "default" },
   { role: "", path: "/Login", component: Login },

@@ -1,8 +1,15 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { FileIcon } from "../../Assets/Icons/Icons";
 
 const ConfigFile = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("Role") !== "Student") {
+      navigate("/Error");
+    }
+  }, []);
+
   const { PrinterID } = useParams();
   const [printerInfo, setPrinterInfo] = useState({
     id: PrinterID,
