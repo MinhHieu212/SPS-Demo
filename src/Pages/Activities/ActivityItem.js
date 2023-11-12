@@ -4,7 +4,7 @@ import { FilterIcon, SearchIcon, InfoIcon } from "../../Assets/Icons/Icons";
 
 function ActivityItem(props) {
   return (
-    <div className="ActivityItem flex flex-row justify-between items-center bg-[#E7E5E5] text-sm md:text-base lg:text-lg font-bold py-3 px-4 mt-3 rounded-sm border-b-2 border-black w-[714px] md:w-full">
+    <div className="ActivityItem flex flex-row justify-between items-center bg-[#E7E5E5] text-[16px] md:text-[20px] font-bold py-3 px-4 mt-3 rounded-sm border-b-2 border-black w-[714px] md:w-full">
       <div className="min-w-[18%] truncate overflow-clip">
         {props.studentName}
       </div>

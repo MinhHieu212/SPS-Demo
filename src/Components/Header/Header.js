@@ -13,21 +13,21 @@ const Header = ({ showSideBar, setShowSideBar }) => {
       <div className="Header_SystemName flex items-center transition-all">
         {!showSideBar && (
           <Link to="/Home">
-            <div className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[55px] w-[66px] bg-gradient-to-br from-cyan-500 to-#3C8DBC">
+            <div className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] md:h-[55px] w-[66px] bg-gradient-to-br from-cyan-500 to-#3C8DBC">
               BK
             </div>
           </Link>
         )}
         {showSideBar && (
           <Link to="/Home">
-            <div className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[55px] w-[250px] bg-gradient-to-br from-cyan-500 to-#3C8DBC">
+            <div className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] md:h-[55px] w-[250px] bg-gradient-to-br from-cyan-500 to-#3C8DBC">
               Smart Printing System
             </div>
           </Link>
         )}
         <div
           id="Header_SideBarIcon"
-          className="Header_MenuIcon flex items-center justify-center text-white font-bold text-[20px] h-[55px] w-[66px] cursor-pointer"
+          className="Header_MenuIcon flex items-center justify-center text-white font-bold text-[20px] h-[66px] md:h-[55px] w-[66px] cursor-pointer"
           onClick={handleShowSideBar}
         >
           {!showSideBar && <MenuIcon />}
