@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import CenterModal from "./CenterModal";
-import "./BuyPagesModal.scss";
+import CenterModal from "../BaseModals/CenterModal";
+import "./PagesPurchaseModal.scss";
 import { useNavigate } from "react-router-dom";
 
-const BuyPagesModal = ({ children }) => {
+const PagesPurchaseModal = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
 
@@ -136,4 +136,4 @@ const BuyPagesModal = ({ children }) => {
   );
 };
 
-export default BuyPagesModal;
+export default PagesPurchaseModal;

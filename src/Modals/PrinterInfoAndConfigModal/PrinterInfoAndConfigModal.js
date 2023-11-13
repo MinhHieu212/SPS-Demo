@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import CenterModal from "./CenterModal";
-import InfoField from "../Utils/InfoField";
+import InfoField from "../../Utils/InfoField";
+import CenterModal from "../BaseModals/CenterModal";
 
-const ModifyPrinterInfoModal = ({
+const PrinterInfoAndConfigModal = ({
   children,
   PrinterProps = {
     printerId: "1234",
@@ -119,4 +119,4 @@ const ModifyPrinterInfoModal = ({
   );
 };
 
-export default ModifyPrinterInfoModal;
+export default PrinterInfoAndConfigModal;

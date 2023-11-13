@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import CenterModal from "./CenterModal";
-import { InfoField2 } from "../Utils/InfoField";
+import CenterModal from "../BaseModals/CenterModal";
+import { InfoField2 } from "../../Utils/InfoField";
 
-const PrintingLogInfoModal = ({ children }) => {
+const DetailHistoryModal = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
   const handleClose = () => {
     setOpenModal(false);
@@ -62,4 +62,4 @@ const PrintingLogInfoModal = ({ children }) => {
   );
 };
 
-export default PrintingLogInfoModal;
+export default DetailHistoryModal;

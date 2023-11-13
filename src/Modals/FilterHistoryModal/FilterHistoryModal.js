@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const PrintingLogFilterModal = ({ children }) => {
+const FilterHistoryModal = ({ children }) => {
   const [open, setOpen] = useState(false);
 
   const Cs1_List = ["A1", "B2", "D1", "B1", "B4", "C7", "B3"];
@@ -68,7 +68,7 @@ const PrintingLogFilterModal = ({ children }) => {
                 <option
                   value="all"
                   className="font-bold text-center border-b-2 border-gray"
-                  selected
+                  // selected
                 >
                   Cơ Sở 1
                 </option>
@@ -88,7 +88,7 @@ const PrintingLogFilterModal = ({ children }) => {
               >
                 <option
                   value="all"
-                  selected
+                  // selected
                   className="font-bold text-center border-b-2 border-gray"
                 >
                   Cơ Sở 2
@@ -188,4 +188,4 @@ const PrintingLogFilterModal = ({ children }) => {
   );
 };
 
-export default PrintingLogFilterModal;
+export default FilterHistoryModal;

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDom from "react-dom";
-import { CloseModalIcon } from "../Assets/Icons/Icons";
+import { CloseModalIcon } from "../../Assets/Icons/Icons";
 
 const CenterModal = ({ open = false, handleClose = () => {}, children }) => {
   if (document.querySelector("body") === "undefined") {
