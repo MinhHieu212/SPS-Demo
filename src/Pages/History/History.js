@@ -2,7 +2,7 @@ import React from "react";
 import "./History.scss";
 import HistoryItem from "./HistoryItem";
 import { FilterIcon, SearchIcon } from "../../Assets/Icons/Icons";
-import PrintingLogFilterModal from "../../Modals/PrintingLogFilterModal";
+import { FilterHistoryModal } from "../../Modals";
 
 const files = [
   {
@@ -136,12 +136,12 @@ const History = () => {
             <SearchIcon></SearchIcon>
           </div>
           <div className="w-full ">
-            <PrintingLogFilterModal>
+            <FilterHistoryModal>
               <div className="w-full cursor-pointer border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white">
                 <span className="mx-3 text-[gray]">Lọc kết quả</span>
                 <FilterIcon></FilterIcon>
               </div>
-            </PrintingLogFilterModal>
+            </FilterHistoryModal>
           </div>
         </div>
       </div>

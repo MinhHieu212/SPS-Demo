@@ -1,8 +1,7 @@
 import React from "react";
 import "./History.scss";
 import { BinIcon, InfoIcon } from "../../Assets/Icons/Icons";
-import ConfirmCancelModal from "../../Modals/ConfirmCancelModal";
-import PrintingLogInfoModal from "../../Modals/PrintingLogInfoModal";
+import { CancelPrintingModal, DetailHistoryModal } from "../../Modals";
 
 function HistoryItem(props) {
   return (
@@ -13,12 +12,12 @@ function HistoryItem(props) {
       <div className="text-center">{props.date}</div>
       <div className="text-center">{props.status}</div>
       <div className="flex flex-row gap-4 items-center justify-center">
-        <PrintingLogInfoModal>
+        <DetailHistoryModal>
           <InfoIcon />
-        </PrintingLogInfoModal>
-        <ConfirmCancelModal>
+        </DetailHistoryModal>
+        <CancelPrintingModal>
           <BinIcon />
-        </ConfirmCancelModal>
+        </CancelPrintingModal>
       </div>
     </div>
   );
