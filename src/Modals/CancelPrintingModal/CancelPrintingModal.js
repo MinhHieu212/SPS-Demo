@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import CenterModal from "./CenterModal";
+import CenterModal from "../BaseModals/CenterModal";
 
-const ConfirmCancelModal = ({ children }) => {
+const CancelPrintingModal = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
   const handleClose = () => {
     setOpenModal(false);
@@ -35,4 +35,4 @@ const ConfirmCancelModal = ({ children }) => {
   );
 };
 
-export default ConfirmCancelModal;
+export default CancelPrintingModal;

@@ -1,5 +1,5 @@
 import React from "react";
-import PrintingRequestModal from "../../Modals/PrintingRequestModal";
+import { PrinterQueueModal } from "../../Modals";
 
 function ManageSpsoItem(props) {
   return (
@@ -9,11 +9,11 @@ function ManageSpsoItem(props) {
       <div className=" text-center w-[20%]">{props.date}</div>
       <div className=" w-[25%] flex flex-row justify-center items-center gap-4">
         <span>{props.queue}</span>
-        <PrintingRequestModal>
+        <PrinterQueueModal>
           <button class="bg-[#c7c7c7] block hover:bg-gray-400 text-gray-800 font-bold py-2 px-3 rounded-sm">
             Chi tiết
           </button>
-        </PrintingRequestModal>
+        </PrinterQueueModal>
       </div>
       <div className="w-[35%] md:w-[25%] flex flex-row justify-between px-0 md:px-2 items-center gap-4">
         <p>{props.status}</p>

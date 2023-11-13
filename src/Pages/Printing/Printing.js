@@ -2,7 +2,8 @@ import React from "react";
 import "./Printing.scss";
 import PrintingItem from "./PrintingItem";
 import { FilterIcon, SearchIcon } from "../../Assets/Icons/Icons";
-import PrinterFilterModal from "../../Modals/PrinterFilterModal";
+import { FilterPrinterModal } from "../../Modals";
+
 const info = [
   {
     id: "2113619",
@@ -77,6 +78,7 @@ const info = [
     request: 98,
   },
 ];
+
 const Printing = () => {
   return (
     <div className="Printing w-full px-[10px] max-w-[1280px] bg-[white] shadow-sm md:px-[32px] lg:px-[70px] mx-auto mb-5 min-h-[93vh]">
@@ -93,12 +95,12 @@ const Printing = () => {
           <SearchIcon></SearchIcon>
         </div>
         <div className="w-full md:w-1/2">
-          <PrinterFilterModal>
+          <FilterPrinterModal>
             <div className="w-full cursor-pointer border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white">
               <span className="mx-3 text-[gray]">Lọc kết quả</span>
               <FilterIcon></FilterIcon>
             </div>
-          </PrinterFilterModal>
+          </FilterPrinterModal>
         </div>
       </div>
       <hr className="sm-hr mt-4" />

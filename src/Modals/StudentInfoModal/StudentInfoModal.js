@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import InfoField from "../Utils/InfoField";
-import BuyPagesModal from "./BuyPagesModal";
-import { CloseModalIcon } from "../Assets/Icons/Icons";
+import InfoField from "../../Utils/InfoField";
+import { CloseModalIcon } from "../../Assets/Icons/Icons";
+import PagesPurchaseModal from "../PagesPurchaseModal/PagesPurchaseModal";
 
-function UserBottomModal({ children }) {
+function StudentInfoModal({ children }) {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const elementRef = useRef();
@@ -58,11 +58,11 @@ function UserBottomModal({ children }) {
                 90
               </div>
             </div>
-            <BuyPagesModal>
+            <PagesPurchaseModal>
               <button className="bg-[#367FA9] bg-gradient-to-br outline-none from-cyan-500 mb-2 mt-4 to-#3C8DBC w-full h-[45px] rounded-lg flex items-center justify-center text-white text-[16px] font-bold hover:bg-[#2c5d8d] hover:from-cyan-400 hover:to-[#345a96] transition-all duration-300">
                 MUA THÊM GIẤY
               </button>
-            </BuyPagesModal>
+            </PagesPurchaseModal>
             <button
               onClick={handleLogout}
               className="bg-gradient-to-br from-[#999292]  outline-none to-[#B4AFAF] my-3 w-full h-[45px] rounded-lg flex items-center justify-center text-white text-[16px] font-bold hover:from-[#888181] hover:to-[#A09D9D] transition-all duration-300"
@@ -76,4 +76,4 @@ function UserBottomModal({ children }) {
   );
 }
 
-export default UserBottomModal;
+export default StudentInfoModal;
