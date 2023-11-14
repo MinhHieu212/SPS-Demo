@@ -39,7 +39,7 @@ const DetailPrinterLogModal = ({ children }) => {
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
       <CenterModal open={openModal} handleClose={handleClose}>
-        <div className="w-[380px] md:w-[550px] mx-auto overflow-hidden rounded-lg">
+        <div className="w-[380px] md:w-[550px] mx-auto overflow-hidden rounded-lg border-[1px] border-[#367FA9] ">
           <div className="header bg-[#3C8DBC] text-white text-[20px] pt-1 font-bold flex items-center justify-center h-[60px] w-full">
             SỐ LƯỢNG YÊU CẦU IN ẤN HIỆN TẠI
           </div>
@@ -55,7 +55,7 @@ const DetailPrinterLogModal = ({ children }) => {
               );
               return (
                 <div
-                  className="w-[90%] rounded-md bg-[#D9D9D9] p-2"
+                  className="w-[90%] rounded-md bg-[#D9D9D9] p-2 border-[1px] border-[#367FA9]"
                   key={index}
                 >
                   <InfoField2

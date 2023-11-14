@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./Home.scss";
+import "./HomeNoLogin.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faShieldHalved,
@@ -12,14 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router";
 
-const Home = () => {
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (localStorage.getItem("Role") === null) {
-      navigate("/Error");
-    }
-  }, []);
-
+const HomeNoLogin = () => {
   return (
     <div className="Home mb-5">
       <div id="slider" className="relative w-full min-h-[400px] ">
@@ -191,4 +184,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeNoLogin;

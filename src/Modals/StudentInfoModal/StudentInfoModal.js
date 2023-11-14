@@ -10,6 +10,9 @@ function StudentInfoModal({ children }) {
   const elementRef = useRef();
 
   const handleLogout = () => {
+    localStorage.removeItem("Role");
+    localStorage.removeItem("MatKhau");
+    localStorage.removeItem("TenTaiKhoan");
     navigate("/");
   };
 
@@ -24,10 +27,10 @@ function StudentInfoModal({ children }) {
       </div>
       {open && (
         <div
-          className="absolute top-[140%] right-5 w-[343px] h-[410px] rounded-lg bg-white overflow-hidden"
+          className="absolute border-[1px] border-[#367FA9] top-[140%] right-5 w-[343px] h-[410px] rounded-lg bg-white overflow-hidden shadow-lg "
           ref={elementRef}
         >
-          <div className="HeaderInfo relative flex items-center justify-center text-[20px] font-bold text-white h-[60px] w-full bg-[#367FA9]  bg-gradient-to-br from-cyan-500 to-#3C8DBC">
+          <div className="HeaderInfo relative flex items-center justify-center text-[20px] font-bold text-white h-[60px] w-full bg-[#3C8DBC]  bg-gradient-to-br from-cyan-500 to-#3C8DBC">
             CHI TIẾT SINH VIÊN
             <span
               className="absolute top-[13px] right-2"
@@ -59,7 +62,7 @@ function StudentInfoModal({ children }) {
               </div>
             </div>
             <PagesPurchaseModal>
-              <button className="bg-[#367FA9] bg-gradient-to-br outline-none from-cyan-500 mb-2 mt-4 to-#3C8DBC w-full h-[45px] rounded-lg flex items-center justify-center text-white text-[16px] font-bold hover:bg-[#2c5d8d] hover:from-cyan-400 hover:to-[#345a96] transition-all duration-300">
+              <button className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500 mb-2 mt-4 to-#3C8DBC w-full h-[45px] rounded-lg flex items-center justify-center text-white text-[16px] font-bold hover:bg-[#2c5d8d] hover:from-cyan-400 hover:to-[#345a96] transition-all duration-300">
                 MUA THÊM GIẤY
               </button>
             </PagesPurchaseModal>
