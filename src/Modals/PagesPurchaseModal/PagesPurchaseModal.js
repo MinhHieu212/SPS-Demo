@@ -118,13 +118,13 @@ const PagesPurchaseModal = ({ children }) => {
           </div>
           <div className="flex items-center gap-3 justify-center w-full py-2 mb-3">
             <button
-              className="bg-[#B4AFAF] py-[12px] w-[40%] block rounded-lg text-[16px] font-semibold text-white"
+              className="bg-gradient-to-br from-[#999292]  outline-none to-[#B4AFAF] py-[12px] w-[40%] block rounded-lg text-[16px] font-semibold text-white"
               onClick={handleClose}
             >
               Hủy bỏ
             </button>
             <button
-              className="bg-[#1488DB] py-[12px] w-[40%] block rounded-lg text-[16px] font-semibold text-white "
+              className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500  py-[12px] w-[40%] block rounded-lg text-[16px] font-semibold text-white "
               onClick={handleAccept}
             >
               Xác nhận

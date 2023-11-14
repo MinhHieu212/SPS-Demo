@@ -44,12 +44,12 @@ const ConfigFile = () => {
 
   return (
     <div className="configFile max-w-[1280px] px-[10px] md:px-[32px] lg:px-[70px] w-full mx-auto bg-[white] shadow-sm mb-5 min-h-[93vh]">
-      <h2 className="w-full text-[#066DCC] text-3xl lg:text-4xl font-semibold mt-4 printing-title border-b-4 border-black pb-2 md:pb-3">
+      <h2 className="w-full text-[#066DCC] text-3xl lg:text-4xl font-semibold mt-4 printing-title border-b-4 border-[#066DCC] pb-2 md:pb-3">
         CẤU HÌNH FILE IN
       </h2>
 
-      <div className="InfoPrinter text-[15px] md:text-[20px] font-semibold bg-[#f8f9fa] rounded-lg shadow-lg relative w-full px-[24px] mt-[30px] flex flex-col lg:flex-row justify-between items-stretch py-[20px]">
-        <div className="font-bold uppercase text-[18px] md:text-[24px]">
+      <div className="InfoPrinter text-[15px] md:text-[20px] font-semibold bg-[#f8f9fa] rounded-lg shadow-lg relative w-full px-[24px] mt-[20px] md:mt-[30px] flex flex-col lg:flex-row justify-between items-stretch py-[20px]">
+        <div className="font-bold uppercase text-[18px] md:text-[20px]">
           Thông tin máy in
         </div>
 
@@ -73,21 +73,21 @@ const ConfigFile = () => {
         </div>
       </div>
 
-      <div className="UploadFile text-[15px] md:text-[20px] font-semibold bg-[#f8f9fa] rounded-lg shadow-lg relative w-full px-[24px] mt-[30px] flex flex-col lg:flex-row justify-between items-stretch py-[20px]">
-        <div className="font-bold uppercase text-[18px] md:text-[24px]">
+      <div className="UploadFile text-[15px] md:text-[20px] font-semibold bg-[#f8f9fa] rounded-lg shadow-lg relative w-full px-[24px] mt-[20px] md:mt-[30px] flex flex-col lg:flex-row justify-between items-stretch py-[20px]">
+        <div className="font-bold uppercase text-[18px] md:text-[20px]">
           Tải tệp in
         </div>
 
-        <div className="flex items-center justify-evenly lg:w-[80%] w-[100%] mt-3">
+        <div className="flex items-center justify-evenly lg:w-[80%] w-[100%] mt-3 md:mt-0">
           <div className="flex items-center justify-center w-full">
-            <label
-              htmlFor="dropzone-file"
-              className="flex flex-col items-center justify-center w-[100%] px-[20px] h-[120px] border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white overflow-x-scroll
-              "
+            <div
+              className="flex flex-col relative items-center mt-0 justify-center w-[100%] h-[120px] border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white"
             >
-              <div className="flex flex-col items-center justify-center ">
-                {files === null ? (
-                  <>
+            
+
+              <div className="FilesList w-full h-full flex flex-col items-center justify-center overflow-x-scroll ">
+              {files === null ? 
+               <div className=" flex items-center justify-center flex-col ">
                     <svg
                       className="w-10 h-10 mb- text-gray-400"
                       fill="none"
@@ -107,37 +107,38 @@ const ConfigFile = () => {
                       <span className="font-semibold">Click to upload</span> or
                       drag and drop
                     </p>
-                  </>
-                ) : (
-                  <>
-                    <div className="w-full h-full px-2 flex items-center justify-center gap-x-3">
-                      {files?.map((file, index) => {
-                        return (
-                          <FileIcon
-                            fileName={file.file.name}
-                            key={index}
-                          ></FileIcon>
-                        );
-                      })}
-                    </div>
-                  </>
-                )}
+                </div> : 
+                <div className="w-full h-full px-2 flex items-center justify-center gap-x-3 overflow-x-scroll">
+                  {files?.map((file, index) => {
+                    return (
+                      <FileIcon 
+                        fileName={file.file.name}
+                        key={index}
+                      ></FileIcon>
+                    );
+                  })}
+                </div>}
               </div>
 
               <input
                 id="dropzone-file"
                 type="file"
                 multiple
-                className="hidden"
+                className="cursor-pointer relative block opacity-0 w-full h-full z-50"
                 onChange={handleFileChange}
               />
-            </label>
+             
+
+             <div className="cursor-pointer relative block opacity-0 w-full h-full z-50">
+
+             </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="CongifFile text-[15px] md:text-[20px] font-semibold bg-[#f8f9fa] rounded-lg shadow-lg relative w-full px-[24px] mt-[30px] flex flex-col lg:flex-row justify-between items-stretch py-[20px]">
-        <div className="font-bold uppercase text-[18px] md:text-[24px]">
+      <div className="CongifFile text-[15px] md:text-[20px] font-semibold bg-[#f8f9fa] rounded-lg shadow-lg relative w-full px-[24px] mt-[20px] md:mt-[30px] flex flex-col lg:flex-row justify-between items-stretch py-[20px]">
+        <div className="font-bold uppercase text-[18px] md:text-[20px]">
           Cấu hình in
         </div>
 
@@ -148,13 +149,13 @@ const ConfigFile = () => {
             <select
               name="files"
               id="files"
-              className="w-[100%] md:w-[90%] border-2 border-gray-400 rounded-sm p-2"
+              className="w-[100%] md:w-[90%] border-2 border-gray-400 rounded-md p-2 "
             >
               {files?.map((file, index) => {
                 return (
                   <option value={file.file.name} key={index} className="p-2">
                     <span className="w-[300px] overflow-hidden">
-                      {file.file.name}{" "}
+                      {file.file.name}
                     </span>
                   </option>
                 );
@@ -164,24 +165,24 @@ const ConfigFile = () => {
 
           <div className="w-full flex items-center justify-between mt-3">
             <div className="w-[45%]">
-              <p className="text-[#1488DB]">Số bản in</p>
+              <p className="text-[#1488DB] mb-2">Số bản in</p>
 
               <input
                 type="number"
                 name="quantity"
                 id="quantity"
                 defaultValue={0}
-                className="w-[100%] border-2 mx-auto border-gray-400 rounded-sm p-2"
+                className="w-[100%] border-2 mx-auto border-gray-400 rounded-md p-2"
               ></input>
             </div>
 
             <div className="w-[45%]">
-              <p className="text-[#1488DB]">Kích thước giấy</p>
+              <p className="text-[#1488DB] mb-2">Kích thước giấy</p>
 
               <select
                 name="quantity"
                 id="quantity"
-                className="w-[100%] border-2 mx-auto border-gray-400 rounded-sm p-2"
+                className="w-[100%] border-2 mx-auto border-gray-400 rounded-md p-2"
               >
                 <option value="">A3</option>
                 <option value="">A4</option>
@@ -191,12 +192,12 @@ const ConfigFile = () => {
 
           <div className="w-full flex items-center justify-between mt-3">
             <div className="w-[45%]">
-              <p className="text-[#1488DB]">Màu sắc in</p>
+              <p className="text-[#1488DB] mb-2">Màu sắc in</p>
 
               <select
                 name="quantity"
                 id="quantity"
-                className="w-[100%] border-2 mx-auto border-gray-400 rounded-sm p-2"
+                className="w-[100%] border-2 mx-auto border-gray-400 rounded-md p-2"
               >
                 <option value="">In thường</option>
                 <option value="">In màu</option>
@@ -204,12 +205,12 @@ const ConfigFile = () => {
             </div>
 
             <div className="w-[45%]">
-              <p className="text-[#1488DB]">Hướng giấy in</p>
+              <p className="text-[#1488DB] mb-2">Hướng giấy in</p>
 
               <select
                 name="quantity"
                 id="quantity"
-                className="w-[100%] border-2 mx-auto border-gray-400 rounded-sm p-2"
+                className="w-[100%] border-2 mx-auto border-gray-400 rounded-md p-2"
               >
                 <option value="">In dọc</option>
                 <option value="">In ngang</option>
@@ -219,11 +220,11 @@ const ConfigFile = () => {
 
           <div className="w-full flex items-center justify-between mt-3">
             <div className="w-[45%]">
-              <p className="text-[#1488DB]">Bố cục in</p>
+              <p className="text-[#1488DB] mb-2">Bố cục in</p>
               <select
                 name="quantity"
                 id="quantity"
-                className="w-[100%] border-2 mx-auto border-gray-400 rounded-sm p-2"
+                className="w-[100%] border-2 mx-auto border-gray-400 rounded-md p-2"
               >
                 <option value="">1 trang trên 1 tờ</option>
                 <option value="">2 trang trên 1 tờ</option>
@@ -233,11 +234,11 @@ const ConfigFile = () => {
             </div>
 
             <div className="w-[45%]">
-              <p className="text-[#1488DB]">Cách in</p>
+              <p className="text-[#1488DB] mb-2">Cách in</p>
               <select
                 name="quantity"
                 id="quantity"
-                className="w-[100%] border-2 mx-auto border-gray-400 rounded-sm p-2"
+                className="w-[100%]  mx-auto border-2 border-gray-400 rounded-md p-2"
               >
                 <option value="">1 mặt</option>
                 <option value="">2 mặt</option>
@@ -245,36 +246,6 @@ const ConfigFile = () => {
             </div>
           </div>
 
-          <div className="w-full  flex flex-col items-center justify-between mt-3">
-            <p className="text-[#1488DB] w-full">Chọn trang in:</p>
-
-            <div className="w-full flex flex-col md:flex-row items-center justify-between mt-2">
-              <div className="w-[90%] md:w-[45%]">
-                <span>In từ:</span>
-                <input
-                  type="number"
-                  defaultValue={0}
-                  className="w-[20%] md:w-[30%] ml-3 px-[20px] rounded-sm"
-                />
-                <span className="ml-3">đến:</span>
-                <input
-                  type="number"
-                  defaultValue={0}
-                  className="w-[20%] md:w-[30%] ml-3 px-[20px] rounded-sm"
-                />
-              </div>
-
-              <div className="w-[90%] md:w-[45%] flex items-center mt-3 md:mt-0">
-                <input type="checkbox" id="All" className="w-[20px] h-[20px]" />
-                <label
-                  htmlFor="All"
-                  className="font-bold text-[15px] md:text-[20px] ml-3"
-                >
-                  In tất cả
-                </label>
-              </div>
-            </div>
-          </div>
           <div className="flex w-full mt-5 items-center justify-end gap-2">
             <button
               className="px-5 bg-[#066DCC] rounded-[5px] text-white font-bold text-center h-[50px]"

@@ -308,7 +308,7 @@ export const ActivitiesIcon = () => (
 );
 
 export const FileIcon = ({ fileName }) => (
-  <div className="flex flex-col justify-center items-center w-[100px] overflow-hidden relative">
+  <div className="flex flex-col justify-center items-center w-[100px] overflow-hidden relative shrink-0" >
     <svg
       width="50"
       height="50"
