@@ -15,11 +15,11 @@ const InfoField = ({ fieldName, fieldValue }) => {
 
 export const InfoField2 = ({ fieldName, fieldValue }) => {
   return (
-    <div className="px-3 mb-2 text-[16px] md:text-[20px] flex items-center gap-3 w-full">
+    <div className="px-5 mb-2 text-[16px] md:text-[20px] flex items-center gap-3 w-full">
       <span className="text-[#066DCC] text-[16px] md:text-[20px]  font-bold w-[40%]">
         {fieldName}:
       </span>
-      <span className="text-[16px] md:text-[20px] font-semibold leading-7">
+      <span className="text-[16px] md:text-[20px] font-semibold leading-7 truncate overflow-clip">
         {fieldValue}
       </span>
     </div>

@@ -11,7 +11,7 @@ const Support = () => {
   }, []);
   return (
     <div className="Support max-w-[1280px] px-[15px] md:px-[32px] lg:px-[70px] mx-auto mb-5 bg-[white] shadow-sm min-h-[93vh]">
-      <h1 className="text-3xl lg:text-4xl font-semibold mt-4 border-b-4 border-black pb-2 md:pb-3">
+      <h1 className="text-3xl lg:text-4xl font-semibold mt-4 border-b-4 border-[#066DCC] pb-2 md:pb-3">
         HƯỚNG DẪN
       </h1>
       <div className="guide text-[16px] md:text-[20px] mt-4 pb-2 md:pb-3 items-center justify-evenly w-full mx-auto">

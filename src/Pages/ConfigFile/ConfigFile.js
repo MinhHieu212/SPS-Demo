@@ -1,39 +1,54 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { FileIcon } from "../../Assets/Icons/Icons";
+import { AddIcon, DeleteIcon, FileIcon } from "../../Assets/Icons/Icons";
+import RemoveFileModal from "../../Modals/RemoveFileModal/RemoveFileModal";
+import { ConfirmPrintingModal } from "../../Modals";
 
 const ConfigFile = () => {
+  const [files, setFiles] = useState([]);
+  const [indexFile, setIndexFile] = useState(0);
   const navigate = useNavigate();
+  const { PrinterID } = useParams();
+
   useEffect(() => {
     if (localStorage.getItem("Role") !== "Student") {
       navigate("/Error");
     }
   }, []);
 
-  const { PrinterID } = useParams();
   const [printerInfo, setPrinterInfo] = useState({
     id: PrinterID,
     localtion: "CS1-H6",
     room: "402",
     queue: "5",
   });
-  const [files, setFiles] = useState(null);
 
   const handleFileChange = (e) => {
     const newFiles = Array.from(e.target.files).map((file, index) => {
       return {
         file: file,
         quantity: 0,
-        pageType: "",
-        color: "",
-        direct: "",
-        typePrint: "",
+        pageSize: "A4",
+        color: "normal",
+        direct: "vertical",
+        layout: "1:1",
+        option: "1 side",
       };
     });
 
-    setFiles((prevFiles) =>
-      Array.isArray(prevFiles) ? [...prevFiles, ...newFiles] : newFiles
-    );
+    setFiles((prevFiles) => {
+      if (Array.isArray(prevFiles)) {
+        const uniqueNewFiles = newFiles.filter((newFile) => {
+          return !prevFiles.some(
+            (prevFile) => prevFile.file.name === newFile.file.name
+          );
+        });
+
+        return [...prevFiles, ...uniqueNewFiles];
+      } else {
+        return newFiles;
+      }
+    });
   };
 
   const removeFile = (fileName) => {
@@ -78,16 +93,16 @@ const ConfigFile = () => {
           Tải tệp in
         </div>
 
-        <div className="flex items-center justify-evenly lg:w-[80%] w-[100%] mt-3 md:mt-0">
+        <div className="flex items-center justify-evenly lg:w-[80%] w-[100%]">
           <div className="flex items-center justify-center w-full">
-            <div
-              className="flex flex-col relative items-center mt-0 justify-center w-[100%] h-[120px] border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white"
-            >
-            
-
-              <div className="FilesList w-full h-full flex flex-col items-center justify-center overflow-x-scroll ">
-              {files === null ? 
-               <div className=" flex items-center justify-center flex-col ">
+            <div className="flex flex-col relative items-center mt-[30px] justify-center w-[100%] h-[120px] border-3 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white">
+              <div
+                className={`FilesList w-full h-full flex flex-col items-center justify-center overflow-x-scroll absolute ${
+                  files?.length !== 0 ? "z-30" : ""
+                }`}
+              >
+                {files?.length === 0 ? (
+                  <div className=" flex items-center justify-center flex-col">
                     <svg
                       className="w-10 h-10 mb- text-gray-400"
                       fill="none"
@@ -107,31 +122,49 @@ const ConfigFile = () => {
                       <span className="font-semibold">Click to upload</span> or
                       drag and drop
                     </p>
-                </div> : 
-                <div className="w-full h-full px-2 flex items-center justify-center gap-x-3 overflow-x-scroll">
-                  {files?.map((file, index) => {
-                    return (
-                      <FileIcon 
-                        fileName={file.file.name}
-                        key={index}
-                      ></FileIcon>
-                    );
-                  })}
-                </div>}
+                  </div>
+                ) : (
+                  <div className="w-full h-full px-2 flex items-center justify-center gap-x-3 overflow-x-scroll">
+                    {files?.map((file, index) => {
+                      return (
+                        <FileIcon
+                          fileName={file.file.name}
+                          key={index}
+                        ></FileIcon>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
 
               <input
                 id="dropzone-file"
                 type="file"
                 multiple
-                className="cursor-pointer relative block opacity-0 w-full h-full z-50"
+                className="cursor-pointer absolute block opacity-0 w-full h-full z-10"
                 onChange={handleFileChange}
               />
-             
 
-             <div className="cursor-pointer relative block opacity-0 w-full h-full z-50">
+              {files?.length !== 0 && (
+                <div className="absolute  z-50 top-0 -translate-y-[45px] right-0 flex gap-3 items-center">
+                  <label
+                    htmlFor="dropzone-file"
+                    className="flex gap-1 items-center justify-center"
+                  >
+                    <AddIcon></AddIcon>
+                    <span className="text-[16px] md:text-[20px]">Thêm tệp</span>
+                  </label>
 
-             </div>
+                  <RemoveFileModal files={files} removeFile={removeFile}>
+                    <div className="flex gap-1 items-center justify-center">
+                      <DeleteIcon></DeleteIcon>
+                      <span className="text-[16px] md:text-[20px]">
+                        Xóa tệp
+                      </span>
+                    </div>
+                  </RemoveFileModal>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -143,13 +176,19 @@ const ConfigFile = () => {
         </div>
 
         <div className="flex flex-col items-center justify-evenly w-[100%] lg:w-[80%] mt-3">
-          <div className="w-full flex-col md:flex-row  items-center justify-between">
+          <div className="w-full flex-col items-center justify-between">
             <span className="text-[#1488DB] mr-5">Tên têp</span>
 
             <select
               name="files"
               id="files"
-              className="w-[100%] md:w-[90%] border-2 border-gray-400 rounded-md p-2 "
+              className=" w-[100%] mx-auto border-2 border-gray-400 mt-2 rounded-md p-2"
+              onChange={(e) => {
+                const selectedIndex = files.findIndex(
+                  (file) => file.file.name === e.target.value
+                );
+                setIndexFile(selectedIndex);
+              }}
             >
               {files?.map((file, index) => {
                 return (
@@ -171,7 +210,14 @@ const ConfigFile = () => {
                 type="number"
                 name="quantity"
                 id="quantity"
-                defaultValue={0}
+                value={files[indexFile]?.quantity}
+                onChange={(e) => {
+                  if (files[indexFile]) {
+                    const updatedFiles = [...files];
+                    updatedFiles[indexFile].quantity = e.target.value;
+                    setFiles(updatedFiles);
+                  }
+                }}
                 className="w-[100%] border-2 mx-auto border-gray-400 rounded-md p-2"
               ></input>
             </div>
@@ -180,12 +226,20 @@ const ConfigFile = () => {
               <p className="text-[#1488DB] mb-2">Kích thước giấy</p>
 
               <select
-                name="quantity"
-                id="quantity"
+                name="pageSize"
+                id="pageSize"
                 className="w-[100%] border-2 mx-auto border-gray-400 rounded-md p-2"
+                value={files[indexFile]?.pageSize}
+                onChange={(e) => {
+                  if (files[indexFile]) {
+                    const updatedFiles = [...files];
+                    updatedFiles[indexFile].pageSize = e.target.value;
+                    setFiles(updatedFiles);
+                  }
+                }}
               >
-                <option value="">A3</option>
-                <option value="">A4</option>
+                <option value="A4">A4</option>
+                <option value="A3">A3</option>
               </select>
             </div>
           </div>
@@ -195,12 +249,20 @@ const ConfigFile = () => {
               <p className="text-[#1488DB] mb-2">Màu sắc in</p>
 
               <select
-                name="quantity"
-                id="quantity"
+                name="color"
+                id="color"
                 className="w-[100%] border-2 mx-auto border-gray-400 rounded-md p-2"
+                value={files[indexFile]?.color}
+                onChange={(e) => {
+                  if (files[indexFile]) {
+                    const updatedFiles = [...files];
+                    updatedFiles[indexFile].color = e.target.value;
+                    setFiles(updatedFiles);
+                  }
+                }}
               >
-                <option value="">In thường</option>
-                <option value="">In màu</option>
+                <option value="normal">In thường</option>
+                <option value="color">In màu</option>
               </select>
             </div>
 
@@ -208,12 +270,20 @@ const ConfigFile = () => {
               <p className="text-[#1488DB] mb-2">Hướng giấy in</p>
 
               <select
-                name="quantity"
-                id="quantity"
+                name="direct"
+                id="direct"
                 className="w-[100%] border-2 mx-auto border-gray-400 rounded-md p-2"
+                value={files[indexFile]?.direct}
+                onChange={(e) => {
+                  if (files[indexFile]) {
+                    const updatedFiles = [...files];
+                    updatedFiles[indexFile].direct = e.target.value;
+                    setFiles(updatedFiles);
+                  }
+                }}
               >
-                <option value="">In dọc</option>
-                <option value="">In ngang</option>
+                <option value="vertical">In dọc</option>
+                <option value="horizontal">In ngang</option>
               </select>
             </div>
           </div>
@@ -222,37 +292,54 @@ const ConfigFile = () => {
             <div className="w-[45%]">
               <p className="text-[#1488DB] mb-2">Bố cục in</p>
               <select
-                name="quantity"
-                id="quantity"
+                name="layout"
+                id="layout"
                 className="w-[100%] border-2 mx-auto border-gray-400 rounded-md p-2"
+                value={files[indexFile]?.layout}
+                onChange={(e) => {
+                  if (files[indexFile]) {
+                    const updatedFiles = [...files];
+                    updatedFiles[indexFile].layout = e.target.value;
+                    setFiles(updatedFiles);
+                  }
+                }}
               >
-                <option value="">1 trang trên 1 tờ</option>
-                <option value="">2 trang trên 1 tờ</option>
-                <option value="">4 trang trên 1 tờ</option>
-                <option value="">8 trang trên 1 tờ</option>
+                <option value="1:1">1 trang trên 1 tờ</option>
+                <option value="2:1">2 trang trên 1 tờ</option>
+                <option value="4:1">4 trang trên 1 tờ</option>
               </select>
             </div>
 
             <div className="w-[45%]">
               <p className="text-[#1488DB] mb-2">Cách in</p>
               <select
-                name="quantity"
-                id="quantity"
+                name="option"
+                id="option"
                 className="w-[100%]  mx-auto border-2 border-gray-400 rounded-md p-2"
+                value={files[indexFile]?.option}
+                onChange={(e) => {
+                  if (files[indexFile]) {
+                    const updatedFiles = [...files];
+                    updatedFiles[indexFile].option = e.target.value;
+                    setFiles(updatedFiles);
+                  }
+                }}
               >
-                <option value="">1 mặt</option>
-                <option value="">2 mặt</option>
+                <option value="1 side">1 mặt</option>
+                <option value="2 side">2 mặt</option>
               </select>
             </div>
           </div>
 
           <div className="flex w-full mt-5 items-center justify-end gap-2">
-            <button
-              className="px-5 bg-[#066DCC] rounded-[5px] text-white font-bold text-center h-[50px]"
-              onClick={() => console.log(files)}
-            >
-              Gửi yêu cầu in
-            </button>
+            <ConfirmPrintingModal files={files}>
+              <button
+                className="px-5 bg-[#066DCC] rounded-[5px] text-white font-bold text-center h-[40px] md:h-[50px]"
+                onClick={() => console.log(files)}
+              >
+                Gửi yêu cầu in
+              </button>
+            </ConfirmPrintingModal>
           </div>
         </div>
       </div>

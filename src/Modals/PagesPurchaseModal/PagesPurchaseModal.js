@@ -43,7 +43,7 @@ const PagesPurchaseModal = ({ children }) => {
     <>
       <div onClick={() => setOpenModal(true)}> {children} </div>
       <CenterModal open={openModal} handleClose={handleClose}>
-        <div className="containerModal w-[380px] md:w-[450px] mx-auto overflow-hidden rounded-lg bg-white">
+        <div className="containerModal w-[380px] md:w-[450px] mx-auto overflow-hidden rounded-lg bg-white border-[1px] border-[#367FA9]">
           <div className="Title text-[24px] text-white pt-2 font-bold text-center border-b-2 border-gray-400  pb-2 bg-[#3C8DBC]">
             Bạn muốn mua thêm giấy in?
             <p className="text-[16px] ">Chọn số lượng tờ A4 bạn muốn mua</p>
