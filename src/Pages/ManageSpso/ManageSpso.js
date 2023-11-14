@@ -98,7 +98,7 @@ const printers = [
 ];
 const ManageSpso = () => {
   return (
-    <div className="Manage  max-w-[1280px] px-[10px] md:px-[32px] lg:px-[70px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
+    <div className="Manage mx-auto  max-w-[1280px] px-[10px] md:px-[32px] lg:px-[70px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
       <h2 className="text-3xl lg:text-4xl font-semibold mt-4 printing-title border-b-4 border-black pb-2  md:pb-3  text-[#066DCC] ">
         QUẢN LÝ HỆ THỐNG MÁY IN
       </h2>

@@ -3,8 +3,8 @@ import React, { useState } from "react";
 const FilterPrinterModal = ({ children }) => {
   const [open, setOpen] = useState(false);
 
-  const Cs1_List = ["A1", "B2", "D1", "B1", "B4", "C7", "B3"];
-  const Cs2_List = ["H1", "H2", "H3", "H6"];
+  const Cs1_List = ["None", "A1", "B2", "D1", "B1", "B4", "C7", "B3"];
+  const Cs2_List = ["None", "H1", "H2", "H3", "H6"];
 
   const [state, setState] = useState("");
   const [location1, setLocation1] = useState("all");

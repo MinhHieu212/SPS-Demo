@@ -14,7 +14,7 @@ const SideBar = ({ showSideBar, elementRef }) => {
 
   //Configure the SideBar according to permissions
   useEffect(() => {
-    setUserPosition("SPSO");
+    setUserPosition("Student");
     if (userPosition === "SPSO") setUserSideBar(SPSOSideBarOption);
     else if (userPosition === "Staff") setUserSideBar(StaffSideBarOption);
     else setUserSideBar(StudentSideBarOption);
