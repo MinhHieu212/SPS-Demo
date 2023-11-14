@@ -7,8 +7,8 @@ const StudentInfo = ({
   return (
     <div className="mt-3 w-[236px] flex flex-col items-start justify-between gap-y-1 ">
       <div className="flex w-full justify-between items-center">
-        <div className=" text-white font-semibold capitalize">
-          {name || "Nguyễn Văn Anh Khoa"}
+        <div className=" text-white font-semibold capitalize text-center w-[80%]">
+          {name || localStorage.getItem("TenTaiKhoan")}
         </div>
         <div className="border border-gray-300 mr-[6px] h-11 w-11 rounded-full overflow-hidden">
           <img

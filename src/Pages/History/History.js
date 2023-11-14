@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./History.scss";
 import HistoryItem from "./HistoryItem";
 import { FilterIcon, SearchIcon } from "../../Assets/Icons/Icons";
 import { FilterHistoryModal } from "../../Modals";
+import { useNavigate } from "react-router-dom";
 
 const files = [
   {
@@ -105,6 +106,12 @@ const files = [
   },
 ];
 const History = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("Role") !== "Student") {
+      navigate("/Error");
+    }
+  }, []);
   return (
     <div className="History max-w-[1280px] px-[10px] md:px-[32px] lg:px-[70px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
       <h2 className="text-3xl lg:text-4xl font-semibold mt-4 printing-title border-b-4 border-black pb-2 md:pb-3  text-[#066DCC] ">

@@ -4,11 +4,14 @@ import { useEffect, useState } from "react";
 import { useRef } from "react";
 
 import React from "react";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import { useNavigate } from "react-router";
 
-const DefaultLayout = ({ children }) => {
+const DefaultLayout = ({ children, role }) => {
   // State for Sidebar
   const elementRef = useRef();
   const [showSideBar, setshowSideBar] = useState(false);
+  const navigate = useNavigate();
 
   const handleOnClickOut = (e) => {
     if (
@@ -61,12 +64,6 @@ const DefaultLayout = ({ children }) => {
         <div className={`Main_Container ${marginLeft} w-full bg-[#f8f9fa]`}>
           {children}
         </div>
-        {/* {showSideBar && window.innerWidth <= 849 && (
-          <div
-            id="overlay"
-            className="overlay absolute inset-0 z-30 bg-slate-200"
-          ></div>
-        )} */}
       </div>
     </div>
   );
