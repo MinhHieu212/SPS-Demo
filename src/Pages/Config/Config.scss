@@ -1,0 +1,57 @@
+.Config {
+    font-family: Roboto Condensed;
+}
+.Config h1 {
+    color: #066dcc;
+    // text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+.Config h2 {
+    color: #1488DB;
+    border-color: #1488DB;
+    text-align: center;
+}
+.Config .Form_quanlyvatlieu {
+    width: fit-content;
+    margin-top: 40px;
+    background-size: cover;
+    background-position: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 40px;
+}
+.Config form {
+    background-color: #fff;
+    padding: 0px 60px;
+    border-radius: 5px; 
+    // display: flex;
+    // flex-direction: row;
+}
+.Config form .formInput:nth-child(3), :nth-child(4) {
+    align-items: justify;
+    float: left;
+    display: flex;
+    flex-direction: column;
+}
+.Config form .formInput:nth-child(4) {
+    // margin-left: 1rem; man hinh lon moi co
+}
+.Config form .formInput:nth-child(5) {
+    // float: left;
+    clear: both;
+    // display: flex;
+    width: 100%;
+}
+.Config form .formInput:nth-child(5) input {
+    width: 30%;
+    display: inline;
+}
+.Config .Form_quanlyvatlieu .Submit,.Todefault {
+    display: flex;
+    float: right;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0.5rem;
+}
+.Submit {
+    margin-right: 0rem;
+}
