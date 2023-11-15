@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { HcmutIcon, MenuIcon, CloseIcon } from "../../Assets/Icons/Icons";
-import UserInfoModal from "../../Modals/UserInfoModal";
 import "./Header.scss";
+import { StudentInfoModal } from "../../Modals";
 
 const Header = ({ showSideBar, setShowSideBar }) => {
   function handleShowSideBar() {
@@ -34,14 +34,14 @@ const Header = ({ showSideBar, setShowSideBar }) => {
           {showSideBar && <CloseIcon />}
         </div>
       </div>
-      <UserInfoModal>
+      <StudentInfoModal>
         <div className="Header_UserInfo flex items-center justify-between gap-3 mr-4">
           {<HcmutIcon />}
           <span className="Header_UserName text-white pr-3 font-semibold cursor-pointer">
-            Nguyễn Văn Anh Khoa
+            {localStorage.getItem("TenTaiKhoan")}
           </span>
         </div>
-      </UserInfoModal>
+      </StudentInfoModal>
     </div>
   );
 };

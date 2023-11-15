@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import CenterModal from "./CenterModal";
-import InfoField from "../Utils/InfoField";
+import InfoField from "../../Utils/InfoField";
+import CenterModal from "../BaseModals/CenterModal";
 
-const ModifyPrinterInfoModal = ({
+const PrinterInfoAndConfigModal = ({
   children,
   PrinterProps = {
     printerId: "1234",
@@ -29,7 +29,7 @@ const ModifyPrinterInfoModal = ({
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
       <CenterModal open={openModal} handleClose={handleClose}>
-        <div className="w-[380px] md:w-[550px] mx-auto overflow-hidden rounded-lg">
+        <div className="w-[380px] md:w-[550px] mx-auto overflow-hidden rounded-lg border-[1px] border-[#367FA9]">
           <div className="header bg-[#3C8DBC] text-white text-[20px] pt-1 font-bold flex items-center justify-center h-[60px] w-full">
             CẤU HÌNH CỦA MÁY IN VÀ TÙY CHỈNH
           </div>
@@ -60,11 +60,11 @@ const ModifyPrinterInfoModal = ({
                 <p className="font-semibold text-[20] md:text-[24px] pb-2">
                   Loại file được in
                 </p>
-                <div className="w-full h-[200px] flex flex-col items-center justify-start overflow-y-scroll border-2 border-gray-400 rounded-md">
+                <div className="w-full h-[200px] flex flex-col items-center justify-start overflow-y-scroll rounded-md border-[1px] border-[#367FA9]">
                   {fileTypes.map((type, index) => {
                     return (
                       <div
-                        className="p-2 bg-[#E6E6E6] rounded-sm text-center w-[90%] h-[100px] mt-2"
+                        className="p-2 bg-[#E6E6E6] rounded-sm text-center w-[90%] h-[100px] mt-2 border-[1px] border-[#367FA9]"
                         key={index}
                       >
                         {type}
@@ -108,7 +108,7 @@ const ModifyPrinterInfoModal = ({
               </div>
             </div>
             <div className="w-1/2 flex items-center justify-end pr-5">
-              <button className="bg-[#1488DB] h-[50px] p-3 w-[80%] md:w-[70%]  rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center">
+              <button className="bg-[#3C8DBC] h-[50px] p-3 w-[80%] md:w-[70%]  rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center">
                 Xác nhận
               </button>
             </div>
@@ -119,4 +119,4 @@ const ModifyPrinterInfoModal = ({
   );
 };
 
-export default ModifyPrinterInfoModal;
+export default PrinterInfoAndConfigModal;

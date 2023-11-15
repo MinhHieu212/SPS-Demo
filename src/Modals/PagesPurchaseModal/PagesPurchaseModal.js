@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import CenterModal from "./CenterModal";
-import "./BuyPagesModal.scss";
+import CenterModal from "../BaseModals/CenterModal";
+import "./PagesPurchaseModal.scss";
 import { useNavigate } from "react-router-dom";
 
-const BuyPagesModal = ({ children }) => {
+const PagesPurchaseModal = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
 
@@ -43,7 +43,7 @@ const BuyPagesModal = ({ children }) => {
     <>
       <div onClick={() => setOpenModal(true)}> {children} </div>
       <CenterModal open={openModal} handleClose={handleClose}>
-        <div className="containerModal w-[380px] md:w-[450px] mx-auto overflow-hidden rounded-lg bg-white">
+        <div className="containerModal w-[380px] md:w-[450px] mx-auto overflow-hidden rounded-lg bg-white border-[1px] border-[#367FA9]">
           <div className="Title text-[24px] text-white pt-2 font-bold text-center border-b-2 border-gray-400  pb-2 bg-[#3C8DBC]">
             Bạn muốn mua thêm giấy in?
             <p className="text-[16px] ">Chọn số lượng tờ A4 bạn muốn mua</p>
@@ -118,13 +118,13 @@ const BuyPagesModal = ({ children }) => {
           </div>
           <div className="flex items-center gap-3 justify-center w-full py-2 mb-3">
             <button
-              className="bg-[#B4AFAF] py-[12px] w-[40%] block rounded-lg text-[16px] font-semibold text-white"
+              className="bg-gradient-to-br from-[#999292]  outline-none to-[#B4AFAF] py-[12px] w-[40%] block rounded-lg text-[16px] font-semibold text-white"
               onClick={handleClose}
             >
               Hủy bỏ
             </button>
             <button
-              className="bg-[#1488DB] py-[12px] w-[40%] block rounded-lg text-[16px] font-semibold text-white "
+              className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500  py-[12px] w-[40%] block rounded-lg text-[16px] font-semibold text-white "
               onClick={handleAccept}
             >
               Xác nhận
@@ -136,4 +136,4 @@ const BuyPagesModal = ({ children }) => {
   );
 };
 
-export default BuyPagesModal;
+export default PagesPurchaseModal;
