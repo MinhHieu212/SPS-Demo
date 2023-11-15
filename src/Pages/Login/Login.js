@@ -4,12 +4,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { HcmutLogo, ErrorIcon } from "../../Assets/Icons/Icons";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Login.scss";
 
 const Login = () => {
   const schema = yup.object().shape({
-    TenTaiKhoan: yup.string().required("Tên tài khoản là bắt buộc"),
-    MatKhau: yup.string().required("Mật khẩu là bắt buộc"),
+    email: yup.string().required("Tên tài khoản là bắt buộc"),
+    password: yup.string().required("Mật khẩu là bắt buộc"),
   });
 
   const navigate = useNavigate();
@@ -23,16 +24,29 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    localStorage.setItem("Role", data.TenTaiKhoan);
-    localStorage.setItem("TenTaiKhoan", data.TenTaiKhoan);
-    localStorage.setItem("MatKhau", data.MatKhau);
-    setTimeout(() => {
-      if (!Object.keys(errors).length) {
-        navigate("/Home");
-      }
-    }, 1500);
+  const onSubmit = async (data) => {
+    console.log("Helo ba gia", data);
+
+    const res = await axios
+      .post("https://ssps-7wxl.onrender.com/v1/user/login", data)
+      .then((response) => {
+        console.log(response.status);
+        localStorage.setItem("accessToken", response?.data?.data?.accessToken);
+        localStorage.setItem(
+          "refreshToken",
+          response?.data?.data?.refreshToken
+        );
+        localStorage.setItem("Role", "SPSO");
+
+        if (response?.status === 200) {
+          setTimeout(() => {
+            if (!Object.keys(errors).length) {
+              navigate("/Home");
+            }
+          }, 1500);
+        }
+      })
+      .catch((errors) => console.log(errors));
   };
 
   const handleReset = () => {
@@ -54,8 +68,8 @@ const Login = () => {
               <div className="w-full py-3 rounded-lg bg-[#ffeedd] text-[#bb0000] border border-red-400 text-center flex gap-2 items-center pl-4">
                 <ErrorIcon></ErrorIcon>
                 <div className="pl-3">
-                  <p> {errors?.TenTaiKhoan?.message}</p>
-                  <p> {errors?.MatKhau?.message}</p>
+                  <p> {errors?.email?.message}</p>
+                  <p> {errors?.password?.message}</p>
                 </div>
               </div>
             )}
@@ -65,30 +79,30 @@ const Login = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mt-[10px]">
                 <label
-                  htmlFor="TenTaiKhoan"
+                  htmlFor="email"
                   className="block font-semibold text-[#777777] text-[16px]"
                 >
                   Tên tài khoản
                 </label>
                 <input
-                  {...register("TenTaiKhoan")}
-                  name="TenTaiKhoan"
-                  id="TenTaiKhoan"
+                  {...register("email")}
+                  name="email"
+                  id="email"
                   type="text"
                   className="h-[30px] w-[314px] px-2 outline-none border border-[#dddddd] text-[16px] bg-[#ffffdd] rounded-[3px]"
                 />
               </div>
               <div className="mt-[10px]">
                 <label
-                  htmlFor="MatKhau"
+                  htmlFor="password"
                   className="block font-semibold text-[16px] text-[#777777]"
                 >
                   Mật khẩu
                 </label>
                 <input
-                  {...register("MatKhau")}
-                  name="MatKhau"
-                  id="MatKhau"
+                  {...register("password")}
+                  name="password"
+                  id="password"
                   type="password"
                   className="h-[30px] w-[314px] px-2 outline-none border border-[#dddddd] text-[16px] bg-[#ffffdd] rounded-[3px]"
                 />

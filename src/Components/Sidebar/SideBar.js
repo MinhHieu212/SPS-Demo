@@ -27,7 +27,7 @@ const SideBar = ({ showSideBar, elementRef }) => {
       ref={elementRef}
     >
       {/* Short infomation of Student */}
-      <StudentInfo name={""} major={""}></StudentInfo>
+      <StudentInfo></StudentInfo>
 
       {/* Sidebar Item (Pages) */}
       <nav className="flex flex-col gap-y-3">
