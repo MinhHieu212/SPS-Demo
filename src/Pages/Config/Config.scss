@@ -1,57 +1,95 @@
-.Config {
-    font-family: Roboto Condensed;
-}
-.Config h1 {
-    color: #066dcc;
-    // text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-}
-.Config h2 {
-    color: #1488DB;
-    border-color: #1488DB;
-    text-align: center;
-}
-.Config .Form_quanlyvatlieu {
-    width: fit-content;
-    margin-top: 40px;
-    background-size: cover;
-    background-position: center;
-    justify-content: center;
-    margin: auto;
-    margin-top: 40px;
-}
 .Config form {
-    background-color: #fff;
-    padding: 0px 60px;
-    border-radius: 5px; 
-    // display: flex;
-    // flex-direction: row;
+    border-radius: 0.3125rem; 
 }
-.Config form .formInput:nth-child(3), :nth-child(4) {
+.Config .Form_quanlyvatlieu form .formInput:nth-child(2) input{
+    width: 27%;
+    display: inline;
+}
+.Config .Form_quanlyvatlieu form .formInput:nth-child(3), :nth-child(4) {
     align-items: justify;
     float: left;
     display: flex;
     flex-direction: column;
 }
-.Config form .formInput:nth-child(4) {
-    // margin-left: 1rem; man hinh lon moi co
-}
-.Config form .formInput:nth-child(5) {
-    // float: left;
+.Config .Form_quanlyvatlieu form .formInput:nth-child(5) {
     clear: both;
-    // display: flex;
     width: 100%;
 }
-.Config form .formInput:nth-child(5) input {
+.Config .Form_quanlyvatlieu form .formInput:nth-child(5) input {
     width: 30%;
     display: inline;
 }
-.Config .Form_quanlyvatlieu .Submit,.Todefault {
-    display: flex;
-    float: right;
-    align-items: center;
-    justify-content: center;
-    margin: 1rem 0.5rem;
+.Config input {
+    background-color: #E6E6E6;
+    margin: 0.625rem 0px;
+    border-radius: 0%;
+    border: none;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
 }
-.Submit {
-    margin-right: 0rem;
+
+.Config button {
+    // width: 83px;
+    width: 5.25rem;
+    // height: 36px;
+    height: 2.25rem;
+    border-radius: 0.3125rem;
+    background: #066DCC;
+    box-shadow: 2px 1px 4px 0px rgba(0, 0, 0, 0.25);
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    // background-color: #ffffff; /* Màu nền */
+    // border: 1px solid #cccccc; /* Viền */
+    // border-radius: 4px; /* Bo tròn viền */
+    // padding: 4px; /* Khoảng cách giữa viền và mũi tên */
+    cursor: pointer;
+  }
+.currentlist_wrapper {
+    padding: 1rem 2rem 1rem 1rem;
+    clear: both;
+    border: 1px solid rgba(0, 0, 0, 0.50);
+}
+.selectlist select {
+    border: 1px solid rgba(0, 0, 0, 0.30)
+}
+div.currentlist_wrapper {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.50);
+}
+div.currentlist_wrapper ::-webkit-scrollbar {
+    border-radius: 0px;
+}
+.current_list_item {
+    background-color: antiquewhite;
+    justify-content: space-between;
+}
+@media (min-width: 768px) {
+    .Config form .formInput:nth-child(4) {
+        margin-left: 1rem;
+    }
+  }
+  .formInput span.Err {
+    font-size: 12;
+    color: red;
+    padding: 3px;
+    display: none;
+}
+.formInput :invalid ~ span.Err {
+    display: flex;
+}
+.formInput input:invalid[focused="true"] ~ span.Err {
+    display: block;
+}
+.formInput input:invalid[focused="true"] {
+    border-color: red;
+}
+.formInput label {
+    display: inline;
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding: 0.625rem 0px;
 }
