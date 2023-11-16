@@ -3,9 +3,10 @@ import { privateRoutes, publicRoutes } from "./Routes/PageList";
 import DefaultLayout from "./Layouts/DefaultLayout";
 import BeforeLogin from "./Layouts/BeforeLogin";
 import EmptyLayout from "./Layouts/EmptyLayout";
-import { useRole } from "./RoleContext";
+import { useRole } from "./Contexts/RoleContext";
 import { useEffect } from "react";
 import { UserInfoAPI } from "./APIs/UserInfoAPI/UserInfoAPI";
+import { useUserInfo } from "./Contexts/UserInfoContext";
 
 function renderRoutes(routes, role = "") {
   return routes.map((route, index) => {
@@ -40,12 +41,16 @@ function renderRoutes(routes, role = "") {
 
 function App() {
   const roleContext = useRole();
+  const userInfoContext = useUserInfo();
+
   console.log("RoleContext", roleContext);
 
   useEffect(() => {
     const handleReload = async () => {
       const userInformation = await UserInfoAPI();
+
       await roleContext.updateRole(userInformation?.data?.data?.role);
+      await userInfoContext.updateUserInfo(userInformation?.data?.data);
     };
     handleReload();
   }, []);

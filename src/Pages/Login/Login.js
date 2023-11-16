@@ -7,13 +7,16 @@ import { useNavigate } from "react-router-dom";
 import "./Login.scss";
 import { LoginAPI } from "../../APIs/LoginAPI/LoginAPI";
 import { UserInfoAPI } from "../../APIs/UserInfoAPI/UserInfoAPI";
-import { useRole } from "../../RoleContext";
+import { useRole } from "../../Contexts/RoleContext";
+import { useUserInfo } from "../../Contexts/UserInfoContext";
 
 const Login = () => {
+  const roleContext = useRole();
+  const userInfoContext = useUserInfo();
+  const navigate = useNavigate();
+
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
-  const roleContext = useRole();
-  const navigate = useNavigate();
 
   const schema = yup.object().shape({
     email: yup.string().required("Tên tài khoản là bắt buộc"),
@@ -32,19 +35,23 @@ const Login = () => {
   const [loginStatus, setLoginStatus] = useState(null);
 
   const onSubmit = async (data) => {
-    // console.log("Params send to Login", data);
-
     const response = await LoginAPI(data);
 
     const userInformation = await UserInfoAPI();
 
-    // console.log("Responce from Login API ", response);
+    console.log("Responce from Login API ", response);
     console.log(
       "Responce from User Information API (Role)",
       userInformation?.data?.data?.role
     );
+    console.log(
+      "Responce from User Information API",
+      userInformation?.data?.data
+    );
 
     await roleContext.updateRole(userInformation?.data?.data?.role);
+
+    await userInfoContext.updateUserInfo(userInformation?.data?.data);
 
     if (response?.status === 200) {
       if (!Object.keys(errors).length) {

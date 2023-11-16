@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { HcmutIcon, MenuIcon, CloseIcon } from "../../Assets/Icons/Icons";
 import "./Header.scss";
 import { StudentInfoModal } from "../../Modals";
+import { useUserInfo } from "../../Contexts/UserInfoContext";
 
 const Header = ({ showSideBar, setShowSideBar }) => {
+  const userInfoContext = useUserInfo();
+  const [userInformation, setUserInformation] = useState(userInfoContext.info);
   function handleShowSideBar() {
     setShowSideBar(!showSideBar);
   }
@@ -38,7 +41,8 @@ const Header = ({ showSideBar, setShowSideBar }) => {
         <div className="Header_UserInfo flex items-center justify-between gap-3 mr-4">
           {<HcmutIcon />}
           <span className="Header_UserName text-white pr-3 font-semibold cursor-pointer">
-            Tran Van Dang
+            {userInformation?.firstName + " " + userInformation?.lastName ||
+              "None"}
           </span>
         </div>
       </StudentInfoModal>
