@@ -8,16 +8,6 @@ const DetailActivityModal = ({ children }) => {
     setOpenModal(false);
   };
 
-  const info = {
-    Printer_ID: "12345",
-    Printer_Location: "CS1 , H6 , 304",
-    Date: "12-03-2023",
-    State: "Đã In",
-    FileName: "Coluuchat.pdf",
-    Quantity: "2 bản",
-    PageQuantity: "A4: 17",
-  };
-
   const stInfo = {
     id: "2113333",
     name: "Nguyễn Văn An",
@@ -25,8 +15,9 @@ const DetailActivityModal = ({ children }) => {
     location: "CS2, H6, 304",
     copies: 2,
     quantity: "A4: 10",
-    date: "12-03-2020"
-  }
+    date: "12-03-2020",
+    files: ["Coluuchat.pdf", "HoaDC.pdf", "Vatli2.pdf"],
+  };
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
@@ -48,6 +39,23 @@ const DetailActivityModal = ({ children }) => {
               fieldName={"ID máy in"}
               fieldValue={stInfo.printerId}
             ></InfoField2>
+            <InfoField2
+              fieldName={"Số tệp in"}
+              fieldValue={stInfo.files.length}
+            ></InfoField2>
+            <div className="px-5 mb-2 text-[16px] md:text-[20px] flex items-center gap-3 w-full">
+              <span className="text-[#066DCC] text-[16px] md:text-[20px]  font-bold w-[40%]">
+                {"Tên file"}:
+              </span>
+              <select className="text-[16px] md:text-[20px] font-semibold leading-7 py-2 w-[60%] overflow-scroll outline-none ">
+                {stInfo.files.map((file, index) => (
+                  <option value="" key={index}>
+                    {file}
+                  </option>
+                ))}
+              </select>
+            </div>
+
             <InfoField2
               fieldName={"Vị trí"}
               fieldValue={stInfo.location}

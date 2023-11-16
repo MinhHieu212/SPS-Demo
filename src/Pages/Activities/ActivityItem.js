@@ -1,7 +1,8 @@
 import React from "react";
 import "./Activities.scss";
 import { InfoIcon } from "../../Assets/Icons/Icons";
-import DetailActivityModal from "../../Modals/DetailActivityModal/DetailActivityModal";
+import { DetailActivityModal } from "../../Modals";
+
 function ActivityItem(props) {
   return (
     <div className="ActivityItem flex flex-row justify-between items-center bg-[#E7E5E5] text-[16px] lg:text-[20px] font-bold py-3 px-4 mt-2 rounded-md border-b-2 border-black  w-[714px] md:w-full">

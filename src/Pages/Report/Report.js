@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import ReportItem from "./ReportItem";
 import PaperChart from "./PaperChart";
 import { useNavigate } from "react-router";
-import FIlterReportModal from "../../Modals/FIlterReportModal/FIlterReportModal";
+import { FilterReportModal } from "../../Modals";
+
 const data = [2478, 5267, 734, 784, 433, 769, 892, 133, 788, 820, 110, 120];
 const items = [
   {
@@ -92,10 +93,11 @@ const Report = () => {
           BÁO CÁO HỆ THỐNG
         </h2>
         <div>
-          <FIlterReportModal>
-            <button className="text-sm md:text-base bg-[#40C0E7] font-semibold md:px-[30px] px-[10px] py-[5px] rounded-lg">Lọc báo cáo</button>
-          </FIlterReportModal>
-
+          <FilterReportModal>
+            <button className="text-[16px] md:text-[20px] text-white bg-[#066DCC] font-semibold md:px-[30px] px-[10px] py-2 rounded-md">
+              Lọc báo cáo
+            </button>
+          </FilterReportModal>
         </div>
       </div>
       <PaperChart data={data} />
