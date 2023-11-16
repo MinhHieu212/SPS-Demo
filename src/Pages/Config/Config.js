@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useNavigate, useEffect } from "react";
 import "./Config.scss"
 import {AiOutlineDelete} from 'react-icons/ai'
 
