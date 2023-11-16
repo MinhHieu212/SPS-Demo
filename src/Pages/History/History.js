@@ -106,12 +106,12 @@ const files = [
   },
 ];
 const History = () => {
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (localStorage.getItem("Role") !== "Student") {
-      navigate("/Error");
-    }
-  }, []);
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   if (localStorage.getItem("Role") !== "Student") {
+  //     navigate("/Error");
+  //   }
+  // }, []);
   return (
     <div className="History max-w-[1280px] px-[10px] md:px-[32px] lg:px-[70px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
       <h2 className="text-3xl lg:text-4xl font-semibold mt-4 printing-title border-b-4 border-[#066DCC] pb-2 md:pb-3  text-[#066DCC] ">

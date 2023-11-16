@@ -98,12 +98,12 @@ const printers = [
 ];
 
 const ManageSpso = () => {
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (localStorage.getItem("Role") !== "SPSO") {
-      navigate("/Error");
-    }
-  }, []);
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   if (localStorage.getItem("Role") !== "SPSO") {
+  //     navigate("/Error");
+  //   }
+  // }, []);
 
   return (
     <div className="Manage mx-auto max-w-[1280px] px-[10px] md:px-[32px] lg:px-[70px] bg-[white] shadow-sm mb-5 min-h-[93vh]">

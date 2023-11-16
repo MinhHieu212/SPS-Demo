@@ -9,62 +9,61 @@ import Activities from "../Pages/Activities/Activities";
 import Test from "../Pages/TestModal/Test";
 import ConfigFile from "../Pages/ConfigFile/ConfigFile";
 import Bkpay from "../Pages/Bkpay/BkPay";
-import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+// import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import ManageStaff from "../Pages/ManageStaff/ManageStaff";
 import ManageSpso from "../Pages/ManageSpso/ManageSpso";
 import HomeNoLogin from "../Pages/HomeNoLogin/HomeNoLogin";
 
-// no required login
 const publicRoutes = [
+  { role: "", path: "/", component: HomeNoLogin, layout: "beforeLogin" },
+  // { role: "", path: "*", component: ErrorPage },
+  { role: "", path: "/Login", component: Login },
+  { role: "", path: "/Test", component: Test },
+];
+
+const privateRoutes = [
   {
-    role: "Student",
+    role: "all",
+    path: "/SPS-FE-Project",
+    component: HomeNoLogin,
+    layout: "beforeLogin",
+  },
+  { role: "all", path: "/Home", component: Home, layout: "default" },
+  { role: "all", path: "/Support", component: Support, layout: "default" },
+  {
+    role: "student",
     path: "/Printing/:PrinterID",
     component: ConfigFile,
     layout: "default",
   },
   {
-    role: "Student",
+    role: "student",
     path: "/Printing",
     component: Printing,
     layout: "default",
   },
-  { role: "Student", path: "/History", component: History, layout: "default" },
-  { role: "Spso", path: "/Config", component: Config, layout: "default" },
+  { role: "student", path: "/Bkpay", component: Bkpay },
+  { role: "student", path: "/History", component: History, layout: "default" },
   {
-    role: "Staff",
+    role: "staff",
     path: "/ManageStaff",
     component: ManageStaff,
     layout: "default",
   },
+  { role: "spso", path: "/Config", component: Config, layout: "default" },
   {
-    role: "Spso",
+    role: "spso",
     path: "/ManageSpso",
     component: ManageSpso,
     layout: "default",
   },
-  { role: "Spso", path: "/Report", component: Report, layout: "default" },
+  { role: "spso", path: "/Report", component: Report, layout: "default" },
   {
-    role: "Spso",
+    role: "spso",
     path: "/Activities",
     component: Activities,
     layout: "default",
   },
-  {
-    role: " ",
-    path: "/SPS-FE-Project",
-    component: HomeNoLogin,
-    layout: "beforeLogin",
-  },
-  { role: "", path: "/", component: HomeNoLogin, layout: "beforeLogin" },
-  { role: "", path: "/Home", component: Home, layout: "default" },
-  { role: "", path: "/Support", component: Support, layout: "default" },
-  { role: "", path: "/Login", component: Login },
-  { role: "", path: "/Bkpay", component: Bkpay },
-  { role: "", path: "/Test", component: Test },
-  { role: "", path: "*", component: ErrorPage },
 ];
-
-// required login
-const privateRoutes = [];
 
 export { publicRoutes, privateRoutes };

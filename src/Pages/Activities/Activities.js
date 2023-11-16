@@ -97,12 +97,12 @@ const activities = [
 ];
 
 const Activities = () => {
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (localStorage.getItem("Role") !== "SPSO") {
-      navigate("/Error");
-    }
-  }, []);
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   if (localStorage.getItem("Role") !== "SPSO") {
+  //     navigate("/Error");
+  //   }
+  // }, []);
   return (
     <div className="Activities max-w-[1280px] px-[10px] md:px-[32px] lg:px-[70px] bg-[white] mx-auto shadow-sm mb-5 min-h-[93vh]">
       <h2 className="text-3xl lg:text-4xl font-semibold mt-3 md:mt-8 printing-title border-b-4 border-black pb-2 md:pb-3  text-[#066DCC]">

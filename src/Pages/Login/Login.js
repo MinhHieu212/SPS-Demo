@@ -4,16 +4,21 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { HcmutLogo, ErrorIcon } from "../../Assets/Icons/Icons";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import "./Login.scss";
+import { LoginAPI } from "../../APIs/LoginAPI/LoginAPI";
+import { UserInfoAPI } from "../../APIs/UserInfoAPI/UserInfoAPI";
+import { useRole } from "../../RoleContext";
 
 const Login = () => {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+  const roleContext = useRole();
+  const navigate = useNavigate();
+
   const schema = yup.object().shape({
     email: yup.string().required("Tên tài khoản là bắt buộc"),
     password: yup.string().required("Mật khẩu là bắt buộc"),
   });
-
-  const navigate = useNavigate();
 
   const {
     reset,
@@ -25,28 +30,25 @@ const Login = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log("Helo ba gia", data);
+    console.log("Params send to Login", data);
 
-    const res = await axios
-      .post("https://ssps-7wxl.onrender.com/v1/user/login", data)
-      .then((response) => {
-        console.log(response.status);
-        localStorage.setItem("accessToken", response?.data?.data?.accessToken);
-        localStorage.setItem(
-          "refreshToken",
-          response?.data?.data?.refreshToken
-        );
-        localStorage.setItem("Role", "SPSO");
+    const response = await LoginAPI(data);
 
-        if (response?.status === 200) {
-          setTimeout(() => {
-            if (!Object.keys(errors).length) {
-              navigate("/Home");
-            }
-          }, 1500);
-        }
-      })
-      .catch((errors) => console.log(errors));
+    const userInformation = await UserInfoAPI();
+
+    console.log("Responce from Login API ", response);
+    console.log(
+      "Responce from User Information API (Role)",
+      userInformation?.data?.data?.role
+    );
+
+    await roleContext.updateRole(userInformation?.data?.data?.role);
+
+    if (response?.status === 200) {
+      if (!Object.keys(errors).length) {
+        navigate("/Home");
+      }
+    }
   };
 
   const handleReset = () => {

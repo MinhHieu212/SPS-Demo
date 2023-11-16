@@ -11,7 +11,7 @@ const ConfigFile = () => {
   const { PrinterID } = useParams();
 
   useEffect(() => {
-    if (localStorage.getItem("Role") !== "Student") {
+    if (localStorage.getItem("accessToken") === null) {
       navigate("/Error");
     }
   }, []);
