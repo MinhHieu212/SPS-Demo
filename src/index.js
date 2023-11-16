@@ -4,15 +4,18 @@ import "./Styles/index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import { RoleProvider } from "./RoleContext";
+import { RoleProvider } from "./Contexts/RoleContext";
+import { UserInfoProvider } from "./Contexts/UserInfoContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <RoleProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <UserInfoProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </UserInfoProvider>
     </RoleProvider>
   </React.StrictMode>
 );

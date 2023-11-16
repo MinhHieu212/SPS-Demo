@@ -7,7 +7,7 @@ import {
   SPSOSideBarOption,
   StaffSideBarOption,
 } from "./SidebarItemList";
-import { useRole } from "../../RoleContext";
+import { useRole } from "../../Contexts/RoleContext";
 
 const SideBar = ({ showSideBar, elementRef }) => {
   const roleContext = useRole();
