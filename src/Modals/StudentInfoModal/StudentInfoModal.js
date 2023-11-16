@@ -1,19 +1,33 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InfoField from "../../Utils/InfoField";
 import { CloseModalIcon } from "../../Assets/Icons/Icons";
 import PagesPurchaseModal from "../PagesPurchaseModal/PagesPurchaseModal";
+import { UserInfoAPI } from "../../APIs/UserInfoAPI/UserInfoAPI";
 
 function StudentInfoModal({ children }) {
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
   const elementRef = useRef();
+  const [open, setOpen] = useState(false);
+  const [userInformation, setUserInformation] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     navigate("/");
   };
+
+  useEffect(async () => {
+    setUserInformation(
+      (await UserInfoAPI()?.data.data) || {
+        mssv: "1111111",
+        firstName: "Minh",
+        lastName: "Nguyen",
+        balance: 10,
+      }
+    );
+    console.log("User Information: ", userInformation);
+  }, []);
 
   return (
     <div className="relative w-auto h-auto">
@@ -41,11 +55,13 @@ function StudentInfoModal({ children }) {
           <div className="p-3">
             <InfoField
               fieldName={"Tên:"}
-              fieldValue={"Nguyễn Văn Anh Khoa"}
+              fieldValue={
+                userInformation.firstName + " " + userInformation.lastName
+              }
             ></InfoField>
             <InfoField
               fieldName={"Mã số sinh viên:"}
-              fieldValue={"2113777"}
+              fieldValue={userInformation?.mssv}
             ></InfoField>
             <InfoField
               fieldName={"Khoa:"}
@@ -57,7 +73,7 @@ function StudentInfoModal({ children }) {
                 Số dư hiện tại (tờ):
               </span>
               <div className="text-[20px] font-semibold w-[135px] h-[40px] bg-[#D9D9D9] flex items-center justify-center rounded-lg">
-                90
+                {userInformation?.balance}
               </div>
             </div>
             <PagesPurchaseModal>

@@ -9,7 +9,7 @@ export const UserInfoAPI = async () => {
       return response;
     })
     .catch((error) => {
-    //   console.log("Fail get User infomation ", error);
+      console.log("Fail get User infomation ", error);
       return null;
     });
 
