@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const FilterReportModal = ({ children }) => {
+const FilterReportModalV2 = ({ children }) => {
   const [open, setOpen] = useState(false);
   const [sort, setSort] = useState("latest");
   const [monthChecked, setMonthChecked] = useState("All");
@@ -120,4 +120,4 @@ const FilterReportModal = ({ children }) => {
   );
 };
 
-export default FilterReportModal;
+export default FilterReportModalV2;

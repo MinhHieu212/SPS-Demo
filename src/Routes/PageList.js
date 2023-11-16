@@ -15,19 +15,19 @@ import ManageSpso from "../Pages/ManageSpso/ManageSpso";
 import HomeNoLogin from "../Pages/HomeNoLogin/HomeNoLogin";
 
 const publicRoutes = [
-  { role: "", path: "/", component: HomeNoLogin, layout: "beforeLogin" },
   // { role: "", path: "*", component: ErrorPage },
+  { role: "", path: "/", component: HomeNoLogin, layout: "beforeLogin" },
   { role: "", path: "/Login", component: Login },
   { role: "", path: "/Test", component: Test },
-];
-
-const privateRoutes = [
   {
-    role: "all",
+    role: "",
     path: "/SPS-FE-Project",
     component: HomeNoLogin,
     layout: "beforeLogin",
   },
+];
+
+const privateRoutes = [
   { role: "all", path: "/Home", component: Home, layout: "default" },
   { role: "all", path: "/Support", component: Support, layout: "default" },
   {
