@@ -151,7 +151,7 @@ const Report = () => {
         </div>
       </div>
       <div className="w-full overflow-x-scroll">
-        <div className="flex flex-row justify-between items-center bg-[#3C8DBC] text-base lg:text-lg font-bold py-3 px-4 mt-8 rounded-sm w-[714px]  md:w-[120%] text-white">
+        <div className="flex flex-row justify-between items-center bg-[#3C8DBC] text-base lg:text-lg font-bold py-3 px-4 mt-8 rounded-sm w-[714px]  md:w-[120%] lg:w-full text-white">
           <div className="min-w-[13%] text-center">THỜI GIAN</div>
           <div className="min-w-[13%] text-center">ID MÁY IN</div>
           <div className="min-w-[17%] text-center">VỊ TRÍ</div>
