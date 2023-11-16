@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 const Config = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    if (localStorage.getItem("Role") !== "SPSO") {
+    if (localStorage.getItem("accessToken") === null) {
       navigate("/Error");
     }
   }, []);

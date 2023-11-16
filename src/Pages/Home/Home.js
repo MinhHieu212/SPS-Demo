@@ -15,7 +15,7 @@ import { useNavigate } from "react-router";
 const Home = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    if (localStorage.getItem("Role") === null) {
+    if (localStorage.getItem("accessToken") === null) {
       navigate("/Error");
     }
   }, []);

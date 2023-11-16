@@ -63,9 +63,9 @@ const PagesPurchaseModal = ({ children }) => {
                 <path
                   d="M4.1665 10H15.8332"
                   stroke="#344054"
-                  stroke-width="1.66667"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.66667"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </button>
@@ -89,9 +89,9 @@ const PagesPurchaseModal = ({ children }) => {
                 <path
                   d="M9.99984 4.1665V15.8332M4.1665 9.99984H15.8332"
                   stroke="#344054"
-                  stroke-width="1.66667"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.66667"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </button>

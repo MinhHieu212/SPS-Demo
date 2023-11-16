@@ -10,9 +10,8 @@ function StudentInfoModal({ children }) {
   const elementRef = useRef();
 
   const handleLogout = () => {
-    localStorage.removeItem("Role");
-    localStorage.removeItem("MatKhau");
-    localStorage.removeItem("TenTaiKhoan");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
     navigate("/");
   };
 

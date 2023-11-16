@@ -99,7 +99,7 @@ const activities = [
 const Activities = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    if (localStorage.getItem("Role") !== "SPSO") {
+    if (localStorage.getItem("accessToken") === null) {
       navigate("/Error");
     }
   }, []);
