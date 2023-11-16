@@ -108,7 +108,7 @@ const files = [
 const History = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    if (localStorage.getItem("Role") !== "Student") {
+    if (localStorage.getItem("accessToken") === null) {
       navigate("/Error");
     }
   }, []);

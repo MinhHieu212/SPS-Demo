@@ -83,7 +83,7 @@ const printerList = [
 const Printing = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    if (localStorage.getItem("Role") !== "Student") {
+    if (localStorage.getItem("accessToken") === null) {
       navigate("/Error");
     }
   }, []);

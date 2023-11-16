@@ -10,9 +10,13 @@ import {
   faFileShield,
   faGaugeHigh,
 } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router";
+import { useRole } from "../../Contexts/RoleContext";
 
 const HomeNoLogin = () => {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+  const roleContext = useRole();
+
   return (
     <div className="Home mb-5">
       <div id="slider" className="relative w-full min-h-[400px] ">

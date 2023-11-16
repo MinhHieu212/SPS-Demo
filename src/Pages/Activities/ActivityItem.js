@@ -1,6 +1,7 @@
 import React from "react";
 import "./Activities.scss";
 import { InfoIcon } from "../../Assets/Icons/Icons";
+import { DetailActivityModal } from "../../Modals";
 
 function ActivityItem(props) {
   return (
@@ -11,7 +12,9 @@ function ActivityItem(props) {
       <div className="text-center w-[20%]">{props.location}</div>
       <div className="text-center w-[15%]">{props.date}</div>
       <div className="w-[10%] flex items-center justify-center gap-2">
-        <InfoIcon></InfoIcon>
+        <DetailActivityModal>
+          <InfoIcon></InfoIcon>
+        </DetailActivityModal>
       </div>
     </div>
   );

@@ -19,3 +19,7 @@ export { default as FilterHistoryModal } from "./FilterHistoryModal/FilterHistor
 export { default as DetailHistoryModal } from "./DetailHistoryModal/DetailHistoryModal";
 
 export { default as StudentInfoModal } from "./StudentInfoModal/StudentInfoModal";
+
+export { default as FilterReportModal } from "./FilterReportModal/FilterReportModal";
+
+export { default as DetailActivityModal } from "./DetailActivityModal/DetailActivityModal";
