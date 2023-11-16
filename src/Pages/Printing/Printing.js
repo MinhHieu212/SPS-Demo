@@ -81,12 +81,12 @@ const printerList = [
 ];
 
 const Printing = () => {
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (localStorage.getItem("Role") !== "Student") {
-  //     navigate("/Error");
-  //   }
-  // }, []);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("accessToken") === null) {
+      navigate("/Error");
+    }
+  }, []);
 
   return (
     <div className="Printing w-full px-[10px] max-w-[1280px] bg-[white] shadow-sm md:px-[32px] lg:px-[70px] mx-auto pb-10 min-h-[93vh]">

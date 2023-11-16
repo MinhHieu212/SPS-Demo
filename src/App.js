@@ -20,7 +20,7 @@ function renderRoutes(routes, role = "") {
     const Page = route.component;
 
     if (route.role === role || route.role === "all") {
-      console.log("OKE", route.path);
+      // console.log("OKE", route.path);
       return (
         <Route
           key={index}
@@ -33,7 +33,7 @@ function renderRoutes(routes, role = "") {
         ></Route>
       );
     } else {
-      console.log("NOT HAVE", route.path);
+      // console.log("NOT HAVE", route.path);
     }
   });
 }

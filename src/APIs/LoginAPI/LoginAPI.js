@@ -11,7 +11,7 @@ export const LoginAPI = async (data) => {
     })
     .catch((error) => {
       console.log("Fail Login", error);
-      return null;
+      return error;
     });
 
   return responseLogin;

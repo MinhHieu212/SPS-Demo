@@ -29,14 +29,16 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
+  const [loginStatus, setLoginStatus] = useState(null);
+
   const onSubmit = async (data) => {
-    console.log("Params send to Login", data);
+    // console.log("Params send to Login", data);
 
     const response = await LoginAPI(data);
 
     const userInformation = await UserInfoAPI();
 
-    console.log("Responce from Login API ", response);
+    // console.log("Responce from Login API ", response);
     console.log(
       "Responce from User Information API (Role)",
       userInformation?.data?.data?.role
@@ -48,11 +50,14 @@ const Login = () => {
       if (!Object.keys(errors).length) {
         navigate("/Home");
       }
+    } else {
+      setLoginStatus(response?.response?.data?.message);
     }
   };
 
   const handleReset = () => {
     reset();
+    setLoginStatus(null);
   };
 
   return (
@@ -66,15 +71,17 @@ const Login = () => {
         </div>
         <div className="flex items-start wrapperBox">
           <div className="formContainer ml-[10px] my-[10px] bg-[#eeeeee] w-[420px] p-[20px]">
-            {Object.keys(errors).length > 0 && (
-              <div className="w-full py-3 rounded-lg bg-[#ffeedd] text-[#bb0000] border border-red-400 text-center flex gap-2 items-center pl-4">
-                <ErrorIcon></ErrorIcon>
-                <div className="pl-3">
-                  <p> {errors?.email?.message}</p>
-                  <p> {errors?.password?.message}</p>
+            {Object.keys(errors).length > 0 ||
+              (loginStatus !== null && (
+                <div className="w-full py-3 rounded-lg bg-[#ffeedd] text-[#bb0000] border border-red-400 text-center flex gap-2 items-center pl-4">
+                  <ErrorIcon></ErrorIcon>
+                  <div className="pl-3">
+                    <p> {errors?.email?.message}</p>
+                    <p> {errors?.password?.message}</p>
+                    <p> {loginStatus} </p>
+                  </div>
                 </div>
-              </div>
-            )}
+              ))}
             <div className="font-bold text-[#990033] text-[18px] border-b-2 border-[#990033] tracking-widest">
               Nhập thông tin tài khoản của bạn
             </div>
