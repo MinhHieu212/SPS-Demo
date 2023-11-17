@@ -5,12 +5,12 @@ const FIlterManagePriterModal = ({ children }) => {
 
   const [status, setStatus] = useState("all"); // all or enable or disable
   const [location, setLocation] = useState("all"); // all or cs1 or cs2
-  const [queue, setQueue] = useState("ascending"); // acsending or descending
+  const [timeActive, settimeActive] = useState("ascending"); // acsending or descending
 
   const cancelFilter = () => {
     setStatus("all");
     setLocation("all");
-    setQueue("acsending");
+    settimeActive("acsending");
     setOpen(false);
   };
 
@@ -18,7 +18,7 @@ const FIlterManagePriterModal = ({ children }) => {
     console.log("Params Filter Printer : ", {
       status: status,
       location: location,
-      queue: queue,
+      timeActive: timeActive,
     });
     setOpen(false);
   };
@@ -96,21 +96,21 @@ const FIlterManagePriterModal = ({ children }) => {
           <div className="flex items-end justify-center gap-3 md:flex-row flex-col">
             <div className="bg-white w-[90%] mx-auto md:w-[48%] h-[150px] rounded-lg flex-col flex items-center shadow-md border-[1px] border-[#367FA9] ">
               <div className="text-[#1488DB]  uppercase text-[18px]  border-b-[3px] border-black h-[40px] flex items-center justify-center font-bold w-full my-2">
-                Sắp xếp hàng đợi
+                Sắp xếp thời gian kích hoạt
               </div>
               <div
                 className={`${
-                  queue === "ascending" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  timeActive === "ascending" ? "rounded-sm bg-[#E6E6E6]" : ""
                 } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
-                onClick={() => setQueue("ascending")}
+                onClick={() => settimeActive("ascending")}
               >
                 Tăng dần
               </div>
               <div
                 className={`${
-                  queue === "descending" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  timeActive === "descending" ? "rounded-sm bg-[#E6E6E6]" : ""
                 } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
-                onClick={() => setQueue("descending")}
+                onClick={() => settimeActive("descending")}
               >
                 Giảm dần
               </div>
