@@ -114,8 +114,7 @@ const ManageSpso = () => {
         </h2>
         <div>
           <AddPrinterModal>
-            {/* <button type="button" className="them_mayin flexbox w-[6rem] md:w-[8rem] h-[2.5rem] bg-[#066DCC] text-white text-xs md:text-base font-bold ">Thêm máy in</button> */}
-            <button className="text-[1rem] md:text-[1.25rem] text-white bg-[#066DCC] font-semibold md:px-[30px] px-[10px] py-2 rounded-md">
+             <button className="text-[1rem] md:text-[1.25rem] text-white bg-[#066DCC] font-semibold md:px-[30px] px-[10px] py-2 rounded-md">
               Thêm máy in
             </button>
           </AddPrinterModal>
