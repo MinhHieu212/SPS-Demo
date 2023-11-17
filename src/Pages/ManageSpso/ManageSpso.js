@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { FilterIcon, SearchIcon } from "../../Assets/Icons/Icons";
 import "./ManageSpso.scss";
 import ManageSpsoItem from "./ManageSpsoItem";
+import { AddPrinterModal } from "../../Modals/AddPrinterModal/AddPrinterModal";
 import { useNavigate } from "react-router";
 const printers = [
   {
@@ -107,9 +108,13 @@ const ManageSpso = () => {
 
   return (
     <div className="Manage mx-auto max-w-[1280px] px-[10px] md:px-[32px] lg:px-[70px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
-      <h2 className="text-3xl lg:text-4xl font-semibold mt-4 printing-title border-b-4 border-black pb-2  md:pb-3  text-[#066DCC] ">
+        <h2 className="text-3xl lg:text-4xl font-semibold mt-4 printing-title border-b-4 border-black pb-2 md:pb-3 pt-2 text-[#066DCC] ">
         QUẢN LÝ HỆ THỐNG MÁY IN
-      </h2>
+          <AddPrinterModal>
+            <button type="button" className="them_mayin w-[8rem] h-[2.5rem] bg-[#066DCC] text-white text-base font-bold">Thêm máy in</button>
+          </AddPrinterModal>
+        </h2>
+        
       <div className="flex flex-col-reverse md:flex-row mt-4 items-start manageSPSO-outer-flex">
         <div className="w-full md:w-1/2 lg:w-1/3 relative shadow-lg rounded-md overflow-hidden">
           <div className="bg-[#3C8DBC] text-white text-xl font-bold flex flex-row justify-center items-center text-center py-[14px] px-[10px] rou">

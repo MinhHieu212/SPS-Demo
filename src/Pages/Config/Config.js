@@ -1,4 +1,5 @@
-import React, { useState, useNavigate, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom'
 import "./Config.scss"
 import {AiOutlineDelete} from 'react-icons/ai'
 
@@ -9,6 +10,90 @@ const Config = () => {
       navigate("/Error");
     }
   }, []);
+  // Attributes for the first form
+  const [values, setValues] = useState({
+    default_paper: 100,
+    time_Sem1: "22-12-2021",
+    time_Sem2: "22-12-2022",
+    a4_price: 300
+  });
+  const inputs = [
+    {
+      id: 1,
+      name: "default_paper",
+      type: "number",
+      placeholder: "Nhập số...",
+      errorMessage: "Lượng giấy mặc định là số tự nhiên từ 1-1000!",
+      label: "Số lượng giấy mặc định cho từng sinh viên / Học kì",
+    },
+    {
+      id: 2,
+      name: "time_Sem1",
+      type: "date",
+      placeholder: "timeSem1",
+      errorMessage: "",
+      label: "Thời gian cấp giấy Học kì 1",
+    },
+    {
+      id: 3,
+      name: "time_Sem2",
+      type: "date",
+      placeholder: "timeSem2",
+      errorMessage: "",
+      label: "Thời gian cấp giấy Học kì 2",
+    },
+    {
+      id: 4,
+      name: "a4_price",
+      type: "number",
+      placeholder: "Nhập giá...",
+      errorMessage: "Giá một tờ A4 không nên vượt quá 2000đ",
+      label: "Giá của một tờ giấy A4 khi mua thêm",
+    },
+  ];
+  const handleSubmit = (e) => {
+    setValues({...values, [e.target.name]: e.target.value});
+    e.preventDefault();
+  };
+  const onChange = (e) => {
+    setValues({...values, [e.target.name]: e.target.value});
+  }
+  const setDefault = () => {
+    setValues({
+      default_paper: 100,
+      time_Sem1: new Date('09-22-2021'),
+      time_Sem2: new Date('09-22-2021'),
+      a4_price: 300
+    });
+  };
+
+  // Attributes for the second form
+  const [allItem,setAllItem] = useState([]);
+  const [selectedValue, setSelectedValue] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
+  const updateInputType = (e) => {
+      setSelectedValue(e.target.value);
+  }
+  const handleAdd = (val) => {
+    if (val !== "") {
+      if (!allItem.some(element => element.fileType === val)) 
+      {
+        let newitem = {
+          id: allItem.length === 0? 1 : allItem[allItem.length - 1].id + 1,
+          fileType: selectedValue,
+        } 
+        setAllItem([...allItem, newitem]);
+      }
+      else {
+        setErrorMessage("Loại file đã tồn tại.");
+      }
+    }
+  }
+
+  const handleDelete = (id) => {
+    const newAllItem = allItem.filter((item) => item.id !== id);
+    setAllItem(newAllItem);
+  }
   return (
     <div className="Config max-w-[1280px] px-[15px] md:px-[32px] lg:px-[70px] mx-auto mb-5 bg-[#E5E5E5] shadow-sm min-h-[93vh]">
       <h1 className="text-3xl lg:text-4xl text-[#066dcc] font-semibold mt-4 border-b-4 border-black pb-2 md:pb-3">
