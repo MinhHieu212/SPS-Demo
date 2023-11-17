@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Test.scss";
 import { ActivitiesFilterModal, FilterPrinterModal } from "../../Modals";
+import AddPrinterModal from "../../Modals/AddPrinterModal/AddPrinterModal";
 
 const TestModalPopover = () => {
   const handle = (e) => {
@@ -37,27 +38,11 @@ const TestModalPopover = () => {
       className="flex flex-col gap-4 items-center justify-center mt-10 max-w-[170px] mx-auto
       flex-wrap"
     >
-      <div class="border border-dashed border-gray-500 w-[500px] relative">
-        <input
-          type="file"
-          multiple
-          class="cursor-pointer relative block opacity-0 w-full h-full p-20 z-50"
-          onChange={handleFileChange}
-        />
-        <div class="text-center p-10 w-[400px] absolute top-0 right-0 left-0 m-auto">
-          <h4>
-            Drop files anywhere to upload
-            <br />
-            or
-          </h4>
-          <p class="">Select Files</p>
-        </div>
-      </div>
-      {/* <FilterPrinterModal>
+      <AddPrinterModal>
         <button className="bg-blue-400 rounded-lg text-white uppercase font-semibold p-4">
           Modal Click Me
         </button>
-      </FilterPrinterModal> */}
+      </AddPrinterModal>
     </div>
   );
 };
