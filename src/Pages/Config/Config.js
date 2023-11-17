@@ -95,12 +95,12 @@ const Config = () => {
     setAllItem(newAllItem);
   }
   return (
-    <div className="Config max-w-[1280px] px-[15px] md:px-[32px] lg:px-[70px] mx-auto mb-5 bg-[#E5E5E5] shadow-sm min-h-[93vh]">
+    <div className="Config max-w-[1280px] px-[15px] md:px-[32px] lg:px-[70px] mx-auto mb-5 bg-white shadow-sm min-h-[93vh]">
       <h1 className="text-3xl lg:text-4xl text-[#066dcc] font-semibold mt-4 border-b-4 border-black pb-2 md:pb-3">
         CẤU HÌNH HỆ THỐNG
       </h1>
       <div className="Form_quanlyvatlieu flex item-center justify-center bg-cover bg-center mx-auto my-10 ">
-        <form onSubmit={handleSubmit} className="bg-white py-0 px-[3.75rem] w-[35.625rem]">
+        <form onSubmit={handleSubmit} className="bg-[#eceaea] py-0 px-[3.75rem] w-[35.625rem]">
           <h2 className="text-xl lg:text-2xl text-[#1488DB] text-center font-semibold mt-4 border-b-4 border-[#1488DB] pb-2 md:pb-3 mb-2 md:mb-6">Quản lý Vật Liệu Học Tập và Cấp Phát Tài Liệu</h2>
             <div className="formInput flex flex-col">
               <label>{inputs[0].label}</label>
@@ -135,13 +135,13 @@ const Config = () => {
               <span className="Err">{errorMessage}</span>
             </div>
           <button className="Submit flex float-right items-center justify-center my-4 mx-[0.5rem]" type="submit">Áp dụng</button>
-          <button className="Todefault flex float-right items-center justify-center my-4 mx-[0.5rem]" type="button" onClick={setDefault}>Mặc định</button>
+          <button className="Todefault flex float-right items-center justify-center my-4 mx-[0.5rem]" type="button" onClick={()=>setDefault}>Mặc định</button>
         </form>
       </div>
       
 
       <div className="Form_fileduocphep flex item-center justify-center bg-cover bg-center mx-auto my-10">
-          <form onSubmit={handleSubmit} className="bg-white py-0 px-[3.75rem] w-[35.625rem]">
+          <form onSubmit={handleSubmit} className="bg-[#eceaea] py-0 px-[3.75rem] w-[35.625rem] h-[27rem]">
             <h2 className="text-xl lg:text-2xl text-[#1488DB] font-semibold mt-4 border-b-4 border-[#1488DB] pb-2 md:pb-3">Cấu hình các loại file được in</h2>
             <div className="selectlist my-[1.5rem] mx-0" > 
               <select className="w-[60%] h-[2.5rem] py-0 px-2 rounded-[0.1875rem]" onChange={updateInputType}>
@@ -172,7 +172,7 @@ const Config = () => {
                 })()}
                 {allItem.map((item, key) => {
                   return (
-                    <div className="current_list_item flex flex-row my-[0.5rem] py-[0.5rem] px-[1rem]" key={key}>
+                    <div className="current_list_item bg-white justify-between flex flex-row my-[0.5rem] py-[0.5rem] px-[1rem]" key={key}>
                       <p>{item.fileType}</p>
                       <div>
                         <AiOutlineDelete className="icon text-2xl cursor-pointer" onClick={()=>handleDelete(item.id)} title="Delete?"/>

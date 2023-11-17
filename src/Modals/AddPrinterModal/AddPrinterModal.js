@@ -11,82 +11,89 @@ export const AddPrinterModal = ({ children }) => {
     setOpenAPModal(false);
   };
   const [values_AP, setValues_AP] = useState({
-    ID: '',
+    ID: '0953',
     brand: "",
     model: "",
-    position: "",
+    location: "",
     description: "None"
   });
+  const [ID, setID] = useState(values_AP.ID);
+  const [brand, setBrand] = useState(values_AP.brand);
+  const [type, setType] = useState(values_AP.type);
+  const [location, setLocation] = useState(values_AP.location);
+  const [desc, setDesc] = useState(values_AP.description);
+  const [checked, setChecked] = useState("active");
+    
   const onChange = (e) => {
     setValues_AP({...values_AP, [e.target.name]: e.target.value});
   }
-  const ToggleSwitch = () => {
-    const [activeButt, setActiveButt] = useState('ena_butt');
-    const switchEnable = () => {
-      setActiveButt('ena_butt');
-    }
-    const switchDisable = () => {
-      setActiveButt('disa_butt');
-    }
-    return (
-      <div className="inputAdd state">
-        <label>Trạng thái:</label>
-        <input type="button" name="enable" className={`toggle_butt ${activeButt == 'ena_butt'? 'active' : 'inactive'}`} onClick={()=>switchEnable} />
-        <span className="font-bold inline-block">Hoạt động</span>
-        {/* </input> */}
-        <input type="button" name="disable" className={`toggle_butt ${activeButt == 'disa_butt'? 'active bg-red' : 'inactive'}`} onClick={()=>switchDisable} />
-        <span className="font-bold block">Vô hiệu hóa</span>
-        {/* </input> */}
-      </div>
-    )
-  }
-  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+}
 
   return (
     <>
         <div className="bg-red-100 flex float-right align-middle" onClick={() => setOpenAPModal(true)}> {children}</div>
         <CenterModal open={openAPModal} handleClose={handleClose}>
           <div className="w-[23.75rem] md:w-[37.5rem] mx-auto overflow-hidden rounded-lg border-[1px] border-[#367FA9]">
-            <div className="header bg-[#066DCC] text-white text-[22px] pt-1 font-bold flex items-center justify-center h-[3.75rem] w-full">
-              THÊM MÁY IN
-            </div>
-            <div className="w-full h-[34rem] flex justify-start py-2 gap-2 items-center flex-col text-[16px] md:text-[20px] overflow-y-scroll">
-              <div className="inputAdd ID flex flex-row">
-                <label>ID máy in:</label>
-                <input type="text" placeholder="Nhập ID..." value={values_AP.ID} name="ID" onChange={onChange}/>
-              </div>
-              <div className="inputAdd brand flex flex-row">
-                <label>Nhãn hiệu:</label>
-                <input type="text" placeholder="Nhập nhãn hiệu..." value={values_AP.brand} name="brand" onChange={onChange}/>
-              </div>
-              <div className="inputAdd model flex flex-row">
-                <label>Mẫu máy:</label>
-                <input type="text" placeholder="Nhập mẫu máy..." value={values_AP.model} name="model" onChange={onChange}/>
-              </div>
-              <div className="inputAdd pos flex flex-row">
-                <label>Vị trí:</label>
-                <input type="text" placeholder="Nhập vị trí..." value={values_AP.pos} name="position" onChange={onChange}/>
-              </div>
-              <div className="inputAdd description flex flex-col">
-                <label>Mô tả:</label>
-                <input type="text" placeholder="Nhập mô tả..." value={values_AP.description} name="description" onChange={onChange}/>
-              </div>
-              {/* <div className="inputAdd state">
-                <label>Trạng thái:</label>
-                <div>
-                  <button type="button"> </button><span>Hoạt động</span>
-                </div>
-                <div>
-                  <button type="button"> </button><span>Vô hiệu hóa</span>
-                </div>
-                
-              </div> */}
-              <ToggleSwitch />
-              <button className="hoantat flex float-right items-center justify-center my-[0.25rem] mx-[0.25rem]" type="submit">Hoàn tất</button>
-              
-            </div>
+          <div className="header bg-[#066DCC] text-white text-[22px] pt-1 font-bold flex items-center justify-center h-[3.75rem] w-full">
+            THÊM MÁY IN
           </div>
-
+          <div className="w-full flex flex-col justify-between md:px-[62px] px-[12px] py-[24px] mb-[16px]">
+              <div className="flex flex-row items-center justify-start gap-[8px] mb-[22px]">
+                  <p className="text-[#066DCC] text-[16px] md:text-[20px] font-bold w-[80px] md:w-[124px]">ID: </p>
+                  <div className="flex-1">
+                      <input type="text" className="block w-full" value={ID} readOnly />
+                  </div>
+              </div>
+              <div className="flex flex-row items-center justify-start gap-[8px] mb-[22px]">
+                  <p className="text-[#066DCC] text-[16px] md:text-[20px] font-bold w-[80px] md:w-[124px]">Nhãn hiệu: </p>
+                  <div className="flex-1">
+                      <input type="text" className="block w-full" value={brand} onChange={(e) => setBrand(e.target.value)} />
+                  </div>
+              </div>
+              <div className="flex flex-row items-center justify-start gap-[8px] mb-[16px]">
+                  <p className="text-[#066DCC] text-[16px] md:text-[20px] font-bold w-[80px] md:w-[124px]">Mẫu máy: </p>
+                  <div className="flex-1">
+                      <input type="text" className="block w-full" value={type} onChange={(e) => setType(e.target.value)} />
+                  </div>
+              </div>
+              <div className="flex flex-row items-center justify-start gap-[8px] mb-[16px]">
+                  <p className="text-[#066DCC] text-[16px] md:text-[20px] font-bold w-[80px] md:w-[124px]">Vị trí: </p>
+                  <div className="flex-1">
+                      <input type="text" className="block w-full" value={location} onChange={(e) => setLocation(e.target.value)} />
+                  </div>
+              </div>
+              <div className="flex flex-col items-start gap-[8px] mb-[16px]">
+                  <p className="text-[#066DCC] text-[16px] md:text-[20px] font-bold w-[80px] md:w-[124px]">Mô tả: </p>
+                  <div className="flex-1 w-full">
+                      <textarea
+                          className="h-[84px] w-full border border-black rounded-md p-2 resize-none"
+                          value={desc}
+                          onChange={(e) => setDesc(e.target.value)}
+                      ></textarea>
+                  </div>
+              </div>
+                  <div className="flex flex-col">
+                      <p className="text-[#066DCC] text-[16px] md:text-[20px] font-bold w-[124px] mb-[8px]">Trạng thái: </p>
+                      <div className="flex flex-row">
+                          <div>
+                              <div className="flex items-center mb-[4px] gap-[22px]">
+                                  <input checked={checked === "active"} onChange={(e) => setChecked(e.target.value)} id="active" type="radio" value="active" name="status" className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300" />
+                                  <label for="active" className="text-[16px] md:text-[20px] font-semibold p-0">Hoạt động</label>
+                              </div>
+                              <div className="flex items-center gap-[22px]">
+                                  <input checked={checked === "inactive"} onChange={(e) => setChecked(e.target.value)} id="inactive" type="radio" value="inactive" name="status" className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300" />
+                                  <label for="inactive" className="text-[16px] md:text-[20px] font-semibold p-0">Không hoạt động</label>
+                              </div>
+                          </div>
+                          <button onClick={handleSubmit} className="ml-auto bg-[#1488db] h-[62px] p-3 w-[154px] rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center">
+                              Hoàn tất
+                          </button>
+                      </div>
+                  </div>
+                </div>
+            </div>
         </CenterModal>
     </>
   )

@@ -20,7 +20,7 @@
     display: inline;
 }
 .Config input {
-    background-color: #E6E6E6;
+    background-color: white;
     margin: 0.625rem 0px;
     border-radius: 0%;
     border: none;
@@ -30,9 +30,7 @@
 }
 
 .Config button {
-    // width: 83px;
     width: 5.25rem;
-    // height: 36px;
     height: 2.25rem;
     border-radius: 0.3125rem;
     background: #066DCC;
@@ -42,10 +40,6 @@
     font-weight: 700;
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
-    // background-color: #ffffff; /* Màu nền */
-    // border: 1px solid #cccccc; /* Viền */
-    // border-radius: 4px; /* Bo tròn viền */
-    // padding: 4px; /* Khoảng cách giữa viền và mũi tên */
     cursor: pointer;
   }
 .currentlist_wrapper {
@@ -60,13 +54,9 @@ div.currentlist_wrapper {
     width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.50);
 }
-div.currentlist_wrapper ::-webkit-scrollbar {
-    border-radius: 0px;
-}
-.current_list_item {
-    background-color: antiquewhite;
-    justify-content: space-between;
-}
+// div.currentlist_wrapper ::-webkit-scrollbar {
+//     border-radius: 50%;
+// }
 @media (min-width: 768px) {
     .Config form .formInput:nth-child(4) {
         margin-left: 1rem;
