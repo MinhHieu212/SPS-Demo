@@ -30,7 +30,7 @@ const ConfirmPrintingModal = ({ children, files }) => {
       <div onClick={() => setOpenModal(true)}> {children}</div>
       <CenterModal open={openModal} handleClose={handleClose}>
         <div className="content w-[350px] md:w-[400px] overflow-hidden rounded-lg  border-[1px] border-[#367FA9]">
-          <div className="header bg-[#3C8DBC] text-white text-[22px] font-bold flex items-center justify-center h-[60px] w-full">
+          <div className="header bg-[#3C8DBC] text-white text-[20px] font-bold flex items-center justify-center h-[60px] w-full">
             XÁC NHẬN IN
           </div>
           <div className="flex flex-col items-center justify-center my-3 w-full">

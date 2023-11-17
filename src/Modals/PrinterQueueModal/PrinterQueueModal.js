@@ -46,7 +46,7 @@ const PrinterQueueModal = ({ children }) => {
       <div onClick={() => setOpenModal(true)}> {children}</div>
       <CenterModal open={openModal} handleClose={handleClose}>
         <div className="w-[380px] md:w-[550px] mx-auto overflow-hidden rounded-lg border-[1px] border-[#367FA9]">
-          <div className="header bg-[#3C8DBC] text-white text-[22px] pt-1 font-bold flex items-center justify-center h-[60px] w-full">
+          <div className="header bg-[#3C8DBC] text-white text-[20px] pt-1 font-bold flex items-center justify-center h-[60px] w-full">
             YÊU CẦU IN ẤN HIỆN TẠI
           </div>
           <div className="w-full h-[400px] flex justify-start py-2 gap-2 items-center flex-col text-[16px] md:text-[20px] overflow-y-scroll">

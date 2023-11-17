@@ -42,7 +42,7 @@ export const AddPrinterModal = ({ children }) => {
       </div>
       <CenterModal open={openAPModal} handleClose={handleClose}>
         <div className="w-[380px] md:w-[550px] mx-auto overflow-hidden rounded-lg border-[1px] border-[#367FA9]">
-          <div className="header bg-[#367FA9] text-white text-[22px] pt-1 font-bold flex items-center justify-center h-[3.75rem] w-full">
+          <div className="header bg-[#367FA9] text-white text-[20px] pt-1 font-bold flex items-center justify-center h-[3.75rem] w-full">
             THÊM MÁY IN
           </div>
           <div className="w-full flex flex-col justify-between md:px-[62px] px-[12px] py-[24px] mb-[16px]">

@@ -149,6 +149,7 @@ const ManageSpso = () => {
                 <input
                   type="text"
                   placeholder="Lọc máy in"
+                  readOnly
                   className="w-full outline-none border-none"
                 />
                 <FilterIcon></FilterIcon>
