@@ -9,90 +9,245 @@ const activities = [
   {
     studentName: "Nguyễn Phạm Thiên Phúc",
     studentId: "2113619",
-    printerId: "12345678",
-    location: "CS2, H6, 304",
-    date: "21/10/2023",
-    fileName: "tangaidaicuong1.pdf",
+    classes: "MT21KH12",
+    major: "Khoa học và kỹ thuật máy tính",
+    history: [
+      {
+        date: "12/2/2023",
+        fileNames: "dstt.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+      {
+        date: "12/2/2023",
+        fileNames: "dstt.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+      {
+        date: "12/2/2023",
+        fileNames: "giaitich.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+      {
+        date: "12/2/2023",
+        fileNames: "giaitich.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+    ],
   },
+
   {
-    studentName: "Trương Thuận Hưng",
-    studentId: "2113619",
-    printerId: "12345678",
-    location: "CS2, H6, 304",
-    date: "21/10/2023",
-    fileName: "tangaidaicuong1.pdf",
+    studentName: "David Nguyễn",
+    studentId: "2114455",
+    classes: "MT21KH12",
+    major: "Khoa học và kỹ thuật máy tính",
+    history: [
+      {
+        date: "12/2/2023",
+        fileNames: "dstt.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+      {
+        date: "12/2/2023",
+        fileNames: "giaitich.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+    ],
   },
   {
     studentName: "Trần Minh Hiếu",
-    studentId: "2113619",
-    printerId: "12345678",
-    location: "CS2, H6, 304",
-    date: "21/10/2023",
-    fileName: "tangaidaicuong1.pdf",
+    studentId: "2113363",
+    classes: "MT21KH12",
+    major: "Khoa học và kỹ thuật máy tính",
+    history: [
+      {
+        date: "12/2/2023",
+        fileNames: "dstt.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+      {
+        date: "12/2/2023",
+        fileNames: "giaitich.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+      {
+        date: "12/2/2023",
+        fileNames: "giaitich.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+    ],
   },
   {
     studentName: "David Nguyễn",
-    studentId: "2113619",
-    printerId: "12345678",
-    location: "CS2, H6, 304",
-    date: "21/10/2023",
-    fileName: "tangaidaicuong1.pdf",
+    studentId: "2114455",
+    classes: "MT21KH12",
+    major: "Khoa học và kỹ thuật máy tính",
+    history: [
+      {
+        date: "12/2/2023",
+        fileNames: "dstt.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+      {
+        date: "12/2/2023",
+        fileNames: "giaitich.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+    ],
+  },
+  {
+    studentName: "Trần Minh Hiếu",
+    studentId: "2113363",
+    classes: "MT21KH12",
+    major: "Khoa học và kỹ thuật máy tính",
+    history: [
+      {
+        date: "12/2/2023",
+        fileNames: "dstt.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+      {
+        date: "12/2/2023",
+        fileNames: "giaitich.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+      {
+        date: "12/2/2023",
+        fileNames: "giaitich.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+    ],
+  },
+  {
+    studentName: "David Nguyễn",
+    studentId: "2114455",
+    classes: "MT21KH12",
+    major: "Khoa học và kỹ thuật máy tính",
+    history: [
+      {
+        date: "12/2/2023",
+        fileNames: "dstt.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+      {
+        date: "12/2/2023",
+        fileNames: "giaitich.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+    ],
+  },
+  {
+    studentName: "Trần Minh Hiếu",
+    studentId: "2113363",
+    classes: "MT21KH12",
+    major: "Khoa học và kỹ thuật máy tính",
+    history: [
+      {
+        date: "12/2/2023",
+        fileNames: "dstt.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+      {
+        date: "12/2/2023",
+        fileNames: "giaitich.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+      {
+        date: "12/2/2023",
+        fileNames: "giaitich.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+    ],
+  },
+  {
+    studentName: "David Nguyễn",
+    studentId: "2114455",
+    classes: "MT21KH12",
+    major: "Khoa học và kỹ thuật máy tính",
+    history: [
+      {
+        date: "12/2/2023",
+        fileNames: "dstt.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+      {
+        date: "12/2/2023",
+        fileNames: "giaitich.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+    ],
   },
   {
     studentName: "Võ Tấn Hưng",
     studentId: "2113619",
-    printerId: "12345678",
-    location: "CS2, H6, 304",
-    date: "21/10/2023",
-    fileName: "tangaidaicuong1.pdf",
-  },
-  {
-    studentName: "Võ Tấn Hưng",
-    studentId: "2113619",
-    printerId: "12345678",
-    location: "CS2, H6, 304",
-    date: "21/10/2023",
-    fileName: "tangaidaicuong1.pdf",
-  },
-  {
-    studentName: "Võ Tấn Hưng",
-    studentId: "2113619",
-    printerId: "12345678",
-    location: "CS2, H6, 304",
-    date: "21/10/2023",
-    fileName: "tangaidaicuong1.pdf",
-  },
-  {
-    studentName: "Võ Tấn Hưng",
-    studentId: "2113619",
-    printerId: "12345678",
-    location: "CS2, H6, 304",
-    date: "21/10/2023",
-    fileName: "tangaidaicuong1.pdf",
-  },
-  {
-    studentName: "Võ Tấn Hưng",
-    studentId: "2113619",
-    printerId: "12345678",
-    location: "CS2, H6, 304",
-    date: "21/10/2023",
-    fileName: "tangaidaicuong1.pdf",
-  },
-  {
-    studentName: "Võ Tấn Hưng",
-    studentId: "2113619",
-    printerId: "12345678",
-    location: "CS2, H6, 304",
-    date: "21/10/2023",
-    fileName: "tangaidaicuong1.pdf",
+    classes: "MT21KH12",
+    major: "Khoa học và kỹ thuật máy tính",
+    history: [
+      {
+        date: "12/2/2023",
+        fileNames: "dstt.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+      {
+        date: "12/2/2023",
+        fileNames: "giaitich.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+      {
+        date: "12/2/2023",
+        fileNames: "giaitich.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+    ],
   },
   {
     studentName: "Trương Thuận Hưng",
-    studentId: "2113619",
-    printerId: "12345678",
-    location: "CS2, H6, 304",
-    date: "21/10/2023",
-    fileName: "tangaidaicuong1.pdf",
+    studentId: "2113336",
+    classes: "MT21KH12",
+    major: "Khoa học và kỹ thuật máy tính",
+    history: [
+      {
+        date: "12/2/2023",
+        fileNames: "dstt.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+      {
+        date: "12/2/2023",
+        fileNames: "giaitich.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+      {
+        date: "12/2/2023",
+        fileNames: "giaitich.docx",
+        quantity: 3,
+        page_Quantity: { A4: 140, A3: 0 },
+      },
+    ],
   },
 ];
 
@@ -121,7 +276,7 @@ const Activities = () => {
           <div className="w-[100%]  mx-auto border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white">
             <input
               type="text"
-              placeholder="Tìm theo ID máy in"
+              placeholder="Tìm theo Tên sinh viên"
               className="w-full outline-none border-none"
             />
             <SearchIcon></SearchIcon>
@@ -144,23 +299,19 @@ const Activities = () => {
       </div>
       <div className="w-full overflow-x-auto">
         <div className=" min-w-[800px] md:w-full max-h-[60px]  flex flex-row mx-auto justify-between shadow-lg items-center bg-[#3C8DBC] text-[16px]  lg:text-[18px] font-bold py-3 px-4 mt-8 rounded-sm  text-white">
-          <div className=" w-[25%]">SINH VIÊN</div>
-          <div className="text-center w-[15%]">ID SINH VIÊN</div>
-          <div className="text-center w-[15%]">ID MÁY IN</div>
-          <div className="text-center w-[20%]">VỊ TRÍ</div>
-          <div className="text-center w-[15%]">NGÀY IN</div>
-          <div className="text-center w-[10%]">CHI TIẾT</div>
+          <div className=" w-[20%] truncate overflow-clip ">SINH VIÊN</div>
+          <div className="text-center truncate overflow-clip  w-[15%]">
+            ID SINH VIÊN
+          </div>
+          <div className=" w-[25%] truncate overflow-clip pl-3">KHOA</div>
+          <div className="text-center truncate overflow-clip  w-[15%]">LỚP</div>
+          <div className=" w-[10%] truncate overflow-clip pl-3">SÓ LẦN IN </div>
+          <div className="text-center w-[10%] truncate overflow-clip ">
+            LỊCH SỬ
+          </div>
         </div>
         {activities.map((activity, index) => (
-          <ActivityItem
-            key={index}
-            studentName={activity.studentName}
-            studentId={activity.studentId}
-            printerId={activity.printerId}
-            location={activity.location}
-            date={activity.date}
-            // fileName={activity.fileName}
-          />
+          <ActivityItem key={index} activity={activity} />
         ))}
       </div>
     </div>

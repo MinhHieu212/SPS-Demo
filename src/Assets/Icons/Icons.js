@@ -557,6 +557,7 @@ export const InfoIcon = () => (
     />
   </svg>
 );
+
 export const BinIcon = () => (
   <svg
     width="17"
@@ -568,6 +569,59 @@ export const BinIcon = () => (
     <path
       d="M1.21429 19.5556C1.21429 20.9 2.30714 22 3.64286 22H13.3571C14.6929 22 15.7857 20.9 15.7857 19.5556V4.88889H1.21429V19.5556ZM4.20143 10.8533L5.91357 9.13L8.5 11.7211L11.0743 9.13L12.7864 10.8533L10.2121 13.4444L12.7864 16.0356L11.0743 17.7589L8.5 15.1678L5.92571 17.7589L4.21357 16.0356L6.78786 13.4444L4.20143 10.8533ZM12.75 1.22222L11.5357 0H5.46429L4.25 1.22222H0V3.66667H17V1.22222H12.75Z"
       fill="#A00000"
+    />
+  </svg>
+);
+
+export const ListIcon = () => (
+  <svg
+    width="25"
+    height="25"
+    viewBox="0 0 30 30"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M10 7.5H26.25"
+      stroke="black"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M10 15H26.25"
+      stroke="black"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M10 22.5H26.25"
+      stroke="black"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M3.75 7.5H3.7625"
+      stroke="black"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M3.75 15H3.7625"
+      stroke="black"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M3.75 22.5H3.7625"
+      stroke="black"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );

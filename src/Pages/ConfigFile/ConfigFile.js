@@ -146,7 +146,7 @@ const ConfigFile = () => {
               />
 
               {files?.length !== 0 && (
-                <div className="absolute  z-50 top-0 -translate-y-[45px] right-0 flex gap-3 items-center">
+                <div className="absolute z-10 top-0 -translate-y-[45px] right-0 flex gap-3 items-center">
                   <label
                     htmlFor="dropzone-file"
                     className="flex gap-1 items-center justify-center"

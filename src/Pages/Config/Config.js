@@ -183,7 +183,7 @@ const Config = () => {
         </form>
       </div>
 
-      <div className="Form_fileduocphep flex item-center justify-center bg-cover bg-center mx-auto my-10">
+      <div className="Form_fileduocphep flex item-center justify-center bg-cover bg-center mx-auto mt-10">
         <form
           onSubmit={handleSubmit}
           className="bg-[#ffffff] shadow-lg py-0 px-2 lg:px-[3.75rem] w-[330px] md:w-[570px] h-[27rem]"
@@ -234,7 +234,7 @@ const Config = () => {
             className="currentlist_wrapper scroll shadow-md rounded-md h-[400px] border-1 border-[#1488DB] overflow-x-scroll mb-[1.3125rem]"
             style={{ overflowY: "auto", maxHeight: "12rem" }}
           >
-            <div className="current_list overflow-x-scroll  flex flex-col">
+            <div className="current_list overflow-x-scroll flex flex-col">
               {(() => {
                 if (allItem.length === 0) {
                   return (

@@ -21,7 +21,7 @@ function StudentInfoModal({ children }) {
   };
 
   return (
-    <div className="relative w-auto h-auto">
+    <div className="relative z-50 w-auto h-auto">
       <div
         id="triggerUserInfo"
         className=" cursor-pointer"
