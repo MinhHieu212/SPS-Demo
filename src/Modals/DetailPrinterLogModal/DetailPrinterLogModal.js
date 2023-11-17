@@ -41,7 +41,7 @@ const DetailPrinterLogModal = ({ children }) => {
       <CenterModal open={openModal} handleClose={handleClose}>
         <div className="w-[380px] md:w-[550px] mx-auto overflow-hidden rounded-lg border-[1px] border-[#367FA9] ">
           <div className="header bg-[#3C8DBC] text-white text-[20px] pt-1 font-bold flex items-center justify-center h-[60px] w-full">
-            LỊCH SỬ IN ẤN MÁY IN
+            LỊCH SỬ IN ẤN 
           </div>
           <div className="w-full h-[400px] flex justify-start py-2 gap-2 items-center flex-col overflow-y-scroll">
             {logPrintings.map((request, index) => {

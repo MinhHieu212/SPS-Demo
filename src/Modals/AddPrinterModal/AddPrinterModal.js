@@ -8,6 +8,7 @@ export const AddPrinterModal = ({ children }) => {
   const handleClose = () => {
     setOpenAPModal(false);
   };
+
   const [values_AP, setValues_AP] = useState({
     ID: "0953",
     brand: "",
@@ -15,6 +16,7 @@ export const AddPrinterModal = ({ children }) => {
     location: "",
     description: "None",
   });
+
   const [ID, setID] = useState(values_AP.ID);
   const [brand, setBrand] = useState(values_AP.brand);
   const [type, setType] = useState(values_AP.type);
@@ -25,6 +27,7 @@ export const AddPrinterModal = ({ children }) => {
   const onChange = (e) => {
     setValues_AP({ ...values_AP, [e.target.name]: e.target.value });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -35,12 +38,11 @@ export const AddPrinterModal = ({ children }) => {
         className="bg-red-100 flex float-right align-middle"
         onClick={() => setOpenAPModal(true)}
       >
-        {" "}
         {children}
       </div>
       <CenterModal open={openAPModal} handleClose={handleClose}>
-        <div className="w-[23.75rem] md:w-[37.5rem] mx-auto overflow-hidden rounded-lg border-[1px] border-[#367FA9]">
-          <div className="header bg-[#066DCC] text-white text-[22px] pt-1 font-bold flex items-center justify-center h-[3.75rem] w-full">
+        <div className="w-[380px] md:w-[550px] mx-auto overflow-hidden rounded-lg border-[1px] border-[#367FA9]">
+          <div className="header bg-[#367FA9] text-white text-[22px] pt-1 font-bold flex items-center justify-center h-[3.75rem] w-full">
             THÊM MÁY IN
           </div>
           <div className="w-full flex flex-col justify-between md:px-[62px] px-[12px] py-[24px] mb-[16px]">
@@ -112,7 +114,7 @@ export const AddPrinterModal = ({ children }) => {
               <p className="text-[#066DCC] text-[16px] md:text-[20px] font-bold w-[124px] mb-[8px]">
                 Trạng thái:{" "}
               </p>
-              <div className="flex flex-row">
+              <div className="flex flex-row items-end">
                 <div>
                   <div className="flex items-center mb-[4px] gap-[22px]">
                     <input
@@ -151,7 +153,7 @@ export const AddPrinterModal = ({ children }) => {
                 </div>
                 <button
                   onClick={handleSubmit}
-                  className="ml-auto bg-[#1488db] h-[62px] p-3 w-[154px] rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center"
+                  className="ml-auto bg-[#1488db]  p-2 w-[154px] rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center"
                 >
                   Hoàn tất
                 </button>

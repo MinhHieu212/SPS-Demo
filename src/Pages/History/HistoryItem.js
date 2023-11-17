@@ -5,7 +5,7 @@ import { CancelPrintingModal, DetailHistoryModal } from "../../Modals";
 
 function HistoryItem(props) {
   return (
-    <div className=" flex flex-row justify-between items-center bg-[#E7E5E5] text-[16px] md:text-[20px] font-bold py-3 px-4 mt-2 min-w-[780px] border-b-2 border-black rounded-md ">
+    <div className=" flex flex-row justify-between items-center bg-[#ffffff] text-[16px] lg:text-[18px] font-semibold py-3 px-4 mt-2 min-w-[800px] md:w-full max-h-[60px] border-b-2 border-black rounded-sm ">
       <div className="truncate overflow-clip w-[25%] ">{props.fileName}</div>
       <div className="text-center w-[15%]">{props.printerId}</div>
       <div className="text-center w-[15%]">{props.position}</div>

@@ -9,7 +9,7 @@ const DefaultLayout = ({ children, role }) => {
   const elementRef = useRef();
   const navigate = useNavigate();
   const [showSideBar, setshowSideBar] = useState(false);
-  const [marginLeft, setMarginLeft] = useState("ml-[66px]");
+  const [PaddingLeft, setPaddingLeft] = useState("pl-[66px]");
 
   const handleOnClickOut = (e) => {
     if (
@@ -38,9 +38,9 @@ const DefaultLayout = ({ children, role }) => {
   }, []);
 
   useEffect(() => {
-    setMarginLeft("ml-[66px]");
+    setPaddingLeft("pl-[66px]");
     if (window.innerWidth > 1280 && showSideBar) {
-      setMarginLeft("ml-[250px]");
+      setPaddingLeft("pl-[250px]");
     }
   }, [showSideBar]);
 
@@ -52,7 +52,7 @@ const DefaultLayout = ({ children, role }) => {
       ></Header>
       <div className="w-full flex mt-[66px] md:mt-[55px] relative">
         <SideBar showSideBar={showSideBar} elementRef={elementRef}></SideBar>
-        <div className={`Main_Container ${marginLeft} w-full bg-[#f8f9fa]`}>
+        <div className={`Main_Container ${PaddingLeft} w-full bg-[#f8f9fa]`}>
           {children}
         </div>
       </div>

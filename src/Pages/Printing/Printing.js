@@ -89,8 +89,8 @@ const Printing = () => {
   }, []);
 
   return (
-    <div className="Printing w-full px-[10px] max-w-[1280px] bg-[white] shadow-sm md:px-[32px] lg:px-[70px] mx-auto pb-10 min-h-[93vh]">
-      <h2 className="text-3xl lg:text-4xl font-semibold mt-4 printing-title border-b-4 border-[#066DCC] pb-2 md:pb-3 text text-[#066DCC] ">
+    <div className="Printing w-full px-[10px] max-w-[1280px] bg-[white] shadow-sm  lg:px-[20px] mx-auto pb-10 min-h-[93vh]">
+      <h2 className="text-2xl lg:text-3xl font-semibold mt-3 printing-title border-b-4 border-[#066DCC] pb-2 md:pb-3 text text-[#066DCC] ">
         CHỌN MÁY IN
       </h2>
       <div className="flex flex-col md:flex-row mt-4 gap-3 ">

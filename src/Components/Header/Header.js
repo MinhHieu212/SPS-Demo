@@ -38,7 +38,7 @@ const Header = ({ showSideBar, setShowSideBar }) => {
         </div>
       </div>
       <StudentInfoModal>
-        <div className="Header_UserInfo flex items-center justify-between gap-3 mr-4">
+        <div className="Header_UserInfo flex items-center justify-between gap-3 mr-3">
           {<HcmutIcon />}
           <span className="Header_UserName text-white pr-3 font-semibold cursor-pointer">
             {userInformation?.firstName + " " + userInformation?.lastName ||

@@ -10,7 +10,7 @@ const StudentInfo = () => {
       <div className="flex w-full justify-between items-center">
         <div className=" text-white font-semibold capitalize text-start w-[80%]">
           {userInformation?.firstName + " " + userInformation?.lastName ||
-            "None"}
+            "... ..."}
         </div>
         <div className="border border-gray-300 mr-[6px] h-11 w-11 rounded-full overflow-hidden">
           <img
@@ -21,7 +21,7 @@ const StudentInfo = () => {
         </div>
       </div>
       <div className=" text-white text-[10px] w-[100%] pr-[60px] truncate overflow-clip capitalize">
-        {userInformation?.major || "None"}
+        {userInformation?.major || "..."}
       </div>
     </div>
   );

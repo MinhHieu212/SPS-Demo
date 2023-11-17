@@ -8,12 +8,12 @@ export const useUserInfo = () => {
 
 export const UserInfoProvider = ({ children }) => {
   const [info, setInfo] = useState({
-    mssv: "none",
+    mssv: "...",
     firstName: "",
-    lastName: "none",
+    lastName: "...",
     balance: 0,
-    major: "none",
-    classes: "none",
+    major: "...",
+    classes: "...",
   });
 
   const updateUserInfo = (newInfo) => {

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const ErrorPage = () => {
   return (
-    <div className="home_container flex items-center justify-center mx-auto max-w-[1280px] px-[10px] md:px-[32px] lg:px-[70px]">
+    <div className="home_container flex items-center justify-center mx-auto max-w-[1280px] px-[10px]   md:px-[20px]">
       <div class="h-screen w-screen bg-gray-50 flex items-center">
         <div class="container flex flex-col md:flex-row items-center justify-between px-5 text-gray-700">
           <div class="w-full lg:w-1/2 mx-8">

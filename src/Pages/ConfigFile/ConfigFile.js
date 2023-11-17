@@ -58,12 +58,12 @@ const ConfigFile = () => {
   };
 
   return (
-    <div className="configFile max-w-[1280px] px-[10px] md:px-[32px] lg:px-[70px] w-full mx-auto bg-[white] shadow-sm min-h-[93vh]">
-      <h2 className="w-full text-[#066DCC] text-3xl lg:text-4xl font-semibold mt-4 printing-title border-b-4 border-[#066DCC] pb-2 md:pb-3">
+    <div className="configFile max-w-[1280px] px-[10px] lg:px-[20px] w-full mx-auto bg-[white] shadow-sm min-h-[93vh]">
+      <h2 className="w-full text-[#066DCC] text-2xl lg:text-3xl font-semibold mt-3 printing-title border-b-4 border-[#066DCC] pb-2 md:pb-3">
         CẤU HÌNH FILE IN
       </h2>
 
-      <div className="InfoPrinter text-[15px] md:text-[20px] font-semibold bg-[#f8f9fa] rounded-lg shadow-lg relative w-full px-[24px] mt-[20px] md:mt-[30px] flex flex-col lg:flex-row justify-between items-stretch py-[20px]">
+      <div className="InfoPrinter text-[16px] lg:text-[18px] font-semibold bg-[#f8f9fa] rounded-lg shadow-lg relative w-full px-[24px] mt-[20px] md:mt-[30px] flex flex-col lg:flex-row justify-between items-stretch py-[20px]">
         <div className="font-bold uppercase text-[18px] md:text-[20px]">
           Thông tin máy in
         </div>
@@ -88,7 +88,7 @@ const ConfigFile = () => {
         </div>
       </div>
 
-      <div className="UploadFile text-[15px] md:text-[20px] font-semibold bg-[#f8f9fa] rounded-lg shadow-lg relative w-full px-[24px] mt-[20px] md:mt-[30px] flex flex-col lg:flex-row justify-between items-stretch py-[20px]">
+      <div className="UploadFile text-[16px] lg:text-[18px] font-semibold bg-[#f8f9fa] rounded-lg shadow-lg relative w-full px-[24px] mt-[20px] md:mt-[30px] flex flex-col lg:flex-row justify-between items-stretch py-[20px]">
         <div className="font-bold uppercase text-[18px] md:text-[20px]">
           Tải tệp in
         </div>
@@ -170,7 +170,7 @@ const ConfigFile = () => {
         </div>
       </div>
 
-      <div className="CongifFile text-[15px] md:text-[20px] font-semibold bg-[#f8f9fa] rounded-lg shadow-lg relative w-full px-[24px] mt-[20px] md:mt-[30px] flex flex-col lg:flex-row justify-between items-stretch py-[20px]">
+      <div className="CongifFile text-[16px] lg:text-[18px] font-semibold bg-[#f8f9fa] rounded-lg shadow-lg relative w-full px-[24px] mt-[20px] md:mt-[30px] flex flex-col lg:flex-row justify-between items-stretch py-[20px]">
         <div className="font-bold uppercase text-[18px] md:text-[20px]">
           Cấu hình in
         </div>

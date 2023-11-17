@@ -21,7 +21,7 @@ const HomeNoLogin = () => {
     <div className="Home mb-5">
       <div id="slider" className="relative w-full min-h-[400px] ">
         <div className="slider__content absolute text-center text-[#0f6cbf] left-1/2 top-1/2">
-          <h1 className="slider__heading text-base text-[#2196f3] mb-1 md:text-3xl lg:text-4xl">
+          <h1 className="slider__heading text-base text-[#2196f3] mb-1 md:text-2xl lg:text-3xl">
             TRƯỜNG ĐẠI HỌC BÁCH KHOA - ĐHQG TP.HCM
           </h1>
           <p className="slider__desc text-xl font-semibold px-2.5 md:text-5xl lg:text-5xl md:mt-5">
@@ -29,7 +29,7 @@ const HomeNoLogin = () => {
           </p>
         </div>
       </div>
-      <div className=" bg-[white] shadow-sm mt-0 max-w-[1280px] mx-auto px-[10px] md:px-[32px] lg:px-[70px]">
+      <div className=" bg-[white] shadow-sm mt-0 max-w-[1280px] mx-auto px-[10px]   md:px-[20px]">
         <h2 className="w-full text-2xl md:text-3xl pb-2 lg:text-4xl text-center font-semibold text-[#367fa9] underline underline-offset-4 pt-[50px]">
           DỊCH VỤ CỦA CHÚNG TÔI
         </h2>
@@ -65,8 +65,8 @@ const HomeNoLogin = () => {
             </p>
           </div>
         </div>
-        <div className="max-w-[1280px] px-[10px] md:px-[32px] lg:px-[70px] mx-auto">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl text-center mt-[50  px] font-semibold text-[#367fa9] underline underline-offset-4 mb-8 mt-[50px]">
+        <div className="max-w-[1280px] px-[10px]   md:px-[20px] mx-auto">
+          <h2 className="text-2xl md:text-2xl lg:text-3xl text-center mt-[50  px] font-semibold text-[#367fa9] underline underline-offset-4 mb-8 mt-[50px]">
             ĐẶC ĐIỂM NỔI BẬT
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-8 md:px-16 text-[16px] md:text-[20px]">
@@ -111,7 +111,7 @@ const HomeNoLogin = () => {
         <div className="max-w-[1280px] px-0 md:px-[32px] lg:px-[70px] mx-auto mt-[50px] overflow-hidden">
           <div className="content-img mt-16 rounded-md overflow-hidden"></div>
         </div>
-        <div className="max-w-[1280px] px-[10px] md:px-[32px] lg:px-[70px] mx-auto">
+        <div className="max-w-[1280px] px-[10px]   md:px-[20px] mx-auto">
           <h2 className="text-2xl md:text-3xl w-[80%] mx-auto lg:text-4xl text-center font-semibold text-[#367fa9] underline underline-offset-4 mt-[50px] mb-8">
             VÌ SAO SINH VIÊN NÊN SỬ DỤNG SMART PRINTING SYSTEM CỦA NHÀ TRƯỜNG?
           </h2>

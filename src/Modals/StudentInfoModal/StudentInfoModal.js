@@ -74,13 +74,13 @@ function StudentInfoModal({ children }) {
                 </div>
               </div>
               <PagesPurchaseModal>
-                <button className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500 mb-2 mt-4 to-#3C8DBC w-full h-[45px] rounded-lg flex items-center justify-center text-white text-[16px] font-bold hover:bg-[#2c5d8d] hover:from-cyan-400 hover:to-[#345a96] transition-all duration-300">
+                <button className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500 mb-2 mt-4 to-#3C8DBC w-full h-[45px] rounded-md flex items-center justify-center text-white text-[16px] font-bold hover:bg-[#2c5d8d] hover:from-cyan-400 hover:to-[#345a96] transition-all duration-300">
                   MUA THÊM GIẤY
                 </button>
               </PagesPurchaseModal>
               <button
                 onClick={handleLogout}
-                className="bg-gradient-to-br from-[#999292]  outline-none to-[#B4AFAF] mt-3 w-full h-[45px] rounded-lg flex items-center justify-center text-white text-[16px] font-bold hover:from-[#888181] hover:to-[#A09D9D] transition-all duration-300"
+                className="bg-gradient-to-br from-[#999292]  outline-none to-[#B4AFAF] mt-3 w-full h-[45px] rounded-md flex items-center justify-center text-white text-[16px] font-bold hover:from-[#888181] hover:to-[#A09D9D] transition-all duration-300"
               >
                 ĐĂNG XUẤT
               </button>
@@ -99,7 +99,7 @@ function StudentInfoModal({ children }) {
               ></InfoField>
               <button
                 onClick={handleLogout}
-                className="bg-gradient-to-br from-[#999292]  outline-none to-[#B4AFAF] mt-3 w-full h-[45px] rounded-lg flex items-center justify-center text-white text-[16px] font-bold hover:from-[#888181] hover:to-[#A09D9D] transition-all duration-300"
+                className="bg-gradient-to-br from-[#999292] outline-none to-[#B4AFAF] mt-3 w-full h-[45px] rounded-md flex items-center justify-center text-white text-[16px] font-bold hover:from-[#888181] hover:to-[#A09D9D] transition-all duration-300"
               >
                 ĐĂNG XUẤT
               </button>

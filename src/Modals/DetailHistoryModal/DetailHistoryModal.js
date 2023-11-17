@@ -22,8 +22,8 @@ const DetailHistoryModal = ({ children }) => {
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
       <CenterModal open={openModal} handleClose={handleClose}>
-        <div className="container w-[350px] md:w-[500px] p-0 rounded-lg overflow-hidden shadow-lg border-[1px] border-[#367FA9]">
-          <div className="header bg-[#3C8DBC] text-white text-[22px] font-bold flex items-center justify-center h-[70px] w-full">
+        <div className="container w-[350px] md:w-[450px] p-0 rounded-lg overflow-hidden shadow-lg border-[1px] border-[#367FA9]">
+          <div className="header bg-[#3C8DBC] text-white text-[22px] font-bold flex items-center justify-center h-[60px] w-full">
             CHI TIẾT IN ẤN
           </div>
           <div className="p-2 flex items-center justify-center gap-y-2 flex-col py-4">

@@ -23,3 +23,5 @@ export { default as StudentInfoModal } from "./StudentInfoModal/StudentInfoModal
 export { default as FilterReportModalV2 } from "./FilterReportModalV2/FilterReportModalV2";
 
 export { default as DetailActivityModal } from "./DetailActivityModal/DetailActivityModal";
+
+export { default as FIlterManagePriterModal } from "./FIlterManagePriterModal/FIlterManagePriterModal";

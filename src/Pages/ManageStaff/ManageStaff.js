@@ -52,8 +52,8 @@ const ManageStaff = () => {
   }, []);
 
   return (
-    <div className="Manage History max-w-[1280px] px-[10px] md:px-[32px] lg:px-[70px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
-      <h2 className="text-3xl lg:text-4xl font-semibold mt-4 printing-title border-b-4 border-[#066DCC] pb-2 md:pb-3  text-[#066DCC] ">
+    <div className="Manage History max-w-[1280px] px-[10px] md:w-full lg:px-[20px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
+      <h2 className="text-2xl lg:text-3xl font-semibold mt-3 printing-title border-b-4 border-[#066DCC] pb-2 md:pb-3  text-[#066DCC] ">
         QUẢN LÝ MÁY IN
       </h2>
       <div className="flex flex-col-reverse md:flex-row mt-4 items-start justify-between ">
@@ -79,7 +79,7 @@ const ManageStaff = () => {
         </div>
       </div>
       <div className="w-full overflow-x-auto">
-        <div className="text-white flex flex-row justify-between items-center bg-[#3C8DBC] text-base lg:text-lg font-bold py-3 px-4 mt-8 rounded-sm w-[714px] md:w-full">
+        <div className="text-white flex flex-row justify-between items-center bg-[#3C8DBC] text-base lg:text-lg shadow-lg font-bold py-3 px-4 mt-8 rounded-sm min-w-[800px] md:w-full max-h-[60px]">
           <div className="  min-w-[10%]">ID MÁY IN</div>
           <div className="text-center min-w-[35%]">SỐ YÊU CẦU IN</div>
           <div className="text-center  min-w-[20%]">LỊCH SỬ IN</div>
