@@ -104,13 +104,13 @@ const Config = () => {
           <h2 className="text-xl lg:text-2xl text-[#1488DB] text-center font-semibold mt-4 border-b-4 border-[#1488DB] pb-2 md:pb-3 mb-2 md:mb-6">Quản lý Vật Liệu Học Tập và Cấp Phát Tài Liệu</h2>
             <div className="formInput flex flex-col">
               <label>{inputs[0].label}</label>
-              <div>
-                  <input placeholder={inputs[0].placeholder} onChange={onChange}/> 
+              <div className="w-[27%] ">
+                  <input placeholder={inputs[0].placeholder} className="inline" onChange={onChange}/> 
               </div>
               <span className="Err">{errorMessage}</span>
             </div>
 
-            <div className="formInput flex flex-col">
+            <div className="formInput flex flex-col float-left">
               <label>{inputs[1].label}</label>
               <div>
                   <input type="date" name="date" id="datepicker" required onChange={onChange}/> 
@@ -118,15 +118,15 @@ const Config = () => {
               <span className="Err">{errorMessage}</span>
             </div>
 
-            <div className="formInput flex flex-col">
+            <div className="formInput flex flex-col float-left">
               <label>{inputs[2].label}</label>
               <div>
                   <input type="date" name="date" id="datepicker" required onChange={onChange}/> 
               </div>
-              <span className="Err">{errorMessage}</span>
+              <span className="Err">{errorMessage}</span> 
             </div>
             
-            <div className="formInput flex flex-col">
+            <div className="formInput flex flex-col w-[100%]">
               <label>{inputs[3].label}</label>
               <div>
                   <input placeholder={inputs[3].placeholder} onChange={onChange}/> 
