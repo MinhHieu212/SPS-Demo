@@ -1,7 +1,7 @@
 import React from "react";
 import "./Activities.scss";
 import { ListIcon } from "../../Assets/Icons/Icons";
-import { DetailPrinterLogModal } from "../../Modals";
+import { DetailStudentLogModal } from "../../Modals";
 
 function ActivityItem({ activity }) {
   return (
@@ -18,13 +18,13 @@ function ActivityItem({ activity }) {
       <div className="text-center truncate overflow-clip  w-[15%]">
         {activity.classes}
       </div>
-      <div className=" w-[10%] text-center  truncate overflow-clip pl-3">
+      <div className=" w-[10%] text-center  truncate overflow-clip">
         {activity.history?.length || 12}
       </div>
       <div className=" flex justify-center w-[10%] truncate overflow-clip ">
-        <DetailPrinterLogModal activity={activity}>
+        <DetailStudentLogModal activity={activity}>
           <ListIcon></ListIcon>
-        </DetailPrinterLogModal>
+        </DetailStudentLogModal>
       </div>
     </div>
   );

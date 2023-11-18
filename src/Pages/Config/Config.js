@@ -100,7 +100,7 @@ const Config = () => {
       <div className="Form_quanlyvatlieu flex item-center justify-center bg-cover bg-center mx-auto my-10 border-[#066dcc] ">
         <form
           onSubmit={handleSubmit}
-          className="bg-[#ffffff] shadow-lg py-0 px-2 lg:px-[3.75rem] w-[330px] md:w-[570px]"
+          className="bg-[#ffffff] shadow-xl border-1 border-[#1488db70]  py-0 px-3 w-full md:w-[570px]"
         >
           <h2 className="text-xl lg:text-2xl text-[#1488DB] text-center font-semibold mt-4 border-b-2 border-[#1488DB] pb-2 md:pb-3 mb-2 md:mb-6">
             Quản lý Vật Liệu Học Tập và Cấp Phát Tài Liệu
@@ -183,10 +183,10 @@ const Config = () => {
         </form>
       </div>
 
-      <div className="Form_fileduocphep flex item-center justify-center bg-cover bg-center mx-auto mt-10">
+      <div className="Form_fileduocphep flex item-center justify-center  bg-cover bg-center mx-auto mt-10">
         <form
           onSubmit={handleSubmit}
-          className="bg-[#ffffff] shadow-lg py-0 px-2 lg:px-[3.75rem] w-[330px] md:w-[570px] h-[27rem]"
+          className="bg-[#ffffff] shadow-xl border-1 border-[#1488db70] py-0 px-3 w-full md:w-[570px] h-[27rem]"
         >
           <h2 className="text-xl lg:text-2xl text-[#1488DB] font-semibold mt-4 border-b-2 border-[#1488DB] pb-2 md:pb-3">
             Cấu hình các loại file được in

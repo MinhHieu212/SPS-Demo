@@ -163,13 +163,13 @@ const FilterHistoryModal = ({ children }) => {
 
               <div className="Buttoms flex mx-auto w-[90%] mt-auto items-center justify-end gap-3 pr-2">
                 <button
-                  className="bg-[#78A3AD] p-[10px] block rounded-md text-[15px] md:text-[18px]  w-[100px]  font-semibold text-white"
+                  className="bg-gradient-to-br from-[#ff7d7d]  outline-none to-[#b84949] p-[10px] block rounded-md text-[15px] md:text-[18px]  w-[100px]  font-semibold text-white"
                   onClick={cancelFilter}
                 >
                   Hủy
                 </button>
                 <button
-                  className="bg-[#066DCC] p-[10px]  block rounded-lg text-[15px] md:text-[18px] w-[100px] font-semibold text-white"
+                  className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500  p-[10px]  block rounded-lg text-[15px] md:text-[18px] w-[100px] font-semibold text-white"
                   onClick={applyFilter}
                 >
                   Áp dụng

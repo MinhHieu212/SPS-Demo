@@ -80,7 +80,7 @@ function StudentInfoModal({ children }) {
               </PagesPurchaseModal>
               <button
                 onClick={handleLogout}
-                className="bg-gradient-to-br from-[#999292]  outline-none to-[#B4AFAF] mt-3 w-full h-[45px] rounded-md flex items-center justify-center text-white text-[16px] font-bold hover:from-[#888181] hover:to-[#A09D9D] transition-all duration-300"
+                className="bg-gradient-to-br from-[#ff7d7d]  outline-none to-[#b84949] mt-3 w-full h-[45px] rounded-md flex items-center justify-center text-white text-[16px] font-bold hover:from-[#ae5d5d] hover:to-[#be4040] transition-all duration-300"
               >
                 ĐĂNG XUẤT
               </button>
@@ -99,7 +99,7 @@ function StudentInfoModal({ children }) {
               ></InfoField>
               <button
                 onClick={handleLogout}
-                className="bg-gradient-to-br from-[#999292] outline-none to-[#B4AFAF] mt-3 w-full h-[45px] rounded-md flex items-center justify-center text-white text-[16px] font-bold hover:from-[#888181] hover:to-[#A09D9D] transition-all duration-300"
+                className="bg-gradient-to-br from-[#ff7d7d] outline-none to-[#b84949] mt-3 w-full h-[45px] rounded-md flex items-center justify-center text-white text-[16px] font-bold hover:from-[#ae5d5d] hover:to-[#be4040] transition-all duration-300"
               >
                 ĐĂNG XUẤT
               </button>

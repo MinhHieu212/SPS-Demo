@@ -117,13 +117,13 @@ const FIlterManagePriterModal = ({ children }) => {
             </div>
             <div className=" w-[90%] mx-auto md:w-[48%] md:h-[150px] rounded-lg flex items-end justify-center gap-3">
               <button
-                className="bg-[#a1a1a1] shadow-md border-[1px] hover:opacity-80 border-[#367FA9] p-[10px] w-[40%] block rounded-md text-[15px] md:text-[18px] font-semibold text-white"
+                className="bg-gradient-to-br from-[#ff7d7d]  outline-none to-[#b84949]  shadow-md border-[1px] hover:opacity-80 border-[#367FA9] p-[10px] w-[40%] block rounded-md text-[15px] md:text-[18px] font-semibold text-white"
                 onClick={cancelFilter}
               >
                 Hủy
               </button>
               <button
-                className="bg-blue-400 shadow-md border-[1px] hover:opacity-80 border-[#367FA9] p-[10px] w-[40%] block rounded-md text-[15px] md:text-[18px] font-semibold text-white"
+                className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500  shadow-md border-[1px] hover:opacity-80 border-[#367FA9] p-[10px] w-[40%] block rounded-md text-[15px] md:text-[18px] font-semibold text-white"
                 onClick={applyFilter}
               >
                 Áp dụng

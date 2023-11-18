@@ -7,7 +7,7 @@ const SPSOEditPrinterModal = ({ children }) => {
     setOpenModal(false);
   };
 
-  const [tabActivated, setTabActivated] = useState(0);
+  const [tabActivated, setTabActivated] = useState(1);
   const info = {
     id: "12345",
     brand: "Canon",
@@ -152,7 +152,7 @@ const SPSOEditPrinterModal = ({ children }) => {
                   </div>
                   <button
                     onClick={handleSubmit}
-                    className="ml-auto bg-[#1488db]  p-2 w-[154px] rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center"
+                    className="ml-auto bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500 hover:bg-blue-300 p-2 w-[154px] rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center"
                   >
                     Hoàn tất
                   </button>
@@ -202,7 +202,7 @@ const SPSOEditPrinterModal = ({ children }) => {
                 </p>
               </div>
               <div className="flex flex-row justify-end mt-[90px]">
-                <button className="bg-[#ff2121]  p-2 w-[154px] rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center">
+                <button className="bg-gradient-to-br from-[#ff7d7d]  outline-none to-[#b84949]  p-2 w-[154px] rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center">
                   Xóa máy in
                 </button>
               </div>

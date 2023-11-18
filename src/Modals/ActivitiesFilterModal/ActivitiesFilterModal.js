@@ -34,7 +34,7 @@ const ActivitiesFilterModal = ({ children }) => {
           <div className="flex items-end justify-center gap-3 md:flex-row flex-col">
             <div className="bg-white w-[90%] md:w-[48%] h-[140px] md:h-[150px] mx-auto rounded-md flex-col flex items-center shadow-md border-[1px] border-[#367FA9]">
               <div className="text-[#1488DB] uppercase  border-b-[3px] border-black h-[40px] flex items-center justify-center font-bold w-full my-2 text-[18px]">
-                Hiện thị tên theo
+                Hiển thị tên theo
               </div>
               <div
                 className={`${
@@ -55,7 +55,7 @@ const ActivitiesFilterModal = ({ children }) => {
             </div>
             <div className="bg-white w-[90%] md:w-[48%] h-[140px] md:h-[150px] mx-auto rounded-md flex-col flex items-center shadow-md border-[1px] border-[#367FA9]">
               <div className="text-[#1488DB] uppercase border-b-[3px] border-black h-[40px] flex items-center  justify-center font-bold w-full my-2 text-[18px]">
-                Hiện thị số lần in
+                Hiển thị số lần in
               </div>
               <div
                 className={`${
@@ -77,13 +77,13 @@ const ActivitiesFilterModal = ({ children }) => {
           </div>
           <div className=" w-[100%] mx-auto  md:h-[50px] rounded-lg flex items-end mt-3 justify-end gap-3">
             <button
-              className="bg-[#a1a1a1] shadow-md border-[1px] hover:opacity-80 border-[#367FA9] p-[10px] w-[35%] md:w-[20%] block rounded-md text-[15px] md:text-[18px] font-semibold text-white"
+              className="bg-gradient-to-br from-[#ff7d7d] outline-none to-[#b84949] shadow-md border-[1px] hover:opacity-80 border-[#367FA9] p-[10px] w-[35%] md:w-[20%] block rounded-md text-[15px] md:text-[18px] font-semibold text-white"
               onClick={cancelFilter}
             >
               Hủy
             </button>
             <button
-              className="bg-blue-400   shadow-md border-[1px] hover:opacity-80 border-[#367FA9] p-[10px] w-[35%] md:w-[20%] block rounded-md text-[15px] md:text-[18px] font-semibold text-white"
+              className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500 shadow-md border-[1px] hover:opacity-80 border-[#367FA9] p-[10px] w-[35%] md:w-[20%] block rounded-md text-[15px] md:text-[18px] font-semibold text-white"
               onClick={applyFilter}
             >
               Áp dụng

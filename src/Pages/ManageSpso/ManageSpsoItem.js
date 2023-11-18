@@ -10,7 +10,7 @@ function ManageSpsoItem(props) {
       <div className=" w-[25%] flex flex-row justify-center items-center gap-4">
         <span>{props.queue}</span>
         <PrinterQueueModal>
-          <button class="bg-[#d9d9d9] block hover:bg-gray-400 text-gray-800 font-semibold py-1 px-3 rounded-sm">
+          <button className="middle none center mr-4 rounded-md bg-[#3C8DBC] text-[14px] lg:text-[16px] py-1 px-3 font-sans   font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
             Chi tiết
           </button>
         </PrinterQueueModal>
@@ -25,8 +25,8 @@ function ManageSpsoItem(props) {
         </p>
         <div className="overflow-hidden px-1">
           <SPSOEditPrinterModal>
-            <button class="bg-[#d9d9d9] hover:bg-gray-500 text-gray-800 font-semibold py-1 px-2  rounded-sm w-full">
-              Tùy chỉnh
+            <button className="middle none center mr-4 rounded-md bg-[#3C8DBC] text-[14px] lg:text-[16px] py-1 px-3 font-sans font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+              Cấu hình
             </button>
           </SPSOEditPrinterModal>
         </div>
