@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import CenterModal from "./CenterModal";
-import "./BuyPagesModal.scss";
+import CenterModal from "../BaseModals/CenterModal";
+import "./PagesPurchaseModal.scss";
+import { useNavigate } from "react-router-dom";
 
-const BuyPagesModal = ({ children }) => {
+const PagesPurchaseModal = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
+  const navigate = useNavigate();
 
   const handleClose = () => {
     setOpenModal(false);
@@ -32,18 +34,21 @@ const BuyPagesModal = ({ children }) => {
 
   const handleAccept = () => {
     console.log(value);
+    setTimeout(() => {
+      navigate("/Bkpay");
+    }, 1000);
   };
 
   return (
     <>
-      <div onClick={() => setOpenModal(true)}> {children}</div>
+      <div onClick={() => setOpenModal(true)}> {children} </div>
       <CenterModal open={openModal} handleClose={handleClose}>
-        <div className="containerModal w-[380px] md:w-[600px] mx-auto overflow-hidden rounded-lg bg-white">
-          <div className="Title text-[24px] text-white pt-2 font-bold text-center border-b-2 border-gray-400  pb-2 bg-[#3C8DBC]">
+        <div className="containerModal w-[380px] md:w-[450px] mx-auto overflow-hidden rounded-lg bg-white border-[1px] border-[#367FA9]">
+          <div className="Title  md:text-[20px] text-white pt-2 font-bold text-center border-b-2 border-gray-400  pb-2 bg-[#3C8DBC]">
             Bạn muốn mua thêm giấy in?
             <p className="text-[16px] ">Chọn số lượng tờ A4 bạn muốn mua</p>
           </div>
-          <div className="flex gap-3 items-center justify-center my-3 border-b-2 border-gray-400 pb-2 pt-4">
+          <div className="flex gap-3 items-center justify-center border-b-2 border-gray-400 ">
             <button
               className="p-2 outline-none border-2 border-gray-500 rounded-lg"
               onClick={decrementValue}
@@ -58,9 +63,9 @@ const BuyPagesModal = ({ children }) => {
                 <path
                   d="M4.1665 10H15.8332"
                   stroke="#344054"
-                  stroke-width="1.66667"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.66667"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </button>
@@ -84,42 +89,42 @@ const BuyPagesModal = ({ children }) => {
                 <path
                   d="M9.99984 4.1665V15.8332M4.1665 9.99984H15.8332"
                   stroke="#344054"
-                  stroke-width="1.66667"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.66667"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </button>
           </div>
-          <div className="text-center">
+          <div className="text-center mt-2">
             <div className="mb-2 flex justify-between px-10">
-              <span className="text-[#066DCC] text-[20px] font-bold mr-3">
+              <span className="text-[#066DCC] text-[18px] font-bold mr-3">
                 Giá mỗi tờ:
               </span>
-              <span className="text-[20px] font-semibold leading-7">
+              <span className="text-[18px] font-semibold leading-7">
                 1000 VNĐ
               </span>
             </div>
           </div>
           <div className="text-center">
             <div className="mb-2 flex justify-between px-10">
-              <span className="text-[#066DCC] text-[20px] font-bold mr-3">
+              <span className="text-[#066DCC] text-[18px] font-bold mr-3">
                 Thành tiền:
               </span>
-              <span className="text-[20px] font-semibold leading-7">
+              <span className="text-[18px] font-semibold leading-7">
                 {`${value * 1000}  VNĐ`}
               </span>
             </div>
           </div>
-          <div className="flex items-center gap-3 justify-center w-full py-3">
+          <div className="flex items-center gap-3 justify-center w-full py-2 mb-3">
             <button
-              className="bg-[#B4AFAF] p-3 w-[40%] block rounded-lg text-[16px] font-semibold text-white"
+              className="bg-gradient-to-br from-[#ff7d7d]  outline-none to-[#b84949] py-[12px] w-[40%] block rounded-lg text-[16px] font-semibold text-white"
               onClick={handleClose}
             >
               Hủy bỏ
             </button>
             <button
-              className="bg-[#1488DB] p-3 w-[40%] block rounded-lg text-[16px] font-semibold text-white"
+              className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500  py-[12px] w-[40%] block rounded-lg text-[16px] font-semibold text-white "
               onClick={handleAccept}
             >
               Xác nhận
@@ -131,4 +136,4 @@ const BuyPagesModal = ({ children }) => {
   );
 };
 
-export default BuyPagesModal;
+export default PagesPurchaseModal;

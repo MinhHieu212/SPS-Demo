@@ -1,39 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Test.scss";
-import PrintingLogInfoModal from "../../Modals/PrintingLogInfoModal";
-import ConfirmCancelModal from "../../Modals/ConfirmCancelModal";
-import ConfirmPrintingModal from "../../Modals/ConfirmPrintingModal";
-import PrinterFilterModal from "../../Modals/PrinterFilterModal";
-import PrintingLogFilterModal from "../../Modals/PrintingLogFilterModal";
+import { ActivitiesFilterModal, FilterPrinterModal } from "../../Modals";
+import AddPrinterModal from "../../Modals/AddPrinterModal/AddPrinterModal";
 
 const TestModalPopover = () => {
+  const handle = (e) => {
+    console.log(e.target.files);
+  };
+
+  const [files, setFiles] = useState(null);
+
+  const handleFileChange = (e) => {
+    const newFiles = Array.from(e.target.files).map((file, index) => {
+      return {
+        file: file,
+        quantity: 0,
+        pageType: "",
+        color: "",
+        direct: "",
+        typePrint: "",
+      };
+    });
+
+    setFiles((prevFiles) =>
+      Array.isArray(prevFiles) ? [...prevFiles, ...newFiles] : newFiles
+    );
+  };
+  console.log(files);
+  const removeFile = (fileName) => {
+    setFiles((prevFiles) =>
+      prevFiles.filter((file) => file.file.name !== fileName)
+    );
+  };
+
   return (
-    <div className="flex gap-4 items-center justify-center mt-10 w-full flex-wrap">
-      <PrintingLogInfoModal>
+    <div
+      className="flex flex-col gap-4 items-center justify-center mt-10 max-w-[170px] mx-auto
+      flex-wrap"
+    >
+      <AddPrinterModal>
         <button className="bg-blue-400 rounded-lg text-white uppercase font-semibold p-4">
-          Modal Printing Log
+          Modal Click Me
         </button>
-      </PrintingLogInfoModal>
-      <ConfirmPrintingModal>
-        <button className="bg-blue-400 rounded-lg text-white uppercase font-semibold p-4">
-          Confirm Printing Modal
-        </button>
-      </ConfirmPrintingModal>
-      <ConfirmCancelModal>
-        <button className="bg-blue-400 rounded-lg text-white uppercase font-semibold p-4">
-          Modal Confirm
-        </button>
-      </ConfirmCancelModal>
-      <PrinterFilterModal>
-        <button className="bg-blue-400 rounded-lg text-white uppercase font-semibold p-4  ">
-          Filter Printer
-        </button>
-      </PrinterFilterModal>
-      <PrintingLogFilterModal>
-        <button className="bg-blue-400 rounded-lg text-white uppercase font-semibold p-4">
-          Filter Printing Log
-        </button>
-      </PrintingLogFilterModal>
+      </AddPrinterModal>
     </div>
   );
 };

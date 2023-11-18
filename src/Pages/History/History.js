@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./History.scss";
 import HistoryItem from "./HistoryItem";
 import { FilterIcon, SearchIcon } from "../../Assets/Icons/Icons";
-import PrintingLogFilterModal from "../../Modals/PrintingLogFilterModal";
+import { FilterHistoryModal } from "../../Modals";
+import { useNavigate } from "react-router-dom";
 
 const files = [
   {
@@ -24,7 +25,7 @@ const files = [
     printerId: "2113620",
     position: "CS1, B3, 201",
     date: "02-12-2021",
-    status: "Đã xong",
+    status: "Đang in",
   },
   {
     fileName: "tangaidaicuong.pdf",
@@ -38,6 +39,48 @@ const files = [
     printerId: "2113619",
     position: "CS2, H6, 304",
     date: "12-03-2020",
+    status: "Đã xong",
+  },
+  {
+    fileName: "sucbenvatlieu.pdf",
+    printerId: "2113620",
+    position: "CS1, B3, 201",
+    date: "27-09-2020",
+    status: "Đã xong",
+  },
+  {
+    fileName: "sucbenvatlieu.pdf",
+    printerId: "2113620",
+    position: "CS1, B3, 201",
+    date: "27-09-2020",
+    status: "Đã xong",
+  },
+  {
+    fileName: "sucbenvatlieu.pdf",
+    printerId: "2113620",
+    position: "CS1, B3, 201",
+    date: "27-09-2020",
+    status: "Đã xong",
+  },
+  {
+    fileName: "sucbenvatlieu.pdf",
+    printerId: "2113620",
+    position: "CS1, B3, 201",
+    date: "27-09-2020",
+    status: "Đã xong",
+  },
+  {
+    fileName: "sucbenvatlieu.pdf",
+    printerId: "2113620",
+    position: "CS1, B3, 201",
+    date: "27-09-2020",
+    status: "Đã xong",
+  },
+  {
+    fileName: "sucbenvatlieu.pdf",
+    printerId: "2113620",
+    position: "CS1, B3, 201",
+    date: "27-09-2020",
     status: "Đã xong",
   },
   {
@@ -63,29 +106,44 @@ const files = [
   },
 ];
 const History = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("accessToken") === null) {
+      navigate("/Error");
+    }
+  }, []);
   return (
-    <div className="History max-w-[1280px]">
-      <h2 className="text-3xl lg:text-4xl font-semibold mt-4 printing-title border-b-4 border-black pb-2 md:pb-3">
-        LỊCH SỬ IN ẤN
+    <div className="History max-w-[1280px] w-full px-[10px] lg:px-[20px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
+      <h2 className="text-2xl lg:text-3xl font-semibold mt-3 printing-title border-b-4 border-[#066DCC] pb-2 md:pb-3 text-[#066DCC] ">
+        LỊCH SỬ HOẠT ĐỘNG
       </h2>
-      <div className="flex flex-col md:flex-row mt-4 wrapper">
-        <div className="w-full md:w-1/2 relative">
-          <div className="bg-[#3C8DBC] text-white text-center text-xl font-bold rounded-lg title-wrapper">
+      <div className="flex flex-col md:flex-row mt-3 wrapper items-center">
+        <div className="w-full md:w-[40%] rounded-md overflow-hidden relative shadow-lg">
+          <div className="bg-[#3C8DBC] text-white text-center text-[16px] lg:text-[18px font-bold title-wrapper">
             TỔNG SỐ TRANG ĐÃ IN
           </div>
-          <div className="bg-white flex flex-row text-base font-bold rounded-lg mt-2 content-wrapper">
-            <div className="w-1/2 flex flex-col justify-evenly items-center">
-              <p className="text-xl">Size A4</p>
-              <p className="text-xl">300</p>
+
+          <div className="bg-white flex flex-row text-[16px] lg:text-[18px] font-bold ">
+            <div className="w-1/2 py-3 text-center">
+              <span className="text-[16px] lg:text-[18px] text-[#3C8DBC] mr-2">
+                Size A4:
+              </span>
+              <span text-center className="text-[16px] lg:text-[18px]">
+                300
+              </span>
             </div>
-            <div className="w-1/2 flex flex-col justify-evenly items-center">
-              <p className="text-xl">Size A3</p>
-              <p className="text-xl">300</p>
+
+            <div className="w-1/2  py-3 text-center">
+              <span className="text-[16px] lg:text-[18px] text-[#3C8DBC] mr-2">
+                Size A3:
+              </span>
+              <span className="text-[16px] lg:text-[18px]">300</span>
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-full md:w-1/2 gap-4 mt-3">
-          <div className="w-full  border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white">
+
+        <div className="flex flex-col w-full md:w-[60%] gap-2 mt-3 md:mt-0">
+          <div className="w-full border h-[50px] border-black rounded-md flex items-center justify-between pr-3 bg-white">
             <input
               type="text"
               placeholder="Tìm theo ID máy in"
@@ -93,32 +151,33 @@ const History = () => {
             />
             <SearchIcon></SearchIcon>
           </div>
-          <div className="w-full ">
-            <PrintingLogFilterModal>
-              <div className="w-full cursor-pointer border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white">
+          <div className="w-full">
+            <FilterHistoryModal>
+              <div className="w-full cursor-pointer border h-[50px] border-black rounded-md flex items-center justify-between pr-3 bg-white">
                 <span className="mx-3 text-[gray]">Lọc kết quả</span>
                 <FilterIcon></FilterIcon>
               </div>
-            </PrintingLogFilterModal>
+            </FilterHistoryModal>
           </div>
         </div>
       </div>
       <div className="w-full overflow-x-auto">
-        <div className="flex flex-row justify-between items-center bg-[#3C8DBC] text-sm md:text-base lg:text-lg font-bold py-3 px-4 mt-8 rounded-md print-section">
-          <div>TÊN FILE</div>
-          <div>ID MÁY IN</div>
-          <div>VỊ TRÍ</div>
-          <div>NGÀY IN</div>
-          <div>TRẠNG THÁI</div>
-          <div>TÙY CHỌN</div>
+        <div className=" min-w-[800px] md:w-full max-h-[60px] text-white flex flex-row justify-between items-center bg-[#3C8DBC]  text-[16px] lg:text-[18px] lg:text-lg font-bold py-3 px-4 mt-8 rounded-sm">
+          <div className="w-[25%]">TÊN FILE</div>
+          <div className="text-center w-[15%]">ID MÁY IN</div>
+          <div className="text-center w-[15%]">VỊ TRÍ</div>
+          <div className="text-center w-[15%]">NGÀY IN</div>
+          <div className="text-center w-[15%]">TRẠNG THÁI</div>
+          <div className="text-center w-[15%]">TÙY CHỌN</div>
         </div>
-        {files.map((file) => (
+        {files.map((file, index) => (
           <HistoryItem
             fileName={file.fileName}
             printerId={file.printerId}
             position={file.position}
             date={file.date}
             status={file.status}
+            key={index}
           />
         ))}
       </div>

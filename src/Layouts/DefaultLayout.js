@@ -2,13 +2,14 @@ import Header from "../Components/Header/Header";
 import SideBar from "../Components/Sidebar/SideBar";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
-
 import React from "react";
+import { useNavigate } from "react-router";
 
-const DefaultLayout = ({ children }) => {
-  // State for Sidebar
+const DefaultLayout = ({ children, role }) => {
   const elementRef = useRef();
+  const navigate = useNavigate();
   const [showSideBar, setshowSideBar] = useState(false);
+  const [PaddingLeft, setPaddingLeft] = useState("pl-[66px]");
 
   const handleOnClickOut = (e) => {
     if (
@@ -17,35 +18,29 @@ const DefaultLayout = ({ children }) => {
       !e.target.matches("#Header_MenuIcon") &&
       !e.target.matches("svg") &&
       !e.target.matches("path") &&
-      window.innerWidth <= 849
+      window.innerWidth <= 1280
     ) {
       setshowSideBar(false);
     }
   };
 
   useEffect(() => {
-    // Show/hide SideBar when the App is opened ([desktop] != [tablet & phone])
-    if (window.innerWidth >= 849) {
+    if (window.innerWidth > 1280) {
       setshowSideBar(true);
     } else {
       setshowSideBar(false);
     }
-    // Hide the Sidebar when we click out and the content is overlay
+
     document.addEventListener("click", handleOnClickOut);
     return () => {
       document.removeEventListener("click", handleOnClickOut);
     };
   }, []);
 
-  // The state for the layout
-  const [marginLeft, setMarginLeft] = useState("ml-[66px]");
-
-  // Overlay on Tablet & Phone when show the Sidebar
-  // Handle new layout on Desktop when show the Sidebar
   useEffect(() => {
-    setMarginLeft("ml-[66px]");
-    if (window.innerWidth >= 849 && showSideBar) {
-      setMarginLeft("ml-[250px]");
+    setPaddingLeft("pl-[66px]");
+    if (window.innerWidth > 1280 && showSideBar) {
+      setPaddingLeft("pl-[250px]");
     }
   }, [showSideBar]);
 
@@ -55,9 +50,11 @@ const DefaultLayout = ({ children }) => {
         showSideBar={showSideBar}
         setShowSideBar={setshowSideBar}
       ></Header>
-      <div className="w-full flex mt-[66px]">
+      <div className="w-full flex mt-[66px] md:mt-[55px] relative">
         <SideBar showSideBar={showSideBar} elementRef={elementRef}></SideBar>
-        <div className={`Main_Container ${marginLeft} w-full`}>{children}</div>
+        <div className={`Main_Container ${PaddingLeft} w-full bg-[#f8f9fa]`}>
+          {children}
+        </div>
       </div>
     </div>
   );

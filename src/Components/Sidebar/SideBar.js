@@ -7,18 +7,17 @@ import {
   SPSOSideBarOption,
   StaffSideBarOption,
 } from "./SidebarItemList";
+import { useRole } from "../../Contexts/RoleContext";
 
 const SideBar = ({ showSideBar, elementRef }) => {
-  let [userPosition, setUserPosition] = useState("SPSO");
-  let [userSideBar, setUserSideBar] = useState(StudentSideBarOption);
+  const roleContext = useRole();
+  const [userSideBar, setUserSideBar] = useState(StudentSideBarOption);
 
-  //Configure the SideBar according to permissions
   useEffect(() => {
-    setUserPosition("Student");
-    if (userPosition === "SPSO") setUserSideBar(SPSOSideBarOption);
-    else if (userPosition === "Staff") setUserSideBar(StaffSideBarOption);
+    if (roleContext.role === "spso") setUserSideBar(SPSOSideBarOption);
+    else if (roleContext.role === "staff") setUserSideBar(StaffSideBarOption);
     else setUserSideBar(StudentSideBarOption);
-  }, [userPosition]);
+  }, [roleContext.role]);
 
   return (
     <div
@@ -27,7 +26,7 @@ const SideBar = ({ showSideBar, elementRef }) => {
       ref={elementRef}
     >
       {/* Short infomation of Student */}
-      <StudentInfo name={""} major={""}></StudentInfo>
+      <StudentInfo></StudentInfo>
 
       {/* Sidebar Item (Pages) */}
       <nav className="flex flex-col gap-y-3">

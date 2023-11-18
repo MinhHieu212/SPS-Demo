@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import { useUserInfo } from "../../Contexts/UserInfoContext";
 
-const StudentInfo = ({
-  name = "Nguyễn Văn A",
-  major = "Khoa khoa học và kĩ thuật máy tính",
-}) => {
+const StudentInfo = () => {
+  const userInfoContext = useUserInfo();
+  const [userInformation, setUserInformation] = useState(userInfoContext.info);
+
   return (
-    <div className="mt-3 w-[236px] flex flex-col items-start justify-between gap-y-1 ">
+    <div className="mt-3 w-[236px] mb-2 flex flex-col items-start justify-between gap-y-1 pl-2 ">
       <div className="flex w-full justify-between items-center">
-        <div className=" text-white font-semibold capitalize">
-          {name || "Nguyễn Văn Anh Khoa"}
+        <div className=" text-white font-semibold capitalize text-start w-[80%]">
+          {userInformation?.firstName + " " + userInformation?.lastName ||
+            "... ..."}
         </div>
         <div className="border border-gray-300 mr-[6px] h-11 w-11 rounded-full overflow-hidden">
           <img
@@ -18,8 +20,8 @@ const StudentInfo = ({
           />
         </div>
       </div>
-      <div className=" text-white text-[10px] w-[175px] capitalize">
-        {major || "Sinh viên trường đại học Bách Khoa thành phố HCM"}
+      <div className=" text-white text-[10px] w-[100%] pr-[60px] truncate overflow-clip capitalize">
+        {userInformation?.major || "..."}
       </div>
     </div>
   );

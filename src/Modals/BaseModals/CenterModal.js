@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDom from "react-dom";
-import { CloseModalIcon } from "../Assets/Icons/Icons";
+import { CloseModalIcon } from "../../Assets/Icons/Icons";
 
 const CenterModal = ({ open = false, handleClose = () => {}, children }) => {
   if (document.querySelector("body") === "undefined") {
@@ -20,7 +20,7 @@ const CenterModal = ({ open = false, handleClose = () => {}, children }) => {
       ></div>
       <div className="content relative w-[auto] h-[auto] z-10 bg-white rounded-lg overflow-hidden">
         <span
-          className="absolute right-2 top-2 p-2 flex items-center justify-center rounded-full z-10"
+          className="absolute right-2 top-2 p-2 md:flex items-center justify-center rounded-full z-10 hidden"
           onClick={handleClose}
         >
           <CloseModalIcon></CloseModalIcon>

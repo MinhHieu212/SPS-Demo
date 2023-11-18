@@ -1,18 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { HcmutLogo, ErrorIcon } from "../../Assets/Icons/Icons";
 import { useNavigate } from "react-router-dom";
 import "./Login.scss";
+import { LoginAPI } from "../../APIs/LoginAPI/LoginAPI";
+import { UserInfoAPI } from "../../APIs/UserInfoAPI/UserInfoAPI";
+import { useRole } from "../../Contexts/RoleContext";
+import { useUserInfo } from "../../Contexts/UserInfoContext";
 
 const Login = () => {
-  const schema = yup.object().shape({
-    TenTaiKhoan: yup.string().required("Tên tài khoản là bắt buộc"),
-    MatKhau: yup.string().required("Mật khẩu là bắt buộc"),
-  });
-
+  const roleContext = useRole();
+  const userInfoContext = useUserInfo();
   const navigate = useNavigate();
+
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+
+  const schema = yup.object().shape({
+    email: yup.string().required("Tên tài khoản là bắt buộc"),
+    password: yup.string().required("Mật khẩu là bắt buộc"),
+  });
 
   const {
     reset,
@@ -23,22 +32,44 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    setTimeout(() => {
+  const [loginStatus, setLoginStatus] = useState(null);
+
+  const onSubmit = async (data) => {
+    const response = await LoginAPI(data);
+
+    const userInformation = await UserInfoAPI();
+
+    console.log("Responce from Login API ", response);
+    console.log(
+      "Responce from User Information API (Role)",
+      userInformation?.data?.data?.role
+    );
+    console.log(
+      "Responce from User Information API",
+      userInformation?.data?.data
+    );
+
+    await roleContext.updateRole(userInformation?.data?.data?.role);
+
+    await userInfoContext.updateUserInfo(userInformation?.data?.data);
+
+    if (response?.status === 200) {
       if (!Object.keys(errors).length) {
         navigate("/Home");
       }
-    }, 1500);
+    } else {
+      setLoginStatus(response?.response?.data?.message);
+    }
   };
 
   const handleReset = () => {
     reset();
+    setLoginStatus(null);
   };
 
   return (
     <>
-      <div className="Wrapperlogin w-[85%] bg-white mx-auto mt-2">
+      <div className="Wrapperlogin w-[85%] bg-white mx-auto mt-2 shadow-sm">
         <div className="Title w-full h-[70px] bg-[#210F7A] flex items-center pl-[5px]">
           <HcmutLogo></HcmutLogo>
           <div className="text-white font-bold text-[26px] ml-[24px] tracking-widest">
@@ -47,47 +78,49 @@ const Login = () => {
         </div>
         <div className="flex items-start wrapperBox">
           <div className="formContainer ml-[10px] my-[10px] bg-[#eeeeee] w-[420px] p-[20px]">
-            {Object.keys(errors).length > 0 && (
-              <div className="w-full py-3 rounded-lg bg-[#ffeedd] text-[#bb0000] border border-red-400 text-center flex gap-2 items-center pl-4">
-                <ErrorIcon></ErrorIcon>
-                <div className="pl-3">
-                  <p> {errors?.TenTaiKhoan?.message}</p>
-                  <p> {errors?.MatKhau?.message}</p>
+            {Object.keys(errors).length > 0 ||
+              (loginStatus !== null && (
+                <div className="w-full py-3 rounded-lg bg-[#ffeedd] text-[#bb0000] border border-red-400 text-center flex gap-2 items-center pl-4">
+                  <ErrorIcon></ErrorIcon>
+                  <div className="pl-3">
+                    <p> {errors?.email?.message}</p>
+                    <p> {errors?.password?.message}</p>
+                    <p> {loginStatus} </p>
+                  </div>
                 </div>
-              </div>
-            )}
+              ))}
             <div className="font-bold text-[#990033] text-[18px] border-b-2 border-[#990033] tracking-widest">
               Nhập thông tin tài khoản của bạn
             </div>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mt-[10px]">
                 <label
-                  htmlFor="TenTaiKhoan"
-                  className="block font-semibold text-[#777777]"
+                  htmlFor="email"
+                  className="block font-semibold text-[#777777] text-[16px]"
                 >
                   Tên tài khoản
                 </label>
                 <input
-                  {...register("TenTaiKhoan")}
-                  name="TenTaiKhoan"
-                  id="TenTaiKhoan"
+                  {...register("email")}
+                  name="email"
+                  id="email"
                   type="text"
-                  className="h-[30px] w-[314px] px-2 outline-none border border-[#dddddd] bg-[#ffffdd] rounded-[3px]"
+                  className="h-[30px] w-[314px] px-2 outline-none border border-[#dddddd] text-[16px] bg-[#ffffdd] rounded-[3px]"
                 />
               </div>
               <div className="mt-[10px]">
                 <label
-                  htmlFor="MatKhau"
-                  className="block font-semibold text-[#777777]"
+                  htmlFor="password"
+                  className="block font-semibold text-[16px] text-[#777777]"
                 >
                   Mật khẩu
                 </label>
                 <input
-                  {...register("MatKhau")}
-                  name="MatKhau"
-                  id="MatKhau"
+                  {...register("password")}
+                  name="password"
+                  id="password"
                   type="password"
-                  className="h-[30px] w-[314px] px-2 outline-none border border-[#dddddd] bg-[#ffffdd] rounded-[3px]"
+                  className="h-[30px] w-[314px] px-2 outline-none border border-[#dddddd] text-[16px] bg-[#ffffdd] rounded-[3px]"
                 />
               </div>
               <div className="mt-[10px] flex items-start border-b-2 border-[#990033] pb-[10px]">
