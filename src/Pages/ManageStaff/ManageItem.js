@@ -14,14 +14,14 @@ function ManageItem(props) {
       <div className="min-w-[35%] flex flex-row   items-center justify-center gap-4 px-5">
         <p>{props.queue}</p>
         <PrinterQueueModal>
-          <button class="bg-[#d7d7d7] hover:bg-gray-400 text-gray-800 font-bold py-1 px-2 rounded-sm">
+          <button className="middle none center mr-4 rounded-md bg-[#3C8DBC] text-[14px] lg:text-[16px] py-1 px-3 font-sans   font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
             Chi tiết
           </button>
         </PrinterQueueModal>
       </div>
       <div className="min-w-[20%] flex justify-center items-center">
         <DetailPrinterLogModal>
-          <button class="bg-[#d7d7d7] hover:bg-gray-400 text-gray-800 font-bold py-1 px-2 rounded-sm">
+          <button className="middle none center mr-4 rounded-md bg-[#3C8DBC] text-[14px] lg:text-[16px] py-1 px-3 font-sans   font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
             Lịch sử
           </button>
         </DetailPrinterLogModal>
@@ -29,7 +29,7 @@ function ManageItem(props) {
       <div className="min-w-[30%] flex items-center justify-between p-0 md:p-3">
         {props.status}
         <PrinterInfoAndConfigModal>
-          <button class="bg-[#d7d7d7] hover:bg-gray-400 text-gray-800 font-bold py-1 px-2 rounded-sm">
+          <button className="middle none center mr-4 rounded-md bg-[#3C8DBC] text-[14px] lg:text-[16px] py-1 px-3 font-sans   font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
             Tùy chỉnh
           </button>
         </PrinterInfoAndConfigModal>

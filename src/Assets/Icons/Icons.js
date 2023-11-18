@@ -531,7 +531,7 @@ export const InfoIcon = () => (
     width="24"
     height="24"
     viewBox="0 0 24 24"
-    fill="none"
+    fill="gray"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
@@ -568,113 +568,79 @@ export const BinIcon = () => (
   >
     <path
       d="M1.21429 19.5556C1.21429 20.9 2.30714 22 3.64286 22H13.3571C14.6929 22 15.7857 20.9 15.7857 19.5556V4.88889H1.21429V19.5556ZM4.20143 10.8533L5.91357 9.13L8.5 11.7211L11.0743 9.13L12.7864 10.8533L10.2121 13.4444L12.7864 16.0356L11.0743 17.7589L8.5 15.1678L5.92571 17.7589L4.21357 16.0356L6.78786 13.4444L4.20143 10.8533ZM12.75 1.22222L11.5357 0H5.46429L4.25 1.22222H0V3.66667H17V1.22222H12.75Z"
-      fill="#A00000"
+      fill="red"
     />
   </svg>
 );
 
 export const ListIcon = () => (
-  <svg
-    width="25"
-    height="25"
-    viewBox="0 0 30 30"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M10 7.5H26.25"
-      stroke="black"
-      strokeWidth="3"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M10 15H26.25"
-      stroke="black"
-      strokeWidth="3"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M10 22.5H26.25"
-      stroke="black"
-      strokeWidth="3"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M3.75 7.5H3.7625"
-      stroke="black"
-      strokeWidth="3"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M3.75 15H3.7625"
-      stroke="black"
-      strokeWidth="3"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M3.75 22.5H3.7625"
-      stroke="black"
-      strokeWidth="3"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
+  <div className="cursor-pointer">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M21 11.11V5C21 4.46957 20.7893 3.96086 20.4142 3.58579C20.0391 3.21071 19.5304 3 19 3H14.82C14.4 1.84 13.3 1 12 1C10.7 1 9.6 1.84 9.18 3H5C3.9 3 3 3.9 3 5V19C3 19.5304 3.21071 20.0391 3.58579 20.4142C3.96086 20.7893 4.46957 21 5 21H11.11C12.37 22.24 14.09 23 16 23C19.87 23 23 19.87 23 16C23 14.09 22.24 12.37 21 11.11ZM12 3C12.55 3 13 3.45 13 4C13 4.55 12.55 5 12 5C11.45 5 11 4.55 11 4C11 3.45 11.45 3 12 3ZM5 19V5H7V7H17V5H19V9.68C18.09 9.25 17.08 9 16 9H7V11H11.1C10.5 11.57 10.04 12.25 9.68 13H7V15H9.08C9.03 15.33 9 15.66 9 16C9 17.08 9.25 18.09 9.68 19H5ZM16 21C13.24 21 11 18.76 11 16C11 13.24 13.24 11 16 11C18.76 11 21 13.24 21 16C21 18.76 18.76 21 16 21ZM16.5 16.25L19.36 17.94L18.61 19.16L15 17V12H16.5V16.25Z"
+        fill="blue"
+      />
+    </svg>
+  </div>
 );
 
 export const DeleteIcon = () => (
-  <svg
-    width="25"
-    height="25"
-    viewBox="0 0 25 25"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <g clipPath="url(#clip0_1062_3192)">
-      <path
-        d="M3.68994 6.10156H5.68994H21.6899"
-        stroke="red"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M19.6899 6.10156V20.1016C19.6899 20.632 19.4792 21.1407 19.1042 21.5158C18.7291 21.8908 18.2204 22.1016 17.6899 22.1016H7.68994C7.15951 22.1016 6.6508 21.8908 6.27573 21.5158C5.90066 21.1407 5.68994 20.632 5.68994 20.1016V6.10156M8.68994 6.10156V4.10156C8.68994 3.57113 8.90066 3.06242 9.27573 2.68735C9.6508 2.31228 10.1595 2.10156 10.6899 2.10156H14.6899C15.2204 2.10156 15.7291 2.31228 16.1042 2.68735C16.4792 3.06242 16.6899 3.57113 16.6899 4.10156V6.10156"
-        stroke="red"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M10.6899 11.1016V17.1016"
-        stroke="red"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M14.6899 11.1016V17.1016"
-        stroke="red"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </g>
-    <defs>
-      <clipPath id="clip0_1062_3192">
-        <rect
-          width="24"
-          height="24"
-          fill="white"
-          transform="translate(0.689941 0.101562)"
+  <div className="cursor-pointer">
+    <svg
+      width="25"
+      height="25"
+      viewBox="0 0 25 25"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g clipPath="url(#clip0_1062_3192)">
+        <path
+          d="M3.68994 6.10156H5.68994H21.6899"
+          stroke="red"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
-      </clipPath>
-    </defs>
-  </svg>
+        <path
+          d="M19.6899 6.10156V20.1016C19.6899 20.632 19.4792 21.1407 19.1042 21.5158C18.7291 21.8908 18.2204 22.1016 17.6899 22.1016H7.68994C7.15951 22.1016 6.6508 21.8908 6.27573 21.5158C5.90066 21.1407 5.68994 20.632 5.68994 20.1016V6.10156M8.68994 6.10156V4.10156C8.68994 3.57113 8.90066 3.06242 9.27573 2.68735C9.6508 2.31228 10.1595 2.10156 10.6899 2.10156H14.6899C15.2204 2.10156 15.7291 2.31228 16.1042 2.68735C16.4792 3.06242 16.6899 3.57113 16.6899 4.10156V6.10156"
+          stroke="red"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M10.6899 11.1016V17.1016"
+          stroke="red"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M14.6899 11.1016V17.1016"
+          stroke="red"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_1062_3192">
+          <rect
+            width="24"
+            height="24"
+            fill="white"
+            transform="translate(0.689941 0.101562)"
+          />
+        </clipPath>
+      </defs>
+    </svg>
+  </div>
 );
 
 export const SearchIcon = () => (

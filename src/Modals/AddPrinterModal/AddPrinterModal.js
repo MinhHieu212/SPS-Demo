@@ -153,7 +153,7 @@ export const AddPrinterModal = ({ children }) => {
                 </div>
                 <button
                   onClick={handleSubmit}
-                  className="ml-auto bg-[#1488db]  p-2 w-[154px] rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center"
+                  className="ml-auto bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500  p-2 w-[154px] rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center"
                 >
                   Hoàn tất
                 </button>

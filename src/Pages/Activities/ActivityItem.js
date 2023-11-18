@@ -18,7 +18,7 @@ function ActivityItem({ activity }) {
       <div className="text-center truncate overflow-clip  w-[15%]">
         {activity.classes}
       </div>
-      <div className=" w-[10%] text-center  truncate overflow-clip pl-3">
+      <div className=" w-[10%] text-center  truncate overflow-clip">
         {activity.history?.length || 12}
       </div>
       <div className=" flex justify-center w-[10%] truncate overflow-clip ">

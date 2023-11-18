@@ -116,7 +116,7 @@ const ManageSpso = () => {
         </h2>
         <div>
           <AddPrinterModal>
-            <button className="text-[1rem] md:text-[1.25rem] text-white bg-[#066DCC] font-semibold md:px-[30px] px-[5px] mf:px-[10px] py-2 rounded-md">
+            <button className="text-[14px] lg:text-[18px] text-white bg-[#3C8DBC] font-semibold md:px-[30px] px-[5px] mf:px-[10px] py-2 rounded-md">
               Thêm máy in
             </button>
           </AddPrinterModal>
