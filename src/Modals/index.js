@@ -10,7 +10,7 @@ export { default as PrinterInfoAndConfigModal } from "./PrinterInfoAndConfigModa
 
 export { default as FilterPrinterModal } from "./FilterPrinterModal/FilterPrinterModal";
 
-export { default as DetailPrinterLogModal } from "./DetailPrinterLogModal/DetailPrinterLogModal";
+export { default as DetailStudentLogModal } from "./DetailStudentLogModal/DetailStudentLogModal";
 
 export { default as PrinterQueueModal } from "./PrinterQueueModal/PrinterQueueModal";
 

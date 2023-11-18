@@ -5,37 +5,37 @@ import ManageItem from "./ManageItem";
 import { useNavigate } from "react-router";
 const printers = [
   {
-    id: "2113619",
+    id: "H41CS1",
+    queue: 6,
+    status: "Ngưng hoạt động",
+  },
+  {
+    id: "H41CS1",
     queue: 6,
     status: "Hoạt động",
   },
   {
-    id: "2113619",
+    id: "H41CS1",
+    queue: 6,
+    status: "Ngưng hoạt động",
+  },
+  {
+    id: "H41CS1",
     queue: 6,
     status: "Hoạt động",
   },
   {
-    id: "2113619",
+    id: "H41CS1",
     queue: 6,
     status: "Hoạt động",
   },
   {
-    id: "2113619",
+    id: "H41CS1",
     queue: 6,
     status: "Hoạt động",
   },
   {
-    id: "2113619",
-    queue: 6,
-    status: "Hoạt động",
-  },
-  {
-    id: "2113619",
-    queue: 6,
-    status: "Hoạt động",
-  },
-  {
-    id: "2113619",
+    id: "H41CS1",
     queue: 6,
     status: "Hoạt động",
   },
@@ -83,7 +83,7 @@ const ManageStaff = () => {
           <div className="  min-w-[10%]">ID MÁY IN</div>
           <div className="text-center min-w-[35%]">SỐ YÊU CẦU IN</div>
           <div className="text-center  min-w-[20%]">LỊCH SỬ IN</div>
-          <div className=" text-center min-w-[30%]">TRẠNG THÁI</div>
+          <div className=" min-w-[30%]">TRẠNG THÁI</div>
         </div>
         {printers.map((printer) => (
           <ManageItem

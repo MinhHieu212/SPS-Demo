@@ -1,6 +1,6 @@
 import React from "react";
 import "./History.scss";
-import { BinIcon, InfoIcon } from "../../Assets/Icons/Icons";
+import { CancelIcon, InfoIcon } from "../../Assets/Icons/Icons";
 import { CancelPrintingModal, DetailHistoryModal } from "../../Modals";
 
 function HistoryItem(props) {
@@ -17,7 +17,7 @@ function HistoryItem(props) {
         </DetailHistoryModal>
         {props.status === "Đang đợi" ? (
           <CancelPrintingModal>
-            <BinIcon />
+            <CancelIcon />
           </CancelPrintingModal>
         ) : (
           <div className="w-[20px]"></div>

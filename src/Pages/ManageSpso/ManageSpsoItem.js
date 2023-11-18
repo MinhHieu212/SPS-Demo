@@ -26,7 +26,7 @@ function ManageSpsoItem(props) {
         <div className="overflow-hidden px-1">
           <SPSOEditPrinterModal>
             <button className="middle none center mr-4 rounded-md bg-[#3C8DBC] text-[14px] lg:text-[16px] py-1 px-3 font-sans font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-              Tùy chỉnh
+              Cấu hình
             </button>
           </SPSOEditPrinterModal>
         </div>

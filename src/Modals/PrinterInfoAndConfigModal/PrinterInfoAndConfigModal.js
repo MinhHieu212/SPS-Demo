@@ -108,7 +108,7 @@ const PrinterInfoAndConfigModal = ({
               </div>
             </div>
             <div className="w-1/2 flex items-center justify-end pr-5">
-              <button className="bg-[#3C8DBC] h-[50px] p-3 w-[80%] md:w-[70%]  rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center">
+              <button className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500 hover:bg-blue-300 h-[50px] p-3 w-[80%] md:w-[70%]  rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center">
                 Xác nhận
               </button>
             </div>

@@ -2,10 +2,12 @@ import React from "react";
 import "./Manage.scss";
 
 import {
-  DetailPrinterLogModal,
+  DetailActivityModal,
+  DetailStudentLogModal,
   PrinterInfoAndConfigModal,
   PrinterQueueModal,
 } from "../../Modals";
+import StaffPrinterLogModal from "../../Modals/StaffPrinterLogModal/StaffPrinterLogModal";
 
 function ManageItem(props) {
   return (
@@ -20,19 +22,27 @@ function ManageItem(props) {
         </PrinterQueueModal>
       </div>
       <div className="min-w-[20%] flex justify-center items-center">
-        <DetailPrinterLogModal>
-          <button className="middle none center mr-4 rounded-md bg-[#3C8DBC] text-[14px] lg:text-[16px] py-1 px-3 font-sans   font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+        <StaffPrinterLogModal>
+          <button className="middle none center mr-4 rounded-md bg-[#3C8DBC] text-[14px] lg:text-[16px] py-1 px-3 font-sans font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
             Lịch sử
           </button>
-        </DetailPrinterLogModal>
+        </StaffPrinterLogModal>
       </div>
-      <div className="min-w-[30%] flex items-center justify-between p-0 md:p-3">
-        {props.status}
-        <PrinterInfoAndConfigModal>
-          <button className="middle none center mr-4 rounded-md bg-[#3C8DBC] text-[14px] lg:text-[16px] py-1 px-3 font-sans   font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-            Tùy chỉnh
-          </button>
-        </PrinterInfoAndConfigModal>
+      <div className="w-[30%] flex flex-row justify-between px-0 md:px-2 items-center">
+        <p
+          className={`w-[60%] overflow-hidden ${
+            props.status == "Hoạt động" ? "text-[blue]" : "text-[red]"
+          }`}
+        >
+          {props.status}
+        </p>
+        <div className="overflow-hidden px-1">
+          <PrinterInfoAndConfigModal>
+            <button className="middle none center mr-4 rounded-md bg-[#3C8DBC] text-[14px] lg:text-[16px] py-1 px-3 font-sans font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+              Cấu hình
+            </button>
+          </PrinterInfoAndConfigModal>
+        </div>
       </div>
     </div>
   );

@@ -27,7 +27,7 @@ const ConfigFile = () => {
     const newFiles = Array.from(e.target.files).map((file, index) => {
       return {
         file: file,
-        quantity: 0,
+        quantity: 1,
         pageSize: "A4",
         color: "normal",
         direct: "vertical",
@@ -175,11 +175,14 @@ const ConfigFile = () => {
           Cấu hình in
         </div>
 
-        <div className="flex flex-col items-center justify-evenly w-[100%] lg:w-[80%] mt-3">
-          <div className="w-full flex-col items-center justify-between">
-            <span className="text-[#1488DB] mr-5">Tên têp</span>
+        <div className="flex flex-col items-center justify-evenly w-[100%] lg:w-[80%] mt-3 mb-3">
+          <div className="w-full flex-col items-center justify-between border-b-2 border-black pb-5">
+            <span className="text-[#ff3434] mr-5">
+              Tên tệp cấu hình hiện tại
+            </span>
 
             <select
+              disabled={files?.length === 0}
               name="files"
               id="files"
               className=" w-[100%] mx-auto border-2 border-gray-400 mt-2 rounded-md p-2"
@@ -202,7 +205,7 @@ const ConfigFile = () => {
             </select>
           </div>
 
-          <div className="w-full flex items-center justify-between mt-3">
+          <div className="w-full flex items-center justify-between mt-5">
             <div className="w-[45%]">
               <p className="text-[#1488DB] mb-2">Số bản in</p>
 

@@ -8,35 +8,35 @@ import { FIlterManagePriterModal } from "../../Modals";
 
 const printers = [
   {
-    id: "12345678",
+    id: "H03CS2",
     location: "CS2, H6, 311",
     date: "12-03-2022",
     queue: 18,
     status: "Hoạt động",
   },
   {
-    id: "12345678",
+    id: "H03CS2",
     location: "CS2, H6, 311",
     date: "12-03-2022",
     queue: 18,
     status: "Hoạt động",
   },
   {
-    id: "12345678",
+    id: "H03CS2",
     location: "CS2, H6, 311",
     date: "12-03-2022",
     queue: 18,
     status: "Hoạt động",
   },
   {
-    id: "12345678",
+    id: "H03CS2",
     location: "CS2, H6, 311",
     date: "12-03-2022",
     queue: 18,
     status: "Hoạt động",
   },
   {
-    id: "12345678",
+    id: "H03CS2",
     location: "CS2, H6, 311",
     date: "12-03-2022",
     queue: 18,
@@ -64,35 +64,35 @@ const printers = [
     status: "Ngưng hoạt động",
   },
   {
-    id: "12345678",
+    id: "H03CS2",
     location: "CS2, H6, 311",
     date: "12-03-2022",
     queue: 18,
     status: "Hoạt động",
   },
   {
-    id: "12345678",
+    id: "H03CS2",
     location: "CS2, H6, 311",
     date: "12-03-2022",
     queue: 18,
     status: "Ngưng hoạt động",
   },
   {
-    id: "12345678",
+    id: "H03CS2",
     location: "CS2, H6, 311",
     date: "12-03-2022",
     queue: 18,
     status: "Hoạt động",
   },
   {
-    id: "12345678",
+    id: "H03CS2",
     location: "CS2, H6, 311",
     date: "12-03-2022",
     queue: 18,
     status: "Hoạt động",
   },
   {
-    id: "12345678",
+    id: "H03CS2",
     location: "CS2, H6, 311",
     date: "12-03-2022",
     queue: 18,
@@ -164,7 +164,7 @@ const ManageSpso = () => {
           <div className="text-center w-[20%]">VỊ TRÍ</div>
           <div className="text-center w-[15%]"> KÍCH HOẠT</div>
           <div className="text-center w-[25%]">SỐ YÊU CẦU IN</div>
-          <div className="text-center w-[30%]">TRẠNG THÁI</div>
+          <div className="w-[30%]">TRẠNG THÁI</div>
         </div>
         {printers.map((printer) => (
           <ManageSpsoItem
