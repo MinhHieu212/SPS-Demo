@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/SPS-FE-Project/static/css/main.c654e144.css",
-    "main.js": "/SPS-FE-Project/static/js/main.c2b06aaa.js",
+    "main.css": "/SPS-FE-Project/static/css/main.9b647efb.css",
+    "main.js": "/SPS-FE-Project/static/js/main.e897f99a.js",
     "static/js/787.15903c1b.chunk.js": "/SPS-FE-Project/static/js/787.15903c1b.chunk.js",
     "static/media/sv.jpg": "/SPS-FE-Project/static/media/sv.2b20417f9b2c4e71e9f5.jpg",
     "static/media/banner.png": "/SPS-FE-Project/static/media/banner.98438c68eee217183a6d.png",
     "static/media/slbk.jpg": "/SPS-FE-Project/static/media/slbk.0a4e1a3d925ef1fb45c0.jpg",
     "index.html": "/SPS-FE-Project/index.html",
-    "main.c654e144.css.map": "/SPS-FE-Project/static/css/main.c654e144.css.map",
-    "main.c2b06aaa.js.map": "/SPS-FE-Project/static/js/main.c2b06aaa.js.map",
+    "main.9b647efb.css.map": "/SPS-FE-Project/static/css/main.9b647efb.css.map",
+    "main.e897f99a.js.map": "/SPS-FE-Project/static/js/main.e897f99a.js.map",
     "787.15903c1b.chunk.js.map": "/SPS-FE-Project/static/js/787.15903c1b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c654e144.css",
-    "static/js/main.c2b06aaa.js"
+    "static/css/main.9b647efb.css",
+    "static/js/main.e897f99a.js"
   ]
 }
