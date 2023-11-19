@@ -2,6 +2,26 @@ import React, { useEffect } from "react";
 import PaymentInfo from "./PaymentInfo";
 import "./BKPay.scss";
 import { useNavigate } from "react-router-dom";
+import { BKPayAPI, res } from "../../APIs/BKPayAPI/BKPayAPI";
+
+var result = await BKPayAPI().then(res => res);
+
+var renderInfos = [];
+var apiInfos = result.data.data;
+console.log(apiInfos);
+for (let i = 0; i < apiInfos.length; i++) {
+  let tmpObj = {};
+  tmpObj.endDate = apiInfos[i].endDate.slice(0,10) + ' ' + apiInfos[i].endDate.slice(11,19);
+  tmpObj.leftMoney = apiInfos[i].leftMoney;
+  tmpObj.money = apiInfos[i].money;
+  tmpObj.paidMoney = apiInfos[i].paidMoney;
+  tmpObj.shortContent = apiInfos[i].shortContent;
+  tmpObj.stt = apiInfos[i].stt;
+  tmpObj.updatedAt = apiInfos[i].updatedAt.slice(0,10) + ' ' + apiInfos[i].updatedAt.slice(11,19);
+  tmpObj._id = apiInfos[i]._id;
+  renderInfos = [...renderInfos, tmpObj];
+}
+console.log(renderInfos);
 const LogOutIcon = () => (
   <svg
     width="24"
@@ -21,50 +41,7 @@ const LogOutIcon = () => (
     />
   </svg>
 );
-const infos = [
-  {
-    semester: 222,
-    content: "Phí mua giấy HK222",
-    batch: "SPSS222.12",
-    type: "Phí mua giấy",
-    date: "2023-04-19 15:00:00",
-    total: 50000,
-    fee: 0,
-    checkout: 50000,
-    remain: 0,
-    checkoutDate: "2023-04-14 15:31:40",
-    order: 1,
-    id: "DDDH222.12.2113619.1",
-  },
-  {
-    semester: 222,
-    content: "Phí mua giấy HK222",
-    batch: "SPSS222.12",
-    type: "Phí mua giấy",
-    date: "2023-04-19 15:00:00",
-    total: 50000,
-    fee: 0,
-    checkout: 50000,
-    remain: 0,
-    checkoutDate: "2023-04-14 15:31:40",
-    order: 1,
-    id: "DDDH222.12.2113619.1",
-  },
-  {
-    semester: 222,
-    content: "Phí mua giấy HK222",
-    batch: "SPSS222.12",
-    type: "Phí mua giấy",
-    date: "2023-04-19 15:00:00",
-    total: 50000,
-    fee: 0,
-    checkout: 50000,
-    remain: 0,
-    checkoutDate: "2023-04-14 15:31:40",
-    order: 1,
-    id: "DDDH222.12.2113619.1",
-  },
-];
+
 const Bkpay = () => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -136,20 +113,20 @@ const Bkpay = () => {
               <div>Đã thanh toán</div>
               <div>Còn lại</div>
             </div>
-            {infos.map((info) => (
+            {renderInfos.map((info) => (
               <PaymentInfo
-                semester={info.semester}
-                content={info.content}
-                batch={info.batch}
-                type={info.type}
-                date={info.date}
-                total={info.total}
-                fee={info.fee}
-                checkout={info.checkout}
-                remain={info.remain}
-                checkoutDate={info.checkoutDate}
-                order={info.order}
-                id={info.id}
+                semester={info.shortContent.slice(-3)}
+                content={info.shortContent}
+                batch={info._id.slice(0,10)}
+                type={"Tiền mua giấy in"}
+                date={info.endDate}
+                total={info.money}
+                fee={0}
+                checkout={info.paidMoney}
+                remain={info.leftMoney}
+                checkoutDate={info.updatedAt}
+                order={info.stt}
+                id={info._id.slice(0,10)}
               />
             ))}
           </div>
