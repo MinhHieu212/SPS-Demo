@@ -1,30 +1,45 @@
 import React, { useState } from "react";
 
-const FIlterManagePriterModal = ({ children }) => {
+export const value = {
+  status: "all",
+  location: "all",
+  timeActive: "ascending",
+}
+const FIlterManagePriterModal = ({ children, functionRenderList }) => {
   const [open, setOpen] = useState(false);
-
   const [status, setStatus] = useState("all"); // all or enable or disable
   const [location, setLocation] = useState("all"); // all or cs1 or cs2
   const [timeActive, settimeActive] = useState("ascending"); // acsending or descending
-  
-  
+
+
   const cancelFilter = () => {
     setStatus("all");
     setLocation("all");
     settimeActive("acsending");
     setOpen(false);
+    value.status = status;
+    value.location = location;
+    value.timeActive = timeActive;
+    value.searchField = "";
   };
 
   const applyFilter = () => {
-    console.log("Params Filter Printer : ", {
-      status: status,
-      location: location,
-      timeActive: timeActive,
-    });
+    // console.log("Params Filter Printer : ", {
+    //   status: status,
+    //   location: location,
+    //   timeActive: timeActive,
+    // });
+    value.status = status;
+    value.location = location;
+    value.timeActive = timeActive;
+    value.searchField = "";
+    //console.log(value);
+    functionRenderList();
+    
     setOpen(false);
   };
 
-  
+
   return (
     <div className="Wrapper relative z-10 w-full">
       <div className="Trigger" onClick={() => setOpen(!open)}>
@@ -39,25 +54,22 @@ const FIlterManagePriterModal = ({ children }) => {
                 Lọc theo trạng thái
               </div>
               <div
-                className={`${
-                  status === "all" ? "rounded-sm bg-[#E6E6E6]" : ""
-                } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
+                className={`${status === "all" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
                 onClick={() => setStatus("all")}
               >
                 Tất cả
               </div>
               <div
-                className={`${
-                  status === "enable" ? "rounded-sm bg-[#E6E6E6]" : ""
-                } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
+                className={`${status === "enable" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
                 onClick={() => setStatus("enable")}
               >
                 Hoạt động
               </div>
               <div
-                className={`${
-                  status === "disable" ? "rounded-sm bg-[#E6E6E6]" : ""
-                } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
+                className={`${status === "disable" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
                 onClick={() => setStatus("disable")}
               >
                 Ngưng hoạt động
@@ -69,25 +81,22 @@ const FIlterManagePriterModal = ({ children }) => {
                 Lọc theo vị trí
               </div>
               <div
-                className={`${
-                  location === "all" ? "rounded-sm bg-[#E6E6E6]" : ""
-                } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
+                className={`${location === "all" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
                 onClick={() => setLocation("all")}
               >
                 Tất cả
               </div>
               <div
-                className={`${
-                  location === "cs1" ? "rounded-sm bg-[#E6E6E6]" : ""
-                } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
+                className={`${location === "cs1" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
                 onClick={() => setLocation("cs1")}
               >
                 Cơ sở 1
               </div>
               <div
-                className={`${
-                  location === "cs2" ? "rounded-sm bg-[#E6E6E6]" : ""
-                } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
+                className={`${location === "cs2" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
                 onClick={() => setLocation("cs2")}
               >
                 Cơ sở 2
@@ -101,17 +110,15 @@ const FIlterManagePriterModal = ({ children }) => {
                 Sắp xếp thời gian kích hoạt
               </div>
               <div
-                className={`${
-                  timeActive === "ascending" ? "rounded-sm bg-[#E6E6E6]" : ""
-                } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
+                className={`${timeActive === "ascending" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
                 onClick={() => settimeActive("ascending")}
               >
                 Tăng dần
               </div>
               <div
-                className={`${
-                  timeActive === "descending" ? "rounded-sm bg-[#E6E6E6]" : ""
-                } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
+                className={`${timeActive === "descending" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
                 onClick={() => settimeActive("descending")}
               >
                 Giảm dần

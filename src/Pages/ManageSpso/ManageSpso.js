@@ -6,119 +6,43 @@ import { AddPrinterModal } from "../../Modals/AddPrinterModal/AddPrinterModal";
 import { useNavigate } from "react-router";
 import { FIlterManagePriterModal } from "../../Modals";
 import { getPrintersList } from "../../APIs/SpsoAPI/SpsoAPI";
-const printers = [
-  {
-    id: "H03CS2",
-    location: "CS2, H6, 311",
-    date: "12-03-2022",
-    queue: 18,
-    status: "Hoạt động",
-  },
-  {
-    id: "H03CS2",
-    location: "CS2, H6, 311",
-    date: "12-03-2022",
-    queue: 18,
-    status: "Hoạt động",
-  },
-  {
-    id: "H03CS2",
-    location: "CS2, H6, 311",
-    date: "12-03-2022",
-    queue: 18,
-    status: "Hoạt động",
-  },
-  {
-    id: "H03CS2",
-    location: "CS2, H6, 311",
-    date: "12-03-2022",
-    queue: 18,
-    status: "Hoạt động",
-  },
-  {
-    id: "H03CS2",
-    location: "CS2, H6, 311",
-    date: "12-03-2022",
-    queue: 18,
-    status: "Ngưng hoạt động",
-  },
-  {
-    id: "12345678",
-    location: "CS2, H6, 311",
-    date: "12-03-2022",
-    queue: 18,
-    status: "Hoạt động",
-  },
-  {
-    id: "12345678",
-    location: "CS2, H6, 311",
-    date: "12-03-2022",
-    queue: 18,
-    status: "Hoạt động",
-  },
-  {
-    id: "12345678",
-    location: "CS2, H6, 311",
-    date: "12-03-2022",
-    queue: 18,
-    status: "Ngưng hoạt động",
-  },
-  {
-    id: "H03CS2",
-    location: "CS2, H6, 311",
-    date: "12-03-2022",
-    queue: 18,
-    status: "Hoạt động",
-  },
-  {
-    id: "H03CS2",
-    location: "CS2, H6, 311",
-    date: "12-03-2022",
-    queue: 18,
-    status: "Ngưng hoạt động",
-  },
-  {
-    id: "H03CS2",
-    location: "CS2, H6, 311",
-    date: "12-03-2022",
-    queue: 18,
-    status: "Hoạt động",
-  },
-  {
-    id: "H03CS2",
-    location: "CS2, H6, 311",
-    date: "12-03-2022",
-    queue: 18,
-    status: "Hoạt động",
-  },
-  {
-    id: "H03CS2",
-    location: "CS2, H6, 311",
-    date: "12-03-2022",
-    queue: 18,
-    status: "Hoạt động",
-  },
-];
+import { value } from "../../Modals/FIlterManagePriterModal/FIlterManagePriterModal";
+
+
 const ManageSpso = () => {
   const [printersList, setPrintersList] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const [renderList, setRenderList] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
-    const handleSPSOApi = async (data) => {
-      const response = await getPrintersList();
+    const handleSPSOApi = async (params) => {
+      const response = await getPrintersList(params);
       //console.log("reponse from get printers api: ", response);
-      console.log(data);
+      //console.log(data);
       setPrintersList(response?.data?.data);
     }
+    const params = {}
+    if (value.status === "all") params.status = "100";
+    else if (value.status === "enable") params.status = "1";
+    else params.status = "0";
 
-    handleSPSOApi();
+    if (value.location === "all") params.facility = 'all';
+    else if (value.location === "cs1") params.facility = "CS1";
+    else if (value.location === "cs2") params.facility = "CS2";
+    else params.facility = "100";
 
+    if (value.timeActive === "ascending") params.sortDirection = "1";
+    else params.sortDirection = "-1";
+    params.searchField = value.searchField;
+    handleSPSOApi(params);
+    console.log(params);
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Error");
     }
-  }, []);
-  const printers = printersList.printers
+  }, [renderList]);
+  const printers = printersList.printers;
   //console.log(printers);
-  
+
   return (
     <div className="Manage mx-auto max-w-[1280px] w-full px-[10px] lg:px-[20px] bg-[white] shadow-sm pb-5 min-h-[93vh]">
       <div className="flex flex-row mt-3 border-b-4 border-[#066DCC] pb-2 md:pb-3 mb-4 items-center justify-between">
@@ -148,13 +72,20 @@ const ManageSpso = () => {
           <div className="w-full lg:w-1/2 border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white">
             <input
               type="text"
-              placeholder="Tìm theo ID sinh viên"
+              placeholder="Tìm theo ID máy in"
               className="w-full outline-none border-none"
+              onChange={(e) => setInputValue(e.target.value)}
             />
-            <SearchIcon></SearchIcon>
+            <div onClick={(e) => {
+              setRenderList(!renderList);
+              value.searchField = inputValue;
+            }}><SearchIcon></SearchIcon></div>
+
           </div>
           <div className="w-[100%] lg:w-1/2">
-            <FIlterManagePriterModal>
+            <FIlterManagePriterModal
+              functionRenderList={() => setRenderList(!renderList)}
+            >
               <div className=" border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white">
                 <input
                   type="text"
@@ -181,10 +112,10 @@ const ManageSpso = () => {
             key={index}
             id={printer.printerId}
             location={printer.location.facility + ", " + printer.location.department + ", " + printer.location.room}
-            date={printer.activatedTime.slice(0,10)}
+            date={printer.activatedTime.slice(0, 10)}
             status={printer.status ? "Hoạt động" : "Không hoạt động"}
-            queue = {printer.printingQueue.length + printer.printingJob.length}
-            printingQueue = {[...printer.printingJob, ...printer.printingQueue]}
+            queue={printer.printingQueue.length + printer.printingJob.length}
+            printingQueue={[...printer.printingJob, ...printer.printingQueue]}
           />
         ))}
       </div>
