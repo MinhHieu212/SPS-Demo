@@ -2,45 +2,12 @@ import React, { useState } from "react";
 import CenterModal from "../BaseModals/CenterModal";
 import { InfoField2 } from "../../Utils/InfoField";
 
-const PrinterQueueModal = ({ children }) => {
+const PrinterQueueModal = ({ children, queue }) => {
   const [openModal, setOpenModal] = useState(false);
   const handleClose = () => {
     setOpenModal(false);
   };
-
-  const [requests, setRequests] = useState([
-    {
-      student_ID: "2113363",
-      student_Name: "Minh Hieu",
-      fileNames: "giaitich123.pdf",
-      quantity: 3,
-    },
-    {
-      student_ID: "2113363",
-      student_Name: "Minh Hieu",
-      fileNames: "giaitich123.pdf",
-      quantity: 3,
-    },
-    {
-      student_ID: "2113363",
-      student_Name: "Minh Hieu",
-      fileNames: "giaitich123.pdf",
-      quantity: 3,
-    },
-    {
-      student_ID: "2113363",
-      student_Name: "Minh Hieu",
-      fileNames: "giaitich123.pdf",
-      quantity: 3,
-    },
-    {
-      student_ID: "2113363",
-      student_Name: "Minh Hieu",
-      fileNames: "giaitich123.pdf",
-      quantity: 3,
-    },
-  ]);
-
+  //console.log(queue)
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
@@ -50,7 +17,7 @@ const PrinterQueueModal = ({ children }) => {
             YÊU CẦU IN ẤN HIỆN TẠI
           </div>
           <div className="w-full h-[400px] flex justify-start py-2 gap-2 items-center flex-col text-[16px] md:text-[20px] overflow-y-scroll">
-            {requests.map((request, index) => {
+            {queue.map((request, index) => {
               return (
                 <div
                   className="w-[90%] rounded-md bg-[#D9D9D9] p-2 shadow-md border-[1px] border-[#367FA9]"
@@ -58,19 +25,19 @@ const PrinterQueueModal = ({ children }) => {
                 >
                   <InfoField2
                     fieldName={"Tên sinh viên"}
-                    fieldValue={request.student_Name}
+                    fieldValue={request.firstName + " " + request.lastName}
                   ></InfoField2>
                   <InfoField2
                     fieldName={"Mã sinh viên"}
-                    fieldValue={request.student_ID}
+                    fieldValue={request.mssv}
                   ></InfoField2>
                   <InfoField2
                     fieldName={"Tên file in"}
-                    fieldValue={request.fileNames}
+                    fieldValue={request.document.title}
                   ></InfoField2>
                   <InfoField2
                     fieldName={"Số bản in"}
-                    fieldValue={request.quantity}
+                    fieldValue={request.numVersion}
                   ></InfoField2>
                 </div>
               );
