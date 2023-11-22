@@ -9,13 +9,14 @@ import Activities from "../Pages/Activities/Activities";
 import Test from "../Pages/TestModal/Test";
 import ConfigFile from "../Pages/ConfigFile/ConfigFile";
 import Bkpay from "../Pages/Bkpay/BkPay";
-// import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import ManageStaff from "../Pages/ManageStaff/ManageStaff";
 import ManageSpso from "../Pages/ManageSpso/ManageSpso";
 import HomeNoLogin from "../Pages/HomeNoLogin/HomeNoLogin";
 
 const publicRoutes = [
-  // { role: "", path: "*", component: ErrorPage },
+  // { role: "", path: "*", component: <></> },
+  { role: "", path: "", component: HomeNoLogin, layout: "beforeLogin" },
   { role: "", path: "/", component: HomeNoLogin, layout: "beforeLogin" },
   { role: "", path: "/Login", component: Login },
   { role: "", path: "/Test", component: Test },
