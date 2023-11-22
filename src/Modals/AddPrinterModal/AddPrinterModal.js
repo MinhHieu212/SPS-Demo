@@ -184,8 +184,8 @@ export const AddPrinterModal = ({ children }) => {
                   <option selected="true" disabled="disable" value="">
                     Tòa...
                   </option>
-                  {departments.map((dep) => {
-                    return <option value={dep}>{dep}</option>;
+                  {departments.map((dep, index) => {
+                    return <option key={index} value={dep}>{dep}</option>;
                   })}
                 </select>
 
@@ -199,8 +199,8 @@ export const AddPrinterModal = ({ children }) => {
                   <option selected="true" disabled="disable" value="">
                     Phòng...
                   </option>
-                  {rooms.map((rm) => {
-                    return <option value={rm}>{rm}</option>;
+                  {rooms.map((rm, index) => {
+                    return <option key={index} value={rm}>{rm}</option>;
                   })}
                 </select>
               </div>

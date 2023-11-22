@@ -2,14 +2,34 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Config.scss";
 import { AiOutlineDelete } from "react-icons/ai";
+import { ConfigAPI } from "../../APIs/ConfigAPI/ConfigAPI";
+import format from 'date-fns/format'
 
 const Config = () => {
+  const [formInfo, setFormInfo] = useState([]);
+  const [curpag_input, setCurpag_input] = useState();
+  const [stday1_input, setStday1_input] = useState(format(new Date(), 'yyyy-MM-dd'));
+  const [stday2_input, setStday2_input] = useState(format(new Date(), 'yyyy-MM-dd'));
+  const [curprice_input, setCurprice_input] = useState();
+
   const navigate = useNavigate();
   useEffect(() => {
+    const handleCallApi = async () => {
+      const response = await ConfigAPI();
+      console.log("reponse from Conf api: ", response);
+      setFormInfo(response?.data?.data);
+      setCurpag_input(response?.data?.data.currentBalance);
+      setStday1_input(response?.data?.data.startDate1.split('T')[0]);
+      setStday2_input(response?.data?.data.startDate2.split('T')[0]);
+      setCurprice_input(response?.data?.data.currentA4Price);
+    };
+    handleCallApi();
+
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Error");
     }
   }, []);
+
   // Attributes for the first form
   const [values, setValues] = useState({
     default_paper: 100,
@@ -17,6 +37,7 @@ const Config = () => {
     time_Sem2: "22-12-2022",
     a4_price: 300,
   });
+
   const inputs = [
     {
       id: 1,
@@ -54,6 +75,7 @@ const Config = () => {
   const handleSubmit = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
     e.preventDefault();
+    console.log("SUbmit");
   };
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -113,7 +135,9 @@ const Config = () => {
               <input
                 placeholder={inputs[0].placeholder}
                 className="inline border-1 border-[#1488DB] rounded-md"
-                onChange={onChange}
+                onChange={(e) => setCurpag_input(e.target.value)}
+                value = {curpag_input}
+                type={inputs[0].type}
               />
             </div>
             <span className="Err">{errorMessage}</span>
@@ -130,7 +154,9 @@ const Config = () => {
                 name="date"
                 id="datepicker"
                 required
-                onChange={onChange}
+                // onChange={onChange}
+                onChange={(e) => setStday1_input(format(new Date(e.target.value), 'yyyy-MM-dd'))}
+                value = {stday1_input}
               />
             </div>
             <span className="Err">{errorMessage}</span>
@@ -147,7 +173,8 @@ const Config = () => {
                 name="date"
                 id="datepicker"
                 required
-                onChange={onChange}
+                onChange={(e) => setStday2_input(format(new Date(e.target.value), 'yyyy-MM-dd'))}
+                value = {stday2_input}
               />
             </div>
             <span className="Err">{errorMessage}</span>
@@ -160,8 +187,9 @@ const Config = () => {
             <div>
               <input
                 placeholder={inputs[3].placeholder}
-                onChange={onChange}
                 className="inline border-1 border-[#1488DB]  rounded-md"
+                onChange={(e) => setCurprice_input(e.target.value)}
+                value = {curprice_input}
               />
               <span className="font-bold text-xl w-1/3 "> (vnđ)</span>
             </div>

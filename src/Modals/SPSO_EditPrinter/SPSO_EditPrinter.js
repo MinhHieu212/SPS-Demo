@@ -10,22 +10,28 @@ const SPSOEditPrinterModal = ({ children }) => {
   const [tabActivated, setTabActivated] = useState(1);
   const info = {
     id: "12345",
+    status: 1,
     brand: "Canon",
     type: "PIXMA E4750",
-    location: { facility: "", department: "", room: "" },
+    location: { facility: "CS2", department: "H6", room: "204" },
     description: "Tốc độ in tiêu chuẩn ISO (A4): 3.9 ipm đen/màu",
   };
   const [brand, setBrand] = useState(info.brand);
   const [type, setType] = useState(info.type);
-  
-  const [location, setLocation] = useState(info.location);
+  const [checked, setChecked] = useState(info.status == 1 ? "enable" : "disable");
+
+  const [location, setLocation] = useState({});
   const [facilities, setFacilities] = useState("");
   const [departments, setDepartments] = useState([]);
   const [rooms, setRooms] = useState([]);
 
-  // useEffect(() => {
-  //   setLocation(info.location);
-  // });
+  useEffect(() => {
+    if (info.status === 1) {
+      setChecked("enable");
+    }
+    else
+      setChecked("disable");
+  }, []);
   useEffect(() => {
     if (location.facility === "Cơ sở 1") {
       setDepartments(["B1", "B2", "B3"]);
@@ -76,24 +82,17 @@ const SPSOEditPrinterModal = ({ children }) => {
       }));
     }
   };
-  const onChangeDep = (val) => {
-    if (facilities === "Cơ sở 1") {
-      setDepartments(["B1", "B2", "B3"]);
-      location.department = "";
-      location.room = "";
-    } else if (facilities === "Cơ sở 2") {
-      setDepartments(["H1", "H3", "H6"]);
-      location.department = "";
-      location.room = "";
-    }
-  };
-
-  console.log(location);
+  // const handleInputChange = (value) => {
+  //   setChecked(value);
+  //   // setInfo()
+  // };
+  // console.log(location);
 
   const [desc, setDesc] = useState(info.description);
-  const [checked, setChecked] = useState("active");
+
   const handleSubmit = () => {
     console.log(brand, type, location, desc, checked);
+    console.log(info);
   };
   return (
     <>
@@ -161,14 +160,6 @@ const SPSOEditPrinterModal = ({ children }) => {
                 <p className="text-[#066DCC] text-[16px] md:text-[20px] font-bold w-[80px] md:w-[124px]">
                   Vị trí:{" "}
                 </p>
-                {/* <div className="flex-1">
-                  <input
-                    type="text"
-                    className="block w-full"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                  />
-                </div> */}
                 <div className="flex flex-1 gap-4">
                 <select
                   value={location.facility}
@@ -195,8 +186,8 @@ const SPSOEditPrinterModal = ({ children }) => {
                   <option selected="true" disabled="disable" value="">
                     Tòa...
                   </option>
-                  {departments.map((dep) => {
-                    return <option value={dep}>{dep}</option>;
+                  {departments.map((dep, index) => {
+                    return <option key={index} value={dep}>{dep}</option>;
                   })}
                 </select>
 
@@ -210,8 +201,8 @@ const SPSOEditPrinterModal = ({ children }) => {
                   <option selected="true" disabled="disable" value="">
                     Phòng...
                   </option>
-                  {rooms.map((rm) => {
-                    return <option value={rm}>{rm}</option>;
+                  {rooms.map((rm, index) => {
+                    return <option key={index} value={rm}>{rm}</option>;
                   })}
                 </select>
               </div>
@@ -236,13 +227,17 @@ const SPSOEditPrinterModal = ({ children }) => {
                   <div>
                     <div className="flex items-center mb-[4px] gap-[22px]">
                       <input
+                        checked={checked === "enable"}
+                        onChange={(e) =>{setChecked(e.target.value)}}
+                        // onChange={() => handleInputChange("enable")}
                         id="statusEnable"
                         type="radio"
                         name="printerStatus"
                         className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300"
+                        value="enable"
                       />
                       <label
-                        onClick={() => setChecked("enable")}
+                        // onClick={() => setChecked("enable")}
                         htmlFor="statusEnable"
                         className="text-[16px] md:text-[20px] font-semibold p-0"
                       >
@@ -251,13 +246,17 @@ const SPSOEditPrinterModal = ({ children }) => {
                     </div>
                     <div className="flex items-center gap-[22px]">
                       <input
+                        checked={checked === "disable"}
+                        onChange={(e) =>{setChecked(e.target.value)}}
+                        // onChange={() => handleInputChange("disable")}
                         id="statusDisable"
                         type="radio"
                         name="printerStatus"
+                        value="disable"
                         className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300"
                       />
                       <label
-                        onClick={(e) => setChecked("disable")}
+                        // onClick={() => setChecked("disable")}
                         htmlFor="statusDisable"
                         className="text-[16px] md:text-[20px] font-semibold p-0"
                       >
@@ -305,7 +304,7 @@ const SPSOEditPrinterModal = ({ children }) => {
                   Vị trí:{" "}
                 </p>
                 <p className="text-black text-[16px] md:text-[20px] font-semibold">
-                  {info.location}
+                  {info.location.facility}, {info.location.department}, {info.location.room}
                 </p>
               </div>
               <div className="flex flex-row items-center justify-start gap-[90px] mb-[22px]">
