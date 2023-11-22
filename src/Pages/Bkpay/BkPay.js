@@ -9,9 +9,10 @@ import { useUserInfo } from "../../Contexts/UserInfoContext";
 const Bkpay = () => {
   const userInfoContext = useUserInfo();
   const [userInformation, setUserInformation] = useState(userInfoContext.info);
+  const navigate = useNavigate();
 
   const [paymentsList, setPaymentsList] = useState([]);
-  const navigate = useNavigate();
+
   useEffect(() => {
     const handleCallApi = async () => {
       const response = await getPaymentsList();
@@ -25,6 +26,7 @@ const Bkpay = () => {
       navigate("/Error");
     }
   }, []);
+
   return (
     <div className="BKPay bg-[#eee]">
       <div id="slider-BKPay" className="relative w-full">
@@ -94,8 +96,9 @@ const Bkpay = () => {
               <div>Đã thanh toán</div>
               <div>Còn lại</div>
             </div>
-            {paymentsList?.map((info) => (
+            {paymentsList?.map((info, index) => (
               <PaymentInfo
+                key={index}
                 semester={info.shortContent.slice(-3)}
                 content={info.shortContent}
                 batch={info._id.slice(0, 10)}
