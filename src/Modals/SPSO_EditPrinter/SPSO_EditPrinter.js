@@ -118,9 +118,11 @@ const SPSOEditPrinterModal = ({ children }) => {
                   <div>
                     <div className="flex items-center mb-[4px] gap-[22px]">
                       <input
+                        checked={checked == "enable"}
                         id="statusEnable"
                         type="radio"
                         name="printerStatus"
+                        onClick={() => setChecked("enable")}
                         className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300"
                       />
                       <label
@@ -133,9 +135,11 @@ const SPSOEditPrinterModal = ({ children }) => {
                     </div>
                     <div className="flex items-center gap-[22px]">
                       <input
+                        checked={checked == "disable"}
                         id="statusDisable"
                         type="radio"
                         name="printerStatus"
+                        onClick={(e) => setChecked("disable")}
                         className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300"
                       />
                       <label
