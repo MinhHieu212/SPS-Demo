@@ -25,19 +25,19 @@ const PrinterQueueModal = ({ children, queue }) => {
                 >
                   <InfoField2
                     fieldName={"Tên sinh viên"}
-                    fieldValue={request.firstName + " " + request.lastName}
+                    fieldValue={request?.firstName + " " + request?.lastName}
                   ></InfoField2>
                   <InfoField2
                     fieldName={"Mã sinh viên"}
-                    fieldValue={request.mssv}
+                    fieldValue={request?.mssv}
                   ></InfoField2>
                   <InfoField2
                     fieldName={"Tên file in"}
-                    fieldValue={request.document.title}
+                    fieldValue={request?.document.title}
                   ></InfoField2>
                   <InfoField2
                     fieldName={"Số bản in"}
-                    fieldValue={request.numVersion}
+                    fieldValue={request?.numVersion}
                   ></InfoField2>
                 </div>
               );

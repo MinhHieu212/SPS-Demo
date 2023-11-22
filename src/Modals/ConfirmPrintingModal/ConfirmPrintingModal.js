@@ -1,27 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InfoField from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
+import { PrintingAPI } from "../../APIs/PrintingAPI/PrintingAPI";
 
 const ConfirmPrintingModal = ({ children, files }) => {
   const [openModal, setOpenModal] = useState(false);
+
   const handleClose = () => {
     setOpenModal(false);
   };
 
   const data = {
     No_File: 0,
-    Quantity: 0,
-    No_Pages: 0,
+    numVersion: 0,
   };
 
   data.No_File = files?.length;
-
   files.forEach((file) => {
-    data.Quantity += parseInt(file?.quantity);
-    data.No_Pages += parseInt(file?.quantity) * 5;
+    data.numVersion += parseInt(file?.numVersion);
   });
 
-  const handleSendRequestPrint = () => {
+  const formData = new FormData();
+
+  // tao ra một array file trong form data
+  files.map((file, index) => {
+    formData.append("file", file.file);
+  });
+
+  // tao ra một array cấu hình file trong biến documents
+  const documents = [];
+  files.forEach((file) => {
+    const newDocument = {
+      paperSize: file?.paperSize,
+      numVersion: file?.numVersion,
+      colorOption: file?.colorOption,
+      landScapeOption: file?.landScapeOption,
+      pagesPerSheet: file?.pagesPerSheet,
+    };
+
+    documents.push(newDocument);
+  });
+
+  formData.append("documents", JSON.stringify(documents));
+  formData.append("printerId", JSON.stringify("H1109"));
+
+  const handleSendRequestPrint = async () => {
+    const reponse = await PrintingAPI();
+    console.log("Response data from printing api :", reponse);
     setOpenModal(false);
   };
 
@@ -40,12 +65,8 @@ const ConfirmPrintingModal = ({ children, files }) => {
             ></InfoField>
             <InfoField
               fieldName={"Tổng số bản in"}
-              fieldValue={data.Quantity}
+              fieldValue={data.numVersion}
             ></InfoField>
-            {/* <InfoField
-              fieldName={"Tổng lượng giấy"}
-              fieldValue={data.No_Pages}
-            ></InfoField> */}
           </div>
           <div className="flex items-center gap-3 justify-center w-full py-2">
             <button

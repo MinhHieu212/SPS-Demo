@@ -18,8 +18,8 @@ const History = () => {
       const response = await filterHistory(filterParams);
 
       const pages = {
-        A3: response.data.printedA3 || 0,
-        A4: response.data.printedA4 || 0,
+        A3: response?.data.printedA3 || 0,
+        A4: response?.data.printedA4 || 0,
       };
 
       setTotalPages(pages);
@@ -61,7 +61,7 @@ const History = () => {
                 Size A4:
               </span>
               <span text-center className="text-[16px] lg:text-[18px]">
-                {totalPages.A4}
+                {totalPages?.A4}
               </span>
             </div>
 
@@ -70,7 +70,7 @@ const History = () => {
                 Size A3:
               </span>
               <span className="text-[16px] lg:text-[18px]">
-                {totalPages.A3}
+                {totalPages?.A3}
               </span>
             </div>
           </div>

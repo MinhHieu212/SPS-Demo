@@ -38,7 +38,7 @@ const PagesPurchaseModal = ({ children }) => {
   const handleAccept = async () => {
     const data = { money: value * 1000 };
 
-    console.log("Data sent to confirm purchase pages ", data);
+    // console.log("Data sent to confirm purchase pages ", data);
 
     await confirmPayment(data);
 

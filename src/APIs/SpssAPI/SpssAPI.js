@@ -27,7 +27,7 @@ SpssAPI.interceptors.response.use(
   async (error) => {
     const path = "/v1/user/refresh-access-token";
     const originalConfig = error.config;
-    console.log("Access_token expired");
+    // console.log("Access_token expired");
     if (error.response && error.response.status == 410) {
       try {
         console.log("call refresh token");
