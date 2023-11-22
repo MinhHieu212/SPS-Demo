@@ -1,73 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PaymentInfo from "./PaymentInfo";
 import "./BKPay.scss";
 import { useNavigate } from "react-router-dom";
-const LogOutIcon = () => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M8 18.9282C9.21615 19.6303 10.5957 20 12 20C13.4043 20 14.7838 19.6303 16 18.9282C17.2162 18.2261 18.2261 17.2162 18.9282 16C19.6303 14.7838 20 13.4043 20 12C20 10.5957 19.6303 9.21615 18.9282 8C18.2261 6.78385 17.2162 5.77394 16 5.0718C14.7838 4.36965 13.4043 4 12 4C10.5957 4 9.21615 4.36965 8 5.0718"
-      stroke="#FFFFFF"
-      stroke-width="2"
-    />
-    <path
-      d="M2 12L1.21913 11.3753L0.719375 12L1.21913 12.6247L2 12ZM11 13C11.5523 13 12 12.5523 12 12C12 11.4477 11.5523 11 11 11V13ZM5.21913 6.3753L1.21913 11.3753L2.78087 12.6247L6.78087 7.6247L5.21913 6.3753ZM1.21913 12.6247L5.21913 17.6247L6.78087 16.3753L2.78087 11.3753L1.21913 12.6247ZM2 13H11V11H2V13Z"
-      fill="#FFFFFF"
-    />
-  </svg>
-);
-const infos = [
-  {
-    semester: 222,
-    content: "Phí mua giấy HK222",
-    batch: "SPSS222.12",
-    type: "Phí mua giấy",
-    date: "2023-04-19 15:00:00",
-    total: 50000,
-    fee: 0,
-    checkout: 50000,
-    remain: 0,
-    checkoutDate: "2023-04-14 15:31:40",
-    order: 1,
-    id: "DDDH222.12.2113619.1",
-  },
-  {
-    semester: 222,
-    content: "Phí mua giấy HK222",
-    batch: "SPSS222.12",
-    type: "Phí mua giấy",
-    date: "2023-04-19 15:00:00",
-    total: 50000,
-    fee: 0,
-    checkout: 50000,
-    remain: 0,
-    checkoutDate: "2023-04-14 15:31:40",
-    order: 1,
-    id: "DDDH222.12.2113619.1",
-  },
-  {
-    semester: 222,
-    content: "Phí mua giấy HK222",
-    batch: "SPSS222.12",
-    type: "Phí mua giấy",
-    date: "2023-04-19 15:00:00",
-    total: 50000,
-    fee: 0,
-    checkout: 50000,
-    remain: 0,
-    checkoutDate: "2023-04-14 15:31:40",
-    order: 1,
-    id: "DDDH222.12.2113619.1",
-  },
-];
+import { getPaymentsList } from "../../APIs/BKPayAPI/BKPayAPI";
+import { LogOutIcon } from "../../Assets/Icons/Icons";
+import { useUserInfo } from "../../Contexts/UserInfoContext";
+
 const Bkpay = () => {
+  const userInfoContext = useUserInfo();
+  const [userInformation, setUserInformation] = useState(userInfoContext.info);
+
+  const [paymentsList, setPaymentsList] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
+    const handleCallApi = async () => {
+      const response = await getPaymentsList();
+      console.log("reponse from get payments api: ", response);
+      setPaymentsList(response?.data?.data);
+    };
+
+    handleCallApi();
+
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Error");
     }
@@ -77,12 +30,17 @@ const Bkpay = () => {
       <div id="slider-BKPay" className="relative w-full">
         <div className="account-info flex flex-row items-center justify-center absolute bg-black text-white rounded-lg bottom-0 right-0">
           <div className="relative account-item account-item-separate">
-            Xin chào TRƯƠNG THUẬN HƯNG
+            Xin chào{" "}
+            {userInformation?.firstName + " " + userInformation?.lastName ||
+              "None"}
           </div>
           <div className="relative account-item account-item-separate">
             Hướng dẫn sử dụng
           </div>
-          <div className="relative account-item">
+          <div
+            className="relative account-item"
+            onClick={() => navigate("/Home")}
+          >
             <LogOutIcon></LogOutIcon>
           </div>
         </div>
@@ -136,20 +94,28 @@ const Bkpay = () => {
               <div>Đã thanh toán</div>
               <div>Còn lại</div>
             </div>
-            {infos.map((info) => (
+            {paymentsList?.map((info) => (
               <PaymentInfo
-                semester={info.semester}
-                content={info.content}
-                batch={info.batch}
-                type={info.type}
-                date={info.date}
-                total={info.total}
-                fee={info.fee}
-                checkout={info.checkout}
-                remain={info.remain}
-                checkoutDate={info.checkoutDate}
-                order={info.order}
-                id={info.id}
+                semester={info.shortContent.slice(-3)}
+                content={info.shortContent}
+                batch={info._id.slice(0, 10)}
+                type={"Tiền mua giấy in"}
+                date={
+                  info.updatedAt.split("T")[0] +
+                  " " +
+                  info.updatedAt.split("T")[1].substring(0, 8)
+                }
+                total={info.money}
+                fee={0}
+                checkout={info.paidMoney}
+                remain={info.leftMoney}
+                checkoutDate={
+                  info.updatedAt.split("T")[0] +
+                  " " +
+                  info.updatedAt.split("T")[1].substring(0, 8)
+                }
+                order={info.stt}
+                id={info._id.slice(0, 10)}
               />
             ))}
           </div>

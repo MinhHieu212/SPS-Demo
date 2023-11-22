@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CenterModal from "../BaseModals/CenterModal";
 import "./AddPrinterModal.scss";
 import { InfoField2 } from "../../Utils/InfoField";
+import filled from "@material-tailwind/react/theme/components/timeline/timelineIconColors/filled";
 
 export const AddPrinterModal = ({ children }) => {
   const [openAPModal, setOpenAPModal] = useState(false);
@@ -13,14 +14,82 @@ export const AddPrinterModal = ({ children }) => {
     ID: "0953",
     brand: "",
     model: "",
-    location: "",
+    location: { facility: "", department: "", room: "" },
     description: "None",
   });
 
   const [ID, setID] = useState(values_AP.ID);
   const [brand, setBrand] = useState(values_AP.brand);
   const [type, setType] = useState(values_AP.type);
+
   const [location, setLocation] = useState(values_AP.location);
+  const [facilities, setFacilities] = useState("");
+  const [departments, setDepartments] = useState([]);
+  const [rooms, setRooms] = useState([]);
+
+  useEffect(() => {
+    if (location.facility === "Cơ sở 1") {
+      setDepartments(["B1", "B2", "B3"]);
+    } else if (location.facility === "Cơ sở 2") {
+      setDepartments(["H1", "H3", "H6"]);
+    }
+  }, [location.facility]);
+
+  useEffect(() => {
+    if (location.department === "B1") {
+      setRooms(["304", "305", "306"]);
+    } else if (location.department === "B2") {
+      setRooms(["404", "405", "406"]);
+    } else if (location.department === "B3") {
+      setRooms(["504", "505", "506"]);
+    } else if (location.department === "H1") {
+      setRooms(["704", "705", "706"]);
+    } else if (location.department === "H3") {
+      setRooms(["604", "605", "606"]);
+    } else if (location.department === "H6") {
+      setRooms(["204", "205", "206"]);
+    }
+  }, [location.department]);
+
+  const handleSelectChange = (event, field) => {
+    const value = event.target.value;
+    if (field === "facility") {
+      // Nếu chọn "Cơ sở," đặt giá trị department và room về giá trị mặc định
+      setLocation({
+        ...location,
+        facility: value,
+        department: "",
+        room: "",
+      });
+      setFacilities(value);
+    } else if (field === "department") {
+      // Nếu chọn "Tòa," đặt giá trị room về giá trị mặc định
+      setLocation({
+        ...location,
+        department: value,
+        room: "",
+      });
+    } else {
+      // Ngược lại, cập nhật giá trị của trường chỉ định (room)
+      setLocation((prevLocation) => ({
+        ...prevLocation,
+        [field]: value,
+      }));
+    }
+  };
+  const onChangeDep = (val) => {
+    if (facilities === "Cơ sở 1") {
+      setDepartments(["B1", "B2", "B3"]);
+      location.department = "";
+      location.room = "";
+    } else if (facilities === "Cơ sở 2") {
+      setDepartments(["H1", "H3", "H6"]);
+      location.department = "";
+      location.room = "";
+    }
+  };
+
+  // console.log(location);
   const [desc, setDesc] = useState(values_AP.description);
   const [checked, setChecked] = useState("active");
 
@@ -89,13 +158,52 @@ export const AddPrinterModal = ({ children }) => {
               <p className="text-[#066DCC] text-[16px] md:text-[20px] font-bold w-[80px] md:w-[124px]">
                 Vị trí:{" "}
               </p>
-              <div className="flex-1">
-                <input
-                  type="text"
-                  className="block w-full"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                />
+              <div className="flex flex-1 gap-4">
+                <select
+                  value={location.facility}
+                  className="w-[40%] h-[2.5rem] border-1 border-[black] focus:border-[black] focus:outline-none rounded-[0.5rem]"
+                  name="facility"
+                  id="facility"
+                  onChange={(e) => handleSelectChange(e, "facility")}
+                >
+                  {" "}
+                  {/*onChange={updateBuilding} */}
+                  <option selected="true" disabled="disable" value="">
+                    Cơ sở...
+                  </option>
+                  <option value="Cơ sở 1">Cơ sở 1</option>
+                  <option value="Cơ sở 2">Cơ sở 2</option>
+                </select>
+
+                <select
+                  value={location.department}
+                  className="w-[35%] h-[2.5rem] border-1 border-[black] focus:outline-none rounded-[0.5rem]"
+                  name="department"
+                  id="department"
+                  onChange={(e) => handleSelectChange(e, "department")}
+                >
+                  <option selected="true" disabled="disable" value="">
+                    Tòa...
+                  </option>
+                  {departments.map((dep) => {
+                    return <option value={dep}>{dep}</option>;
+                  })}
+                </select>
+
+                <select
+                  value={location.room}
+                  className="w-[40%] h-[2.5rem] border-1 border-[black] focus:outline-none rounded-[0.5rem]"
+                  name="room"
+                  id="room"
+                  onChange={(e) => handleSelectChange(e, "room")}
+                >
+                  <option selected="true" disabled="disable" value="">
+                    Phòng...
+                  </option>
+                  {rooms.map((rm) => {
+                    return <option value={rm}>{rm}</option>;
+                  })}
+                </select>
               </div>
             </div>
             <div className="flex flex-col items-start gap-[8px] mb-[16px]">

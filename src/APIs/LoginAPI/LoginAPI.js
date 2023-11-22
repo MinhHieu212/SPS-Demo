@@ -10,7 +10,7 @@ export const LoginAPI = async (data) => {
       return response;
     })
     .catch((error) => {
-      // console.log("Fail Login", error);
+      console.log("Fail Login", error);
       return error;
     });
 
