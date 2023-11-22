@@ -118,15 +118,14 @@ const SPSOEditPrinterModal = ({ children }) => {
                   <div>
                     <div className="flex items-center mb-[4px] gap-[22px]">
                       <input
-                        checked={checked === "enable"}
-                        id="enable"
+                        id="statusEnable"
                         type="radio"
-                        name="status"
+                        name="printerStatus"
                         className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300"
                       />
                       <label
                         onClick={() => setChecked("enable")}
-                        for="enable"
+                        htmlFor="statusEnable"
                         className="text-[16px] md:text-[20px] font-semibold p-0"
                       >
                         Hoạt động
@@ -134,16 +133,14 @@ const SPSOEditPrinterModal = ({ children }) => {
                     </div>
                     <div className="flex items-center gap-[22px]">
                       <input
-                        checked={checked === "disable"}
-                        id="disable"
+                        id="statusDisable"
                         type="radio"
-                        // value="inactive"
-                        name="status"
+                        name="printerStatus"
                         className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300"
                       />
                       <label
                         onClick={(e) => setChecked("disable")}
-                        for="disable"
+                        htmlFor="statusDisable"
                         className="text-[16px] md:text-[20px] font-semibold p-0"
                       >
                         Không hoạt động
