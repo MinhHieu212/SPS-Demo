@@ -5,7 +5,6 @@ import { makePayment } from "../../APIs/BKPayAPI/BKPayAPI";
 import { useState } from "react";
 
 function PaymentInfo(props) {
-  console.log(props.remain);
   const [biCarDisplay, setBiCartDisplay] = useState(props.remain !== 0);
 
   const handleMakePayment = async () => {

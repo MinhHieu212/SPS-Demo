@@ -16,7 +16,7 @@ const Bkpay = () => {
   useEffect(() => {
     const handleCallApi = async () => {
       const response = await getPaymentsList();
-      console.log("reponse from get payments api: ", response);
+      // console.log("reponse from get payments api: ", response);
       setPaymentsList(response?.data?.data);
     };
 

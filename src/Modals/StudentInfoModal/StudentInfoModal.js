@@ -27,9 +27,9 @@ function StudentInfoModal({ children }) {
 
     await userInfoContext.updateUserInfo(userInformation?.data?.data);
 
-    console.log("newConext User info", userInfoContext.info);
+    // console.log("newConext User info", userInfoContext.info);
 
-    // setUserInformation(userInformation?.data?.data);
+    setUserInformation(userInformation?.data?.data);
   };
 
   return (
@@ -85,7 +85,7 @@ function StudentInfoModal({ children }) {
                   Số dư hiện tại (tờ):
                 </span>
                 <div className="text-[20px] font-semibold w-[135px] h-[40px] bg-[#D9D9D9] flex items-center justify-center rounded-lg">
-                  {userInformation?.balance}
+                  {Math.floor(userInformation?.balance)}
                 </div>
               </div>
               <PagesPurchaseModal>
