@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CenterModal from "../BaseModals/CenterModal";
 import "./PagesPurchaseModal.scss";
 import { useNavigate } from "react-router-dom";
+import { confirmPayment } from "../../APIs/BKPayAPI/BKPayAPI";
 
 const PagesPurchaseModal = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -27,13 +28,20 @@ const PagesPurchaseModal = ({ children }) => {
 
   const handleInputChange = (e) => {
     const newValue = parseInt(e.target.value, 10);
+    console.log("new value", newValue);
+    isNaN(newValue) ? setValue(0) : null;
     if (!isNaN(newValue) && newValue <= 999 && newValue >= 0) {
       setValue(newValue);
     }
   };
 
-  const handleAccept = () => {
-    console.log(value);
+  const handleAccept = async () => {
+    const data = { money: value * 1000 };
+
+    console.log("Data sent to confirm purchase pages ", data);
+
+    await confirmPayment(data);
+
     setTimeout(() => {
       navigate("/Bkpay");
     }, 1000);
