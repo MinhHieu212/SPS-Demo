@@ -84,7 +84,7 @@ const Printing = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem("accessToken") === null) {
-      navigate("/Error");
+      navigate("/Login");
     }
   }, []);
 

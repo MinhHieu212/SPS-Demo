@@ -23,7 +23,7 @@ const Bkpay = () => {
     handleCallApi();
 
     if (localStorage.getItem("accessToken") === null) {
-      navigate("/Error");
+      navigate("/Login");
     }
   }, [renderList]);
   return (

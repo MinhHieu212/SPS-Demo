@@ -15,7 +15,7 @@ function HistoryItem(props) {
         <DetailHistoryModal>
           <InfoIcon />
         </DetailHistoryModal>
-        {props.status === "Đang đợi" ? (
+        {props.status === "Queued" ? (
           <CancelPrintingModal>
             <CancelIcon />
           </CancelPrintingModal>
