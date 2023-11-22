@@ -167,7 +167,6 @@ export const AddPrinterModal = ({ children }) => {
                   onChange={(e) => handleSelectChange(e, "facility")}
                 >
                   {" "}
-                  {/*onChange={updateBuilding} */}
                   <option selected="true" disabled="disable" value="">
                     Cơ sở...
                   </option>
