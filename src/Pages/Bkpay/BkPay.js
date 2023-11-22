@@ -16,7 +16,7 @@ const Bkpay = () => {
   useEffect(() => {
     const handleCallApi = async () => {
       const response = await getPaymentsList();
-      console.log("reponse from get payments api: ", response);
+      // console.log("reponse from get payments api: ", response);
       setPaymentsList(response?.data?.data);
     };
 
@@ -96,31 +96,33 @@ const Bkpay = () => {
               <div>Đã thanh toán</div>
               <div>Còn lại</div>
             </div>
-            {paymentsList?.map((info, index) => (
-              <PaymentInfo
-                key={index}
-                semester={info.shortContent.slice(-3)}
-                content={info.shortContent}
-                batch={info._id.slice(0, 10)}
-                type={"Tiền mua giấy in"}
-                date={
-                  info.updatedAt.split("T")[0] +
-                  " " +
-                  info.updatedAt.split("T")[1].substring(0, 8)
-                }
-                total={info.money}
-                fee={0}
-                checkout={info.paidMoney}
-                remain={info.leftMoney}
-                checkoutDate={
-                  info.updatedAt.split("T")[0] +
-                  " " +
-                  info.updatedAt.split("T")[1].substring(0, 8)
-                }
-                order={info.stt}
-                id={info._id.slice(0, 10)}
-              />
-            ))}
+            {paymentsList &&
+              paymentsList.length > 0 &&
+              paymentsList?.map((info, index) => (
+                <PaymentInfo
+                  key={index}
+                  semester={info?.shortContent?.slice(-3)}
+                  content={info?.shortContent}
+                  batch={info?._id?.slice(0, 10)}
+                  type={"Tiền mua giấy in"}
+                  date={
+                    info?.updatedAt.split("T")[0] +
+                    " " +
+                    info?.updatedAt.split("T")[1].substring(0, 8)
+                  }
+                  total={info?.money}
+                  fee={0}
+                  checkout={info?.paidMoney}
+                  remain={info?.leftMoney}
+                  checkoutDate={
+                    info?.updatedAt.split("T")[0] +
+                    " " +
+                    info?.updatedAt?.split("T")[1].substring(0, 8)
+                  }
+                  order={info?.stt}
+                  id={info?._id?.slice(0, 10)}
+                />
+              ))}
           </div>
         </div>
       </div>
