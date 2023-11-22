@@ -231,11 +231,11 @@ export const AddPrinterModal = ({ children }) => {
                       id="active"
                       type="radio"
                       value="active"
-                      name="status"
+                      name="statusPrinter"
                       className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300"
                     />
                     <label
-                      for="active"
+                      htmlFor="active"
                       className="text-[16px] md:text-[20px] font-semibold p-0"
                     >
                       Hoạt động
@@ -248,11 +248,11 @@ export const AddPrinterModal = ({ children }) => {
                       id="inactive"
                       type="radio"
                       value="inactive"
-                      name="status"
+                      name="statusPrinter"
                       className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300"
                     />
                     <label
-                      for="inactive"
+                      htmlFor="inactive"
                       className="text-[16px] md:text-[20px] font-semibold p-0"
                     >
                       Không hoạt động
