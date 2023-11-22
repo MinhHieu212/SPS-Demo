@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import CenterModal from "../BaseModals/CenterModal";
 
-const SPSOEditPrinterModal = ({ children }) => {
+const SPSOEditPrinterModal = ({ children, status }) => {
   const [openModal, setOpenModal] = useState(false);
   const handleClose = () => {
     setOpenModal(false);
   };
-
+  //console.log(status)
   const [tabActivated, setTabActivated] = useState(1);
   const info = {
     id: "12345",
@@ -122,6 +122,7 @@ const SPSOEditPrinterModal = ({ children }) => {
                         type="radio"
                         name="printerStatus"
                         className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300"
+                        checked = {status === "Hoạt động"}
                       />
                       <label
                         onClick={() => setChecked("enable")}
@@ -137,6 +138,7 @@ const SPSOEditPrinterModal = ({ children }) => {
                         type="radio"
                         name="printerStatus"
                         className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300"
+                        checked = {status === "Không hoạt động"}
                       />
                       <label
                         onClick={(e) => setChecked("disable")}

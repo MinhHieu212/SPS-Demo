@@ -16,11 +16,11 @@ const FIlterManagePriterModal = ({ children, functionRenderList }) => {
     setStatus("all");
     setLocation("all");
     settimeActive("acsending");
-    setOpen(false);
     value.status = status;
     value.location = location;
     value.timeActive = timeActive;
     value.searchField = "";
+    setOpen(false);
   };
 
   const applyFilter = () => {

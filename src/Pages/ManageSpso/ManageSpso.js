@@ -22,7 +22,7 @@ const ManageSpso = () => {
       setPrintersList(response?.data?.data);
     }
     const params = {}
-    if (value.status === "all") params.status = "100";
+    if (value.status === "all") params.status = null;
     else if (value.status === "enable") params.status = "1";
     else params.status = "0";
 
