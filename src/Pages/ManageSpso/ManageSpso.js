@@ -8,7 +8,6 @@ import { FIlterManagePriterModal } from "../../Modals";
 import { getPrintersList } from "../../APIs/SpsoAPI/SpsoAPI";
 import { value } from "../../Modals/FIlterManagePriterModal/FIlterManagePriterModal";
 
-
 const ManageSpso = () => {
   const [printersList, setPrintersList] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -20,13 +19,13 @@ const ManageSpso = () => {
       //console.log("reponse from get printers api: ", response);
       //console.log(data);
       setPrintersList(response?.data?.data);
-    }
-    const params = {}
+    };
+    const params = {};
     if (value.status === "all") params.status = null;
     else if (value.status === "enable") params.status = "1";
     else params.status = "0";
 
-    if (value.location === "all") params.facility = 'all';
+    if (value.location === "all") params.facility = "all";
     else if (value.location === "cs1") params.facility = "CS1";
     else if (value.location === "cs2") params.facility = "CS2";
     else params.facility = "100";
@@ -37,7 +36,7 @@ const ManageSpso = () => {
     handleSPSOApi(params);
     console.log(params);
     if (localStorage.getItem("accessToken") === null) {
-      navigate("/Error");
+      navigate("/Login");
     }
   }, [renderList]);
   const printers = printersList.printers;
@@ -64,8 +63,12 @@ const ManageSpso = () => {
             <p className="text-base lg:text-xl w-[60%]">ĐANG HOẠT ĐỘNG</p>
           </div>
           <div className="bg-white flex flex-row text-base font-bold justify-center items-center text-center py-[14px]">
-            <p className="text-base lg:text-xl w-[40%]">{printersList.totalPrinter}</p>
-            <p className="text-base lg:text-xl w-[60%]">{printersList.activatedPrinter}</p>
+            <p className="text-base lg:text-xl w-[40%]">
+              {printersList.totalPrinter || 0}
+            </p>
+            <p className="text-base lg:text-xl w-[60%]">
+              {printersList.activatedPrinter || 0}
+            </p>
           </div>
         </div>
         <div className="w-full md:w-1/2 lg:w-2/3 flex flex-col lg:flex-row gap-3 ">
@@ -76,11 +79,14 @@ const ManageSpso = () => {
               className="w-full outline-none border-none"
               onChange={(e) => setInputValue(e.target.value)}
             />
-            <div onClick={(e) => {
-              setRenderList(!renderList);
-              value.searchField = inputValue;
-            }}><SearchIcon></SearchIcon></div>
-
+            <div
+              onClick={(e) => {
+                setRenderList(!renderList);
+                value.searchField = inputValue;
+              }}
+            > 
+              <SearchIcon></SearchIcon>
+            </div>
           </div>
           <div className="w-[100%] lg:w-1/2">
             <FIlterManagePriterModal
@@ -111,7 +117,13 @@ const ManageSpso = () => {
           <ManageSpsoItem
             key={index}
             id={printer.printerId}
-            location={printer.location.facility + ", " + printer.location.department + ", " + printer.location.room}
+            location={
+              printer.location.facility +
+              ", " +
+              printer.location.department +
+              ", " +
+              printer.location.room
+            }
             date={printer.activatedTime.slice(0, 10)}
             status={printer.status ? "Hoạt động" : "Không hoạt động"}
             queue={printer.printingQueue.length + printer.printingJob.length}

@@ -7,7 +7,7 @@ const Config = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem("accessToken") === null) {
-      navigate("/Error");
+      navigate("/Login");
     }
   }, []);
   // Attributes for the first form

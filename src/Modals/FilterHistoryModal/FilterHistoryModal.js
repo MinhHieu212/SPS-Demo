@@ -1,30 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const FilterHistoryModal = ({ children }) => {
+const FilterHistoryModal = ({ children, handleChangeParams }) => {
   const [open, setOpen] = useState(false);
+  const [status, setStatus] = useState(null);
+  const [facility, setFacility] = useState(null);
+  const [sort, setSort] = useState(-1);
+  const [date1, setDate1] = useState(null);
+  const [date2, setDate2] = useState(null);
 
-  const [status, setStatus] = useState("all"); // all or enable or disable
-  const [location, setLocation] = useState("all"); // all or cs1 or cs2
-  const [sort, setSort] = useState("latest");
-  const [date1, setDate1] = useState("none");
-  const [date2, setDate2] = useState("none");
+  const [filterParams, setFilterParams] = useState({
+    status: status,
+    facility: facility,
+    sortDirection: sort,
+    startDate: date1,
+    endDate: date2,
+  });
 
-  const cancelFilter = () => {
-    setStatus("all");
-    setLocation("all");
-    setSort("latest");
-    setDate1("none");
-    setDate2("none");
+  useEffect(() => {
+    setFilterParams({
+      status: status,
+      facility: facility,
+      sortDirection: sort,
+      startDate: date1,
+      endDate: date2,
+    });
+  }, [status, facility, sort, date1, date2]);
+
+  const applyFilter = async () => {
+    console.log("Params Filter History : ", filterParams);
+    await handleChangeParams(filterParams);
     setOpen(false);
   };
 
-  const applyFilter = () => {
-    console.log("Params Filter History : ", {
-      status: status,
-      location: location,
-      sort: sort,
-      date1: date1,
-      date2: date2,
+  const cancelFilter = async () => {
+    setDate1(null);
+    setDate2(null);
+    setSort(-1);
+    setFacility(null);
+    setStatus(null);
+
+    await handleChangeParams({
+      status: null,
+      facility: null,
+      sortDirection: null,
+      startDate: null,
+      endDate: null,
     });
     setOpen(false);
   };
@@ -66,25 +86,25 @@ const FilterHistoryModal = ({ children }) => {
               </div>
               <div
                 className={`${
-                  location === "all" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  facility === null ? "rounded-sm bg-[#E6E6E6]" : ""
                 } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
-                onClick={() => setLocation("all")}
+                onClick={() => setFacility(null)}
               >
                 Tất cả
               </div>
               <div
                 className={`${
-                  location === "cs1" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  facility === "CS1" ? "rounded-sm bg-[#E6E6E6]" : ""
                 } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
-                onClick={() => setLocation("cs1")}
+                onClick={() => setFacility("CS1")}
               >
                 Cơ sở 1
               </div>
               <div
                 className={`${
-                  location === "cs2" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  facility === "CS2" ? "rounded-sm bg-[#E6E6E6]" : ""
                 } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
-                onClick={() => setLocation("cs2")}
+                onClick={() => setFacility("CS2")}
               >
                 Cơ sở 2
               </div>
@@ -98,41 +118,41 @@ const FilterHistoryModal = ({ children }) => {
               </div>
               <div
                 className={`${
-                  status === "all" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  status === null ? "rounded-sm bg-[#E6E6E6]" : ""
                 } border-b-[3px] cursor-pointer border-gray h-[40px] shrink-0 flex items-center justify-center font-semibold w-[80%]`}
-                onClick={() => setStatus("all")}
+                onClick={() => setStatus(null)}
               >
                 Tất cả
               </div>
               <div
                 className={`${
-                  status === "Printed" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  status === "Completed" ? "rounded-sm bg-[#E6E6E6]" : ""
                 } border-b-[3px] cursor-pointer border-gray h-[40px] shrink-0 flex items-center justify-center font-semibold w-[80%]`}
-                onClick={() => setStatus("Printed")}
+                onClick={() => setStatus("Completed")}
               >
                 Đã in
               </div>
               <div
                 className={`${
-                  status === "Cancelled" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  status === "Failed" ? "rounded-sm bg-[#E6E6E6]" : ""
                 } border-b-[3px] cursor-pointer border-gray h-[40px] shrink-0 flex items-center justify-center font-semibold w-[80%]`}
-                onClick={() => setStatus("Cancelled")}
+                onClick={() => setStatus("Failed")}
               >
                 Đã hủy
               </div>
               <div
                 className={`${
-                  status === "Printing" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  status === "InProgress" ? "rounded-sm bg-[#E6E6E6]" : ""
                 } border-b-[3px] cursor-pointer border-gray h-[40px] shrink-0 flex items-center justify-center font-semibold w-[80%]`}
-                onClick={() => setStatus("Printing")}
+                onClick={() => setStatus("InProgress")}
               >
                 Đang in
               </div>
               <div
                 className={`${
-                  status === "Waiting" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  status === "Queued" ? "rounded-sm bg-[#E6E6E6]" : ""
                 } border-b-[3px] cursor-pointer border-gray h-[40px] shrink-0 flex items-center justify-center font-semibold w-[80%]`}
-                onClick={() => setStatus("Waiting")}
+                onClick={() => setStatus("Queued")}
               >
                 Đang đợi
               </div>
@@ -145,17 +165,17 @@ const FilterHistoryModal = ({ children }) => {
                 </div>
                 <div
                   className={`${
-                    sort === "latest" ? "rounded-sm bg-[#E6E6E6]" : ""
+                    sort === -1 ? "rounded-sm bg-[#E6E6E6]" : ""
                   } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
-                  onClick={() => setSort("latest")}
+                  onClick={() => setSort(-1)}
                 >
                   Mới nhất
                 </div>
                 <div
                   className={`${
-                    sort === "oldest" ? "rounded-sm bg-[#E6E6E6]" : ""
+                    sort === 1 ? "rounded-sm bg-[#E6E6E6]" : ""
                   } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%] mb-1`}
-                  onClick={() => setSort("oldest")}
+                  onClick={() => setSort(1)}
                 >
                   Cũ nhất
                 </div>
