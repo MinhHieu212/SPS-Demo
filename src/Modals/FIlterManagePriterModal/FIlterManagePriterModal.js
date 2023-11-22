@@ -6,7 +6,8 @@ const FIlterManagePriterModal = ({ children }) => {
   const [status, setStatus] = useState("all"); // all or enable or disable
   const [location, setLocation] = useState("all"); // all or cs1 or cs2
   const [timeActive, settimeActive] = useState("ascending"); // acsending or descending
-
+  
+  
   const cancelFilter = () => {
     setStatus("all");
     setLocation("all");
@@ -23,6 +24,7 @@ const FIlterManagePriterModal = ({ children }) => {
     setOpen(false);
   };
 
+  
   return (
     <div className="Wrapper relative z-10 w-full">
       <div className="Trigger" onClick={() => setOpen(!open)}>
@@ -135,5 +137,4 @@ const FIlterManagePriterModal = ({ children }) => {
     </div>
   );
 };
-
 export default FIlterManagePriterModal;

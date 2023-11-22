@@ -103,9 +103,10 @@ const ManageSpso = () => {
   const [printersList, setPrintersList] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    const handleSPSOApi = async () => {
+    const handleSPSOApi = async (data) => {
       const response = await getPrintersList();
       //console.log("reponse from get printers api: ", response);
+      console.log(data);
       setPrintersList(response?.data?.data);
     }
 
