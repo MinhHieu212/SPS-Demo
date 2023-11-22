@@ -105,7 +105,7 @@ const ManageSpso = () => {
   useEffect(() => {
     const handleSPSOApi = async () => {
       const response = await getPrintersList();
-      console.log("reponse from get printers api: ", response);
+      //console.log("reponse from get printers api: ", response);
       setPrintersList(response?.data?.data);
     }
 
@@ -116,7 +116,7 @@ const ManageSpso = () => {
     }
   }, []);
   const printers = printersList.printers
-  console.log(printers);
+  //console.log(printers);
   
   return (
     <div className="Manage mx-auto max-w-[1280px] w-full px-[10px] lg:px-[20px] bg-[white] shadow-sm pb-5 min-h-[93vh]">
@@ -178,10 +178,12 @@ const ManageSpso = () => {
         {printers?.map((printer, index) => (
           <ManageSpsoItem
             key={index}
-            id={printer._id.slice(0, 10)}
+            id={printer.printerId}
             location={printer.location.facility + ", " + printer.location.department + ", " + printer.location.room}
             date={printer.activatedTime.slice(0,10)}
             status={printer.status ? "Hoạt động" : "Không hoạt động"}
+            queue = {printer.printingQueue.length + printer.printingJob.length}
+            printingQueue = {[...printer.printingJob, ...printer.printingQueue]}
           />
         ))}
       </div>

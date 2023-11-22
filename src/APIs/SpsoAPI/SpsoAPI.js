@@ -2,7 +2,7 @@ import SpssAPI from "../SpssAPI/SpssAPI";
 
 const path = "/v1/spso/printers/";
 
-export const getPrintersList = async () => {
+export const getPrintersList = async (data) => {
   const PrintersInfos = await SpssAPI.get(path)
     .then((response) => {
       //console.log("Response from api User infomation ", response);
