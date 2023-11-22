@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FilterIcon, SearchIcon } from "../../Assets/Icons/Icons";
 import "./ManageSpso.scss";
 import ManageSpsoItem from "./ManageSpsoItem";
 import { AddPrinterModal } from "../../Modals/AddPrinterModal/AddPrinterModal";
 import { useNavigate } from "react-router";
 import { FIlterManagePriterModal } from "../../Modals";
-
+import { getPrintersList } from "../../APIs/SpsoAPI/SpsoAPI";
 const printers = [
   {
     id: "H03CS2",
@@ -99,15 +99,25 @@ const printers = [
     status: "Hoạt động",
   },
 ];
-
 const ManageSpso = () => {
+  const [printersList, setPrintersList] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
+    const handleSPSOApi = async () => {
+      const response = await getPrintersList();
+      console.log("reponse from get printers api: ", response);
+      setPrintersList(response?.data?.data);
+    }
+
+    handleSPSOApi();
+
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Error");
     }
   }, []);
-
+  const printers = printersList.printers
+  console.log(printers);
+  
   return (
     <div className="Manage mx-auto max-w-[1280px] w-full px-[10px] lg:px-[20px] bg-[white] shadow-sm pb-5 min-h-[93vh]">
       <div className="flex flex-row mt-3 border-b-4 border-[#066DCC] pb-2 md:pb-3 mb-4 items-center justify-between">
@@ -122,7 +132,6 @@ const ManageSpso = () => {
           </AddPrinterModal>
         </div>
       </div>
-
       <div className="flex flex-col-reverse md:flex-row mt-3 items-start manageSPSO-outer-flex">
         <div className="w-full md:w-1/2 lg:w-1/3 relative shadow-lg rounded-md overflow-hidden">
           <div className="bg-[#3C8DBC] text-white text-xl font-bold flex flex-row justify-center items-center text-center py-[14px] px-[10px] rou">
@@ -130,8 +139,8 @@ const ManageSpso = () => {
             <p className="text-base lg:text-xl w-[60%]">ĐANG HOẠT ĐỘNG</p>
           </div>
           <div className="bg-white flex flex-row text-base font-bold justify-center items-center text-center py-[14px]">
-            <p className="text-base lg:text-xl w-[40%]">10</p>
-            <p className="text-base lg:text-xl w-[60%]">2</p>
+            <p className="text-base lg:text-xl w-[40%]">{printersList.totalPrinter}</p>
+            <p className="text-base lg:text-xl w-[60%]">{printersList.activatedPrinter}</p>
           </div>
         </div>
         <div className="w-full md:w-1/2 lg:w-2/3 flex flex-col lg:flex-row gap-3 ">
@@ -166,13 +175,13 @@ const ManageSpso = () => {
           <div className="text-center w-[25%]">SỐ YÊU CẦU IN</div>
           <div className="w-[30%]">TRẠNG THÁI</div>
         </div>
-        {printers.map((printer) => (
+        {printers?.map((printer, index) => (
           <ManageSpsoItem
-            id={printer.id}
-            location={printer.location}
-            date={printer.date}
-            queue={printer.queue}
-            status={printer.status}
+            key={index}
+            id={printer._id.slice(0, 10)}
+            location={printer.location.facility + ", " + printer.location.department + ", " + printer.location.room}
+            date={printer.activatedTime.slice(0,10)}
+            status={printer.status ? "Hoạt động" : "Không hoạt động"}
           />
         ))}
       </div>
