@@ -15,11 +15,12 @@ const FIlterManagePriterModal = ({ children, functionRenderList }) => {
   const cancelFilter = () => {
     setStatus("all");
     setLocation("all");
-    settimeActive("acsending");
-    value.status = status;
-    value.location = location;
-    value.timeActive = timeActive;
+    settimeActive("ascending");
+    value.status = "all";
+    value.location = "all";
+    value.timeActive = "ascending";
     value.searchField = "";
+    functionRenderList();
     setOpen(false);
   };
 
