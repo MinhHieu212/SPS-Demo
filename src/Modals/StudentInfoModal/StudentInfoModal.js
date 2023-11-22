@@ -5,6 +5,7 @@ import { CloseModalIcon } from "../../Assets/Icons/Icons";
 import PagesPurchaseModal from "../PagesPurchaseModal/PagesPurchaseModal";
 import { useUserInfo } from "../../Contexts/UserInfoContext";
 import { useRole } from "../../Contexts/RoleContext";
+import { UserInfoAPI } from "../../APIs/UserInfoAPI/UserInfoAPI";
 
 function StudentInfoModal({ children }) {
   const navigate = useNavigate();
@@ -20,12 +21,26 @@ function StudentInfoModal({ children }) {
     navigate("/");
   };
 
+  const getNewInfo = async () => {
+    const userInformation = await UserInfoAPI();
+    // console.log("New User info", userInformation?.data?.data);
+
+    await userInfoContext.updateUserInfo(userInformation?.data?.data);
+
+    // console.log("newConext User info", userInfoContext.info);
+
+    setUserInformation(userInformation?.data?.data);
+  };
+
   return (
     <div className="relative z-50 w-auto h-auto">
       <div
         id="triggerUserInfo"
         className=" cursor-pointer"
-        onClick={() => setOpen(!open)}
+        onClick={() => {
+          setOpen(!open);
+          getNewInfo();
+        }}
       >
         {children}
       </div>
@@ -70,7 +85,7 @@ function StudentInfoModal({ children }) {
                   Số dư hiện tại (tờ):
                 </span>
                 <div className="text-[20px] font-semibold w-[135px] h-[40px] bg-[#D9D9D9] flex items-center justify-center rounded-lg">
-                  {userInformation?.balance}
+                  {Math.floor(userInformation?.balance)}
                 </div>
               </div>
               <PagesPurchaseModal>

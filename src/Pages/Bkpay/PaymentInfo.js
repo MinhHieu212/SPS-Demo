@@ -1,8 +1,20 @@
 import "./BKPay.scss";
 import { AiOutlinePrinter } from "react-icons/ai";
 import { BiCart } from "react-icons/bi";
+import { makePayment } from "../../APIs/BKPayAPI/BKPayAPI";
+import { useState } from "react";
 
 function PaymentInfo(props) {
+  const [biCarDisplay, setBiCartDisplay] = useState(props.remain !== 0);
+
+  const handleMakePayment = async () => {
+    const data = {
+      payment_id: props.payment_id,
+    };
+    await makePayment(data);
+    setBiCartDisplay(false);
+  };
+
   return (
     <div className="PaymentInfo">
       <h2 className="font-semibold semester-title mb-2 mt-2 text-xs lg:text-sm">
@@ -40,7 +52,14 @@ function PaymentInfo(props) {
         <div>{props.remain}</div>
         <div>{props.date}</div>
         <div>
-          <BiCart className="text-lg lg:text-2xl" />
+          <div
+            onClick={async () => {
+              await handleMakePayment();
+              await props.functionRenderList();
+            }}
+          >
+            {biCarDisplay && <BiCart className="text-lg lg:text-2xl" />}
+          </div>
         </div>
         <div>
           <AiOutlinePrinter className="text-lg lg:text-2xl" />
