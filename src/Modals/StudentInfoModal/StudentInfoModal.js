@@ -29,7 +29,7 @@ function StudentInfoModal({ children }) {
 
     console.log("newConext User info", userInfoContext.info);
 
-    // setUserInformation(userInformation?.data?.data);
+    setUserInformation(userInformation?.data?.data);
   };
 
   return (

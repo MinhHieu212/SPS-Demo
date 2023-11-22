@@ -26,6 +26,7 @@ const Bkpay = () => {
       navigate("/Error");
     }
   }, [renderList]);
+  
   return (
     <div className="BKPay bg-[#eee]">
       <div id="slider-BKPay" className="relative w-full">
