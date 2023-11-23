@@ -12,7 +12,7 @@ function HistoryItem(props) {
       <div className="text-center w-[15%]">{props.date}</div>
       <div className="text-center w-[15%]">{props.status}</div>
       <div className="flex flex-row gap-4 items-center justify-center w-[15%]">
-        <DetailHistoryModal>
+        <DetailHistoryModal props={props}>
           <InfoIcon />
         </DetailHistoryModal>
         {props.status === "Queued" ? (

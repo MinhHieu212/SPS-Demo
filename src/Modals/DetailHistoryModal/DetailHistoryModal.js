@@ -2,20 +2,10 @@ import React, { useState } from "react";
 import CenterModal from "../BaseModals/CenterModal";
 import { InfoField2 } from "../../Utils/InfoField";
 
-const DetailHistoryModal = ({ children }) => {
+const DetailHistoryModal = ({ children, props }) => {
   const [openModal, setOpenModal] = useState(false);
   const handleClose = () => {
     setOpenModal(false);
-  };
-
-  const info = {
-    Printer_ID: "12345",
-    Printer_Location: "CS1 , H6 , 304",
-    Date: "12-03-2023",
-    State: "Đã In",
-    FileName: "Coluuchat.pdf",
-    Quantity: "2 bản",
-    PageQuantity: "A4: 17",
   };
 
   return (
@@ -29,31 +19,31 @@ const DetailHistoryModal = ({ children }) => {
           <div className="p-2 flex items-center justify-center gap-y-2 flex-col py-4">
             <InfoField2
               fieldName={"ID máy in"}
-              fieldValue={info.Printer_ID}
+              fieldValue={props.printerId}
             ></InfoField2>
             <InfoField2
               fieldName={"Vị trí"}
-              fieldValue={info.Printer_Location}
+              fieldValue={props.position}
             ></InfoField2>
             <InfoField2
               fieldName={"Ngày in"}
-              fieldValue={info.Date}
+              fieldValue={props.date}
             ></InfoField2>
             <InfoField2
               fieldName={"Trạng thái"}
-              fieldValue={info.State}
+              fieldValue={props.status}
             ></InfoField2>
             <InfoField2
               fieldName={"Tên file"}
-              fieldValue={info.FileName}
+              fieldValue={props.fileName}
             ></InfoField2>
             <InfoField2
               fieldName={"Số bản in:"}
-              fieldValue={info.Quantity}
+              fieldValue={props.numVersion}
             ></InfoField2>
             <InfoField2
               fieldName={"Lượng giấy in"}
-              fieldValue={info.PageQuantity}
+              fieldValue={props.paperSize + ": " + props.page}
             ></InfoField2>
           </div>
         </div>

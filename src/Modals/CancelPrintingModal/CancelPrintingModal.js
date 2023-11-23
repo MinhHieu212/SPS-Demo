@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import CenterModal from "../BaseModals/CenterModal";
+import { cancelPrintingAPI } from "../../APIs/HistoryAPI/HistoryAPI";
 
-const CancelPrintingModal = ({ children }) => {
+const CancelPrintingModal = ({ children, printingLogId }) => {
   const [openModal, setOpenModal] = useState(false);
   const handleClose = () => {
     setOpenModal(false);
+  };
+
+  const data = {
+    printingLogId: printingLogId,
+  };
+
+  const callApiCancel = async () => {
+    const reponse = await cancelPrintingAPI(data);
+    console.log("Reponse form Cancel Prinintg Log", reponse);
   };
 
   return (
@@ -25,7 +35,10 @@ const CancelPrintingModal = ({ children }) => {
             >
               Hủy bỏ
             </button>
-            <button className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500  p-2 w-[40%] block rounded-md text-[16px] font-semibold text-white border-[1px] border-[#367FA9]">
+            <button
+              className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500  p-2 w-[40%] block rounded-md text-[16px] font-semibold text-white border-[1px] border-[#367FA9]"
+              onClick={callApiCancel}
+            >
               Xác nhận
             </button>
           </div>

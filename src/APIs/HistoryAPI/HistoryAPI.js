@@ -15,3 +15,17 @@ export const filterHistory = async (filterParams = {}) => {
 
   return responseFilterParams;
 };
+
+export const cancelPrintingAPI = async (data) => {
+  const reponseCancelPrintingAPI = await SpssAPI.delete(path, data)
+    .then((response) => {
+      // console.log("Response from api User infomation ", response);
+      return response?.data;
+    })
+    .catch((error) => {
+      // console.log("Fail get User infomation ", error);
+      return error;
+    });
+
+  return reponseCancelPrintingAPI;
+};

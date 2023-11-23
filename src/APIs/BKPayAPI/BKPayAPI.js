@@ -7,11 +7,11 @@ const path3 = "/v1/student/BKpayment";
 export const getPaymentsList = async () => {
   const BKPayInfo = await SpssAPI.get(path1)
     .then((response) => {
-      //console.log("Response from api get list payments", response);
+      console.log("Response from api get list payments", response);
       return response;
     })
     .catch((error) => {
-      //console.log("Fail on api get list payments ", error);
+      console.log("Fail on api get list payments ", error);
       return error;
     });
 
@@ -21,11 +21,11 @@ export const getPaymentsList = async () => {
 export const confirmPayment = async (data) => {
   const responseConfirmPayment = await SpssAPI.post(path2, data)
     .then((response) => {
-      // console.log("Response from api post confirm payments", response);
+      console.log("Response from api post confirm payments", response);
       return response;
     })
     .catch((error) => {
-      // console.log("Fail on api post confirm payments ", error);
+      console.log("Fail on api post confirm payments ", error);
       return error;
     });
 
@@ -35,11 +35,11 @@ export const confirmPayment = async (data) => {
 export const makePayment = async (data) => {
   const resMakePayment = await SpssAPI.post(path3, data)
     .then((response) => {
-      // console.log("Response from api post confirm resMakePayment", response);
+      console.log("Response from api post confirm resMakePayment", response);
       return response;
     })
     .catch((error) => {
-      // console.log("Fail on api post confirm resMakePayment ", error);
+      console.log("Fail on api post confirm resMakePayment ", error);
       return error;
     });
 

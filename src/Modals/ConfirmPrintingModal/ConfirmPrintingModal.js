@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import InfoField from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
 import { PrintingAPI } from "../../APIs/PrintingAPI/PrintingAPI";
+import { toast } from "../../Utils/Toastify";
 
-const ConfirmPrintingModal = ({ children, files }) => {
+const ConfirmPrintingModal = ({ children, files, printerId, clearFiles }) => {
   const [openModal, setOpenModal] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const handleClose = () => {
     setOpenModal(false);
@@ -16,20 +18,15 @@ const ConfirmPrintingModal = ({ children, files }) => {
   };
 
   data.No_File = files?.length;
+
   files.forEach((file) => {
     data.numVersion += parseInt(file?.numVersion);
   });
 
   const formData = new FormData();
-
-  // tao ra một array file trong form data
-  files.map((file, index) => {
-    formData.append("file", file.file);
-  });
-
-  // tao ra một array cấu hình file trong biến documents
   const documents = [];
-  files.forEach((file) => {
+
+  files.forEach((file, index) => {
     const newDocument = {
       paperSize: file?.paperSize,
       numVersion: file?.numVersion,
@@ -39,14 +36,36 @@ const ConfirmPrintingModal = ({ children, files }) => {
     };
 
     documents.push(newDocument);
+
+    formData.append("file", file?.file || null);
   });
 
   formData.append("documents", JSON.stringify(documents));
-  formData.append("printerId", JSON.stringify("H1109"));
+  formData.append("printerId", printerId);
 
   const handleSendRequestPrint = async () => {
-    const reponse = await PrintingAPI();
-    console.log("Response data from printing api :", reponse);
+    if (files?.length !== 0) {
+      try {
+        setIsButtonDisabled(true);
+
+        const response = await PrintingAPI(formData);
+
+        // console.log("Response data from printing api :", response);
+
+        clearFiles();
+
+        toast.success("Print request sent successfully!");
+      } catch (error) {
+        setIsButtonDisabled(false);
+        // console.log("Error data from printing api :", error);
+
+        toast.error(
+          error?.response?.data?.message || "Failed to send print request"
+        );
+      } finally {
+        setIsButtonDisabled(false);
+      }
+    }
     setOpenModal(false);
   };
 
@@ -78,6 +97,7 @@ const ConfirmPrintingModal = ({ children, files }) => {
             <button
               className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500  p-2 w-[40%] block rounded-lg text-[16px] md:text-[18px]  font-semibold text-white"
               onClick={handleSendRequestPrint}
+              disabled={isButtonDisabled}
             >
               Xác nhận
             </button>

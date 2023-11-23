@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const SpssAPI = axios.create({
-  baseURL: "https://ssps-7wxl.onrender.com",
+  baseURL: "http://172.16.0.161:8000",
   headers: {
     "Content-Type": "application/json",
   },

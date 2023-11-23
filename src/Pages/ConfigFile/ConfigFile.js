@@ -307,9 +307,9 @@ const ConfigFile = () => {
                   }
                 }}
               >
-                <option value="1">1 trang trên 1 tờ</option>
-                <option value="2">2 trang trên 1 tờ</option>
-                <option value="4">4 trang trên 1 tờ</option>
+                <option value="1">1 trang trên 1 mặt</option>
+                <option value="2">2 trang trên 1 mặt</option>
+                <option value="4">4 trang trên 1 mặt</option>
               </select>
             </div>
 
@@ -335,11 +335,12 @@ const ConfigFile = () => {
           </div>
 
           <div className="flex w-full mt-5 items-center justify-end gap-2">
-            <ConfirmPrintingModal files={files}>
-              <button
-                className="px-5 bg-[#066DCC] rounded-[5px] text-white font-bold text-center h-[40px] md:h-[50px]"
-                // onClick={() => console.log(files)}
-              >
+            <ConfirmPrintingModal
+              files={files}
+              printerId={PrinterID}
+              clearFiles={() => setFiles([])}
+            >
+              <button className="px-5 bg-[#066DCC] rounded-[5px] text-white font-bold text-center h-[40px] md:h-[50px]">
                 Gửi yêu cầu in
               </button>
             </ConfirmPrintingModal>

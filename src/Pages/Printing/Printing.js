@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const printerList = [
   {
-    id: "2113619",
+    id: "B4405",
     base: 2,
     building: "H6",
     room: 311,
@@ -15,7 +15,7 @@ const printerList = [
     request: 5,
   },
   {
-    id: "2113620",
+    id: "B4405",
     base: 2,
     building: "H3",
     room: 202,
@@ -23,7 +23,7 @@ const printerList = [
     request: 12,
   },
   {
-    id: "2113621",
+    id: "B4405",
     base: 1,
     building: "B3",
     room: 602,
@@ -31,7 +31,7 @@ const printerList = [
     request: 98,
   },
   {
-    id: "2113619",
+    id: "B4405",
     base: 2,
     building: "H6",
     room: 311,
@@ -39,7 +39,7 @@ const printerList = [
     request: 5,
   },
   {
-    id: "2113619",
+    id: "B4405",
     base: 2,
     building: "H6",
     room: 311,
@@ -47,7 +47,7 @@ const printerList = [
     request: 5,
   },
   {
-    id: "2113619",
+    id: "B4405",
     base: 2,
     building: "H6",
     room: 311,
@@ -55,7 +55,7 @@ const printerList = [
     request: 5,
   },
   {
-    id: "2113619",
+    id: "B4405",
     base: 2,
     building: "H6",
     room: 311,
@@ -63,7 +63,7 @@ const printerList = [
     request: 5,
   },
   {
-    id: "2113620",
+    id: "B4405",
     base: 2,
     building: "H3",
     room: 202,
@@ -71,7 +71,7 @@ const printerList = [
     request: 12,
   },
   {
-    id: "2113621",
+    id: "B4405",
     base: 1,
     building: "B3",
     room: 602,
