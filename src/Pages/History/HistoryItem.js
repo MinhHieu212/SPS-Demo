@@ -4,7 +4,7 @@ import { CancelIcon, InfoIcon } from "../../Assets/Icons/Icons";
 import { CancelPrintingModal, DetailHistoryModal } from "../../Modals";
 
 function HistoryItem(props) {
-  console.log(props.total_pages);
+  // console.log(props.total_pages);
   return (
     <div className=" flex flex-row justify-between items-center bg-[#ffffff] text-[16px] lg:text-[18px] font-semibold py-3 px-4 mt-2 min-w-[800px] md:w-full max-h-[60px] border-b-2 border-black rounded-sm ">
       <div className="truncate overflow-clip w-[25%] ">{props.fileName}</div>

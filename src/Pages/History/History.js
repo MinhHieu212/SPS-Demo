@@ -12,7 +12,7 @@ const History = () => {
   const [totalPages, setTotalPages] = useState({ A3: 0, A4: 0 });
   const [filterParams, setFilterParams] = useState({ per_page: 100 });
   const [searchParams, setSearchParams] = useState(null);
-  const [renderList, seteRnderList] = useState(true);
+  const [renderList, setRenderList] = useState(true);
 
   useEffect(() => {
     const handleCallAPI = async () => {

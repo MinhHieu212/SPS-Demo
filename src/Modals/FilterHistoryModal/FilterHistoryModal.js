@@ -46,6 +46,7 @@ const FilterHistoryModal = ({ children, handleChangeParams }) => {
       startDate: null,
       endDate: null,
     });
+
     setOpen(false);
   };
 
