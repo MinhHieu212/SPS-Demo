@@ -10,7 +10,7 @@ export const toast = {
       gravity: "top", // `top` or `bottom`
       position: "right", // `left`, `center` or `right`
       style: {
-        background: "#03a9f4",
+        background: "#367FA9",
       },
     }).showToast();
   },

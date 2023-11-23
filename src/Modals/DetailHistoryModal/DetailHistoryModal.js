@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CenterModal from "../BaseModals/CenterModal";
 import { InfoField2 } from "../../Utils/InfoField";
 
-const DetailHistoryModal = ({ children, props }) => {
+const DetailHistoryModal = ({ children, props, total_pages }) => {
   const [openModal, setOpenModal] = useState(false);
   const handleClose = () => {
     setOpenModal(false);
@@ -43,7 +43,7 @@ const DetailHistoryModal = ({ children, props }) => {
             ></InfoField2>
             <InfoField2
               fieldName={"Lượng giấy in"}
-              fieldValue={props.paperSize + ": " + props.page}
+              fieldValue={props.paperSize + ": " + props.total_pages}
             ></InfoField2>
           </div>
         </div>

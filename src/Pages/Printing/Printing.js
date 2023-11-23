@@ -1,92 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Printing.scss";
 import PrintingItem from "./PrintingItem";
 import { FilterIcon, SearchIcon } from "../../Assets/Icons/Icons";
 import { FilterPrinterModal } from "../../Modals";
 import { useNavigate } from "react-router-dom";
-
-const printerList = [
-  {
-    id: "B4405",
-    base: 2,
-    building: "H6",
-    room: 311,
-    status: "Hoạt động",
-    request: 5,
-  },
-  {
-    id: "B4405",
-    base: 2,
-    building: "H3",
-    room: 202,
-    status: "Hoạt động",
-    request: 12,
-  },
-  {
-    id: "B4405",
-    base: 1,
-    building: "B3",
-    room: 602,
-    status: "Hoạt động",
-    request: 98,
-  },
-  {
-    id: "B4405",
-    base: 2,
-    building: "H6",
-    room: 311,
-    status: "Hoạt động",
-    request: 5,
-  },
-  {
-    id: "B4405",
-    base: 2,
-    building: "H6",
-    room: 311,
-    status: "Hoạt động",
-    request: 5,
-  },
-  {
-    id: "B4405",
-    base: 2,
-    building: "H6",
-    room: 311,
-    status: "Hoạt động",
-    request: 5,
-  },
-  {
-    id: "B4405",
-    base: 2,
-    building: "H6",
-    room: 311,
-    status: "Hoạt động",
-    request: 5,
-  },
-  {
-    id: "B4405",
-    base: 2,
-    building: "H3",
-    room: 202,
-    status: "Hoạt động",
-    request: 12,
-  },
-  {
-    id: "B4405",
-    base: 1,
-    building: "B3",
-    room: 602,
-    status: "Hoạt động",
-    request: 98,
-  },
-];
+import { async } from "q";
+import { getPrinterList } from "../../APIs/PrintersAPI/PrintersAPI";
 
 const Printing = () => {
   const navigate = useNavigate();
+  const [printerList, setPrinterList] = useState([]);
+  const [filterParams, setFilterParams] = useState({ per_page: 100 });
+  const [searchParams, setSearchParams] = useState(null);
+
   useEffect(() => {
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Login");
     }
-  }, []);
+
+    const callAPI = async () => {
+      const response = await getPrinterList({ ...filterParams, per_page: 100 });
+      console.log("Response from get printer lisr api : ", response);
+      setPrinterList(response?.data?.printers);
+    };
+
+    callAPI();
+  }, [filterParams]);
+
+  const handleSearch = () => {
+    setFilterParams((filterParams) => {
+      return { ...filterParams, ["searchField"]: searchParams };
+    });
+  };
 
   return (
     <div className="Printing w-full px-[10px] max-w-[1280px] bg-[white] shadow-sm  lg:px-[20px] mx-auto pb-10 min-h-[93vh]">
@@ -99,11 +44,14 @@ const Printing = () => {
             type="text"
             placeholder="Tìm theo ID máy in"
             className="w-[90%] outline-none border-none"
+            onInput={(e) => setSearchParams(e.target.value)}
           />
-          <SearchIcon></SearchIcon>
+          <div onClick={handleSearch}>
+            <SearchIcon></SearchIcon>
+          </div>
         </div>
         <div className="w-full md:w-1/2">
-          <FilterPrinterModal>
+          <FilterPrinterModal setParams={(params) => setFilterParams(params)}>
             <div className="w-full cursor-pointer border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white">
               <span className="mx-3 text-[gray]">Lọc kết quả</span>
               <FilterIcon></FilterIcon>
@@ -114,12 +62,12 @@ const Printing = () => {
       <hr className="sm-hr mt-4" />
       {printerList.map((printer, index) => (
         <PrintingItem
-          id={printer.id}
-          base={printer.base}
-          building={printer.building}
-          room={printer.room}
-          status={printer.status}
-          request={printer.request}
+          id={printer.printerId}
+          base={printer?.location?.facility}
+          building={printer?.location?.department}
+          room={printer?.location?.room}
+          status={printer.status === 1 ? "Hoạt động" : "Ngưng hoạt động"}
+          request={printer.waiting_amount}
           key={index}
         ></PrintingItem>
       ))}

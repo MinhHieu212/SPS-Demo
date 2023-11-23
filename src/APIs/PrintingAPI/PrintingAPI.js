@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const PrintingBaseApi = axios.create({
-  baseURL: "http://172.16.0.161:8000",
+  baseURL: "https://ssps-7wxl.onrender.com",
   headers: {
     "Content-Type": "multipart/form-data",
   },
