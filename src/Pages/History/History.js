@@ -10,12 +10,13 @@ const History = () => {
   const navigate = useNavigate();
   const [historyLogs, setHistoryLogs] = useState([]);
   const [totalPages, setTotalPages] = useState({ A3: 0, A4: 0 });
-  const [filterParams, setFilterParams] = useState({});
+  const [filterParams, setFilterParams] = useState({ per_page: 100 });
   const [searchParams, setSearchParams] = useState(null);
+  const [renderList, seteRnderList] = useState(true);
 
   useEffect(() => {
     const handleCallAPI = async () => {
-      const response = await filterHistory(filterParams);
+      const response = await filterHistory({ ...filterParams, per_page: 100 });
 
       const pages = {
         A3: response?.data?.printedA3 || 0,
@@ -29,22 +30,19 @@ const History = () => {
 
     handleCallAPI();
 
-    console.log("Refresh API");
-
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Login");
     }
-  }, [filterParams]);
+  }, [filterParams, renderList]);
 
   const handleSearch = () => {
-    console.log("Search input", searchParams);
+    // console.log("Search input", searchParams);
     setFilterParams((filterParams) => {
       return { ...filterParams, ["searchField"]: searchParams };
     });
-    console.log("filterParams", filterParams);
+    // console.log("filterParams", filterParams);
   };
 
-  console.log(historyLogs);
   return (
     <div className="History max-w-[1280px] w-full px-[10px] lg:px-[20px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
       <h2 className="text-2xl lg:text-3xl font-semibold mt-3 printing-title border-b-4 border-[#066DCC] pb-2 md:pb-3 text-[#066DCC] ">
@@ -91,7 +89,7 @@ const History = () => {
           </div>
           <div className="w-full">
             <FilterHistoryModal
-              handleChangeParams={(params) => setFilterParams(params)}
+              handleChangeParams={(params) => setFilterParams({ ...params })}
             >
               <div className="w-full cursor-pointer border h-[50px] border-black rounded-md flex items-center justify-between pr-3 bg-white">
                 <span className="mx-3 text-[gray]">Lọc kết quả</span>
@@ -127,7 +125,9 @@ const History = () => {
             page={historyLog?.document?.pages}
             pagesPerSheet={historyLog?.pagesPerSheet}
             paperSize={historyLog?.paperSize}
-            printingLogId={historyLog}
+            printingLogId={historyLog?._id}
+            total_pages={historyLog?.total_pages}
+            renderList={() => setRenderList(!renderList)}
             key={index}
           />
         ))}
