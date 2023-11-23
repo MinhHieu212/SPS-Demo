@@ -10,11 +10,11 @@ function PrintingItem(props) {
       className="PrintingItem mt-3"
       onClick={() => navigate(`/Printing/${props.id}`)}
     >
-      <div className="bg-[#E6E6E6] hover:bg-[#d6d3d3] transition-all cursor-pointer flex rounded-md justify-evenly w-[100] shadow-md">
+      <div className="bg-[#e8e7e7] hover:bg-[#d6d3d3] transition-all cursor-pointer flex rounded-md justify-evenly w-[100] shadow-md">
         <div className="w-[30%] my-3 mx-1 md:m-3 shadow-md bg-white py-2 px-1 rounded-lg text-center item flex flex-col justify-center items-center border-2 border-[#1488db] ">
           <PrinterIcon></PrinterIcon>
-          <p className="text-[16px] lg:text-[18px] font-bold mt-1">
-            ID: {props.id}
+          <p className="text-[16px] lg:text-[18px] font-bold mt-1 text-[#1488db]">
+            ID: {<span className="text-black pl-2"> {props.id} </span>}
           </p>
         </div>
 

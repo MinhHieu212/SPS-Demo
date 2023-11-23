@@ -10,16 +10,17 @@ const History = () => {
   const navigate = useNavigate();
   const [historyLogs, setHistoryLogs] = useState([]);
   const [totalPages, setTotalPages] = useState({ A3: 0, A4: 0 });
-  const [filterParams, setFilterParams] = useState({});
+  const [filterParams, setFilterParams] = useState({ per_page: 100 });
   const [searchParams, setSearchParams] = useState(null);
+  const [renderList, setRenderList] = useState(true);
 
   useEffect(() => {
     const handleCallAPI = async () => {
-      const response = await filterHistory(filterParams);
+      const response = await filterHistory({ ...filterParams, per_page: 100 });
 
       const pages = {
-        A3: response.data.printedA3 || 0,
-        A4: response.data.printedA4 || 0,
+        A3: response?.data?.printedA3 || 0,
+        A4: response?.data?.printedA4 || 0,
       };
 
       setTotalPages(pages);
@@ -29,19 +30,17 @@ const History = () => {
 
     handleCallAPI();
 
-    console.log("Refresh API");
-
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Login");
     }
-  }, [filterParams]);
+  }, [filterParams, renderList]);
 
   const handleSearch = () => {
-    console.log("Search input", searchParams);
+    // console.log("Search input", searchParams);
     setFilterParams((filterParams) => {
       return { ...filterParams, ["searchField"]: searchParams };
     });
-    console.log("filterParams", filterParams);
+    // console.log("filterParams", filterParams);
   };
 
   return (
@@ -61,7 +60,7 @@ const History = () => {
                 Size A4:
               </span>
               <span text-center className="text-[16px] lg:text-[18px]">
-                {totalPages.A4}
+                {totalPages?.A4}
               </span>
             </div>
 
@@ -70,7 +69,7 @@ const History = () => {
                 Size A3:
               </span>
               <span className="text-[16px] lg:text-[18px]">
-                {totalPages.A3}
+                {totalPages?.A3}
               </span>
             </div>
           </div>
@@ -90,7 +89,7 @@ const History = () => {
           </div>
           <div className="w-full">
             <FilterHistoryModal
-              handleChangeParams={(params) => setFilterParams(params)}
+              handleChangeParams={(params) => setFilterParams({ ...params })}
             >
               <div className="w-full cursor-pointer border h-[50px] border-black rounded-md flex items-center justify-between pr-3 bg-white">
                 <span className="mx-3 text-[gray]">Lọc kết quả</span>
@@ -122,6 +121,13 @@ const History = () => {
             }
             date={historyLog?.createdAt.split("T")[0]}
             status={historyLog?.status}
+            numVersion={historyLog?.numVersion}
+            page={historyLog?.document?.pages}
+            pagesPerSheet={historyLog?.pagesPerSheet}
+            paperSize={historyLog?.paperSize}
+            printingLogId={historyLog?._id}
+            total_pages={historyLog?.total_pages}
+            renderList={() => setRenderList(!renderList)}
             key={index}
           />
         ))}

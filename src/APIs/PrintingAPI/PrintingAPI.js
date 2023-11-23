@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const SpssAPI = axios.create({
+const PrintingBaseApi = axios.create({
   baseURL: "https://ssps-7wxl.onrender.com",
   headers: {
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
   },
 });
 
-SpssAPI.interceptors.request.use(
+PrintingBaseApi.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("accessToken");
     if (token) {
@@ -20,7 +20,7 @@ SpssAPI.interceptors.request.use(
   }
 );
 
-SpssAPI.interceptors.response.use(
+PrintingBaseApi.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -31,7 +31,7 @@ SpssAPI.interceptors.response.use(
     if (error.response && error.response.status == 410) {
       try {
         console.log("call refresh token");
-        const result = await SpssAPI.post(path, {
+        const result = await PrintingBaseApi.post(path, {
           refreshToken: localStorage.getItem("refreshToken"),
         });
         const { accesstoken, refreshtoken } = result.data;
@@ -39,7 +39,7 @@ SpssAPI.interceptors.response.use(
         localStorage.setItem("refreshToken", refreshtoken);
         originalConfig.headers["Authorization"] = `Bearer ${accesstoken}`;
 
-        return SpssAPI(originalConfig);
+        return PrintingBaseApi(originalConfig);
       } catch (err) {
         if (err.response && err.response.status === 419) {
           localStorage.removeItem("accessToken");
@@ -54,4 +54,15 @@ SpssAPI.interceptors.response.use(
   }
 );
 
-export default SpssAPI;
+const path = "/v1/student/printing";
+
+export const PrintingAPI = async (formData) => {
+  try {
+    const response = await PrintingBaseApi.post(path, formData);
+    console.log("Response from Printing API:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error from Printing API:", error);
+    throw error;
+  }
+};

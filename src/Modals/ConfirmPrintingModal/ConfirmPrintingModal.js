@@ -1,27 +1,71 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InfoField from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
+import { PrintingAPI } from "../../APIs/PrintingAPI/PrintingAPI";
+import { toast } from "../../Utils/Toastify";
 
-const ConfirmPrintingModal = ({ children, files }) => {
+const ConfirmPrintingModal = ({ children, files, printerId, clearFiles }) => {
   const [openModal, setOpenModal] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
   const handleClose = () => {
     setOpenModal(false);
   };
 
   const data = {
     No_File: 0,
-    Quantity: 0,
-    No_Pages: 0,
+    numVersion: 0,
   };
 
   data.No_File = files?.length;
 
   files.forEach((file) => {
-    data.Quantity += parseInt(file?.quantity);
-    data.No_Pages += parseInt(file?.quantity) * 5;
+    data.numVersion += parseInt(file?.numVersion);
   });
 
-  const handleSendRequestPrint = () => {
+  const formData = new FormData();
+  const documents = [];
+
+  files.forEach((file, index) => {
+    const newDocument = {
+      paperSize: file?.paperSize,
+      numVersion: file?.numVersion,
+      colorOption: file?.colorOption,
+      landScapeOption: file?.landScapeOption,
+      pagesPerSheet: file?.pagesPerSheet,
+    };
+
+    documents.push(newDocument);
+
+    formData.append("file", file?.file || null);
+  });
+
+  formData.append("documents", JSON.stringify(documents));
+  formData.append("printerId", printerId);
+
+  const handleSendRequestPrint = async () => {
+    if (files?.length !== 0) {
+      try {
+        setIsButtonDisabled(true);
+
+        const response = await PrintingAPI(formData);
+
+        // console.log("Response data from printing api :", response);
+
+        clearFiles();
+
+        toast.success("Print request sent successfully!");
+      } catch (error) {
+        setIsButtonDisabled(false);
+        // console.log("Error data from printing api :", error);
+
+        toast.error(
+          error?.response?.data?.message || "Failed to send print request"
+        );
+      } finally {
+        setIsButtonDisabled(false);
+      }
+    }
     setOpenModal(false);
   };
 
@@ -40,12 +84,8 @@ const ConfirmPrintingModal = ({ children, files }) => {
             ></InfoField>
             <InfoField
               fieldName={"Tổng số bản in"}
-              fieldValue={data.Quantity}
+              fieldValue={data.numVersion}
             ></InfoField>
-            {/* <InfoField
-              fieldName={"Tổng lượng giấy"}
-              fieldValue={data.No_Pages}
-            ></InfoField> */}
           </div>
           <div className="flex items-center gap-3 justify-center w-full py-2">
             <button
@@ -57,6 +97,7 @@ const ConfirmPrintingModal = ({ children, files }) => {
             <button
               className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500  p-2 w-[40%] block rounded-lg text-[16px] md:text-[18px]  font-semibold text-white"
               onClick={handleSendRequestPrint}
+              disabled={isButtonDisabled}
             >
               Xác nhận
             </button>

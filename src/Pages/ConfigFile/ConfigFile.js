@@ -27,12 +27,12 @@ const ConfigFile = () => {
     const newFiles = Array.from(e.target.files).map((file, index) => {
       return {
         file: file,
-        quantity: 1,
-        pageSize: "A4",
-        color: "normal",
-        direct: "vertical",
-        layout: "1:1",
-        option: "1 side",
+        numVersion: 1,
+        paperSize: "A4",
+        colorOption: false,
+        landScapeOption: false,
+        pagesPerSheet: 1,
+        pageSideNumber: 1,
       };
     });
 
@@ -211,13 +211,13 @@ const ConfigFile = () => {
 
               <input
                 type="number"
-                name="quantity"
-                id="quantity"
-                value={files[indexFile]?.quantity}
+                name="numVersion"
+                id="numVersion"
+                value={files[indexFile]?.numVersion}
                 onChange={(e) => {
                   if (files[indexFile]) {
                     const updatedFiles = [...files];
-                    updatedFiles[indexFile].quantity = e.target.value;
+                    updatedFiles[indexFile].numVersion = e.target.value;
                     setFiles(updatedFiles);
                   }
                 }}
@@ -229,14 +229,14 @@ const ConfigFile = () => {
               <p className="text-[#1488DB] mb-2">Kích thước giấy</p>
 
               <select
-                name="pageSize"
-                id="pageSize"
+                name="paperSize"
+                id="paperSize"
                 className="w-[100%] border-2 mx-auto border-gray-400 rounded-md p-2"
-                value={files[indexFile]?.pageSize}
+                value={files[indexFile]?.paperSize}
                 onChange={(e) => {
                   if (files[indexFile]) {
                     const updatedFiles = [...files];
-                    updatedFiles[indexFile].pageSize = e.target.value;
+                    updatedFiles[indexFile].paperSize = e.target.value;
                     setFiles(updatedFiles);
                   }
                 }}
@@ -252,20 +252,20 @@ const ConfigFile = () => {
               <p className="text-[#1488DB] mb-2">Màu sắc in</p>
 
               <select
-                name="color"
-                id="color"
+                name="colorOption"
+                id="colorOption"
                 className="w-[100%] border-2 mx-auto border-gray-400 rounded-md p-2"
-                value={files[indexFile]?.color}
+                value={files[indexFile]?.colorOption}
                 onChange={(e) => {
                   if (files[indexFile]) {
                     const updatedFiles = [...files];
-                    updatedFiles[indexFile].color = e.target.value;
+                    updatedFiles[indexFile].colorOption = e.target.value;
                     setFiles(updatedFiles);
                   }
                 }}
               >
-                <option value="normal">In thường</option>
-                <option value="color">In màu</option>
+                <option value={false}>In thường</option>
+                <option value={true}>In màu</option>
               </select>
             </div>
 
@@ -273,20 +273,20 @@ const ConfigFile = () => {
               <p className="text-[#1488DB] mb-2">Hướng giấy in</p>
 
               <select
-                name="direct"
-                id="direct"
+                name="landScapeOption"
+                id="landScapeOption"
                 className="w-[100%] border-2 mx-auto border-gray-400 rounded-md p-2"
-                value={files[indexFile]?.direct}
+                value={files[indexFile]?.landScapeOption}
                 onChange={(e) => {
                   if (files[indexFile]) {
                     const updatedFiles = [...files];
-                    updatedFiles[indexFile].direct = e.target.value;
+                    updatedFiles[indexFile].landScapeOption = e.target.value;
                     setFiles(updatedFiles);
                   }
                 }}
               >
-                <option value="vertical">In dọc</option>
-                <option value="horizontal">In ngang</option>
+                <option value={false}>In dọc</option>
+                <option value={true}>In ngang</option>
               </select>
             </div>
           </div>
@@ -295,51 +295,52 @@ const ConfigFile = () => {
             <div className="w-[45%]">
               <p className="text-[#1488DB] mb-2">Bố cục in</p>
               <select
-                name="layout"
-                id="layout"
+                name="pagesPerSheet"
+                id="pagesPerSheet"
                 className="w-[100%] border-2 mx-auto border-gray-400 rounded-md p-2"
-                value={files[indexFile]?.layout}
+                value={files[indexFile]?.pagesPerSheet}
                 onChange={(e) => {
                   if (files[indexFile]) {
                     const updatedFiles = [...files];
-                    updatedFiles[indexFile].layout = e.target.value;
+                    updatedFiles[indexFile].pagesPerSheet = e.target.value;
                     setFiles(updatedFiles);
                   }
                 }}
               >
-                <option value="1:1">1 trang trên 1 tờ</option>
-                <option value="2:1">2 trang trên 1 tờ</option>
-                <option value="4:1">4 trang trên 1 tờ</option>
+                <option value="1">1 trang trên 1 mặt</option>
+                <option value="2">2 trang trên 1 mặt</option>
+                <option value="4">4 trang trên 1 mặt</option>
               </select>
             </div>
 
             <div className="w-[45%]">
               <p className="text-[#1488DB] mb-2">Cách in</p>
               <select
-                name="option"
-                id="option"
+                name="pageSideNumber"
+                id="pageSideNumber"
                 className="w-[100%]  mx-auto border-2 border-gray-400 rounded-md p-2"
-                value={files[indexFile]?.option}
+                value={files[indexFile]?.pageSideNumber}
                 onChange={(e) => {
                   if (files[indexFile]) {
                     const updatedFiles = [...files];
-                    updatedFiles[indexFile].option = e.target.value;
+                    updatedFiles[indexFile].pageSideNumber = e.target.value;
                     setFiles(updatedFiles);
                   }
                 }}
               >
-                <option value="1 side">1 mặt</option>
-                <option value="2 side">2 mặt</option>
+                <option value="1">1 mặt</option>
+                <option value="2">2 mặt</option>
               </select>
             </div>
           </div>
 
           <div className="flex w-full mt-5 items-center justify-end gap-2">
-            <ConfirmPrintingModal files={files}>
-              <button
-                className="px-5 bg-[#066DCC] rounded-[5px] text-white font-bold text-center h-[40px] md:h-[50px]"
-                onClick={() => console.log(files)}
-              >
+            <ConfirmPrintingModal
+              files={files}
+              printerId={PrinterID}
+              clearFiles={() => setFiles([])}
+            >
+              <button className="px-5 bg-[#066DCC] rounded-[5px] text-white font-bold text-center h-[40px] md:h-[50px]">
                 Gửi yêu cầu in
               </button>
             </ConfirmPrintingModal>
