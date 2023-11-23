@@ -18,8 +18,8 @@ const History = () => {
       const response = await filterHistory(filterParams);
 
       const pages = {
-        A3: response.data.printedA3 || 0,
-        A4: response.data.printedA4 || 0,
+        A3: response?.data?.printedA3 || 0,
+        A4: response?.data?.printedA4 || 0,
       };
 
       setTotalPages(pages);
@@ -44,6 +44,7 @@ const History = () => {
     console.log("filterParams", filterParams);
   };
 
+  console.log(historyLogs);
   return (
     <div className="History max-w-[1280px] w-full px-[10px] lg:px-[20px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
       <h2 className="text-2xl lg:text-3xl font-semibold mt-3 printing-title border-b-4 border-[#066DCC] pb-2 md:pb-3 text-[#066DCC] ">
@@ -61,7 +62,7 @@ const History = () => {
                 Size A4:
               </span>
               <span text-center className="text-[16px] lg:text-[18px]">
-                {totalPages.A4}
+                {totalPages?.A4}
               </span>
             </div>
 
@@ -70,7 +71,7 @@ const History = () => {
                 Size A3:
               </span>
               <span className="text-[16px] lg:text-[18px]">
-                {totalPages.A3}
+                {totalPages?.A3}
               </span>
             </div>
           </div>
@@ -122,6 +123,11 @@ const History = () => {
             }
             date={historyLog?.createdAt.split("T")[0]}
             status={historyLog?.status}
+            numVersion={historyLog?.numVersion}
+            page={historyLog?.document?.pages}
+            pagesPerSheet={historyLog?.pagesPerSheet}
+            paperSize={historyLog?.paperSize}
+            printingLogId={historyLog}
             key={index}
           />
         ))}

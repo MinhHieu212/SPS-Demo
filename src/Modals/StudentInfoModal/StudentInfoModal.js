@@ -65,7 +65,7 @@ function StudentInfoModal({ children }) {
               <InfoField
                 fieldName={"Tên"}
                 fieldValue={
-                  userInformation.firstName + " " + userInformation.lastName
+                  userInformation?.firstName + " " + userInformation?.lastName
                 }
               ></InfoField>
               <InfoField
@@ -105,7 +105,7 @@ function StudentInfoModal({ children }) {
               <InfoField
                 fieldName={"Tên"}
                 fieldValue={
-                  userInformation.firstName + " " + userInformation.lastName
+                  userInformation?.firstName + " " + userInformation?.lastName
                 }
               ></InfoField>
               <InfoField
