@@ -13,7 +13,7 @@ const SPSOEditPrinterModal = ({ children, printerId, printerStatus, description,
   const handleClose = () => {
     setOpenModal(false);
   };
-  const [tabActivated, setTabActivated] = useState(1);
+  const [tabActivated, setTabActivated] = useState(0);
   const [brandName, setBrandName] = useState(brand);
   const [type, setType] = useState(model);
   const [locationName, setLocationName] = useState(location);
@@ -137,7 +137,7 @@ const SPSOEditPrinterModal = ({ children, printerId, printerStatus, description,
                         id="enable"
                         type="radio"
                         value="enable"
-                        name="statusPrinter"
+                        name="statusPrinter2"
                         className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300"
                       />
                       <label
@@ -158,7 +158,7 @@ const SPSOEditPrinterModal = ({ children, printerId, printerStatus, description,
                         id="disable"
                         type="radio"
                         value="disable"
-                        name="statusPrinter"
+                        name="statusPrinter2"
                         className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300"
                       />
                       <label
