@@ -3,12 +3,20 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AddIcon, DeleteIcon, FileIcon } from "../../Assets/Icons/Icons";
 import RemoveFileModal from "../../Modals/RemoveFileModal/RemoveFileModal";
 import { ConfirmPrintingModal } from "../../Modals";
+import { getPrinterInfo } from "../../APIs/PrintersAPI/PrintersAPI";
 
 const ConfigFile = () => {
-  const [files, setFiles] = useState([]);
-  const [indexFile, setIndexFile] = useState(0);
   const navigate = useNavigate();
   const { PrinterID } = useParams();
+  const [files, setFiles] = useState([]);
+  const [renderInfo, setrednerInfo] = useState(true);
+  const [indexFile, setIndexFile] = useState(0);
+  const [printerInfo, setPrinterInfo] = useState({
+    id: PrinterID,
+    localtion: "......",
+    room: "...",
+    queue: "...",
+  });
 
   useEffect(() => {
     if (localStorage.getItem("accessToken") === null) {
@@ -16,12 +24,30 @@ const ConfigFile = () => {
     }
   }, []);
 
-  const [printerInfo, setPrinterInfo] = useState({
-    id: PrinterID,
-    localtion: "CS1-H6",
-    room: "402",
-    queue: "5",
-  });
+  useEffect(() => {
+    const callAPI = async () => {
+      const params = {
+        printerId: PrinterID,
+      };
+
+      const response = await getPrinterInfo(params);
+
+      console.log("get information details: ", response);
+
+      setPrinterInfo((printerInfo) => ({
+        ...printerInfo,
+        id: PrinterID,
+        localtion:
+          response?.data?.location?.facility +
+          " - " +
+          response?.data?.location?.department,
+        room: response?.data?.location?.room,
+        queue: response?.data?.waiting_amount,
+      }));
+    };
+
+    callAPI();
+  }, [renderInfo]);
 
   const handleFileChange = (e) => {
     const newFiles = Array.from(e.target.files).map((file, index) => {
@@ -178,7 +204,7 @@ const ConfigFile = () => {
         <div className="flex flex-col items-center justify-evenly w-[100%] lg:w-[80%] mt-3 mb-3">
           <div className="w-full flex-col items-center justify-between border-b-2 border-black pb-5">
             <span className="text-[#ff3434] mr-5">
-              Tên tệp cấu hình hiện tại
+              Tên tệp đang được cấu hình
             </span>
 
             <select
@@ -339,6 +365,7 @@ const ConfigFile = () => {
               files={files}
               printerId={PrinterID}
               clearFiles={() => setFiles([])}
+              handleRenderPrinterInfo={() => setrednerInfo(!renderInfo)}
             >
               <button className="px-5 bg-[#066DCC] rounded-[5px] text-white font-bold text-center h-[40px] md:h-[50px]">
                 Gửi yêu cầu in

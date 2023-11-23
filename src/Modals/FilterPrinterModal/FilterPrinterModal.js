@@ -6,7 +6,6 @@ const FilterPrinterModal = ({ children, setParams = () => {} }) => {
   const [status, setStatus] = useState(null); //nullor 1 or 0
   const [facility, setFacility] = useState(null); //nullor CS1 or CS2
   const [sortDirection, setSortDirection] = useState(1); // acsending or descending
-  const [searchField, setSearchField] = useState();
   const [filterParams, setFilterParams] = useState({
     status: status,
     facility: facility,
@@ -76,7 +75,7 @@ const FilterPrinterModal = ({ children, setParams = () => {} }) => {
                 } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
                 onClick={() => setStatus("0")}
               >
-                Ngưng hoạt động
+                Tạm dừng
               </div>
             </div>
 

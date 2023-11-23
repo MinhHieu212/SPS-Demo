@@ -7,7 +7,7 @@ const printers = [
   {
     id: "H41CS1",
     queue: 6,
-    status: "Ngưng hoạt động",
+    status: "Tạm dừng",
   },
   {
     id: "H41CS1",
@@ -17,7 +17,7 @@ const printers = [
   {
     id: "H41CS1",
     queue: 6,
-    status: "Ngưng hoạt động",
+    status: "Tạm dừng",
   },
   {
     id: "H41CS1",

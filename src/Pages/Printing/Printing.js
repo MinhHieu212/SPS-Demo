@@ -4,14 +4,14 @@ import PrintingItem from "./PrintingItem";
 import { FilterIcon, SearchIcon } from "../../Assets/Icons/Icons";
 import { FilterPrinterModal } from "../../Modals";
 import { useNavigate } from "react-router-dom";
-import { async } from "q";
 import { getPrinterList } from "../../APIs/PrintersAPI/PrintersAPI";
+import { data } from "./FixedData";
 
 const Printing = () => {
   const navigate = useNavigate();
-  const [printerList, setPrinterList] = useState([]);
   const [filterParams, setFilterParams] = useState({ per_page: 100 });
   const [searchParams, setSearchParams] = useState(null);
+  const [printerList, setPrinterList] = useState(data);
 
   useEffect(() => {
     if (localStorage.getItem("accessToken") === null) {
@@ -19,7 +19,9 @@ const Printing = () => {
     }
 
     const callAPI = async () => {
-      const response = await getPrinterList({ ...filterParams, per_page: 100 });
+      const response = await getPrinterList({
+        ...filterParams,
+      });
       console.log("Response from get printer lisr api : ", response);
       setPrinterList(response?.data?.printers);
     };
@@ -66,7 +68,7 @@ const Printing = () => {
           base={printer?.location?.facility}
           building={printer?.location?.department}
           room={printer?.location?.room}
-          status={printer.status === 1 ? "Hoạt động" : "Ngưng hoạt động"}
+          status={printer.status === 1 ? "Hoạt động" : "Tạm dừng"}
           request={printer.waiting_amount}
           key={index}
         ></PrintingItem>

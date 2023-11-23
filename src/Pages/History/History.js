@@ -5,10 +5,11 @@ import { FilterIcon, SearchIcon } from "../../Assets/Icons/Icons";
 import { FilterHistoryModal } from "../../Modals";
 import { useNavigate } from "react-router-dom";
 import { filterHistory } from "../../APIs/HistoryAPI/HistoryAPI";
+import { data } from "./FixedData";
 
 const History = () => {
   const navigate = useNavigate();
-  const [historyLogs, setHistoryLogs] = useState([]);
+  const [historyLogs, setHistoryLogs] = useState(data);
   const [totalPages, setTotalPages] = useState({ A3: 0, A4: 0 });
   const [filterParams, setFilterParams] = useState({ per_page: 100 });
   const [searchParams, setSearchParams] = useState(null);
@@ -79,7 +80,7 @@ const History = () => {
           <div className="w-full border h-[50px] border-black rounded-md flex items-center justify-between pr-3 bg-white">
             <input
               type="text"
-              placeholder="Tìm theo ID máy in"
+              placeholder="Tìm theo tên tệp in"
               className="w-[90%] outline-none border-none"
               onInput={(e) => setSearchParams(e.target.value)}
             />
@@ -102,10 +103,10 @@ const History = () => {
       <div className="w-full overflow-x-auto">
         <div className=" min-w-[800px] md:w-full max-h-[60px] text-white flex flex-row justify-between items-center bg-[#3C8DBC]  text-[16px] lg:text-[18px] lg:text-lg font-bold py-3 px-4 mt-8 rounded-sm">
           <div className="w-[25%]">TÊN FILE</div>
+          <div className="text-center w-[15%]">TRẠNG THÁI</div>
           <div className="text-center w-[15%]">ID MÁY IN</div>
           <div className="text-center w-[15%]">VỊ TRÍ</div>
           <div className="text-center w-[15%]">NGÀY IN</div>
-          <div className="text-center w-[15%]">TRẠNG THÁI</div>
           <div className="text-center w-[15%]">TÙY CHỌN</div>
         </div>
         {historyLogs.map((historyLog, index) => (

@@ -4,7 +4,13 @@ import CenterModal from "../BaseModals/CenterModal";
 import { PrintingAPI } from "../../APIs/PrintingAPI/PrintingAPI";
 import { toast } from "../../Utils/Toastify";
 
-const ConfirmPrintingModal = ({ children, files, printerId, clearFiles }) => {
+const ConfirmPrintingModal = ({
+  children,
+  files,
+  printerId,
+  clearFiles,
+  handleRenderPrinterInfo,
+}) => {
   const [openModal, setOpenModal] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
@@ -53,7 +59,7 @@ const ConfirmPrintingModal = ({ children, files, printerId, clearFiles }) => {
         // console.log("Response data from printing api :", response);
 
         clearFiles();
-
+        handleRenderPrinterInfo();
         toast.success("Print request sent successfully!");
       } catch (error) {
         setIsButtonDisabled(false);
