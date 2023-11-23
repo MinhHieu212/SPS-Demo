@@ -13,8 +13,8 @@ export const data = [
   {
     location: {
       facility: "...",
-      department: "H1",
-      room: "109",
+      department: "...",
+      room: "...",
     },
     _id: "655ec6df480edf078b499da7",
     printerId: "...",

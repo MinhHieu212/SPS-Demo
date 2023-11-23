@@ -3,6 +3,7 @@ import InfoField from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
 import { PrintingAPI } from "../../APIs/PrintingAPI/PrintingAPI";
 import { toast } from "../../Utils/Toastify";
+import { Loading } from "../../Assets/Icons/Icons";
 
 const ConfirmPrintingModal = ({
   children,
@@ -83,16 +84,24 @@ const ConfirmPrintingModal = ({
           <div className="header bg-[#3C8DBC] text-white text-[20px] font-bold flex items-center justify-center h-[60px] w-full">
             XÁC NHẬN IN
           </div>
-          <div className="flex flex-col items-center justify-center my-3 w-full ">
-            <InfoField
-              fieldName={"Số file in"}
-              fieldValue={data.No_File}
-            ></InfoField>
-            <InfoField
-              fieldName={"Tổng số bản in"}
-              fieldValue={data.numVersion}
-            ></InfoField>
-          </div>
+          {isButtonDisabled ? (
+            <div className="flex flex-col items-center justify-center min-h-[95px] my-3 w-full ">
+              <span className="animate-spin">
+                <Loading></Loading>
+              </span>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center min-h-[95px] my-3 w-full ">
+              <InfoField
+                fieldName={"Số file in"}
+                fieldValue={data.No_File}
+              ></InfoField>
+              <InfoField
+                fieldName={"Tổng số bản in"}
+                fieldValue={data.numVersion}
+              ></InfoField>
+            </div>
+          )}
           <div className="flex items-center gap-3 justify-center w-full py-2">
             <button
               className="bg-gradient-to-br from-[#ff7d7d] outline-none to-[#b84949]  p-2 w-[40%] block rounded-lg text-[16px] md:text-[18px] font-semibold text-white"

@@ -8,16 +8,18 @@ import { FIlterManagePriterModal } from "../../Modals";
 import { getPrintersList, editPrinter } from "../../APIs/SpsoAPI/SpsoAPI";
 import { value } from "../../Modals/FIlterManagePriterModal/FIlterManagePriterModal";
 import { newData } from "../../Modals/SPSO_EditPrinter/SPSO_EditPrinter";
+
 const ManageSpso = () => {
   const [printersList, setPrintersList] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [renderList, setRenderList] = useState(true);
   const [renderList1, setRenderList1] = useState(true);
+
   const navigate = useNavigate();
   useEffect(() => {
     const handleSPSOApi = async (params) => {
       const response = await getPrintersList(params);
-      //console.log("reponse from get printers api: ", response);
+      console.log("reponse from get printers api: ", response?.data?.data);
       //console.log(data);
       setPrintersList(response?.data?.data);
     };
@@ -44,10 +46,10 @@ const ManageSpso = () => {
   useEffect(() => {
     const handleEditAPI = async (newData) => {
       const request = await editPrinter(newData);
-      setRenderList(!renderList)
-    }
+      setRenderList(!renderList);
+    };
     handleEditAPI(newData);
-  }, [renderList1])
+  }, [renderList1]);
   //console.log(printersList);
   const printers = printersList.printers;
   //console.log(printers);
@@ -118,14 +120,15 @@ const ManageSpso = () => {
       <div className=" w-full overflow-x-auto">
         <div className=" min-w-[800px] md:w-full max-h-[60px]  flex flex-row mx-auto justify-between shadow-lg items-center bg-[#3C8DBC] text-[16px]  lg:text-[18px] font-bold py-3 px-4 mt-8 rounded-sm  text-white">
           <div className="text-center w-[10%]">ID MÁY IN</div>
+          <div className="w-[15%] text-center">TRẠNG THÁI</div>
           <div className="text-center w-[20%]">VỊ TRÍ</div>
           <div className="text-center w-[15%]"> KÍCH HOẠT</div>
           <div className="text-center w-[25%]">SỐ YÊU CẦU IN</div>
-          <div className="w-[30%]">TRẠNG THÁI</div>
+          <div className="w-[15%] text-center">THIẾT LẬP</div>
         </div>
         {printers?.map((printer, index) => (
           <ManageSpsoItem
-            functionRenderList1 = {() => setRenderList1(!renderList1)}
+            functionRenderList1={() => setRenderList1(!renderList1)}
             functionRenderList={() => setRenderList(!renderList)}
             model={printer.model}
             description={printer.description}

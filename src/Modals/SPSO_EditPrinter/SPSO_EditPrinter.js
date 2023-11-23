@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import CenterModal from "../BaseModals/CenterModal";
 export const newData = {
-  location: {
+  location: {},
+};
 
-  }
-}
-
-const SPSOEditPrinterModal = ({ children, printerId, printerStatus, description, brand, model, location, functionRenderList1 }) => {
+const SPSOEditPrinterModal = ({
+  children,
+  printerId,
+  printerStatus,
+  description,
+  brand,
+  model,
+  location,
+  functionRenderList1,
+}) => {
   //const [renderList1, setRenderList1] = useState(true);
   const [checked, setChecked] = useState(printerStatus);
   const [openModal, setOpenModal] = useState(false);
@@ -45,10 +52,11 @@ const SPSOEditPrinterModal = ({ children, printerId, printerStatus, description,
           </div>
           <div className="flex items-center justify-center text-[16px] md:text-[20px] font-semibold">
             <div
-              className={`${!tabActivated
-                ? "border-[#1488db] text-black"
-                : "text-[#7d7b7b] border-white"
-                } w-1/2 text-center py-[10px] text-[16px] lg:text-[18px] border-b-4 cursor-pointer`}
+              className={`${
+                !tabActivated
+                  ? "border-[#1488db] text-black"
+                  : "text-[#7d7b7b] border-white"
+              } w-1/2 text-center py-[10px] text-[16px] lg:text-[18px] border-b-4 cursor-pointer transition-all `}
               onClick={() => {
                 setTabActivated(0);
               }}
@@ -56,10 +64,11 @@ const SPSOEditPrinterModal = ({ children, printerId, printerStatus, description,
               Thông tin máy in
             </div>
             <div
-              className={`${tabActivated
-                ? "border-[#1488db] text-black"
-                : "text-[#7d7b7b] border-white"
-                } w-1/2 text-center py-[10px] text-[16px] lg:text-[18px] border-b-4 cursor-pointer`}
+              className={`${
+                tabActivated
+                  ? "border-[#1488db] text-black"
+                  : "text-[#7d7b7b] border-white"
+              } w-1/2 text-center py-[10px] text-[16px] lg:text-[18px] border-b-4 cursor-pointer transition-all`}
               onClick={() => {
                 setTabActivated(1);
               }}
@@ -128,11 +137,10 @@ const SPSOEditPrinterModal = ({ children, printerId, printerStatus, description,
                   <div>
                     <div className="flex items-center mb-[4px] gap-[22px]">
                       <input
-
                         checked={checked === "enable"}
                         onChange={(e) => {
                           //e.preventDefault();
-                          setChecked(e.target.value)
+                          setChecked(e.target.value);
                         }}
                         id="enable"
                         type="radio"
@@ -149,11 +157,10 @@ const SPSOEditPrinterModal = ({ children, printerId, printerStatus, description,
                     </div>
                     <div className="flex items-center gap-[22px]">
                       <input
-
                         checked={checked === "disable"}
                         onChange={(e) => {
                           //e.preventDefault();
-                          setChecked(e.target.value)
+                          setChecked(e.target.value);
                         }}
                         id="disable"
                         type="radio"
@@ -220,7 +227,7 @@ const SPSOEditPrinterModal = ({ children, printerId, printerStatus, description,
                   {description}
                 </p>
               </div>
-              <div className="flex flex-row justify-end mt-[90px]">
+              <div className="flex flex-row justify-end mt-[133px] md:mt-[121px]">
                 <button className="bg-gradient-to-br from-[#ff7d7d]  outline-none to-[#b84949]  p-2 w-[154px] rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center">
                   Xóa máy in
                 </button>
