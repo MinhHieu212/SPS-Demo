@@ -5,13 +5,14 @@ import ManageSpsoItem from "./ManageSpsoItem";
 import { AddPrinterModal } from "../../Modals/AddPrinterModal/AddPrinterModal";
 import { useNavigate } from "react-router";
 import { FIlterManagePriterModal } from "../../Modals";
-import { getPrintersList } from "../../APIs/SpsoAPI/SpsoAPI";
+import { getPrintersList, editPrinter } from "../../APIs/SpsoAPI/SpsoAPI";
 import { value } from "../../Modals/FIlterManagePriterModal/FIlterManagePriterModal";
-
+import { newData } from "../../Modals/SPSO_EditPrinter/SPSO_EditPrinter";
 const ManageSpso = () => {
   const [printersList, setPrintersList] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [renderList, setRenderList] = useState(true);
+  const [renderList1, setRenderList1] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     const handleSPSOApi = async (params) => {
@@ -21,11 +22,11 @@ const ManageSpso = () => {
       setPrintersList(response?.data?.data);
     };
     const params = {};
-    if (value.status === "all") params.status = null;
-    else if (value.status === "enable") params.status = "1";
-    else params.status = "0";
+    if (value.status === "all") delete params.status;
+    else if (value.status === "enable") params.status = 1;
+    else params.status = 0;
 
-    if (value.location === "all") params.facility = "all";
+    if (value.location === "all") delete params.facility;
     else if (value.location === "cs1") params.facility = "CS1";
     else if (value.location === "cs2") params.facility = "CS2";
     else params.facility = "100";
@@ -34,11 +35,20 @@ const ManageSpso = () => {
     else params.sortDirection = "-1";
     params.searchField = value.searchField;
     handleSPSOApi(params);
-    console.log(params);
+    //console.log(params);
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Login");
     }
   }, [renderList]);
+
+  useEffect(() => {
+    const handleEditAPI = async (newData) => {
+      const request = await editPrinter(newData);
+      setRenderList(!renderList)
+    }
+    handleEditAPI(newData);
+  }, [renderList1])
+  //console.log(printersList);
   const printers = printersList.printers;
   //console.log(printers);
 
@@ -84,7 +94,7 @@ const ManageSpso = () => {
                 setRenderList(!renderList);
                 value.searchField = inputValue;
               }}
-            > 
+            >
               <SearchIcon></SearchIcon>
             </div>
           </div>
@@ -115,6 +125,11 @@ const ManageSpso = () => {
         </div>
         {printers?.map((printer, index) => (
           <ManageSpsoItem
+            functionRenderList1 = {() => setRenderList1(!renderList1)}
+            functionRenderList={() => setRenderList(!renderList)}
+            model={printer.model}
+            description={printer.description}
+            brand={printer.brand}
             key={index}
             id={printer.printerId}
             location={
@@ -126,8 +141,7 @@ const ManageSpso = () => {
             }
             date={printer.activatedTime.slice(0, 10)}
             status={printer.status ? "Hoạt động" : "Không hoạt động"}
-            queue={printer.printingQueue.length + printer.printingJob.length}
-            printingQueue={[...printer.printingJob, ...printer.printingQueue]}
+            queue={printer.printingQueue.length}
           />
         ))}
       </div>
