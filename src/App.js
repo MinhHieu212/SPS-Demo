@@ -56,7 +56,7 @@ function App() {
   }, []);
 
   return (
-    <Routes>
+    <Routes basename="/SPS-FE-Project">
       {renderRoutes(publicRoutes)}
       {roleContext.role !== "" && renderRoutes(privateRoutes, roleContext.role)}
     </Routes>
