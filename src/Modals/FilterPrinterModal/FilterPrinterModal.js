@@ -1,25 +1,42 @@
-import React, { useState } from "react";
+import { async } from "q";
+import React, { useEffect, useState } from "react";
 
-const FilterPrinterModal = ({ children }) => {
+const FilterPrinterModal = ({ children, setParams = () => {} }) => {
   const [open, setOpen] = useState(false);
+  const [status, setStatus] = useState(null); //nullor 1 or 0
+  const [facility, setFacility] = useState(null); //nullor CS1 or CS2
+  const [sortDirection, setSortDirection] = useState(1); // acsending or descending
+  const [filterParams, setFilterParams] = useState({
+    status: status,
+    facility: facility,
+    sortDirection: sortDirection,
+  });
 
-  const [status, setStatus] = useState("all"); // all or enable or disable
-  const [location, setLocation] = useState("all"); // all or cs1 or cs2
-  const [queue, setQueue] = useState("ascending"); // acsending or descending
+  useEffect(() => {
+    setFilterParams({
+      status: status,
+      facility: facility,
+      sortDirection: sortDirection,
+    });
+  }, [status, facility, sortDirection]);
 
-  const cancelFilter = () => {
-    setStatus("all");
-    setLocation("all");
-    setQueue("acsending");
+  const applyFilter = async () => {
+    console.log("Params Filter Printer : ", filterParams);
+    await setParams(filterParams);
     setOpen(false);
   };
 
-  const applyFilter = () => {
-    console.log("Params Filter Printer : ", {
-      status: status,
-      location: location,
-      queue: queue,
+  const cancelFilter = async () => {
+    setStatus(null);
+    setFacility(null);
+    setSortDirection(1);
+
+    await setParams({
+      status: null,
+      facility: null,
+      sortDirection: 1,
     });
+
     setOpen(false);
   };
 
@@ -38,27 +55,27 @@ const FilterPrinterModal = ({ children }) => {
               </div>
               <div
                 className={`${
-                  status === "all" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  status === null ? "rounded-sm bg-[#E6E6E6]" : ""
                 } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
-                onClick={() => setStatus("all")}
+                onClick={() => setStatus(null)}
               >
                 Tất cả
               </div>
               <div
                 className={`${
-                  status === "enable" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  status === "1" ? "rounded-sm bg-[#E6E6E6]" : ""
                 } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
-                onClick={() => setStatus("enable")}
+                onClick={() => setStatus("1")}
               >
                 Hoạt động
               </div>
               <div
                 className={`${
-                  status === "disable" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  status === "0" ? "rounded-sm bg-[#E6E6E6]" : ""
                 } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
-                onClick={() => setStatus("disable")}
+                onClick={() => setStatus("0")}
               >
-                Ngưng hoạt động
+                Tạm dừng
               </div>
             </div>
 
@@ -68,25 +85,25 @@ const FilterPrinterModal = ({ children }) => {
               </div>
               <div
                 className={`${
-                  location === "all" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  facility === null ? "rounded-sm bg-[#E6E6E6]" : ""
                 } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
-                onClick={() => setLocation("all")}
+                onClick={() => setFacility(null)}
               >
                 Tất cả
               </div>
               <div
                 className={`${
-                  location === "cs1" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  facility === "CS1" ? "rounded-sm bg-[#E6E6E6]" : ""
                 } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
-                onClick={() => setLocation("cs1")}
+                onClick={() => setFacility("CS1")}
               >
                 Cơ sở 1
               </div>
               <div
                 className={`${
-                  location === "cs2" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  facility === "CS2" ? "rounded-sm bg-[#E6E6E6]" : ""
                 } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
-                onClick={() => setLocation("cs2")}
+                onClick={() => setFacility("CS2")}
               >
                 Cơ sở 2
               </div>
@@ -100,17 +117,17 @@ const FilterPrinterModal = ({ children }) => {
               </div>
               <div
                 className={`${
-                  queue === "ascending" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  sortDirection === 1 ? "rounded-sm bg-[#E6E6E6]" : ""
                 } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
-                onClick={() => setQueue("ascending")}
+                onClick={() => setSortDirection(1)}
               >
                 Tăng dần
               </div>
               <div
                 className={`${
-                  queue === "descending" ? "rounded-sm bg-[#E6E6E6]" : ""
+                  sortDirection === -1 ? "rounded-sm bg-[#E6E6E6]" : ""
                 } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
-                onClick={() => setQueue("descending")}
+                onClick={() => setSortDirection(-1)}
               >
                 Giảm dần
               </div>

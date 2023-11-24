@@ -1,28 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CenterModal from "../BaseModals/CenterModal";
+export const newData = {
+  location: {},
+};
 
-const SPSOEditPrinterModal = ({ children }) => {
+const SPSOEditPrinterModal = ({
+  children,
+  printerId,
+  printerStatus,
+  description,
+  brand,
+  model,
+  location,
+  functionRenderList1,
+}) => {
+  //const [renderList1, setRenderList1] = useState(true);
+  const [checked, setChecked] = useState(printerStatus);
   const [openModal, setOpenModal] = useState(false);
   const handleClose = () => {
     setOpenModal(false);
   };
+  const [tabActivated, setTabActivated] = useState(0);
+  const [brandName, setBrandName] = useState(brand);
+  const [type, setType] = useState(model);
+  const [locationName, setLocationName] = useState(location);
+  const [desc, setDesc] = useState(description);
 
-  const [tabActivated, setTabActivated] = useState(1);
-  const info = {
-    id: "12345",
-    brand: "Canon",
-    type: "PIXMA E4750",
-    location: "CS2, H6, 304",
-    description: "Tốc độ in tiêu chuẩn ISO (A4): 3.9 ipm đen/màu",
-  };
-  const [brand, setBrand] = useState(info.brand);
-  const [type, setType] = useState(info.type);
-  const [location, setLocation] = useState(info.location);
-  const [desc, setDesc] = useState(info.description);
-  const [checked, setChecked] = useState("active");
   const handleSubmit = () => {
-    console.log(brand, type, location, desc, checked);
+    //console.log(brand, type, location, desc, checked);
+    newData.printerId = printerId;
+    newData.location.facility = locationName.slice(0, 3);
+    newData.location.department = locationName.slice(5, 7);
+    newData.location.room = locationName.slice(9, 12);
+    newData.brand = brand;
+    newData.model = type;
+    newData.description = desc;
+    newData.status = checked === "enable" ? 1 : 0;
+    //handleEditAPI(newData);
+    //setRenderList1(!renderList1);
+    functionRenderList1();
+    setOpenModal(false);
   };
+  //console.log(checked);
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
@@ -37,7 +56,7 @@ const SPSOEditPrinterModal = ({ children }) => {
                 !tabActivated
                   ? "border-[#1488db] text-black"
                   : "text-[#7d7b7b] border-white"
-              } w-1/2 text-center py-[10px] text-[16px] lg:text-[18px] border-b-4 cursor-pointer`}
+              } w-1/2 text-center py-[10px] text-[16px] lg:text-[18px] border-b-4 cursor-pointer transition-all `}
               onClick={() => {
                 setTabActivated(0);
               }}
@@ -49,7 +68,7 @@ const SPSOEditPrinterModal = ({ children }) => {
                 tabActivated
                   ? "border-[#1488db] text-black"
                   : "text-[#7d7b7b] border-white"
-              } w-1/2 text-center py-[10px] text-[16px] lg:text-[18px] border-b-4 cursor-pointer`}
+              } w-1/2 text-center py-[10px] text-[16px] lg:text-[18px] border-b-4 cursor-pointer transition-all`}
               onClick={() => {
                 setTabActivated(1);
               }}
@@ -67,8 +86,8 @@ const SPSOEditPrinterModal = ({ children }) => {
                   <input
                     type="text"
                     className="block w-full"
-                    value={brand}
-                    onChange={(e) => setBrand(e.target.value)}
+                    value={brandName}
+                    onChange={(e) => setBrandName(e.target.value)}
                   />
                 </div>
               </div>
@@ -93,8 +112,8 @@ const SPSOEditPrinterModal = ({ children }) => {
                   <input
                     type="text"
                     className="block w-full"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
+                    value={locationName}
+                    onChange={(e) => setLocationName(e.target.value)}
                   />
                 </div>
               </div>
@@ -119,14 +138,18 @@ const SPSOEditPrinterModal = ({ children }) => {
                     <div className="flex items-center mb-[4px] gap-[22px]">
                       <input
                         checked={checked === "enable"}
+                        onChange={(e) => {
+                          //e.preventDefault();
+                          setChecked(e.target.value);
+                        }}
                         id="enable"
                         type="radio"
-                        name="status"
+                        value="enable"
+                        name="statusPrinter2"
                         className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300"
                       />
                       <label
-                        onClick={() => setChecked("enable")}
-                        for="enable"
+                        htmlFor="enable"
                         className="text-[16px] md:text-[20px] font-semibold p-0"
                       >
                         Hoạt động
@@ -135,15 +158,18 @@ const SPSOEditPrinterModal = ({ children }) => {
                     <div className="flex items-center gap-[22px]">
                       <input
                         checked={checked === "disable"}
+                        onChange={(e) => {
+                          //e.preventDefault();
+                          setChecked(e.target.value);
+                        }}
                         id="disable"
                         type="radio"
-                        // value="inactive"
-                        name="status"
+                        value="disable"
+                        name="statusPrinter2"
                         className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300"
                       />
                       <label
-                        onClick={(e) => setChecked("disable")}
-                        for="disable"
+                        htmlFor="disable"
                         className="text-[16px] md:text-[20px] font-semibold p-0"
                       >
                         Không hoạt động
@@ -166,7 +192,7 @@ const SPSOEditPrinterModal = ({ children }) => {
                   ID máy in:{" "}
                 </p>
                 <p className="text-black text-[16px] md:text-[20px] font-semibold">
-                  {info.id}
+                  {printerId}
                 </p>
               </div>
               <div className="flex flex-row items-center justify-start gap-[90px] mb-[22px]">
@@ -174,7 +200,7 @@ const SPSOEditPrinterModal = ({ children }) => {
                   Nhãn hiệu:{" "}
                 </p>
                 <p className="text-black text-[16px] md:text-[20px] font-semibold">
-                  {info.brand}
+                  {brandName}
                 </p>
               </div>
               <div className="flex flex-row items-center justify-start gap-[90px] mb-[22px]">
@@ -182,7 +208,7 @@ const SPSOEditPrinterModal = ({ children }) => {
                   Mẫu máy:{" "}
                 </p>
                 <p className="text-black text-[16px] md:text-[20px] font-semibold">
-                  {info.type}
+                  {type}
                 </p>
               </div>
               <div className="flex flex-row items-center justify-start gap-[90px] mb-[22px]">
@@ -190,7 +216,7 @@ const SPSOEditPrinterModal = ({ children }) => {
                   Vị trí:{" "}
                 </p>
                 <p className="text-black text-[16px] md:text-[20px] font-semibold">
-                  {info.location}
+                  {locationName}
                 </p>
               </div>
               <div className="flex flex-row items-center justify-start gap-[90px] mb-[22px]">
@@ -198,10 +224,10 @@ const SPSOEditPrinterModal = ({ children }) => {
                   Mô tả:{" "}
                 </p>
                 <p className="text-black text-[16px] md:text-[20px] font-semibold">
-                  {info.description}
+                  {description}
                 </p>
               </div>
-              <div className="flex flex-row justify-end mt-[90px]">
+              <div className="flex flex-row justify-end mt-[133px] md:mt-[121px]">
                 <button className="bg-gradient-to-br from-[#ff7d7d]  outline-none to-[#b84949]  p-2 w-[154px] rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center">
                   Xóa máy in
                 </button>

@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 
-const FIlterManagePriterModal = ({ children }) => {
+export const value = {
+  status: "all",
+  location: "all",
+  timeActive: "ascending",
+};
+const FIlterManagePriterModal = ({ children, functionRenderList }) => {
   const [open, setOpen] = useState(false);
-
   const [status, setStatus] = useState("all"); // all or enable or disable
   const [location, setLocation] = useState("all"); // all or cs1 or cs2
   const [timeActive, settimeActive] = useState("ascending"); // acsending or descending
@@ -10,16 +14,28 @@ const FIlterManagePriterModal = ({ children }) => {
   const cancelFilter = () => {
     setStatus("all");
     setLocation("all");
-    settimeActive("acsending");
+    settimeActive("ascending");
+    value.status = "all";
+    value.location = "all";
+    value.timeActive = "ascending";
+    value.searchField = "";
+    functionRenderList();
     setOpen(false);
   };
 
   const applyFilter = () => {
-    console.log("Params Filter Printer : ", {
-      status: status,
-      location: location,
-      timeActive: timeActive,
-    });
+    // console.log("Params Filter Printer : ", {
+    //   status: status,
+    //   location: location,
+    //   timeActive: timeActive,
+    // });
+    value.status = status;
+    value.location = location;
+    value.timeActive = timeActive;
+    value.searchField = "";
+    //console.log(value);
+    functionRenderList();
+
     setOpen(false);
   };
 
@@ -58,7 +74,7 @@ const FIlterManagePriterModal = ({ children }) => {
                 } border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%]`}
                 onClick={() => setStatus("disable")}
               >
-                Ngưng hoạt động
+                Tạm dừng
               </div>
             </div>
 
@@ -135,5 +151,4 @@ const FIlterManagePriterModal = ({ children }) => {
     </div>
   );
 };
-
 export default FIlterManagePriterModal;

@@ -9,22 +9,24 @@ import { useUserInfo } from "../../Contexts/UserInfoContext";
 const Bkpay = () => {
   const userInfoContext = useUserInfo();
   const [userInformation, setUserInformation] = useState(userInfoContext.info);
-
+  const [renderList, setRenderList] = useState(true);
   const [paymentsList, setPaymentsList] = useState([]);
   const navigate = useNavigate();
+
   useEffect(() => {
     const handleCallApi = async () => {
       const response = await getPaymentsList();
-      console.log("reponse from get payments api: ", response);
+      // console.log("reponse from get payments api: ", response);
       setPaymentsList(response?.data?.data);
     };
 
     handleCallApi();
 
     if (localStorage.getItem("accessToken") === null) {
-      navigate("/Error");
+      navigate("/Login");
     }
-  }, []);
+  }, [renderList]);
+  
   return (
     <div className="BKPay bg-[#eee]">
       <div id="slider-BKPay" className="relative w-full">
@@ -94,30 +96,35 @@ const Bkpay = () => {
               <div>Đã thanh toán</div>
               <div>Còn lại</div>
             </div>
-            {paymentsList?.map((info) => (
-              <PaymentInfo
-                semester={info.shortContent.slice(-3)}
-                content={info.shortContent}
-                batch={info._id.slice(0, 10)}
-                type={"Tiền mua giấy in"}
-                date={
-                  info.updatedAt.split("T")[0] +
-                  " " +
-                  info.updatedAt.split("T")[1].substring(0, 8)
-                }
-                total={info.money}
-                fee={0}
-                checkout={info.paidMoney}
-                remain={info.leftMoney}
-                checkoutDate={
-                  info.updatedAt.split("T")[0] +
-                  " " +
-                  info.updatedAt.split("T")[1].substring(0, 8)
-                }
-                order={info.stt}
-                id={info._id.slice(0, 10)}
-              />
-            ))}
+            {paymentsList &&
+              paymentsList.length > 0 &&
+              paymentsList?.map((info, index) => (
+                <PaymentInfo
+                  functionRenderList={() => setRenderList(!renderList)}
+                  key={index}
+                  semester={info?.shortContent?.slice(-3)}
+                  content={info?.shortContent}
+                  batch={info?._id?.slice(0, 10)}
+                  type={"Tiền mua giấy in"}
+                  date={
+                    info?.updatedAt.split("T")[0] +
+                    " " +
+                    info?.updatedAt.split("T")[1].substring(0, 8)
+                  }
+                  total={info?.money}
+                  fee={0}
+                  checkout={info?.paidMoney}
+                  remain={info?.leftMoney}
+                  checkoutDate={
+                    info?.updatedAt.split("T")[0] +
+                    " " +
+                    info?.updatedAt?.split("T")[1].substring(0, 8)
+                  }
+                  order={info?.stt}
+                  id={info?._id?.slice(0, 10)}
+                  payment_id={info?.payment_id}
+                />
+              ))}
           </div>
         </div>
       </div>
