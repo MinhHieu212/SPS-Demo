@@ -13,16 +13,17 @@
   width: 100%;
 }
 
-.Config button {
-  width: 5.25rem;
-  height: 2.25rem;
-  border-radius: 0.3125rem;
-  background: #066dcc;
-  box-shadow: 2px 1px 4px 0px rgba(0, 0, 0, 0.25);
-  color: white;
-  font-size: 1rem;
-  font-weight: 700;
-}
+
+// .Config button {
+//   width: 5.25rem;
+//   height: 2.25rem;
+//   border-radius: 0.3125rem;
+//   background: #066dcc;
+//   box-shadow: 2px 1px 4px 0px rgba(0, 0, 0, 0.25);
+//   color: white;
+//   font-size: 1rem;
+//   font-weight: 700;
+// }
 input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
@@ -37,7 +38,7 @@ div.currentlist_wrapper {
 }
 @media (min-width: 768px) {
   .Config form .formInput:nth-child(4) {
-    margin-left: 1rem;
+    margin-left: 2rem;
   }
 }
 .formInput span.Err {
