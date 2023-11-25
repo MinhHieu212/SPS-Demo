@@ -19,7 +19,7 @@ export const InfoField2 = ({ fieldName, fieldValue }) => {
       <span className="text-[#066DCC] text-[16px] md:text-[20px]  font-bold w-[40%]">
         {fieldName}:
       </span>
-      <span className="text-[16px] md:text-[20px] font-semibold leading-7 truncate overflow-clip">
+      <span className="text-[16px] md:text-[20px] font-semibold leading-7 truncate overflow-clip w-[60%]">
         {fieldValue}
       </span>
     </div>

@@ -7,6 +7,8 @@ export const LoginAPI = async (data) => {
     .then((response) => {
       localStorage.setItem("accessToken", response?.data?.data?.accessToken);
       localStorage.setItem("refreshToken", response?.data?.data?.refreshToken);
+      console.log("Response Login", response);
+
       return response;
     })
     .catch((error) => {

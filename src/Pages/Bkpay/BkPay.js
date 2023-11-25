@@ -23,9 +23,10 @@ const Bkpay = () => {
     handleCallApi();
 
     if (localStorage.getItem("accessToken") === null) {
-      navigate("/Error");
+      navigate("/Login");
     }
   }, [renderList]);
+  
   return (
     <div className="BKPay bg-[#eee]">
       <div id="slider-BKPay" className="relative w-full">

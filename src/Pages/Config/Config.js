@@ -50,7 +50,7 @@ const Config = () => {
     handleCallApi();
 
     if (localStorage.getItem("accessToken") === null) {
-      navigate("/Error");
+      navigate("/Login");
     }
   }, []);
 

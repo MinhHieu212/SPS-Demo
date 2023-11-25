@@ -21,7 +21,7 @@ const StudentInfo = () => {
         </div>
       </div>
       <div className=" text-white text-[10px] w-[100%] pr-[60px] truncate overflow-clip capitalize">
-        {userInformation?.major || "..."}
+        {userInformation?.major || ""}
       </div>
     </div>
   );
