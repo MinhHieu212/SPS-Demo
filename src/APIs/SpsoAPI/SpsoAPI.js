@@ -67,3 +67,18 @@ export const editPrinter = async (newData) => {
 
   return PrintersInfos;
 };
+
+export const addPrinter = async (newData) => {
+  const PrintersInfo = await SpssAPI.post(path1, newData)
+    .then((response) => {
+      //console.log("Response from api User infomation ", response);
+
+      return response;
+    })
+    .catch((error) => {
+      //console.log("Fail get User infomation ", error);
+      return error;
+    });
+
+  return PrintersInfo;
+}

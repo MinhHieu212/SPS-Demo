@@ -5,15 +5,16 @@ import ManageSpsoItem from "./ManageSpsoItem";
 import { AddPrinterModal } from "../../Modals/AddPrinterModal/AddPrinterModal";
 import { useNavigate } from "react-router";
 import { FIlterManagePriterModal } from "../../Modals";
-import { getPrintersList, editPrinter } from "../../APIs/SpsoAPI/SpsoAPI";
+import { getPrintersList, editPrinter, addPrinter } from "../../APIs/SpsoAPI/SpsoAPI";
 import { value } from "../../Modals/FIlterManagePriterModal/FIlterManagePriterModal";
 import { newData } from "../../Modals/SPSO_EditPrinter/SPSO_EditPrinter";
-
+import { newPrinter } from "../../Modals/AddPrinterModal/AddPrinterModal";
 const ManageSpso = () => {
   const [printersList, setPrintersList] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [renderList, setRenderList] = useState(true);
   const [renderList1, setRenderList1] = useState(true);
+  const [renderList2, setRenderList2] = useState(true);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -50,6 +51,14 @@ const ManageSpso = () => {
     };
     handleEditAPI(newData);
   }, [renderList1]);
+  useEffect(() => {
+    const handleAddAPI = async (newData) => {
+      const request = await addPrinter(newData);
+      setRenderList(!renderList);
+    }
+    handleAddAPI(newPrinter);
+    console.log(newPrinter);
+  }, [renderList2]) 
   //console.log(printersList);
   const printers = printersList.printers;
   //console.log(printers);
@@ -61,7 +70,9 @@ const ManageSpso = () => {
           QUẢN LÝ HỆ THỐNG MÁY IN
         </h2>
         <div>
-          <AddPrinterModal>
+          <AddPrinterModal
+            functionRenderList2={() => setRenderList2(!renderList2)}
+          >
             <button className="text-[14px] lg:text-[18px] text-white bg-[#3C8DBC] font-semibold md:px-[30px] px-[5px] mf:px-[10px] py-2 rounded-md">
               Thêm máy in
             </button>

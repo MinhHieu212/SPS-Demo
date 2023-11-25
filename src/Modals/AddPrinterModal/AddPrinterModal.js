@@ -4,14 +4,19 @@ import "./AddPrinterModal.scss";
 import { InfoField2 } from "../../Utils/InfoField";
 import filled from "@material-tailwind/react/theme/components/timeline/timelineIconColors/filled";
 
-export const AddPrinterModal = ({ children }) => {
+export const newPrinter = {
+  location: {
+
+  }
+}
+export const AddPrinterModal = ({ children, functionRenderList2 }) => {
   const [openAPModal, setOpenAPModal] = useState(false);
   const handleClose = () => {
     setOpenAPModal(false);
   };
 
   const [values_AP, setValues_AP] = useState({
-    ID: "0953",
+    ID: "",
     brand: "",
     model: "",
     location: { facility: "", department: "", room: "" },
@@ -26,6 +31,8 @@ export const AddPrinterModal = ({ children }) => {
   const [facilities, setFacilities] = useState("");
   const [departments, setDepartments] = useState([]);
   const [rooms, setRooms] = useState([]);
+  const [room, setRoom] = useState("");
+  const [dept, setDept] = useState("");
 
   useEffect(() => {
     if (location.facility === "Cơ sở 1") {
@@ -97,8 +104,17 @@ export const AddPrinterModal = ({ children }) => {
     setValues_AP({ ...values_AP, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    newPrinter.printerId = ID;
+    newPrinter.brand = brand;
+    newPrinter.model = type; 
+    newPrinter.location.facility = facilities === "Cơ sở 1" ? "CS1" : "CS2";
+    newPrinter.location.department = dept;
+    newPrinter.location.room = room;
+    newPrinter.status = checked === "active" ? 1 : 0;
+    console.log(newPrinter);
+    setOpenAPModal(false);
+    functionRenderList2();
   };
 
   return (
@@ -124,7 +140,7 @@ export const AddPrinterModal = ({ children }) => {
                   type="text"
                   className="block w-full"
                   value={ID}
-                  readOnly
+                  onChange={(e) => setID(e.target.value)}
                 />
               </div>
             </div>
@@ -180,7 +196,10 @@ export const AddPrinterModal = ({ children }) => {
                   className="w-[35%] h-[2.5rem] border-1 border-[black] focus:outline-none rounded-[0.5rem]"
                   name="department"
                   id="department"
-                  onChange={(e) => handleSelectChange(e, "department")}
+                  onChange={(e) => {
+                    handleSelectChange(e, "department");
+                    setDept(e.target.value);
+                  }}
                 >
                   <option selected="true" disabled="disable" value="">
                     Tòa...
@@ -195,7 +214,10 @@ export const AddPrinterModal = ({ children }) => {
                   className="w-[40%] h-[2.5rem] border-1 border-[black] focus:outline-none rounded-[0.5rem]"
                   name="room"
                   id="room"
-                  onChange={(e) => handleSelectChange(e, "room")}
+                  onChange={(e) => {
+                    handleSelectChange(e, "room");
+                    setRoom(Number(e.target.value));
+                  }}
                 >
                   <option selected="true" disabled="disable" value="">
                     Phòng...
