@@ -21,10 +21,10 @@ export const ConfigAPI = async () => {
 export const SendConfigAPI = async (data) => {
   const responseConfigInfo = await SpssAPI.put(path2, data)
   .then((response) => {
-    console.log("Response from api post confirm payments", response);
+    console.log("Response from api put config info ", response);
     return response;
   }) .catch((error) => {
-    console.log("Fail on api post confirm payments ", error);
+    console.log("Fail on api api put config info ", error);
     return error;
   });
   return responseConfigInfo;

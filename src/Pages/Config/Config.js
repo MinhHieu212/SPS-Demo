@@ -4,8 +4,7 @@ import "./Config.scss";
 import { AiOutlineDelete } from "react-icons/ai";
 import { ConfigAPI, SendConfigAPI } from "../../APIs/ConfigAPI/ConfigAPI";
 import format from 'date-fns/format'
-import { Axios } from "axios";
-import { info } from "autoprefixer";
+
 
 const Config = () => {
   // formInfo to save fetched data
@@ -21,21 +20,22 @@ const Config = () => {
     isDefault: false,
   })
 
-  // 4 useStates to control first Form
+  // 4 useStates to control first Section
   const [curpag_input, setCurpag_input] = useState();
   const [stday1_input, setStday1_input] = useState(format(new Date(), 'yyyy-MM-dd'));
   const [stday2_input, setStday2_input] = useState(format(new Date(), 'yyyy-MM-dd'));
   const [curprice_input, setCurprice_input] = useState();
-  // const [currentList, setCurrentList] = useState([]);
-  const [allItem, setAllItem] = useState([]);
+  // 2 useStates to control second Section
+  const [deffileTypes, setDefFileTypes] = useState([]);
+  const [curfileTypes, setCurfileTypes] = useState([]);
+  const [selectedValue, setSelectedValue] = useState("");
 
-  const [firstLaunch, setFirstLaunch] = useState(true);
   // First launch
-  useEffect(() => {  
+  useEffect(() => {
     const handleCallApi = async () => {
       const response = await ConfigAPI();
       console.log("reponse from Conf api: ", response);
-      
+
       setFormInfo(response?.data?.data);
       setCurpag_input(response?.data?.data.currentBalance);
       setStday1_input(response?.data?.data.startDate1.split('T')[0]);
@@ -43,9 +43,7 @@ const Config = () => {
       setCurprice_input(response?.data?.data.currentA4Price);
 
       setDefFileTypes(response?.data?.data.defaultFileType);
-      // setCurrentList(response?.data.data.currentFileType);
       setCurfileTypes(response?.data.data.currentFileType);
-      
     };
     handleCallApi();
 
@@ -54,10 +52,9 @@ const Config = () => {
     }
   }, []);
 
-
-  useEffect(()=>{
+  useEffect(() => {
     setInfoSend(formInfo);
-    setInfoSend((prevData) => ({...prevData, startDate1: stday1_input, startDate2: stday2_input}));
+    setInfoSend((prevData) => ({ ...prevData, startDate1: stday1_input, startDate2: stday2_input }));
   }, [formInfo]);
 
   const [errorMessage, setErrorMessage] = useState(null);
@@ -72,77 +69,55 @@ const Config = () => {
     }
   }, [errorMessage]);
 
-  // Function for 2 buttons
+  // Submitting
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await SendConfigAPI(infoSend);
     console.log("reponse send to api: ", response.data);
   };
 
+  // Setting default
   const setDefault = () => {
     setCurpag_input(formInfo?.defaultBalance);
     setStday1_input(formInfo?.startDate1.split('T')[0]);
     setStday2_input(formInfo?.startDate2.split('T')[0]);
     setCurprice_input(formInfo?.defaultA4Price);
-    setInfoSend((prevData)=>({...prevData, 
+    setCurfileTypes(formInfo.defaultFileType);
+
+    setInfoSend((prevData) => ({
+      ...prevData,
+      startDate1: formInfo?.startDate1,
+      startDate2: formInfo?.startDate2,
       isDefault: true,
     }))
   };
-
-
-  // Attributes for the second form
-
-  const [deffileTypes, setDefFileTypes] = useState([]);
-  const [curfileTypes, setCurfileTypes] = useState([]);
-  const [selectedValue, setSelectedValue] = useState("");
 
   const updateInputType = (e) => {
     setSelectedValue(e.target.value);
   };
   const handleAdd = (val) => {
     if (val !== "") {
-      if (!allItem.some((element) => element.fileType === val)) {
-        let newitem = {
-          // id: allItem.length === 0 ? 1 : allItem[allItem.length - 1].id + 1,
-          // fileType: selectedValue,
-          fileType: val,
-        };
-        setAllItem([...allItem, newitem]);
+      if (!curfileTypes.some((element) => element === val)) {
         setCurfileTypes([...curfileTypes, val]);
-        console.log("Dang add...");
         setInfoSend((prevData) => ({
           ...prevData,
           currentFileType: [...prevData.currentFileType, val],
-        }));        
+        }));
       } else {
         setErrorMessage("Loại file đã tồn tại.");
       }
     }
   };
 
-
-  const handleSubmit2 = async (e) => {
-    e.preventDefault();
-    console.log("nop form 2!");
-    const response = await SendConfigAPI(infoSend);
-    console.log("reponse send to api: ", response.data);
+  const handleDelete = (ftype) => {
+    const newCurfileTypes = curfileTypes.filter((item) => item !== ftype);
+    setCurfileTypes(newCurfileTypes);
+    const updatedCurrentFileType = infoSend.currentFileType.filter((item) => item !== ftype);
+    setInfoSend((prevData) => ({
+      ...prevData,
+      currentFileType: updatedCurrentFileType,
+    }));
   };
-
-  const handleDelete = (id, ftype) => {
-    const newAllItem = allItem.filter((item) => item.fileType !== ftype);
-    setAllItem(newAllItem);
-    console.log("Dang xoa...");
-    setInfoSend((prevData) => {
-      const updatedCurrentFileType = prevData.currentFileType.filter((item) => item !== ftype);
-      console.log(updatedCurrentFileType);
-      console.log("Set to send");
-      return {
-        ...prevData,
-        currentFileType: updatedCurrentFileType,
-      };
-    }); 
-  };
-  console.log(allItem);
 
   return (
     <div className="Config max-w-[1280px] px-[10px] md:px-[20px] mx-auto pb-5 bg-white shadow-sm min-h-[93vh]">
@@ -168,92 +143,74 @@ const Config = () => {
                   setCurpag_input(numericValue);
                   setInfoSend((prevData) => ({ ...prevData, currentBalance: numericValue }));
                 }}
-                value = {curpag_input} type="number" required min="1" max="2000"
+                value={curpag_input} type="number" required min="1" max="2000"
                 onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()}
               />
             </div>
             <span className="Err">{errorMessage}</span>
           </div>
-
-          <div className="formInput flex flex-col float-left">
-            <label className="text-[16px] lg:text-[18px] ">Thời gian cấp giấy Học kì 1</label>
-            <div>
-              <input
-                className="inline border-1 border-[#1488DB] rounded-md"
-                type="date"
-                name="date"
-                id="datepicker"
-                required
-                onChange={(e) => {
-                  const dayValue = format(new Date(e.target.value), 'yyyy-MM-dd');
-                  setStday1_input(dayValue)
-                  setInfoSend((prevData) => ({ ...prevData, startDate1: dayValue }));
-                }}
-                value = {stday1_input}
-              />
+          <div className="flex flex-row item-center justify-start md:gap-[32px] gap-[16px]">
+            <div className="formInput flex flex-col float-left">
+              <label className="TG1 text-[16px] lg:text-[18px] ">Thời gian cấp giấy Học kì 1</label>
+              <div>
+                <input
+                  className="inline border-1 border-[#1488DB] rounded-md"
+                  type="date"
+                  name="date"
+                  id="datepicker"
+                  required
+                  onChange={(e) => {
+                    const dayValue = format(new Date(e.target.value), 'yyyy-MM-dd');
+                    setStday1_input(dayValue)
+                    setInfoSend((prevData) => ({ ...prevData, startDate1: dayValue }));
+                  }}
+                  value={stday1_input}
+                />
+              </div>
+              <span className="Err">{errorMessage}</span>
             </div>
-            <span className="Err">{errorMessage}</span>
+
+            <div className="formInput flex flex-col float-left col-span-1 sm:col-span-1 ml-0 sm:ml-4 md:ml-8 ">
+              <label className="TG2 text-[16px] lg:text-[18px] ">Thời gian cấp giấy Học kì 2</label>
+              <div>
+                <input
+                  className="inline border-1 border-[#1488DB] rounded-md"
+                  type="date"
+                  name="date"
+                  id="datepicker"
+                  required
+                  onChange={(e) => {
+                    const dayValue = format(new Date(e.target.value), 'yyyy-MM-dd');
+                    setStday2_input(dayValue)
+                    setInfoSend((prevData) => ({ ...prevData, startDate2: dayValue }));
+                  }}
+                  value={stday2_input}
+                />
+              </div>
+              <span className="Err">{errorMessage}</span>
+            </div>
           </div>
 
-          <div className="formInput flex flex-col float-left">
-            <label className="text-[16px] lg:text-[18px] ">Thời gian cấp giấy Học kì 2</label>
-            <div>
-              <input
-                className="inline border-1 border-[#1488DB] rounded-md"
-                type="date"
-                name="date"
-                id="datepicker"
-                required
-                onChange={(e) => {
-                  const dayValue = format(new Date(e.target.value), 'yyyy-MM-dd');
-                  setStday2_input(dayValue)
-                  setInfoSend((prevData) => ({ ...prevData, startDate2: dayValue }));
-                }}
-                value = {stday2_input}
-              />
-            </div>
-            <span className="Err">{errorMessage}</span>
-          </div>
 
           <div className="formInput flex flex-col w-[100%]">
             <label className="text-[16px] lg:text-[18px] ">Giá của một tờ giấy A4 khi mua thêm</label>
-            <div>
+            <div class="flex flex-row items-center justify-start gap-3">
               <input
                 placeholder="Nhập giá..."
-                className="inline border-1 border-[#1488DB]  rounded-md"
+                className="border-1 border-[#1488DB]  rounded-md block max-w-[120px]"
                 onChange={(e) => {
                   const numericValue = parseFloat(e.target.value);
                   setCurprice_input(numericValue);
                   setInfoSend((prevData) => ({ ...prevData, currentA4Price: numericValue }));
                 }}
-                value = {curprice_input} type="number" required min="100" max="1000"
+                value={curprice_input} type="number" required min="100" max="1000"
                 onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()}
               />
               <span className="font-bold text-xl w-1/3 "> (vnđ)</span>
             </div>
             <span className="Err">{errorMessage}</span>
           </div>
-          <button
-            className="Submit flex float-right items-center justify-center my-4 mx-[0.5rem] w-[5.25rem] h-[2.25rem] rounded-[0.3125rem] bg-[#066dcc] text-white text-[1rem] font-bold"
-            type="submit"
-          >
-            Áp dụng
-          </button>
-          <button
-            className="Todefault flex float-right items-center justify-center my-4 mx-[0.5rem] w-[5.25rem] h-[2.25rem] rounded-[0.3125rem] bg-[#066dcc] text-white text-[1rem] font-bold"
-            type="button"
-            onClick={() => setDefault()}>
-            Mặc định
-          </button>
-        </form>
-      </div>
 
-
-      <div className="Form_fileduocphep flex item-center justify-center  bg-cover bg-center mx-auto mt-10">
-        <form
-          onSubmit={handleSubmit2}
-          className="bg-[#ffffff] shadow-xl border-1 border-[#1488db70] py-0 px-3 w-full md:w-[570px] h-[27rem]"
-        >
           <h2 className="text-xl lg:text-2xl text-[#1488DB] font-semibold mt-4 border-b-2 border-[#1488DB] pb-2 md:pb-3">
             Cấu hình các loại file được in
           </h2>
@@ -262,7 +219,7 @@ const Config = () => {
               className="w-[60%] h-[2.5rem] py-0 px-2 border-1 border-[#1488DB] rounded-[0.1875rem]"
               onChange={updateInputType}
             >
-              <option selected="true" disabled="disable" value="">
+              <option selected="selected" disabled="disable" value="">
                 Chọn loại tệp để thêm...
               </option>
               {
@@ -273,8 +230,8 @@ const Config = () => {
             </select>
 
             <button
+              type="button"
               className="float-right w-[5.25rem] h-[2.25rem] rounded-[0.3125rem] bg-[#066dcc] text-white text-[1rem] font-bold"
-              type="submit"
               onClick={() => handleAdd(selectedValue)}>
               Thêm
             </button>
@@ -296,7 +253,7 @@ const Config = () => {
           >
             <div className="current_list overflow-x-scroll flex flex-col">
               {(() => {
-                if (allItem.length === 0) {
+                if (curfileTypes.length === 0) {
                   return (
                     <div className="italic text-gray-400">
                       Bạn hiện chưa thêm loại file nào.
@@ -304,44 +261,38 @@ const Config = () => {
                   );
                 }
               })()}
-              {firstLaunch && (
-                <>
-                  {/* {console.log("Day la cur list", currentList)} */}
-                  {console.log("Day la cur list", curfileTypes)}
-                  {curfileTypes.map((member, index) => {
-                    let newitem = {
-                      // id: allItem.length === 0 ? 1 : allItem[allItem.length - 1].id + 1,
-                      fileType: member,
-                    };
-                    setAllItem((prevAllItem) => [...prevAllItem, newitem]);
-                    if (index === curfileTypes.length - 1) {
-                      setFirstLaunch(false);
-                    }
-                    // return null;
-                  })}
-                </>
-              )}
-              {allItem.map((item, key) => {
+              {curfileTypes.map((item, key) => {
                 return (
                   <div
                     className="current_list_item bg-white justify-between bg-transparent flex flex-row my-[0.5rem] md:py-[5px] px-[1rem] border-b-[2px] border-[#1488DB]"
                     key={key}
                   >
-                    <p>{item.fileType}</p>
+                    <p>{item}</p>
                     <div>
-                      {/* <button type="submit"> */}
                       <AiOutlineDelete
                         className="icon text-2xl cursor-pointer"
-                        onClick={(e) => {handleDelete(item.id, item.fileType)}}
+                        onClick={(e) => { handleDelete(item) }}
                         title="Delete?"
                       />
-                      {/* </button> */}
                     </div>
                   </div>
                 );
               })}
             </div>
           </div>
+
+          <button
+            className="Submit flex float-right items-center justify-center my-4 mx-[0.5rem] w-[5.25rem] h-[2.25rem] rounded-[0.3125rem] bg-[#066dcc] text-white text-[1rem] font-bold"
+            type="submit"
+          >
+            Áp dụng
+          </button>
+          <button
+            className="Todefault flex float-right items-center justify-center my-4 mx-[0.5rem] w-[5.25rem] h-[2.25rem] rounded-[0.3125rem] bg-[#066dcc] text-white text-[1rem] font-bold"
+            type="submit"
+            onClick={() => setDefault()}>
+            Mặc định
+          </button>
         </form>
       </div>
     </div>
