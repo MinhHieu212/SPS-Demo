@@ -5,10 +5,16 @@ import ManageSpsoItem from "./ManageSpsoItem";
 import { AddPrinterModal } from "../../Modals/AddPrinterModal/AddPrinterModal";
 import { useNavigate } from "react-router";
 import { FIlterManagePriterModal } from "../../Modals";
-import { getPrintersList, editPrinter, addPrinter } from "../../APIs/SpsoAPI/SpsoAPI";
+import {
+  getPrintersList,
+  editPrinter,
+  addPrinter,
+} from "../../APIs/SpsoAPI/SpsoAPI";
 import { value } from "../../Modals/FIlterManagePriterModal/FIlterManagePriterModal";
 import { newData } from "../../Modals/SPSO_EditPrinter/SPSO_EditPrinter";
 import { newPrinter } from "../../Modals/AddPrinterModal/AddPrinterModal";
+import { PrintersData } from "./FixedData";
+
 const ManageSpso = () => {
   const [printersList, setPrintersList] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -55,13 +61,12 @@ const ManageSpso = () => {
     const handleAddAPI = async (newData) => {
       const request = await addPrinter(newData);
       setRenderList(!renderList);
-    }
+    };
     handleAddAPI(newPrinter);
     console.log(newPrinter);
-  }, [renderList2]) 
-  //console.log(printersList);
+  }, [renderList2]);
+
   const printers = printersList.printers;
-  //console.log(printers);
 
   return (
     <div className="Manage mx-auto max-w-[1280px] w-full px-[10px] lg:px-[20px] bg-[white] shadow-sm pb-5 min-h-[93vh]">
@@ -132,32 +137,55 @@ const ManageSpso = () => {
         <div className=" min-w-[800px] md:w-full max-h-[60px]  flex flex-row mx-auto justify-between shadow-lg items-center bg-[#3C8DBC] text-[16px]  lg:text-[18px] font-bold py-3 px-4 mt-8 rounded-sm  text-white">
           <div className="text-center w-[10%]">ID MÁY IN</div>
           <div className="w-[15%] text-center">TRẠNG THÁI</div>
-          <div className="text-center w-[20%]">VỊ TRÍ</div>
+          <div className="text-center w-[15%]">VỊ TRÍ</div>
           <div className="text-center w-[15%]"> KÍCH HOẠT</div>
-          <div className="text-center w-[25%]">SỐ YÊU CẦU IN</div>
+          <div className="text-center w-[5%]">QUEUE</div>
+          <div className="text-center w-[25%]">YÊU CẦU IN</div>
           <div className="w-[15%] text-center">THIẾT LẬP</div>
         </div>
-        {printers?.map((printer, index) => (
-          <ManageSpsoItem
-            functionRenderList1={() => setRenderList1(!renderList1)}
-            functionRenderList={() => setRenderList(!renderList)}
-            model={printer.model}
-            description={printer.description}
-            brand={printer.brand}
-            key={index}
-            id={printer.printerId}
-            location={
-              printer.location.facility +
-              ", " +
-              printer.location.department +
-              ", " +
-              printer.location.room
-            }
-            date={printer.activatedTime.slice(0, 10)}
-            status={printer.status ? "Hoạt động" : "Không hoạt động"}
-            queue={printer.printingQueue.length}
-          />
-        ))}
+        {printers
+          ? printers?.map((printer, index) => (
+              <ManageSpsoItem
+                functionRenderList1={() => setRenderList1(!renderList1)}
+                functionRenderList={() => setRenderList(!renderList)}
+                model={printer.model}
+                description={printer.description}
+                brand={printer.brand}
+                key={index}
+                id={printer.printerId}
+                location={
+                  printer.location.facility +
+                  ", " +
+                  printer.location.department +
+                  ", " +
+                  printer.location.room
+                }
+                date={printer.activatedTime.slice(0, 10)}
+                status={printer.status ? "Hoạt động" : "Không hoạt động"}
+                queue={printer.printingQueue.length}
+              />
+            ))
+          : PrintersData?.map((printer, index) => (
+              <ManageSpsoItem
+                functionRenderList1={() => setRenderList1(!renderList1)}
+                functionRenderList={() => setRenderList(!renderList)}
+                model={printer.model}
+                description={printer.description}
+                brand={printer.brand}
+                key={index}
+                id={printer.printerId}
+                location={
+                  printer.location.facility +
+                  ", " +
+                  printer.location.department +
+                  ", " +
+                  printer.location.room
+                }
+                date={printer.activatedTime.slice(0, 10)}
+                status={printer.status ? "Hoạt động" : "Không hoạt động"}
+                queue={printer.printingQueue.length}
+              />
+            ))}
       </div>
     </div>
   );

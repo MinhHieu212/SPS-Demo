@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { getPtr, editPtr } from "../../APIs/StaffAPI/StaffAPI";
 import { newPtr } from "../../Modals/PrinterInfoAndConfigModal/PrinterInfoAndConfigModal";
 const ManageStaff = () => {
+  const [printers, setPrinters] = useState(exampleData);
   const [renderList, setRenderList] = useState(true);
   const [renderList1, setRenderList1] = useState(true);
   const [data, setData] = useState([]);

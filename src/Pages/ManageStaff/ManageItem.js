@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./Manage.scss";
 
 import {
@@ -21,7 +21,7 @@ function ManageItem(props) {
     setLog(response?.data?.data?.printingLog);
   }
   const handleSubmit = () => {
-    handleGetLogs({printerId: props.id});
+    handleGetLogs({ printerId: props.id });
   }
   const handleGetQueue = async (id) => {
     const response = await getPtrQueue(id);
@@ -29,7 +29,7 @@ function ManageItem(props) {
     setQueue([...response?.data?.data?.printingJob, ...response?.data?.data?.printingQueue]);
   }
   const handleSubmitQueue = () => {
-    handleGetQueue({printerId: props.id})
+    handleGetQueue({ printerId: props.id })
   }
   return (
     <div className="ManageItem flex flex-row justify-between items-center bg-[#ffffff] text-[16px] lg:text-[18px] font-bold py-[12px] px-4 mt-2 rounded-sm border-b-2 border-black min-w-[800px] md:w-full max-h-[60px]">
@@ -46,7 +46,7 @@ function ManageItem(props) {
       </div>
       <div className="min-w-[20%] flex justify-center items-center">
         <StaffPrinterLogModal
-          log = {log}
+          log={log}
         >
           <button onClick={handleSubmit} className="middle none center mr-4 rounded-md bg-[#3C8DBC] text-[14px] lg:text-[16px] py-1 px-3 font-sans font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
             Lịch sử
@@ -64,12 +64,12 @@ function ManageItem(props) {
           <PrinterInfoAndConfigModal
             id={props.id}
             status={props.status}
-            description = {props.description}
+            description={props.description}
             brand={props.brand}
             model={props.model}
             fileType={props.fileType}
-            setRenderList = {() => props.setRenderList}
-            setRenderList1 = {props.functionRenderList1}
+            setRenderList={() => props.setRenderList}
+            setRenderList1={props.functionRenderList1}
           >
             <button className="middle none center mr-4 rounded-md bg-[#3C8DBC] text-[14px] lg:text-[16px] py-1 px-3 font-sans font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
               Cấu hình

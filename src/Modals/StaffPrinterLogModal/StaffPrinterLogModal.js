@@ -19,7 +19,7 @@ const StaffPrinterLogModal = ({ children, log }) => {
             {log.map((request, index) => {
               return (
                 <div
-                  className="w-[90%] rounded-md bg-[#D9D9D9] p-2 shadow-md border-[1px] border-[#367FA9]"
+                  className="w-[90%] rounded-md bg-[#f1eeee] p-2 shadow-md border-[1px] border-[#367FA9]"
                   key={index}
                 >
                   <InfoField2

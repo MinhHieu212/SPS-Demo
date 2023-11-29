@@ -175,14 +175,16 @@ const ConfigFile = () => {
                 <div className="absolute z-10 top-0 -translate-y-[45px] right-0 flex gap-3 items-center">
                   <label
                     htmlFor="dropzone-file"
-                    className="flex gap-1 items-center justify-center"
+                    className="flex gap-1 items-center justify-center cursor-pointer"
                   >
                     <AddIcon></AddIcon>
-                    <span className="text-[16px] md:text-[20px]">Thêm tệp</span>
+                    <span className="text-[16px] md:text-[20px] ">
+                      Thêm tệp
+                    </span>
                   </label>
 
                   <RemoveFileModal files={files} removeFile={removeFile}>
-                    <div className="flex gap-1 items-center justify-center">
+                    <div className="flex gap-1 items-center justify-center cursor-pointer">
                       <DeleteIcon></DeleteIcon>
                       <span className="text-[16px] md:text-[20px]">
                         Xóa tệp

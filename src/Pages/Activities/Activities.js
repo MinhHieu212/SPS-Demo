@@ -4,6 +4,7 @@ import { FilterIcon, SearchIcon } from "../../Assets/Icons/Icons";
 import ActivityItem from "./ActivityItem";
 import { ActivitiesFilterModal } from "../../Modals";
 import { useNavigate } from "react-router-dom";
+import { activities } from "./FixedData";
 import { ActivityFilter } from "../../Modals/ActivitiesFilterModal/ActivitiesFilterModal";
 import { getStudents } from "../../APIs/SpsoAPI/SpsoAPI";
 const activities = [
