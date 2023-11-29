@@ -36,7 +36,7 @@ function PaperChart({ data }) {
     ],
     datasets: [
       {
-        label: "TỜ A4",
+        label: "TỜ",
         backgroundColor: ["#3e95cd"],
         data: data,
         borderWidth: 1,
@@ -55,7 +55,7 @@ function PaperChart({ data }) {
     plugins: {
       title: {
         display: true,
-        text: "LƯỢNG GIẤY ĐÃ IN",
+        text: "TỔNG LƯỢNG GIẤY ĐÃ IN",
         color: "#1488db",
         font: {
           size: 18,

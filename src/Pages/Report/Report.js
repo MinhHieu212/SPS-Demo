@@ -1,91 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReportItem from "./ReportItem";
 import PaperChart from "./PaperChart";
 import { useNavigate } from "react-router";
 import { FilterReportModalV2 } from "../../Modals";
-
-const data = [2478, 5267, 734, 784, 433, 769, 892, 133, 788, 820, 110, 120];
-const items = [
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-];
+import { getReportPrinters, getReportChart } from "../../APIs/SpsoAPI/SpsoAPI";
+import { params } from "../../Modals/FilterReportModalV2/FilterReportModalV2";
 const Report = () => {
   const navigate = useNavigate();
+  const [renderList, setRenderList] = useState(true);
+  const [reports, setReports] = useState([]);
+  const [printers, setPrinters] = useState([]);
+  const [data, setData] = useState([]);
   useEffect(() => {
+    const handleGetReport = async (params) => {
+      const response = await getReportPrinters(params);
+      setReports(response?.data?.data);
+      setPrinters(response?.data?.data?.all_printers);
+      //console.log(response?.data?.data);
+    }
+    handleGetReport(params);
+    //console.log(params);
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Login");
     }
-  }, []);
+  }, [renderList]);
+
+  useEffect(() => {
+    const handleGetChart = async(params) => {
+      const response = await getReportChart(params);
+      setData(Object.values(response?.data?.data))
+    }
+    handleGetChart({year: params.year});
+  }, [renderList]);
   return (
     <div className="Report mx-auto max-w-[1280px] px-[10px]   md:px-[20px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
       <div className="flex flex-row mt-3 border-b-4 border-[#066DCC] pb-2 md:pb-3 mb-4 items-center justify-between">
@@ -93,14 +39,16 @@ const Report = () => {
           BÁO CÁO HỆ THỐNG
         </h2>
         <div>
-          <FilterReportModalV2>
+          <FilterReportModalV2
+            functionRenderList={() => setRenderList(!renderList)}
+          >
             <button className="text-[16px] lg:text-[18px] text-white bg-[#066DCC] font-semibold md:px-[30px] px-[10px] py-2 rounded-md">
               Lọc báo cáo
             </button>
           </FilterReportModalV2>
         </div>
       </div>
-      <PaperChart data={data} />
+      <PaperChart data={data || Array(12).fill(0)} />
       <h2 className="text-[16px] lg:text-[18px] font-bold underline px-8 mt-[50px] mb-4">
         TẤT CẢ MÁY IN
       </h2>
@@ -110,25 +58,25 @@ const Report = () => {
             <span className="   text-[#1488db] font-semibold">
               Tổng lượng giấy đã in:{" "}
             </span>
-            2000
+            {reports.total_pages || 0}
           </p>
           <p className="text-[16px] lg:text-[18px]  text-black font-semibold">
             <span className="  text-[#1488db] font-semibold">
               Tổng lượng giấy A3 đã in:{" "}
             </span>
-            120
+            {reports.total_A3 || 0}
           </p>
           <p className="text-[16px] lg:text-[18px]  text-black font-semibold">
             <span className="   text-[#1488db] font-semibold">
               Tổng lượng giấy A4 đã in:{" "}
             </span>
-            1880
+            {reports.total_A4 || 0}
           </p>
           <p className="text-[16px] lg:text-[18px]  text-black font-semibold">
             <span className="  text-[#1488db] font-semibold">
               Tổng số lần bảo trì:{" "}
             </span>
-            13
+            {reports.total_Printed || 0}
           </p>
         </div>
         <div className="w-full lg:w-1/2 flex flex-col gap-3 ">
@@ -136,19 +84,19 @@ const Report = () => {
             <span className="   text-[#1488db] font-semibold">
               Trung bình lượng giấy A3 trên mỗi máy:{" "}
             </span>
-            40
+            {reports.avg_A3 || 0}
           </p>
           <p className="text-[16px] lg:text-[18px]  text-black font-semibold">
             <span className="   text-[#1488db] font-semibold">
               Trung bình lượng giấy A4 trên mỗi máy:{" "}
             </span>
-            120
+            {reports.avg_A4 || 0}
           </p>
           <p className="text-[16px] lg:text-[18px]  text-black font-semibold">
             <span className="   text-[#1488db] font-semibold">
               Trung bình số lần in trên mỗi máy:{" "}
             </span>
-            20
+            {reports.avg_Printed || 0}
           </p>
         </div>
       </div>
@@ -162,16 +110,16 @@ const Report = () => {
           <div className="min-w-[15%] text-center">GIẤY A4 ĐÃ IN</div>
           <div className="min-w-[10%] text-center">BẢO TRÌ</div>
         </div>
-        {items.map((item, index) => (
+        {printers?.map((item, index) => (
           <ReportItem
             key={index}
-            time={item.time}
-            id={item.id}
-            location={item.location}
-            frequency={item.frequency}
-            a3={item.a3}
-            a4={item.a4}
-            maintenance={item.maintenance}
+            time={item.date}
+            id={item.printerId}
+            location={item.location.facility + ", " + item.location.department + ", " + item.location.room}
+            frequency={item.printed}
+            a3={item.totalA3Pages}
+            a4={item.totalA4Pages}
+            maintenance={item.printed}
           />
         ))}
       </div>
