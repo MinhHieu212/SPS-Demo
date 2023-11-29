@@ -1,23 +1,34 @@
 import React, { useEffect, useState } from "react";
-
-const FilterReportModalV2 = ({ children }) => {
+export const params = {
+  year: 2023,
+  sortDirection: 1,
+  month: null
+}
+const FilterReportModalV2 = ({ children, functionRenderList }) => {
   const [open, setOpen] = useState(false);
   const [sort, setSort] = useState("latest");
-  const [monthChecked, setMonthChecked] = useState("All");
+  const [monthChecked, setMonthChecked] = useState("all");
   const [yearChecked, setYearChecked] = useState("2023");
   const cancelFilter = () => {
     setSort("latest");
-    setMonthChecked("All");
+    setMonthChecked("all");
     setYearChecked("2023");
+    params.year = 2023;
+    params.sortDirection = 1;
+    params.month = null;
+    
+    setSort("latest");
+    setMonthChecked("all");
+    setYearChecked("2023");
+    functionRenderList();
     setOpen(false);
   };
 
   const applyFilter = () => {
-    console.log("Params Filter Printer : ", {
-      sort: sort,
-      month: monthChecked,
-      year: yearChecked,
-    });
+    params.year = Number(yearChecked);
+    params.month = (monthChecked === "all" ? null : Number(monthChecked));
+    params.sortDirection = sort === "latest" ? 1 : -1;
+    functionRenderList();
     setOpen(false);
   };
   const customStyles = {
@@ -50,7 +61,8 @@ const FilterReportModalV2 = ({ children }) => {
               </div>
               <select
                 className="border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%] text-center"
-                onClick={handleYear}
+                onChange={handleYear}
+                value={yearChecked}
               >
                 <option value="2020">Năm 2020</option>
                 <option value="2021">Năm 2021</option>
@@ -61,9 +73,10 @@ const FilterReportModalV2 = ({ children }) => {
               </select>
               <select
                 className="border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%] text-center"
-                onClick={handleMonth}
+                onChange={handleMonth}
+                value={monthChecked}
               >
-                <option value="All selected">Tất cả tháng</option>
+                <option value="all">Tất cả tháng</option>
                 <option value="1">Tháng 1</option>
                 <option value="2">Tháng 2</option>
                 <option value="3">Tháng 3</option>
