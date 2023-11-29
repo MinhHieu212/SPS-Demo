@@ -3,90 +3,14 @@ import ReportItem from "./ReportItem";
 import PaperChart from "./PaperChart";
 import { useNavigate } from "react-router";
 import { FilterReportModalV2 } from "../../Modals";
-import { getReportPrinters } from "../../APIs/SpsoAPI/SpsoAPI";
+import { getReportPrinters, getReportChart } from "../../APIs/SpsoAPI/SpsoAPI";
 import { params } from "../../Modals/FilterReportModalV2/FilterReportModalV2";
-const data = [2478, 5267, 734, 784, 433, 769, 892, 133, 788, 820, 110, 120];
-const items = [
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-];
 const Report = () => {
   const navigate = useNavigate();
   const [renderList, setRenderList] = useState(true);
   const [reports, setReports] = useState([]);
   const [printers, setPrinters] = useState([]);
-
-
+  const [data, setData] = useState([]);
   useEffect(() => {
     const handleGetReport = async (params) => {
       const response = await getReportPrinters(params);
@@ -95,10 +19,18 @@ const Report = () => {
       //console.log(response?.data?.data);
     }
     handleGetReport(params);
-    console.log(printers);
+    //console.log(params);
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Login");
     }
+  }, [renderList]);
+
+  useEffect(() => {
+    const handleGetChart = async(params) => {
+      const response = await getReportChart(params);
+      setData(Object.values(response?.data?.data))
+    }
+    handleGetChart({year: params.year});
   }, [renderList]);
   return (
     <div className="Report mx-auto max-w-[1280px] px-[10px]   md:px-[20px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
@@ -116,7 +48,7 @@ const Report = () => {
           </FilterReportModalV2>
         </div>
       </div>
-      <PaperChart data={data} />
+      <PaperChart data={data || Array(12).fill(0)} />
       <h2 className="text-[16px] lg:text-[18px] font-bold underline px-8 mt-[50px] mb-4">
         TẤT CẢ MÁY IN
       </h2>

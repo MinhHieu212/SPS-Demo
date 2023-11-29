@@ -28,10 +28,6 @@ const FilterReportModalV2 = ({ children, functionRenderList }) => {
     params.year = Number(yearChecked);
     params.month = (monthChecked === "all" ? null : Number(monthChecked));
     params.sortDirection = sort === "latest" ? 1 : -1;
-    
-    setSort("latest");
-    setMonthChecked("all");
-    setYearChecked("2023");
     functionRenderList();
     setOpen(false);
   };
@@ -66,6 +62,7 @@ const FilterReportModalV2 = ({ children, functionRenderList }) => {
               <select
                 className="border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%] text-center"
                 onChange={handleYear}
+                value={yearChecked}
               >
                 <option value="2020">Năm 2020</option>
                 <option value="2021">Năm 2021</option>
@@ -77,6 +74,7 @@ const FilterReportModalV2 = ({ children, functionRenderList }) => {
               <select
                 className="border-b-[3px] cursor-pointer border-gray h-[40px] flex items-center justify-center font-semibold w-[80%] text-center"
                 onChange={handleMonth}
+                value={monthChecked}
               >
                 <option value="all">Tất cả tháng</option>
                 <option value="1">Tháng 1</option>
