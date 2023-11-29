@@ -1,36 +1,33 @@
 import React, { useEffect, useState } from "react";
-
-const ActivitiesFilterModal = ({ children }) => {
+export const ActivityFilter = {
+  sortName: null,
+  sortPayment: null,
+}
+const ActivitiesFilterModal = ({ children, functionSetRenderList }) => {
   const [open, setOpen] = useState(false);
 
   const [alphabet, setAlphabet] = useState("all");
   const [sort, setSort] = useState("all");
-
   const cancelFilter = () => {
     setOpen(false);
     setSort("all");
     setAlphabet("all");
+    ActivityFilter.sortName = null;
+    ActivityFilter.sortPayment = null;
   };
 
   const applyFilter = () => {
-    console.log("Params Filter Activity : ", {
-      alphabet: alphabet,
-      sort: sort,
-    });
+    if (alphabet === "a-z") ActivityFilter.sortName = 1;
+    else if (alphabet === "z-a") ActivityFilter.sortName = -1;
+    else ActivityFilter.sortName = null;
+    
+    if (sort === "ascending") ActivityFilter.sortPayment = 1;
+    else if (sort === "descending") ActivityFilter.sortPayment = -1;
+    else ActivityFilter.sortPayment = null;
+
+    functionSetRenderList();
     setOpen(false);
   };
-
-  useEffect(() => {
-    if (alphabet !== "all") {
-      setSort("all");
-    }
-  }, [sort]);
-
-  useEffect(() => {
-    if (sort !== "all") {
-      setAlphabet("all");
-    }
-  }, [alphabet]);
 
   return (
     <div className="Wrapper relative h-[auto] z-10 w-full">

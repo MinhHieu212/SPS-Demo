@@ -3,19 +3,38 @@ import "./Manage.scss";
 import { FilterIcon, SearchIcon } from "../../Assets/Icons/Icons";
 import ManageItem from "./ManageItem";
 import { useNavigate } from "react-router";
-import { exampleData } from "./FixedData";
-
-const totalPrinters = 15;
-const onlinePrinters = 8;
-
+import { getPtr, editPtr } from "../../APIs/StaffAPI/StaffAPI";
+import { newPtr } from "../../Modals/PrinterInfoAndConfigModal/PrinterInfoAndConfigModal";
 const ManageStaff = () => {
-  const [printers, setPrinters] = useState(exampleData);
+  const [renderList, setRenderList] = useState(true);
+  const [renderList1, setRenderList1] = useState(true);
+  const [data, setData] = useState([]);
+  const [printerID, setPrinterID] = useState("");
+  const [searchID, setSearchID] = useState("");
+  const [printers, setPrinters] = useState([]);
+  const [fileType, setFileType] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
+    const handleEditAPI = async (newData) => {
+      const request = await editPtr(newData);
+      setRenderList(!renderList);
+    };
+    console.log(newPtr);
+    handleEditAPI(newPtr);
+  }, [renderList1])
+  useEffect(() => {
+    const handleGetPtr = async (params) => {
+      const response = await getPtr(params);
+      setData(response?.data?.data);
+      setPrinters(response?.data?.data?.printers);
+      setFileType(response?.data?.data?.currentFileType);
+    }
+    handleGetPtr({ searchField: searchID });
+
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Login");
     }
-  }, []);
+  }, [renderList]);
 
   return (
     <div className="Manage History max-w-[1280px] px-[10px] md:w-full lg:px-[20px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
@@ -29,8 +48,8 @@ const ManageStaff = () => {
             <p className="text-base lg:text-xl w-[60%]">ĐANG HOẠT ĐỘNG</p>
           </div>
           <div className="bg-white flex flex-row text-base font-bold justify-center items-center text-center py-[14px]">
-            <p className="text-base lg:text-xl w-1/2">{totalPrinters}</p>
-            <p className="text-base lg:text-xl w-1/2">{onlinePrinters}</p>
+            <p className="text-base lg:text-xl w-1/2">{data.totalPrinter}</p>
+            <p className="text-base lg:text-xl w-1/2">{data.activatedPrinter}</p>
           </div>
         </div>
         <div className="w-full md:w-[50%] flex mb-3 items-start justify-between relative">
@@ -38,9 +57,10 @@ const ManageStaff = () => {
             type="text"
             placeholder="Tìm theo ID máy in"
             className="w-full lg:w-[100%] border block border-black"
+            onChange={(e) => setPrinterID(e.target.value)}
           />
           <div className="absolute right-[3%] bottom-1/2 translate-y-1/2">
-            <SearchIcon></SearchIcon>
+            <div onClick={(e) => {setSearchID(printerID); setRenderList(!renderList)}}><SearchIcon></SearchIcon></div>
           </div>
         </div>
       </div>
@@ -51,11 +71,17 @@ const ManageStaff = () => {
           <div className="text-center  min-w-[20%]">LỊCH SỬ IN</div>
           <div className=" min-w-[30%]">TRẠNG THÁI</div>
         </div>
-        {printers.map((printer) => (
+        {printers?.map((printer) => (
           <ManageItem
-            id={printer.id}
-            queue={printer.queue}
-            status={printer.status}
+            functionRenderList1={() => setRenderList1(!renderList1)}
+            id={printer.printerId}
+            queue={printer.printingJob.length + printer.printingQueue.length}
+            status={printer.status === 1 ? "Hoạt động" : "Không hoạt động"}
+            description = {printer.description}
+            brand={printer.brand}
+            model={printer.model}
+            fileType={fileType}
+            setRenderList = {() => setRenderList(!renderList)}
           />
         ))}
       </div>

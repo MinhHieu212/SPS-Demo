@@ -30,9 +30,9 @@ const PrinterQueueModal = ({ children, queue }) => {
                   <InfoField2
                     fieldName={"Tên sinh viên"}
                     fieldValue={
-                      (request?.firstName || "...") +
+                      (request?.lastName || "...") +
                       " " +
-                      (request?.lastName || "...")
+                      (request?.firstName || "...")
                     }
                   ></InfoField2>
                   <InfoField2
