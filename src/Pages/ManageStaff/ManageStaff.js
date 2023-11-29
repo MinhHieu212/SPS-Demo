@@ -83,7 +83,7 @@ const ManageStaff = () => {
             fileType={fileType}
             setRenderList = {() => setRenderList(!renderList)}
           />
-        ))} */}
+        ))} 
         {printers?.map((printer, index) => (
           <ManageItem
             functionRenderList1={() => setRenderList1(!renderList1)}
