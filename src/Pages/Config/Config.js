@@ -135,7 +135,7 @@ const Config = () => {
 
   return (
     <div className="Config max-w-[1280px] px-[10px] md:px-[20px] mx-auto pb-5 bg-white shadow-sm min-h-[93vh]">
-      <h1 className="text-2xl lg:text-3xl text-[#066dcc] font-semibold mt-4 border-b-4 border-[#066dcc] pb-2 md:pb-3">
+      <h1 className="text-2xl lg:text-3xl text-[#066dcc] font-semibold mt-3 border-b-4 border-[#066dcc] pb-2 md:pb-3">
         CẤU HÌNH HỆ THỐNG
       </h1>
       <div className="Form_quanlyvatlieu flex item-center justify-center bg-cover bg-center mx-auto my-10 border-[#066dcc] ">

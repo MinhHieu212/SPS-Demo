@@ -21,14 +21,14 @@ const ManageStaff = () => {
     };
     console.log(newPtr);
     handleEditAPI(newPtr);
-  }, [renderList1])
+  }, [renderList1]);
   useEffect(() => {
     const handleGetPtr = async (params) => {
       const response = await getPtr(params);
       setData(response?.data?.data);
       setPrinters(response?.data?.data?.printers);
       setFileType(response?.data?.data?.currentFileType);
-    }
+    };
     handleGetPtr({ searchField: searchID });
 
     if (localStorage.getItem("accessToken") === null) {
@@ -49,7 +49,9 @@ const ManageStaff = () => {
           </div>
           <div className="bg-white flex flex-row text-base font-bold justify-center items-center text-center py-[14px]">
             <p className="text-base lg:text-xl w-1/2">{data.totalPrinter}</p>
-            <p className="text-base lg:text-xl w-1/2">{data.activatedPrinter}</p>
+            <p className="text-base lg:text-xl w-1/2">
+              {data.activatedPrinter}
+            </p>
           </div>
         </div>
         <div className="w-full md:w-[50%] flex mb-3 items-start justify-between relative">
@@ -60,7 +62,14 @@ const ManageStaff = () => {
             onChange={(e) => setPrinterID(e.target.value)}
           />
           <div className="absolute right-[3%] bottom-1/2 translate-y-1/2">
-            <div onClick={(e) => {setSearchID(printerID); setRenderList(!renderList)}}><SearchIcon></SearchIcon></div>
+            <div
+              onClick={(e) => {
+                setSearchID(printerID);
+                setRenderList(!renderList);
+              }}
+            >
+              <SearchIcon></SearchIcon>
+            </div>
           </div>
         </div>
       </div>
@@ -77,11 +86,11 @@ const ManageStaff = () => {
             id={printer.printerId}
             queue={printer.printingJob.length + printer.printingQueue.length}
             status={printer.status === 1 ? "Hoạt động" : "Không hoạt động"}
-            description = {printer.description}
+            description={printer.description}
             brand={printer.brand}
             model={printer.model}
             fileType={fileType}
-            setRenderList = {() => setRenderList(!renderList)}
+            setRenderList={() => setRenderList(!renderList)}
           />
         ))}
       </div>

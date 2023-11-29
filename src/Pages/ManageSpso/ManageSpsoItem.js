@@ -12,7 +12,6 @@ function ManageSpsoItem(props) {
   const handleGetQueue = async (id) => {
     const response = await getPrinterQueue(id);
     setPrinterQueue(response?.data?.data.printingQueue);
-    // console.log(response?.data?.data.printingQueue);
   };
 
   const handleSubmit = (id) => {

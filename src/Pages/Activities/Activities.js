@@ -8,7 +8,6 @@ import { activities } from "./FixedData";
 import { ActivityFilter } from "../../Modals/ActivitiesFilterModal/ActivitiesFilterModal";
 import { getStudents } from "../../APIs/SpsoAPI/SpsoAPI";
 
-
 const Activities = () => {
   const [renderList, setRenderList] = useState(true);
   const [stID, setStID] = useState("");
@@ -16,19 +15,19 @@ const Activities = () => {
   var [name, setName] = useState(null);
   var [id, setId] = useState(null);
   const navigate = useNavigate();
-  const [fetchAct, setFetchAct] = useState([]);
+  const [fetchAct, setFetchAct] = useState(activities);
   useEffect(() => {
     const params = {
       studentId: id !== "" ? id : null,
       studentName: name !== "" ? name : null,
       sortName: ActivityFilter.sortName,
-      sortPayment: ActivityFilter.sortPayment
-    }
+      sortPayment: ActivityFilter.sortPayment,
+    };
     console.log(params);
     const handleGetStudents = async (params) => {
       const response = await getStudents(params);
       setFetchAct(response?.data?.data);
-    }
+    };
     handleGetStudents(params);
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Login");
@@ -48,7 +47,14 @@ const Activities = () => {
               className="w-full outline-none border-none"
               onChange={(e) => setStID(e.target.value)}
             />
-            <div onClick={(e) => {setId(stID); setRenderList(!renderList);}}><SearchIcon></SearchIcon></div>
+            <div
+              onClick={(e) => {
+                setId(stID);
+                setRenderList(!renderList);
+              }}
+            >
+              <SearchIcon></SearchIcon>
+            </div>
           </div>
           <div className="w-[100%]  mx-auto border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white">
             <input
@@ -57,7 +63,14 @@ const Activities = () => {
               className="w-full outline-none border-none"
               onChange={(e) => setStName(e.target.value)}
             />
-            <div onClick={(e) => {setName(stName); setRenderList(!renderList);}}><SearchIcon></SearchIcon></div>
+            <div
+              onClick={(e) => {
+                setName(stName);
+                setRenderList(!renderList);
+              }}
+            >
+              <SearchIcon></SearchIcon>
+            </div>
           </div>
         </div>
 
