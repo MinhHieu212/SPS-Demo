@@ -5,11 +5,13 @@ import { useNavigate } from "react-router";
 import { FilterReportModalV2 } from "../../Modals";
 import { getReportPrinters, getReportChart } from "../../APIs/SpsoAPI/SpsoAPI";
 import { params } from "../../Modals/FilterReportModalV2/FilterReportModalV2";
+import { itemsData } from "./FixedData";
+
 const Report = () => {
   const navigate = useNavigate();
   const [renderList, setRenderList] = useState(true);
   const [reports, setReports] = useState([]);
-  const [printers, setPrinters] = useState([]);
+  const [printers, setPrinters] = useState(itemsData);
   const [data, setData] = useState([]);
   useEffect(() => {
     const handleGetReport = async (params) => {
@@ -17,7 +19,7 @@ const Report = () => {
       setReports(response?.data?.data);
       setPrinters(response?.data?.data?.all_printers);
       //console.log(response?.data?.data);
-    }
+    };
     handleGetReport(params);
     //console.log(params);
     if (localStorage.getItem("accessToken") === null) {
@@ -26,11 +28,11 @@ const Report = () => {
   }, [renderList]);
 
   useEffect(() => {
-    const handleGetChart = async(params) => {
+    const handleGetChart = async (params) => {
       const response = await getReportChart(params);
-      setData(Object.values(response?.data?.data))
-    }
-    handleGetChart({year: params.year});
+      setData(Object.values(response?.data?.data));
+    };
+    handleGetChart({ year: params.year });
   }, [renderList]);
   return (
     <div className="Report mx-auto max-w-[1280px] px-[10px]   md:px-[20px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
@@ -108,18 +110,22 @@ const Report = () => {
           <div className="min-w-[10%] text-center">SỐ LẦN IN</div>
           <div className="min-w-[15%] text-center">GIẤY A3 ĐÃ IN</div>
           <div className="min-w-[15%] text-center">GIẤY A4 ĐÃ IN</div>
-          <div className="min-w-[10%] text-center">BẢO TRÌ</div>
         </div>
         {printers?.map((item, index) => (
           <ReportItem
             key={index}
             time={item.date}
             id={item.printerId}
-            location={item.location.facility + ", " + item.location.department + ", " + item.location.room}
-            frequency={item.printed}
-            a3={item.totalA3Pages}
-            a4={item.totalA4Pages}
-            maintenance={item.printed}
+            location={
+              item?.location?.facility +
+              ", " +
+              item?.location?.department +
+              ", " +
+              item?.location?.room
+            }
+            frequency={item?.printed}
+            a3={item?.totalA3Pages}
+            a4={item?.totalA4Pages}
           />
         ))}
       </div>

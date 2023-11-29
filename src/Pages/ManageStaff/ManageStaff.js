@@ -1,49 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Manage.scss";
 import { FilterIcon, SearchIcon } from "../../Assets/Icons/Icons";
 import ManageItem from "./ManageItem";
 import { useNavigate } from "react-router";
-const printers = [
-  {
-    id: "H41CS1",
-    queue: 6,
-    status: "Tạm dừng",
-  },
-  {
-    id: "H41CS1",
-    queue: 6,
-    status: "Hoạt động",
-  },
-  {
-    id: "H41CS1",
-    queue: 6,
-    status: "Tạm dừng",
-  },
-  {
-    id: "H41CS1",
-    queue: 6,
-    status: "Hoạt động",
-  },
-  {
-    id: "H41CS1",
-    queue: 6,
-    status: "Hoạt động",
-  },
-  {
-    id: "H41CS1",
-    queue: 6,
-    status: "Hoạt động",
-  },
-  {
-    id: "H41CS1",
-    queue: 6,
-    status: "Hoạt động",
-  },
-];
+import { exampleData } from "./FixedData";
+
 const totalPrinters = 15;
 const onlinePrinters = 8;
 
 const ManageStaff = () => {
+  const [printers, setPrinters] = useState(exampleData);
   const navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem("accessToken") === null) {

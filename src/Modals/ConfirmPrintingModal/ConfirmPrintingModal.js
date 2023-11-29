@@ -61,13 +61,13 @@ const ConfirmPrintingModal = ({
 
         clearFiles();
         handleRenderPrinterInfo();
-        toast.success("Print request sent successfully!");
+        toast.success("Yêu cầu in ấn đã được xác nhận!");
       } catch (error) {
         setIsButtonDisabled(false);
         // console.log("Error data from printing api :", error);
 
         toast.error(
-          error?.response?.data?.message || "Failed to send print request"
+          error?.response?.data?.message || "Gửi yêu cầu in ấn thất bại!"
         );
       } finally {
         setIsButtonDisabled(false);
@@ -104,13 +104,14 @@ const ConfirmPrintingModal = ({
           )}
           <div className="flex items-center gap-3 justify-center w-full py-2">
             <button
-              className="bg-gradient-to-br from-[#ff7d7d] outline-none to-[#b84949]  p-2 w-[40%] block rounded-lg text-[16px] md:text-[18px] font-semibold text-white"
+              className="bg-gradient-to-br from-[#ff7d7d] outline-none cursor-pointer to-[#b84949] p-2 w-[40%] block rounded-lg text-[16px] md:text-[18px] font-semibold text-white hover:from-[#ff5a5a] hover:to-[#9e3a3a] transition-all duration-500"
               onClick={handleClose}
             >
               Hủy bỏ
             </button>
+
             <button
-              className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500  p-2 w-[40%] block rounded-lg text-[16px] md:text-[18px]  font-semibold text-white"
+              className="bg-[#3C8DBC] bg-gradient-to-br outline-none cursor-pointer from-cyan-500 p-2 w-[40%] block rounded-lg text-[16px] md:text-[18px] font-semibold text-white hover:from-cyan-700 transition-all duration-500"
               onClick={handleSendRequestPrint}
               disabled={isButtonDisabled}
             >

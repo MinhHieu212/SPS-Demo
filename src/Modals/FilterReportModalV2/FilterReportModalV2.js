@@ -92,7 +92,7 @@ const FilterReportModalV2 = ({ children, functionRenderList }) => {
               </select>
             </div>
             <div className="bg-white w-[90%] mx-auto md:w-[48%] h-[150px] rounded-lg flex-col flex items-center shadow-md border-[1px] border-[#367FA9] ">
-              <div className="text-[#1488DB]  uppercase text-[18px]  border-b-[3px] border-black h-[40px] flex items-center justify-center font-bold w-full my-2">
+              <div className="text-[#1488DB]  uppercase text-[18px]  border-b-[3px] border-[#367FA9] h-[40px] flex items-center justify-center font-bold w-full my-2">
                 Sắp xếp
               </div>
               <div
