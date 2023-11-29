@@ -84,7 +84,7 @@ function StudentInfoModal({ children }) {
                 <span className="text-[#066DCC] text-[20px] font-bold mr-3 leading-7">
                   Số dư hiện tại (tờ):
                 </span>
-                <div className="text-[20px] font-semibold w-[135px] h-[40px] bg-[#D9D9D9] flex items-center justify-center rounded-lg">
+                <div className="text-[20px] font-semibold w-[135px] h-[40px] bg-[#f1eeee] flex items-center justify-center rounded-lg">
                   {Math.floor(userInformation?.balance)}
                 </div>
               </div>

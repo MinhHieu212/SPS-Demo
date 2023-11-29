@@ -3,7 +3,34 @@ import { InfoField2 } from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
 import { FilterModalIcon } from "../../Assets/Icons/Icons";
 
-const DetailStudentLogModal = ({ children, activity }) => {
+const printerLogs = [
+  {
+    date: "21-12-2023",
+    user_id: 2114453,
+    user_name: "Trương Quỳnh Anh",
+    file_name: "BTL_MMT_2.pdf",
+    quantity: 2,
+    pages: 18,
+  },
+  {
+    date: "21-12-2023",
+    user_id: 2114453,
+    user_name: "Trương Quỳnh Anh",
+    file_name: "BTL_MMT_2.pdf",
+    quantity: 2,
+    pages: 18,
+  },
+  {
+    date: "21-12-2023",
+    user_id: 2114453,
+    user_name: "Trương Quỳnh Anh",
+    file_name: "BTL_MMT_2.pdf",
+    quantity: 2,
+    pages: 18,
+  },
+];
+
+const DetailPrinterLogModal = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
   const [openFilter, setOpenFilter] = useState(false);
   const [date1, setDate1] = useState(null);
@@ -41,8 +68,8 @@ const DetailStudentLogModal = ({ children, activity }) => {
           </div>
           <div className="w-full h-[470px] flex justify-start py-2 gap-2 items-center flex-col overflow-y-scroll">
             {openFilter ? (
-              <div className="w-full h-full flex flex-col ">
-                <div className="bg-white h-[250px] md:h-[280px] mt-5  rounded-md flex-col   flex items-center  shadow-md w-[90%] gap-2 mx-auto border-[1px] border-[#367FA9]">
+              <div className="w-full h-full flex flex-col">
+                <div className="bg-white h-[250px] md:h-[280px] mt-5 rounded-md flex-col flex items-center  shadow-md w-[90%] gap-2 mx-auto border-[1px] border-[#367FA9]">
                   <div className="text-[#1488DB] uppercase  border-b-[3px] border-[#367FA9] h-[40px] flex items-center justify-center font-bold w-full my-2 text-[18px]">
                     Khoảng thời gian
                   </div>
@@ -79,43 +106,35 @@ const DetailStudentLogModal = ({ children, activity }) => {
                 </div>
               </div>
             ) : (
-              activity?.history?.map((request, index) => {
-                const pageQuantity = (
-                  <p>
-                    <span className="text-[blue]"> A4: </span>{" "}
-                    <span className=" mr-3">{request.page_Quantity.A4}</span>
-                    <span className="text-[blue]"> A3: </span>{" "}
-                    <span> {request.page_Quantity.A3}</span>
-                  </p>
-                );
+              printerLogs?.map((request, index) => {
                 return (
                   <div
                     className="w-[90%] rounded-md bg-[#f1eeee] py-2 border-[1px] border-[#367FA9]"
                     key={index}
                   >
                     <InfoField2
-                      fieldName={"ID máy in"}
-                      fieldValue={activity?.printerId || "..."}
-                    ></InfoField2>
-                    <InfoField2
-                      fieldName={"Tên file in"}
-                      fieldValue={request?.fileNames || "..."}
-                    ></InfoField2>
-                    <InfoField2
-                      fieldName={"Lượng giấy in"}
-                      fieldValue={pageQuantity || "..."}
-                    ></InfoField2>
-                    <InfoField2
-                      fieldName={"Số bản in"}
-                      fieldValue={request?.quantity || "..."}
-                    ></InfoField2>
-                    <InfoField2
                       fieldName={"Thời gian"}
                       fieldValue={request?.date || "..."}
                     ></InfoField2>
                     <InfoField2
-                      fieldName={"Trạng thái in"}
-                      fieldValue={activity?.status || "..."}
+                      fieldName={"ID sinh viên"}
+                      fieldValue={printerLogs?.user_id || "..."}
+                    ></InfoField2>
+                    <InfoField2
+                      fieldName={"Tên sinh viên"}
+                      fieldValue={printerLogs?.user_name || "..."}
+                    ></InfoField2>
+                    <InfoField2
+                      fieldName={"Tên file in"}
+                      fieldValue={request?.file_name || "..."}
+                    ></InfoField2>
+                    <InfoField2
+                      fieldName={"Lượng giấy in"}
+                      fieldValue={request?.pages || "..."}
+                    ></InfoField2>
+                    <InfoField2
+                      fieldName={"Số bản in"}
+                      fieldValue={request?.quantity || "..."}
                     ></InfoField2>
                   </div>
                 );
@@ -128,4 +147,4 @@ const DetailStudentLogModal = ({ children, activity }) => {
   );
 };
 
-export default DetailStudentLogModal;
+export default DetailPrinterLogModal;

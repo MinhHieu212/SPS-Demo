@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "./Config.scss";
 import { AiOutlineDelete } from "react-icons/ai";
 import { ConfigAPI, SendConfigAPI } from "../../APIs/ConfigAPI/ConfigAPI";
-import format from 'date-fns/format'
-
+import format from "date-fns/format";
+import { toast } from "../../Utils/Toastify";
 
 const Config = () => {
   // formInfo to save fetched data
@@ -18,12 +18,16 @@ const Config = () => {
     currentA4Price: 0,
     currentFileType: [],
     isDefault: false,
-  })
+  });
 
   // 4 useStates to control first Section
   const [curpag_input, setCurpag_input] = useState();
-  const [stday1_input, setStday1_input] = useState(format(new Date(), 'yyyy-MM-dd'));
-  const [stday2_input, setStday2_input] = useState(format(new Date(), 'yyyy-MM-dd'));
+  const [stday1_input, setStday1_input] = useState(
+    format(new Date(), "yyyy-MM-dd")
+  );
+  const [stday2_input, setStday2_input] = useState(
+    format(new Date(), "yyyy-MM-dd")
+  );
   const [curprice_input, setCurprice_input] = useState();
   // 2 useStates to control second Section
   const [deffileTypes, setDefFileTypes] = useState([]);
@@ -38,8 +42,8 @@ const Config = () => {
 
       setFormInfo(response?.data?.data);
       setCurpag_input(response?.data?.data.currentBalance);
-      setStday1_input(response?.data?.data.startDate1.split('T')[0]);
-      setStday2_input(response?.data?.data.startDate2.split('T')[0]);
+      setStday1_input(response?.data?.data.startDate1.split("T")[0]);
+      setStday2_input(response?.data?.data.startDate2.split("T")[0]);
       setCurprice_input(response?.data?.data.currentA4Price);
 
       setDefFileTypes(response?.data?.data.defaultFileType);
@@ -54,7 +58,11 @@ const Config = () => {
 
   useEffect(() => {
     setInfoSend(formInfo);
-    setInfoSend((prevData) => ({ ...prevData, startDate1: stday1_input, startDate2: stday2_input }));
+    setInfoSend((prevData) => ({
+      ...prevData,
+      startDate1: stday1_input,
+      startDate2: stday2_input,
+    }));
   }, [formInfo]);
 
   const [errorMessage, setErrorMessage] = useState(null);
@@ -74,13 +82,14 @@ const Config = () => {
     e.preventDefault();
     const response = await SendConfigAPI(infoSend);
     console.log("reponse send to api: ", response.data);
+    toast.success("Cập nhật thành công cấu hình cho hệ thống!");
   };
 
   // Setting default
   const setDefault = () => {
     setCurpag_input(formInfo?.defaultBalance);
-    setStday1_input(formInfo?.startDate1.split('T')[0]);
-    setStday2_input(formInfo?.startDate2.split('T')[0]);
+    setStday1_input(formInfo?.startDate1.split("T")[0]);
+    setStday2_input(formInfo?.startDate2.split("T")[0]);
     setCurprice_input(formInfo?.defaultA4Price);
     setCurfileTypes(formInfo.defaultFileType);
 
@@ -89,12 +98,13 @@ const Config = () => {
       startDate1: formInfo?.startDate1,
       startDate2: formInfo?.startDate2,
       isDefault: true,
-    }))
+    }));
   };
 
   const updateInputType = (e) => {
     setSelectedValue(e.target.value);
   };
+
   const handleAdd = (val) => {
     if (val !== "") {
       if (!curfileTypes.some((element) => element === val)) {
@@ -103,8 +113,10 @@ const Config = () => {
           ...prevData,
           currentFileType: [...prevData.currentFileType, val],
         }));
+        toast.success("Đã thêm vào danh sách loại file được phép in !");
       } else {
         setErrorMessage("Loại file đã tồn tại.");
+        toast.error("Loại file đã tồn tại !");
       }
     }
   };
@@ -112,7 +124,9 @@ const Config = () => {
   const handleDelete = (ftype) => {
     const newCurfileTypes = curfileTypes.filter((item) => item !== ftype);
     setCurfileTypes(newCurfileTypes);
-    const updatedCurrentFileType = infoSend.currentFileType.filter((item) => item !== ftype);
+    const updatedCurrentFileType = infoSend.currentFileType.filter(
+      (item) => item !== ftype
+    );
     setInfoSend((prevData) => ({
       ...prevData,
       currentFileType: updatedCurrentFileType,
@@ -133,7 +147,9 @@ const Config = () => {
             Quản lý Vật Liệu Học Tập và Cấp Phát Tài Liệu
           </h2>
           <div className="formInput flex flex-col ">
-            <label className="text-[16px] lg:text-[18px] ">Số lượng giấy mặc định cho từng sinh viên / Học kì</label>
+            <label className="text-[16px] lg:text-[18px] ">
+              Số lượng giấy mặc định cho từng sinh viên / Học kì
+            </label>
             <div className="w-[27%] ">
               <input
                 placeholder="Nhập số..."
@@ -141,17 +157,28 @@ const Config = () => {
                 onChange={(e) => {
                   const numericValue = parseFloat(e.target.value);
                   setCurpag_input(numericValue);
-                  setInfoSend((prevData) => ({ ...prevData, currentBalance: numericValue }));
+                  setInfoSend((prevData) => ({
+                    ...prevData,
+                    currentBalance: numericValue,
+                  }));
                 }}
-                value={curpag_input} type="number" required min="1" max="2000"
-                onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()}
+                value={curpag_input}
+                type="number"
+                required
+                min="1"
+                max="2000"
+                onKeyDown={(evt) =>
+                  ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()
+                }
               />
             </div>
             <span className="Err">{errorMessage}</span>
           </div>
           <div className="flex flex-row item-center justify-start md:gap-[32px] gap-[16px]">
             <div className="formInput flex flex-col float-left">
-              <label className="TG1 text-[16px] lg:text-[18px] ">Thời gian cấp giấy Học kì 1</label>
+              <label className="TG1 text-[16px] lg:text-[18px] ">
+                Thời gian cấp giấy Học kì 1
+              </label>
               <div>
                 <input
                   className="inline border-1 border-[#1488DB] rounded-md"
@@ -160,9 +187,15 @@ const Config = () => {
                   id="datepicker"
                   required
                   onChange={(e) => {
-                    const dayValue = format(new Date(e.target.value), 'yyyy-MM-dd');
-                    setStday1_input(dayValue)
-                    setInfoSend((prevData) => ({ ...prevData, startDate1: dayValue }));
+                    const dayValue = format(
+                      new Date(e.target.value),
+                      "yyyy-MM-dd"
+                    );
+                    setStday1_input(dayValue);
+                    setInfoSend((prevData) => ({
+                      ...prevData,
+                      startDate1: dayValue,
+                    }));
                   }}
                   value={stday1_input}
                 />
@@ -171,7 +204,9 @@ const Config = () => {
             </div>
 
             <div className="formInput flex flex-col float-left col-span-1 sm:col-span-1 ml-0 sm:ml-4 md:ml-8 ">
-              <label className="TG2 text-[16px] lg:text-[18px] ">Thời gian cấp giấy Học kì 2</label>
+              <label className="TG2 text-[16px] lg:text-[18px] ">
+                Thời gian cấp giấy Học kì 2
+              </label>
               <div>
                 <input
                   className="inline border-1 border-[#1488DB] rounded-md"
@@ -180,9 +215,15 @@ const Config = () => {
                   id="datepicker"
                   required
                   onChange={(e) => {
-                    const dayValue = format(new Date(e.target.value), 'yyyy-MM-dd');
-                    setStday2_input(dayValue)
-                    setInfoSend((prevData) => ({ ...prevData, startDate2: dayValue }));
+                    const dayValue = format(
+                      new Date(e.target.value),
+                      "yyyy-MM-dd"
+                    );
+                    setStday2_input(dayValue);
+                    setInfoSend((prevData) => ({
+                      ...prevData,
+                      startDate2: dayValue,
+                    }));
                   }}
                   value={stday2_input}
                 />
@@ -191,9 +232,10 @@ const Config = () => {
             </div>
           </div>
 
-
           <div className="formInput flex flex-col w-[100%]">
-            <label className="text-[16px] lg:text-[18px] ">Giá của một tờ giấy A4 khi mua thêm</label>
+            <label className="text-[16px] lg:text-[18px] ">
+              Giá của một tờ giấy A4 khi mua thêm
+            </label>
             <div class="flex flex-row items-center justify-start gap-3">
               <input
                 placeholder="Nhập giá..."
@@ -201,10 +243,19 @@ const Config = () => {
                 onChange={(e) => {
                   const numericValue = parseFloat(e.target.value);
                   setCurprice_input(numericValue);
-                  setInfoSend((prevData) => ({ ...prevData, currentA4Price: numericValue }));
+                  setInfoSend((prevData) => ({
+                    ...prevData,
+                    currentA4Price: numericValue,
+                  }));
                 }}
-                value={curprice_input} type="number" required min="100" max="1000"
-                onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()}
+                value={curprice_input}
+                type="number"
+                required
+                min="100"
+                max="1000"
+                onKeyDown={(evt) =>
+                  ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()
+                }
               />
               <span className="font-bold text-xl w-1/3 "> (vnđ)</span>
             </div>
@@ -222,23 +273,24 @@ const Config = () => {
               <option selected="selected" disabled="disable" value="">
                 Chọn loại tệp để thêm...
               </option>
-              {
-                deffileTypes.map((fileType, index) => {
-                  return <option key={index} value={fileType}>{fileType}</option>
-                })
-              }
+              {deffileTypes.map((fileType, index) => {
+                return (
+                  <option key={index} value={fileType}>
+                    {fileType}
+                  </option>
+                );
+              })}
             </select>
 
             <button
               type="button"
               className="float-right w-[5.25rem] h-[2.25rem] rounded-[0.3125rem] bg-[#066dcc] text-white text-[1rem] font-bold"
-              onClick={() => handleAdd(selectedValue)}>
+              onClick={() => handleAdd(selectedValue)}
+            >
               Thêm
             </button>
             {errorMessage && (
-              <div className="absolute -bottom-6 left-0">
-                {errorMessage}
-              </div>
+              <div className="absolute -bottom-6 left-0">{errorMessage}</div>
             )}
           </div>
 
@@ -271,7 +323,9 @@ const Config = () => {
                     <div>
                       <AiOutlineDelete
                         className="icon text-2xl cursor-pointer"
-                        onClick={(e) => { handleDelete(item) }}
+                        onClick={(e) => {
+                          handleDelete(item);
+                        }}
                         title="Delete?"
                       />
                     </div>
@@ -290,7 +344,8 @@ const Config = () => {
           <button
             className="Todefault flex float-right items-center justify-center my-4 mx-[0.5rem] w-[5.25rem] h-[2.25rem] rounded-[0.3125rem] bg-[#066dcc] text-white text-[1rem] font-bold"
             type="submit"
-            onClick={() => setDefault()}>
+            onClick={() => setDefault()}
+          >
             Mặc định
           </button>
         </form>

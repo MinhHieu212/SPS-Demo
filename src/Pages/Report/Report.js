@@ -1,86 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReportItem from "./ReportItem";
 import PaperChart from "./PaperChart";
 import { useNavigate } from "react-router";
 import { FilterReportModalV2 } from "../../Modals";
+import { itemsData } from "./FixedData";
 
 const data = [2478, 5267, 734, 784, 433, 769, 892, 133, 788, 820, 110, 120];
-const items = [
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-  {
-    time: " 1/2021",
-    id: "2113619",
-    location: "CS2, H6, 311",
-    frequency: 80,
-    a3: 50,
-    a4: 100,
-    maintenance: 10,
-  },
-];
+
 const Report = () => {
   const navigate = useNavigate();
+  const [items, setItems] = useState(itemsData);
   useEffect(() => {
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Login");

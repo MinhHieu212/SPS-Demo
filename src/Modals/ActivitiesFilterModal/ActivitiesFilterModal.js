@@ -77,7 +77,7 @@ const ActivitiesFilterModal = ({ children }) => {
               </div>
             </div>
             <div className="bg-white w-[90%] md:w-[48%] h-[170px] md:h-[180px] mx-auto rounded-md flex-col flex items-center shadow-md border-[1px] border-[#367FA9]">
-              <div className="text-[#1488DB] uppercase border-b-[3px] border-black h-[40px] flex items-center  justify-center font-bold w-full my-2 text-[18px]">
+              <div className="text-[#1488DB] uppercase border-b-[3px] border-[#367FA9] h-[40px] flex items-center  justify-center font-bold w-full my-2 text-[18px]">
                 Hiển thị số lần in
               </div>
               <div
