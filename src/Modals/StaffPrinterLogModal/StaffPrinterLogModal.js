@@ -2,50 +2,11 @@ import React, { useState } from "react";
 import CenterModal from "../BaseModals/CenterModal";
 import { InfoField2 } from "../../Utils/InfoField";
 
-const StaffPrinterLogModal = ({ children }) => {
+const StaffPrinterLogModal = ({ children, log }) => {
   const [openModal, setOpenModal] = useState(false);
   const handleClose = () => {
     setOpenModal(false);
   };
-
-  const [log, setLog] = useState([
-    {
-      student_ID: "H41CS1",
-      date: "21-11-2023",
-      student_Name: "Trần Minh Hieu",
-      fileNames: "DSTT.txt",
-      quantity: 3,
-    },
-    {
-      student_ID: "H41CS1",
-      date: "21-11-2023",
-      student_Name: "Trần Minh Hieu",
-      fileNames: "DSTT.txt",
-      quantity: 3,
-    },
-    {
-      student_ID: "H41CS1",
-      date: "21-11-2023",
-      student_Name: "Trần Minh Hieu",
-      fileNames: "DSTT.txt",
-      quantity: 3,
-    },
-    {
-      student_ID: "H41CS1",
-      date: "21-11-2023",
-      student_Name: "Trần Minh Hieu",
-      fileNames: "DSTT.txt",
-      quantity: 3,
-    },
-    {
-      student_ID: "H41CS1",
-      date: "21-11-2023",
-      student_Name: "Trần Minh Hieu",
-      fileNames: "DSTT.txt",
-      quantity: 3,
-    },
-  ]);
-
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
@@ -63,23 +24,23 @@ const StaffPrinterLogModal = ({ children }) => {
                 >
                   <InfoField2
                     fieldName={"Thời gian"}
-                    fieldValue={request.date}
+                    fieldValue={request.createdAt.slice(0,10)}
                   ></InfoField2>
                   <InfoField2
                     fieldName={"Tên sinh viên"}
-                    fieldValue={request.student_Name}
+                    fieldValue={request.lastName + " " + request.firstName}
                   ></InfoField2>
                   <InfoField2
                     fieldName={"Mã sinh viên"}
-                    fieldValue={request.student_ID}
+                    fieldValue={request.mssv}
                   ></InfoField2>
                   <InfoField2
                     fieldName={"Tên file in"}
-                    fieldValue={request.fileNames}
+                    fieldValue={request.document.title}
                   ></InfoField2>
                   <InfoField2
                     fieldName={"Số bản in"}
-                    fieldValue={request.quantity}
+                    fieldValue={request.numVersion}
                   ></InfoField2>
                 </div>
               );

@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Activities.scss";
 import { FilterIcon, SearchIcon } from "../../Assets/Icons/Icons";
 import ActivityItem from "./ActivityItem";
 import { ActivitiesFilterModal } from "../../Modals";
 import { useNavigate } from "react-router-dom";
-
+import { ActivityFilter } from "../../Modals/ActivitiesFilterModal/ActivitiesFilterModal";
+import { getStudents } from "../../APIs/SpsoAPI/SpsoAPI";
 const activities = [
   {
     studentName: "Nguyễn Phạm Thiên Phúc",
@@ -262,12 +263,30 @@ const activities = [
 ];
 
 const Activities = () => {
+  const [renderList, setRenderList] = useState(true);
+  const [stID, setStID] = useState("");
+  const [stName, setStName] = useState("");
+  var [name, setName] = useState(null);
+  var [id, setId] = useState(null);
   const navigate = useNavigate();
+  const [fetchAct, setFetchAct] = useState([]);
   useEffect(() => {
+    const params = {
+      studentId: id !== "" ? id : null,
+      studentName: name !== "" ? name : null,
+      sortName: ActivityFilter.sortName,
+      sortPayment: ActivityFilter.sortPayment
+    }
+    console.log(params);
+    const handleGetStudents = async (params) => {
+      const response = await getStudents(params);
+      setFetchAct(response?.data?.data);
+    }
+    handleGetStudents(params);
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Login");
     }
-  }, []);
+  }, [renderList]);
   return (
     <div className="Activities max-w-[1280px] px-[10px] md:px-[20px] bg-[white] mx-auto shadow-sm mb-5 min-h-[93vh]">
       <h2 className="text-2xl lg:text-3xl font-semibold mt-3  printing-title border-b-4 border-[#066DCC] pb-2 md:pb-3  text-[#066DCC]">
@@ -280,21 +299,25 @@ const Activities = () => {
               type="text"
               placeholder="Tìm theo ID sinh viên"
               className="w-full outline-none border-none"
+              onChange={(e) => setStID(e.target.value)}
             />
-            <SearchIcon></SearchIcon>
+            <div onClick={(e) => {setId(stID); setRenderList(!renderList);}}><SearchIcon></SearchIcon></div>
           </div>
           <div className="w-[100%]  mx-auto border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white">
             <input
               type="text"
               placeholder="Tìm theo Tên sinh viên"
               className="w-full outline-none border-none"
+              onChange={(e) => setStName(e.target.value)}
             />
-            <SearchIcon></SearchIcon>
+            <div onClick={(e) => {setName(stName); setRenderList(!renderList);}}><SearchIcon></SearchIcon></div>
           </div>
         </div>
 
         <div className="w-[90%] md:w-[30%] mx-auto">
-          <ActivitiesFilterModal>
+          <ActivitiesFilterModal
+            functionSetRenderList={() => setRenderList(!renderList)}
+          >
             <div className="w-full border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white">
               <input
                 type="text"
@@ -322,7 +345,7 @@ const Activities = () => {
             LỊCH SỬ
           </div>
         </div>
-        {activities.map((activity, index) => (
+        {fetchAct.map((activity, index) => (
           <ActivityItem key={index} activity={activity} />
         ))}
       </div>

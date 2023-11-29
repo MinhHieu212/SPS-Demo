@@ -1,22 +1,25 @@
 import React, { useState } from "react";
 import InfoField from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
+export const newPtr = {
 
+};
 const PrinterInfoAndConfigModal = ({
   children,
-  PrinterProps = {
-    printerId: "1234",
-    brand: "Sony",
-    model: "PIXMA E4750",
-    desc: "Tốc độ in tiêu chuẩn ISO (A4): 3.9 ipm đen/màu",
-  },
+  id,
+  brand,
+  model,
+  description,
+  status,
+  fileType,
+  setRenderList1
 }) => {
   const [openModal, setOpenModal] = useState(false);
   const handleClose = () => {
     setOpenModal(false);
   };
-
-  const [printerInfo, setPrinterInfo] = useState(PrinterProps);
+  
+  const [printerInfo, setPrinterInfo] = useState("");
   const [fileTypes, setFileTypes] = useState([
     "pdf",
     "docx",
@@ -24,7 +27,13 @@ const PrinterInfoAndConfigModal = ({
     "docx",
     "pptx",
   ]);
-
+  const handleClick = () => {
+    newPtr.status = checked === "enable" ? 1 : 0;
+    newPtr.printerId = id;
+    setRenderList1();
+    setOpenModal(false);
+  }
+  const [checked, setChecked] = useState(status === "Hoạt động" ? "enable" : "disable");
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
@@ -41,19 +50,19 @@ const PrinterInfoAndConfigModal = ({
                 </p>
                 <InfoField
                   fieldName={"ID máy in"}
-                  fieldValue={printerInfo?.printerId}
+                  fieldValue={id}
                 ></InfoField>
                 <InfoField
                   fieldName={"Nhãn hiệu"}
-                  fieldValue={printerInfo?.brand}
+                  fieldValue={brand}
                 ></InfoField>
                 <InfoField
                   fieldName={"Mẫu máy"}
-                  fieldValue={printerInfo?.model}
+                  fieldValue={model}
                 ></InfoField>
                 <InfoField
                   fieldName={"Mô tả"}
-                  fieldValue={printerInfo?.desc}
+                  fieldValue={description}
                 ></InfoField>
               </div>
               <div className="w-[40%]  p-3 md:p-4">
@@ -61,7 +70,7 @@ const PrinterInfoAndConfigModal = ({
                   Loại file được in
                 </p>
                 <div className="w-full h-[200px] flex flex-col items-center justify-start overflow-y-scroll rounded-md border-[1px] border-[#367FA9]">
-                  {fileTypes.map((type, index) => {
+                  {fileType.map((type, index) => {
                     return (
                       <div
                         className="p-2 bg-[#E6E6E6] rounded-sm text-center w-[90%] h-[100px] mt-2 border-[1px] border-[#367FA9]"
@@ -81,13 +90,15 @@ const PrinterInfoAndConfigModal = ({
                 <input
                   type="radio"
                   className="w-5 h-5"
-                  name="printerState"
-                  id="enable"
+                  name="printerState5"
+                  id="enable5"
+                  value={"enable"}
+                  onChange={(e) => setChecked(e.target.value)}
+                  checked={checked === "enable"}
                 />
                 <label
-                  htmlFor="enable"
+                  htmlFor="enable5"
                   className="ml-3 text-[16px] md:text-[20px] font-semibold"
-                  ld
                 >
                   Hoạt động
                 </label>
@@ -96,11 +107,14 @@ const PrinterInfoAndConfigModal = ({
                 <input
                   type="radio"
                   className="w-5 h-5"
-                  name="printerState"
-                  id="disable"
+                  name="printerState5"
+                  id="disable5"
+                  value={"disable"}
+                  onChange={(e) => setChecked(e.target.value)}
+                  checked={checked === "disable"}
                 />
                 <label
-                  htmlFor="disable"
+                  htmlFor="disable5"
                   className="ml-3 text-[16px] md:text-[20px] font-semibold"
                 >
                   Vô hiệu hóa
@@ -108,7 +122,7 @@ const PrinterInfoAndConfigModal = ({
               </div>
             </div>
             <div className="w-1/2 flex items-center justify-end pr-5">
-              <button className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500 hover:bg-blue-300 h-[50px] p-3 w-[80%] md:w-[70%]  rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center">
+              <button onClick={handleClick} className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500 hover:bg-blue-300 h-[50px] p-3 w-[80%] md:w-[70%]  rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center">
                 Xác nhận
               </button>
             </div>
