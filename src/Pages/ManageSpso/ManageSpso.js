@@ -21,7 +21,7 @@ const ManageSpso = () => {
     const handleSPSOApi = async (params) => {
       const response = await getPrintersList(params);
       console.log("reponse from get printers api: ", response?.data?.data);
-      //console.log(data);
+      console.log("CC", response?.data?.data);
       setPrintersList(response?.data?.data);
     };
     const params = {};
