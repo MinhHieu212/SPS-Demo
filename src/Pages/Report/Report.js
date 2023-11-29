@@ -11,7 +11,7 @@ const Report = () => {
   const navigate = useNavigate();
   const [renderList, setRenderList] = useState(true);
   const [reports, setReports] = useState([]);
-  const [printers, setPrinters] = useState([itemsData]);
+  const [printers, setPrinters] = useState(itemsData);
   const [data, setData] = useState([]);
   useEffect(() => {
     const handleGetReport = async (params) => {
@@ -110,7 +110,6 @@ const Report = () => {
           <div className="min-w-[10%] text-center">SỐ LẦN IN</div>
           <div className="min-w-[15%] text-center">GIẤY A3 ĐÃ IN</div>
           <div className="min-w-[15%] text-center">GIẤY A4 ĐÃ IN</div>
-          <div className="min-w-[10%] text-center">BẢO TRÌ</div>
         </div>
         {printers?.map((item, index) => (
           <ReportItem
@@ -118,16 +117,15 @@ const Report = () => {
             time={item.date}
             id={item.printerId}
             location={
-              item.location.facility +
+              item?.location?.facility +
               ", " +
-              item.location.department +
+              item?.location?.department +
               ", " +
-              item.location.room
+              item?.location?.room
             }
-            frequency={item.printed}
-            a3={item.totalA3Pages}
-            a4={item.totalA4Pages}
-            maintenance={item.printed}
+            frequency={item?.printed}
+            a3={item?.totalA3Pages}
+            a4={item?.totalA4Pages}
           />
         ))}
       </div>

@@ -12,7 +12,7 @@ function ReportItem(props) {
           <div className="min-w-[10%] text-center">{props.frequency}</div>
           <div className="min-w-[15%] text-center">{props.a3}</div>
           <div className="min-w-[15%] text-center">{props.a4}</div>
-          <div className="min-w-[10%] text-center">{props.maintenance}</div>
+          {/* <div className="min-w-[10%] text-center">{props.maintenance}</div> */}
         </div>
       ) : (
         <ReportItemSkeleton></ReportItemSkeleton>
