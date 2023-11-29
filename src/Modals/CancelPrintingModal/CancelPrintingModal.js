@@ -52,13 +52,13 @@ const CancelPrintingModal = ({ children, printingLogId, renderList }) => {
 
           <div className="flex items-center gap-3 justify-center w-full py-2">
             <button
-              className="bg-gradient-to-br from-[#ff7d7d] outline-none to-[#b84949]  p-2 w-[40%] block rounded-md text-[16px] font-semibold text-white border-[1px] border-[#367FA9]"
+              className="bg-gradient-to-br from-[#ff7d7d] outline-none to-[#b84949]  p-2 w-[40%] block rounded-md text-[16px] font-semibold text-white border-[1px] border-[#367FA9]  hover:from-[#ff5a5a] hover:to-[#9e3a3a] transition-all duration-500"
               onClick={handleClose}
             >
               Hủy bỏ
             </button>
             <button
-              className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500  p-2 w-[40%] block rounded-md text-[16px] font-semibold text-white border-[1px] border-[#367FA9]"
+              className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500  p-2 w-[40%] block rounded-md text-[16px] font-semibold text-white border-[1px] border-[#367FA9]  hover:from-cyan-700 transition-all duration-500"
               onClick={callApiCancel}
               disabled={isButtonDisabled}
             >

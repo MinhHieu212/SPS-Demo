@@ -38,8 +38,6 @@ const PagesPurchaseModal = ({ children }) => {
   const handleAccept = async () => {
     const data = { money: value * 1000 };
 
-    // console.log("Data sent to confirm purchase pages ", data);
-
     await confirmPayment(data);
 
     setTimeout(() => {
@@ -126,13 +124,13 @@ const PagesPurchaseModal = ({ children }) => {
           </div>
           <div className="flex items-center gap-3 justify-center w-full py-2 mb-3">
             <button
-              className="bg-gradient-to-br from-[#ff7d7d]  outline-none to-[#b84949] py-[12px] w-[40%] block rounded-lg text-[16px] font-semibold text-white"
+              className="bg-gradient-to-br from-[#ff7d7d]  hover:from-[#ff5a5a] hover:to-[#9e3a3a] transition-all duration-500  outline-none to-[#b84949] py-[12px] w-[40%] block rounded-lg text-[16px] font-semibold text-white"
               onClick={handleClose}
             >
               Hủy bỏ
             </button>
             <button
-              className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500  py-[12px] w-[40%] block rounded-lg text-[16px] font-semibold text-white "
+              className="bg-[#3C8DBC]  hover:from-cyan-700 transition-all duration-500 bg-gradient-to-br outline-none from-cyan-500  py-[12px] w-[40%] block rounded-lg text-[16px] font-semibold text-white "
               onClick={handleAccept}
             >
               Xác nhận

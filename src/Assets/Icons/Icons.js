@@ -779,3 +779,23 @@ export const FilterIcon = () => (
     </svg>
   </div>
 );
+
+export const FilterModalIcon = () => (
+  <div className="cursor-pointer">
+    <svg
+      width="23"
+      height="20"
+      viewBox="0 0 23 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M21.7376 1H1.73755L9.73755 10.46V17L13.7376 19V10.46L21.7376 1Z"
+        stroke="white"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  </div>
+);

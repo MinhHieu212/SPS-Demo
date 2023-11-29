@@ -17,18 +17,22 @@ const PrinterQueueModal = ({ children, queue }) => {
             YÊU CẦU IN ẤN HIỆN TẠI
           </div>
           <div className="w-full h-[400px] flex justify-start py-2 gap-2 items-center flex-col text-[16px] md:text-[20px] overflow-y-scroll">
-            {queue.map((request, index) => {
+            {queue?.map((request, index) => {
               return (
                 <div
-                  className="w-[90%] rounded-md bg-[#D9D9D9] p-2 shadow-md border-[1px] border-[#367FA9]"
+                  className="w-[90%] rounded-md bg-[#f1eeee] p-2 shadow-md border-[1px] border-[#367FA9]"
                   key={index}
                 >
                   <InfoField2
+                    fieldName={"Thời gian"}
+                    fieldValue={request?.date || "..."}
+                  ></InfoField2>
+                  <InfoField2
                     fieldName={"Tên sinh viên"}
                     fieldValue={
-                      (request?.firstName || "...") +
+                      (request?.lastName || "...") +
                       " " +
-                      (request?.lastName || "...")
+                      (request?.firstName || "...")
                     }
                   ></InfoField2>
                   <InfoField2
