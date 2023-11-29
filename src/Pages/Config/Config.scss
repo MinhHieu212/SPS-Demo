@@ -8,43 +8,23 @@
 .Config input {
   background-color: white;
   margin: 0.625rem 0px;
-  // border-radius: 0%;
-  // border: none;
   text-align: center;
   font-weight: bold;
   width: 100%;
 }
 
-.Config button {
-  width: 5.25rem;
-  height: 2.25rem;
-  border-radius: 0.3125rem;
-  background: #066dcc;
-  box-shadow: 2px 1px 4px 0px rgba(0, 0, 0, 0.25);
-  color: white;
-  font-size: 1rem;
-  font-weight: 700;
-}
 input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 .currentlist_wrapper {
   padding: 1rem 2rem 1rem 1rem;
   clear: both;
-  // border: 1px solid rgba(0, 0, 0, 0.5);
 }
-// .selectlist select {
-//   // border: 1px solid rgba(0, 0, 0, 0.3);
-// }
+
 div.currentlist_wrapper {
   width: 100%;
-  // border: 1px solid rgba(0, 0, 0, 0.5);
 }
-@media (min-width: 768px) {
-  .Config form .formInput:nth-child(4) {
-    margin-left: 1rem;
-  }
-}
+
 .formInput span.Err {
   font-size: 12;
   color: red;
@@ -62,7 +42,6 @@ div.currentlist_wrapper {
 }
 .formInput label {
   display: inline;
-  // font-size: 1.25rem;
   font-weight: 700;
   padding: 0.625rem 0px;
 }

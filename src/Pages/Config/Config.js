@@ -2,96 +2,123 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Config.scss";
 import { AiOutlineDelete } from "react-icons/ai";
+import { ConfigAPI, SendConfigAPI } from "../../APIs/ConfigAPI/ConfigAPI";
+import format from 'date-fns/format'
+
 
 const Config = () => {
-  const navigate = useNavigate();
+  // formInfo to save fetched data
+  const [formInfo, setFormInfo] = useState([]);
+
+  // info to send to API
+  const [infoSend, setInfoSend] = useState({
+    currentBalance: 0,
+    startDate1: "",
+    startDate2: "",
+    currentA4Price: 0,
+    currentFileType: [],
+    isDefault: false,
+  })
+
+  // 4 useStates to control first Section
+  const [curpag_input, setCurpag_input] = useState();
+  const [stday1_input, setStday1_input] = useState(format(new Date(), 'yyyy-MM-dd'));
+  const [stday2_input, setStday2_input] = useState(format(new Date(), 'yyyy-MM-dd'));
+  const [curprice_input, setCurprice_input] = useState();
+  // 2 useStates to control second Section
+  const [deffileTypes, setDefFileTypes] = useState([]);
+  const [curfileTypes, setCurfileTypes] = useState([]);
+  const [selectedValue, setSelectedValue] = useState("");
+
+  // First launch
   useEffect(() => {
+    const handleCallApi = async () => {
+      const response = await ConfigAPI();
+      console.log("reponse from Conf api: ", response);
+
+      setFormInfo(response?.data?.data);
+      setCurpag_input(response?.data?.data.currentBalance);
+      setStday1_input(response?.data?.data.startDate1.split('T')[0]);
+      setStday2_input(response?.data?.data.startDate2.split('T')[0]);
+      setCurprice_input(response?.data?.data.currentA4Price);
+
+      setDefFileTypes(response?.data?.data.defaultFileType);
+      setCurfileTypes(response?.data.data.currentFileType);
+    };
+    handleCallApi();
+
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Login");
     }
   }, []);
-  // Attributes for the first form
-  const [values, setValues] = useState({
-    default_paper: 100,
-    time_Sem1: "22-12-2021",
-    time_Sem2: "22-12-2022",
-    a4_price: 300,
-  });
-  const inputs = [
-    {
-      id: 1,
-      name: "default_paper",
-      type: "number",
-      placeholder: "Nhập số...",
-      errorMessage: "Lượng giấy mặc định là số tự nhiên từ 1-1000!",
-      label: "Số lượng giấy mặc định cho từng sinh viên / Học kì",
-    },
-    {
-      id: 2,
-      name: "time_Sem1",
-      type: "date",
-      placeholder: "timeSem1",
-      errorMessage: "",
-      label: "Thời gian cấp giấy Học kì 1",
-    },
-    {
-      id: 3,
-      name: "time_Sem2",
-      type: "date",
-      placeholder: "timeSem2",
-      errorMessage: "",
-      label: "Thời gian cấp giấy Học kì 2",
-    },
-    {
-      id: 4,
-      name: "a4_price",
-      type: "number",
-      placeholder: "Nhập giá...",
-      errorMessage: "Giá một tờ A4 không nên vượt quá 2000đ",
-      label: "Giá của một tờ giấy A4 khi mua thêm",
-    },
-  ];
-  const handleSubmit = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
+
+  useEffect(() => {
+    setInfoSend(formInfo);
+    setInfoSend((prevData) => ({ ...prevData, startDate1: stday1_input, startDate2: stday2_input }));
+  }, [formInfo]);
+
+  const [errorMessage, setErrorMessage] = useState(null);
+  useEffect(() => {
+    if (errorMessage) {
+      const timerId = setTimeout(() => {
+        setErrorMessage(null);
+      }, 2000);
+
+      // Cleanup the timer when the component unmounts or when the errorMessage changes
+      return () => clearTimeout(timerId);
+    }
+  }, [errorMessage]);
+
+  // Submitting
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  };
-  const onChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
-  const setDefault = () => {
-    setValues({
-      default_paper: 100,
-      time_Sem1: new Date("09-22-2021"),
-      time_Sem2: new Date("09-22-2021"),
-      a4_price: 300,
-    });
+    const response = await SendConfigAPI(infoSend);
+    console.log("reponse send to api: ", response.data);
   };
 
-  // Attributes for the second form
-  const [allItem, setAllItem] = useState([]);
-  const [selectedValue, setSelectedValue] = useState("");
-  const [errorMessage, setErrorMessage] = useState(null);
+  // Setting default
+  const setDefault = () => {
+    setCurpag_input(formInfo?.defaultBalance);
+    setStday1_input(formInfo?.startDate1.split('T')[0]);
+    setStday2_input(formInfo?.startDate2.split('T')[0]);
+    setCurprice_input(formInfo?.defaultA4Price);
+    setCurfileTypes(formInfo.defaultFileType);
+
+    setInfoSend((prevData) => ({
+      ...prevData,
+      startDate1: formInfo?.startDate1,
+      startDate2: formInfo?.startDate2,
+      isDefault: true,
+    }))
+  };
+
   const updateInputType = (e) => {
     setSelectedValue(e.target.value);
   };
   const handleAdd = (val) => {
     if (val !== "") {
-      if (!allItem.some((element) => element.fileType === val)) {
-        let newitem = {
-          id: allItem.length === 0 ? 1 : allItem[allItem.length - 1].id + 1,
-          fileType: selectedValue,
-        };
-        setAllItem([...allItem, newitem]);
+      if (!curfileTypes.some((element) => element === val)) {
+        setCurfileTypes([...curfileTypes, val]);
+        setInfoSend((prevData) => ({
+          ...prevData,
+          currentFileType: [...prevData.currentFileType, val],
+        }));
       } else {
         setErrorMessage("Loại file đã tồn tại.");
       }
     }
   };
 
-  const handleDelete = (id) => {
-    const newAllItem = allItem.filter((item) => item.id !== id);
-    setAllItem(newAllItem);
+  const handleDelete = (ftype) => {
+    const newCurfileTypes = curfileTypes.filter((item) => item !== ftype);
+    setCurfileTypes(newCurfileTypes);
+    const updatedCurrentFileType = infoSend.currentFileType.filter((item) => item !== ftype);
+    setInfoSend((prevData) => ({
+      ...prevData,
+      currentFileType: updatedCurrentFileType,
+    }));
   };
+
   return (
     <div className="Config max-w-[1280px] px-[10px] md:px-[20px] mx-auto pb-5 bg-white shadow-sm min-h-[93vh]">
       <h1 className="text-2xl lg:text-3xl text-[#066dcc] font-semibold mt-4 border-b-4 border-[#066dcc] pb-2 md:pb-3">
@@ -106,88 +133,84 @@ const Config = () => {
             Quản lý Vật Liệu Học Tập và Cấp Phát Tài Liệu
           </h2>
           <div className="formInput flex flex-col ">
-            <label className="text-[16px] lg:text-[18px] ">
-              {inputs[0].label}
-            </label>
+            <label className="text-[16px] lg:text-[18px] ">Số lượng giấy mặc định cho từng sinh viên / Học kì</label>
             <div className="w-[27%] ">
               <input
-                placeholder={inputs[0].placeholder}
+                placeholder="Nhập số..."
                 className="inline border-1 border-[#1488DB] rounded-md"
-                onChange={onChange}
+                onChange={(e) => {
+                  const numericValue = parseFloat(e.target.value);
+                  setCurpag_input(numericValue);
+                  setInfoSend((prevData) => ({ ...prevData, currentBalance: numericValue }));
+                }}
+                value={curpag_input} type="number" required min="1" max="2000"
+                onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()}
               />
             </div>
             <span className="Err">{errorMessage}</span>
+          </div>
+          <div className="flex flex-row item-center justify-start md:gap-[32px] gap-[16px]">
+            <div className="formInput flex flex-col float-left">
+              <label className="TG1 text-[16px] lg:text-[18px] ">Thời gian cấp giấy Học kì 1</label>
+              <div>
+                <input
+                  className="inline border-1 border-[#1488DB] rounded-md"
+                  type="date"
+                  name="date"
+                  id="datepicker"
+                  required
+                  onChange={(e) => {
+                    const dayValue = format(new Date(e.target.value), 'yyyy-MM-dd');
+                    setStday1_input(dayValue)
+                    setInfoSend((prevData) => ({ ...prevData, startDate1: dayValue }));
+                  }}
+                  value={stday1_input}
+                />
+              </div>
+              <span className="Err">{errorMessage}</span>
+            </div>
+
+            <div className="formInput flex flex-col float-left col-span-1 sm:col-span-1 ml-0 sm:ml-4 md:ml-8 ">
+              <label className="TG2 text-[16px] lg:text-[18px] ">Thời gian cấp giấy Học kì 2</label>
+              <div>
+                <input
+                  className="inline border-1 border-[#1488DB] rounded-md"
+                  type="date"
+                  name="date"
+                  id="datepicker"
+                  required
+                  onChange={(e) => {
+                    const dayValue = format(new Date(e.target.value), 'yyyy-MM-dd');
+                    setStday2_input(dayValue)
+                    setInfoSend((prevData) => ({ ...prevData, startDate2: dayValue }));
+                  }}
+                  value={stday2_input}
+                />
+              </div>
+              <span className="Err">{errorMessage}</span>
+            </div>
           </div>
 
-          <div className="formInput flex flex-col float-left">
-            <label className="text-[16px] lg:text-[18px] ">
-              {inputs[1].label}
-            </label>
-            <div>
-              <input
-                className="inline border-1 border-[#1488DB] rounded-md"
-                type="date"
-                name="date"
-                id="datepicker"
-                required
-                onChange={onChange}
-              />
-            </div>
-            <span className="Err">{errorMessage}</span>
-          </div>
-
-          <div className="formInput flex flex-col float-left">
-            <label className="text-[16px] lg:text-[18px] ">
-              {inputs[2].label}
-            </label>
-            <div>
-              <input
-                className="inline border-1 border-[#1488DB] rounded-md"
-                type="date"
-                name="date"
-                id="datepicker"
-                required
-                onChange={onChange}
-              />
-            </div>
-            <span className="Err">{errorMessage}</span>
-          </div>
 
           <div className="formInput flex flex-col w-[100%]">
-            <label className="text-[16px] lg:text-[18px] ">
-              {inputs[3].label}
-            </label>
-            <div>
+            <label className="text-[16px] lg:text-[18px] ">Giá của một tờ giấy A4 khi mua thêm</label>
+            <div class="flex flex-row items-center justify-start gap-3">
               <input
-                placeholder={inputs[3].placeholder}
-                onChange={onChange}
-                className="inline border-1 border-[#1488DB]  rounded-md"
+                placeholder="Nhập giá..."
+                className="border-1 border-[#1488DB]  rounded-md block max-w-[120px]"
+                onChange={(e) => {
+                  const numericValue = parseFloat(e.target.value);
+                  setCurprice_input(numericValue);
+                  setInfoSend((prevData) => ({ ...prevData, currentA4Price: numericValue }));
+                }}
+                value={curprice_input} type="number" required min="100" max="1000"
+                onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()}
               />
               <span className="font-bold text-xl w-1/3 "> (vnđ)</span>
             </div>
             <span className="Err">{errorMessage}</span>
           </div>
-          <button
-            className="Submit flex float-right items-center justify-center my-4 mx-[0.5rem]"
-            type="submit"
-          >
-            Áp dụng
-          </button>
-          <button
-            className="Todefault flex float-right items-center justify-center my-4 mx-[0.5rem]"
-            type="button"
-            onClick={() => setDefault}
-          >
-            Mặc định
-          </button>
-        </form>
-      </div>
 
-      <div className="Form_fileduocphep flex item-center justify-center  bg-cover bg-center mx-auto mt-10">
-        <form
-          onSubmit={handleSubmit}
-          className="bg-[#ffffff] shadow-xl border-1 border-[#1488db70] py-0 px-3 w-full md:w-[570px] h-[27rem]"
-        >
           <h2 className="text-xl lg:text-2xl text-[#1488DB] font-semibold mt-4 border-b-2 border-[#1488DB] pb-2 md:pb-3">
             Cấu hình các loại file được in
           </h2>
@@ -196,31 +219,25 @@ const Config = () => {
               className="w-[60%] h-[2.5rem] py-0 px-2 border-1 border-[#1488DB] rounded-[0.1875rem]"
               onChange={updateInputType}
             >
-              <option selected="true" disabled="disable" value="">
+              <option selected="selected" disabled="disable" value="">
                 Chọn loại tệp để thêm...
               </option>
-              <option value=".pptx">.pptx</option>
-              <option value=".pdf">.pdf</option>
-              <option value=".png">.png</option>
-              <option value=".doc">.doc</option>
-              <option value=".docx">.docx</option>
-              <option value=".jpg">.jpg</option>
-              <option value=".xlsx">.xlsx</option>
+              {
+                deffileTypes.map((fileType, index) => {
+                  return <option key={index} value={fileType}>{fileType}</option>
+                })
+              }
             </select>
 
             <button
-              className="float-right"
-              type="submit"
-              onClick={() => handleAdd(selectedValue)}
-            >
+              type="button"
+              className="float-right w-[5.25rem] h-[2.25rem] rounded-[0.3125rem] bg-[#066dcc] text-white text-[1rem] font-bold"
+              onClick={() => handleAdd(selectedValue)}>
               Thêm
             </button>
             {errorMessage && (
               <div className="absolute -bottom-6 left-0">
                 {errorMessage}
-                {setTimeout(() => {
-                  setErrorMessage(null);
-                }, 2000)}
               </div>
             )}
           </div>
@@ -236,7 +253,7 @@ const Config = () => {
           >
             <div className="current_list overflow-x-scroll flex flex-col">
               {(() => {
-                if (allItem.length === 0) {
+                if (curfileTypes.length === 0) {
                   return (
                     <div className="italic text-gray-400">
                       Bạn hiện chưa thêm loại file nào.
@@ -244,17 +261,17 @@ const Config = () => {
                   );
                 }
               })()}
-              {allItem.map((item, key) => {
+              {curfileTypes.map((item, key) => {
                 return (
                   <div
                     className="current_list_item bg-white justify-between bg-transparent flex flex-row my-[0.5rem] md:py-[5px] px-[1rem] border-b-[2px] border-[#1488DB]"
                     key={key}
                   >
-                    <p>{item.fileType}</p>
+                    <p>{item}</p>
                     <div>
                       <AiOutlineDelete
                         className="icon text-2xl cursor-pointer"
-                        onClick={() => handleDelete(item.id)}
+                        onClick={(e) => { handleDelete(item) }}
                         title="Delete?"
                       />
                     </div>
@@ -263,6 +280,19 @@ const Config = () => {
               })}
             </div>
           </div>
+
+          <button
+            className="Submit flex float-right items-center justify-center my-4 mx-[0.5rem] w-[5.25rem] h-[2.25rem] rounded-[0.3125rem] bg-[#066dcc] text-white text-[1rem] font-bold"
+            type="submit"
+          >
+            Áp dụng
+          </button>
+          <button
+            className="Todefault flex float-right items-center justify-center my-4 mx-[0.5rem] w-[5.25rem] h-[2.25rem] rounded-[0.3125rem] bg-[#066dcc] text-white text-[1rem] font-bold"
+            type="submit"
+            onClick={() => setDefault()}>
+            Mặc định
+          </button>
         </form>
       </div>
     </div>
