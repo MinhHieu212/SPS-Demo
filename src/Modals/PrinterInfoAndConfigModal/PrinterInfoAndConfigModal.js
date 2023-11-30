@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import InfoField from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
+import { editPtr } from "../../APIs/StaffAPI/StaffAPI";
 export const newPtr = {};
 const PrinterInfoAndConfigModal = ({
   children,
@@ -10,25 +11,22 @@ const PrinterInfoAndConfigModal = ({
   description,
   status,
   fileType,
-  setRenderList1,
+  setRenderList,
 }) => {
   const [openModal, setOpenModal] = useState(false);
   const handleClose = () => {
     setOpenModal(false);
   };
 
-  const [printerInfo, setPrinterInfo] = useState("");
-  const [fileTypes, setFileTypes] = useState([
-    "pdf",
-    "docx",
-    "pptx",
-    "docx",
-    "pptx",
-  ]);
   const handleClick = () => {
     newPtr.status = checked === "enable" ? 1 : 0;
     newPtr.printerId = id;
-    setRenderList1();
+    const handleEditAPI = async (newData) => {
+      const request = await editPtr(newData);
+      setRenderList();
+    };
+    handleEditAPI(newPtr);
+
     setOpenModal(false);
   };
   const [checked, setChecked] = useState(
@@ -67,7 +65,7 @@ const PrinterInfoAndConfigModal = ({
                   {fileType.map((type, index) => {
                     return (
                       <div
-                        className="p-2 bg-[#E6E6E6] rounded-sm text-center w-[90%] h-[100px] mt-2 border-[1px] border-[#367FA9]"
+                        className="p-2 bg-[#e9e9e9] rounded-sm text-center w-[90%] h-[50px] mt-2 border-[1px] border-[#367FA9]"
                         key={index}
                       >
                         {type}
