@@ -12,7 +12,7 @@ root.render(
   <React.StrictMode>
     <RoleProvider>
       <UserInfoProvider>
-        <BrowserRouter>
+        <BrowserRouter basename="/SPS-FE-Project">
           <App />
         </BrowserRouter>
       </UserInfoProvider>

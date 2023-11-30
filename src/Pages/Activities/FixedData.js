@@ -1,7 +1,7 @@
 export const activities = [
   {
     studentName: "",
-    studentId: "...",
+    studentId: "",
     classes: "",
     totlePages: 0,
     major: "",
@@ -28,7 +28,7 @@ export const activities = [
   },
   {
     studentName: "",
-    studentId: "...",
+    studentId: "",
     classes: "",
     totlePages: 0,
     major: "",

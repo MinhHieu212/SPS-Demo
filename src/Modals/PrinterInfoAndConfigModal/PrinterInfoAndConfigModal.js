@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import InfoField from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
+import { editPtr } from "../../APIs/StaffAPI/StaffAPI";
 export const newPtr = {
 
 };
@@ -12,7 +13,7 @@ const PrinterInfoAndConfigModal = ({
   description,
   status,
   fileType,
-  functionRenderList1
+  setRenderList
 }) => {
   const [openModal, setOpenModal] = useState(false);
   // const [checked3, setChecked3] = useState(status === "Hoạt động" ? "enable" : "disable");
@@ -22,19 +23,16 @@ const PrinterInfoAndConfigModal = ({
   const handleClose = () => {
     setOpenModal(false);
   };
-  
-  const [printerInfo, setPrinterInfo] = useState("");
-  const [fileTypes, setFileTypes] = useState([
-    "pdf",
-    "docx",
-    "pptx",
-    "docx",
-    "pptx",
-  ]);
+
   const handleClick = () => {
     newPtr.status = checked3 === "enable" ? 1 : 0;
     newPtr.printerId = id;
-    functionRenderList1();
+    const handleEditAPI = async (newData) => {
+      const request = await editPtr(newData);
+      setRenderList();
+    };
+    handleEditAPI(newPtr);
+
     setOpenModal(false);
   }
 
@@ -77,7 +75,7 @@ const PrinterInfoAndConfigModal = ({
                   {fileType.map((type, index) => {
                     return (
                       <div
-                        className="p-2 bg-[#E6E6E6] rounded-sm text-center w-[90%] h-[50px] mt-2 border-[1px] border-[#367FA9]"
+                        className="p-2 bg-[#e9e9e9] rounded-sm text-center w-[90%] h-[50px] mt-2 border-[1px] border-[#367FA9]"
                         key={index}
                       >
                         {type}
