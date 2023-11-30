@@ -25,7 +25,13 @@ const PrinterQueueModal = ({ children, queue }) => {
                 >
                   <InfoField2
                     fieldName={"Thời gian"}
-                    fieldValue={new Date(request?.createdAt).toISOString().slice(0,10) + " " + new Date(request?.createdAt).toISOString().slice(11,19)|| "..."}
+                    fieldValue={
+                      new Date(request?.createdAt).toISOString().slice(0, 10) +
+                        " " +
+                        new Date(request?.createdAt)
+                          .toISOString()
+                          .slice(11, 19) || "..."
+                    }
                   ></InfoField2>
                   <InfoField2
                     fieldName={"Tên sinh viên"}

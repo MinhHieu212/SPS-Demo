@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import InfoField from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
 import { editPtr } from "../../APIs/StaffAPI/StaffAPI";
-export const newPtr = {
-
-};
+export const newPtr = {};
 const PrinterInfoAndConfigModal = ({
   children,
   id,
@@ -13,7 +11,7 @@ const PrinterInfoAndConfigModal = ({
   description,
   status,
   fileType,
-  setRenderList
+  setRenderList,
 }) => {
   const [openModal, setOpenModal] = useState(false);
   // const [checked3, setChecked3] = useState(status === "Hoạt động" ? "enable" : "disable");
@@ -34,8 +32,10 @@ const PrinterInfoAndConfigModal = ({
     handleEditAPI(newPtr);
 
     setOpenModal(false);
-  }
-
+  };
+  const [checked, setChecked] = useState(
+    status === "Hoạt động" ? "enable" : "disable"
+  );
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
@@ -50,18 +50,12 @@ const PrinterInfoAndConfigModal = ({
                 <p className="font-semibold text-[20] md:text-[24px] pb-2">
                   Thông tin máy in
                 </p>
-                <InfoField
-                  fieldName={"ID máy in"}
-                  fieldValue={id}
-                ></InfoField>
+                <InfoField fieldName={"ID máy in"} fieldValue={id}></InfoField>
                 <InfoField
                   fieldName={"Nhãn hiệu"}
                   fieldValue={brand}
                 ></InfoField>
-                <InfoField
-                  fieldName={"Mẫu máy"}
-                  fieldValue={model}
-                ></InfoField>
+                <InfoField fieldName={"Mẫu máy"} fieldValue={model}></InfoField>
                 <InfoField
                   fieldName={"Mô tả"}
                   fieldValue={description}
@@ -94,12 +88,14 @@ const PrinterInfoAndConfigModal = ({
                   onChange={(e) => setChecked3(e.target.value)}
                   type="radio"
                   className="w-5 h-5"
-                  name="printerStatus3"
-                  id="enable3"
-                  value="enable"
+                  name="printerState5"
+                  id="enable123"
+                  value={"enable"}
+                  onChange={(e) => setChecked(e.target.value)}
+                  checked={checked === "enable"}
                 />
                 <label
-                  htmlFor="enable3"
+                  htmlFor="enable123"
                   className="ml-3 text-[16px] md:text-[20px] font-semibold"
                 >
                   Hoạt động
@@ -111,12 +107,14 @@ const PrinterInfoAndConfigModal = ({
                   onChange={(e) => setChecked3(e.target.value)}
                   type="radio"
                   className="w-5 h-5"
-                  name="printerStatus3"
-                  id="disable3"
-                  value="disable"
+                  name="printerState5"
+                  id="disable1234"
+                  value={"disable"}
+                  onChange={(e) => setChecked(e.target.value)}
+                  checked={checked === "disable"}
                 />
                 <label
-                  htmlFor="disable3"
+                  htmlFor="disable1234"
                   className="ml-3 text-[16px] md:text-[20px] font-semibold"
                 >
                   Vô hiệu hóa
@@ -124,7 +122,10 @@ const PrinterInfoAndConfigModal = ({
               </div>
             </div>
             <div className="w-1/2 flex items-center justify-end pr-5">
-              <button onClick={handleClick} className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500 hover:bg-blue-300 h-[50px] p-3 w-[80%] md:w-[70%]  rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center">
+              <button
+                onClick={handleClick}
+                className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500 hover:bg-blue-300 h-[50px] p-3 w-[80%] md:w-[70%]  rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center"
+              >
                 Xác nhận
               </button>
             </div>
