@@ -42,7 +42,7 @@ const DetailStudentLogModal = ({ children, activity }) => {
           <div className="w-full h-[470px] flex justify-start py-2 gap-2 items-center flex-col overflow-y-scroll">
             {openFilter ? (
               <div className="w-full h-full flex flex-col ">
-                <div className="bg-white h-[250px] md:h-[280px] mt-5  rounded-md flex-col   flex items-center  shadow-md w-[90%] gap-2 mx-auto border-[1px] border-[#367FA9]">
+                <div className="bg-white  h-[250px] mt-5  rounded-md flex-col   flex items-center  shadow-md w-[90%] gap-2 mx-auto border-[1px] border-[#367FA9]">
                   <div className="text-[#1488DB] uppercase  border-b-[3px] border-[#367FA9] h-[40px] flex items-center justify-center font-bold w-full my-2 text-[18px]">
                     Khoảng thời gian
                   </div>
@@ -62,7 +62,7 @@ const DetailStudentLogModal = ({ children, activity }) => {
                       className="border-b-[1px] border-gray rounded-md pl-2 h-[40px] bg-[#E6E6E6] flex items-center justify-center font-semibold w-[75%] outline-none"
                     />
                   </div>
-                  <div className="Buttoms flex mx-auto mt-5 items-center justify-end gap-3 pr-2">
+                  <div className="Buttoms flex mx-auto mt-4 items-center justify-end gap-3 pr-2">
                     <button
                       className="bg-gradient-to-br from-[#ff7d7d]  outline-none to-[#b84949] p-[10px] block rounded-md text-[15px] md:text-[18px]  w-[100px]  font-semibold text-white"
                       onClick={cancelFilter}
