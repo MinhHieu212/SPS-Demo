@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InfoField from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
 export const newPtr = {
@@ -12,9 +12,13 @@ const PrinterInfoAndConfigModal = ({
   description,
   status,
   fileType,
-  setRenderList1
+  functionRenderList1
 }) => {
   const [openModal, setOpenModal] = useState(false);
+  // const [checked3, setChecked3] = useState(status === "Hoạt động" ? "enable" : "disable");
+  const [checked3, setChecked3] = useState(status);
+
+  console.log("Trang thai may: ", checked3);
   const handleClose = () => {
     setOpenModal(false);
   };
@@ -28,12 +32,12 @@ const PrinterInfoAndConfigModal = ({
     "pptx",
   ]);
   const handleClick = () => {
-    newPtr.status = checked === "enable" ? 1 : 0;
+    newPtr.status = checked3 === "enable" ? 1 : 0;
     newPtr.printerId = id;
-    setRenderList1();
+    functionRenderList1();
     setOpenModal(false);
   }
-  const [checked, setChecked] = useState(status === "Hoạt động" ? "enable" : "disable");
+
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
@@ -73,7 +77,7 @@ const PrinterInfoAndConfigModal = ({
                   {fileType.map((type, index) => {
                     return (
                       <div
-                        className="p-2 bg-[#E6E6E6] rounded-sm text-center w-[90%] h-[100px] mt-2 border-[1px] border-[#367FA9]"
+                        className="p-2 bg-[#E6E6E6] rounded-sm text-center w-[90%] h-[50px] mt-2 border-[1px] border-[#367FA9]"
                         key={index}
                       >
                         {type}
@@ -88,16 +92,16 @@ const PrinterInfoAndConfigModal = ({
             <div className="w-1/2 pl-5">
               <div className="w-[200px] flex items-center">
                 <input
+                  checked={checked3 === "enable"}
+                  onChange={(e) => setChecked3(e.target.value)}
                   type="radio"
                   className="w-5 h-5"
-                  name="printerState5"
-                  id="enable5"
-                  value={"enable"}
-                  onChange={(e) => setChecked(e.target.value)}
-                  checked={checked === "enable"}
+                  name="printerStatus3"
+                  id="enable3"
+                  value="enable"
                 />
                 <label
-                  htmlFor="enable5"
+                  htmlFor="enable3"
                   className="ml-3 text-[16px] md:text-[20px] font-semibold"
                 >
                   Hoạt động
@@ -105,16 +109,16 @@ const PrinterInfoAndConfigModal = ({
               </div>
               <div className="w-[200px] flex items-center">
                 <input
+                  checked={checked3 === "disable"}
+                  onChange={(e) => setChecked3(e.target.value)}
                   type="radio"
                   className="w-5 h-5"
-                  name="printerState5"
-                  id="disable5"
-                  value={"disable"}
-                  onChange={(e) => setChecked(e.target.value)}
-                  checked={checked === "disable"}
+                  name="printerStatus3"
+                  id="disable3"
+                  value="disable"
                 />
                 <label
-                  htmlFor="disable5"
+                  htmlFor="disable3"
                   className="ml-3 text-[16px] md:text-[20px] font-semibold"
                 >
                   Vô hiệu hóa

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Manage.scss";
-import { FilterIcon, SearchIcon } from "../../Assets/Icons/Icons";
+import { SearchIcon } from "../../Assets/Icons/Icons";
 import ManageItem from "./ManageItem";
 import { useNavigate } from "react-router";
 import { getPtr, editPtr } from "../../APIs/StaffAPI/StaffAPI";
@@ -35,7 +35,7 @@ const ManageStaff = () => {
       navigate("/Login");
     }
   }, [renderList]);
-
+  console.log("CC: ", data);
   return (
     <div className="Manage History max-w-[1280px] px-[10px] md:w-full lg:px-[20px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
       <h2 className="text-2xl lg:text-3xl font-semibold mt-3 printing-title border-b-4 border-[#066DCC] pb-2 md:pb-3  text-[#066DCC] ">
@@ -74,6 +74,7 @@ const ManageStaff = () => {
         {printers?.map((printer) => (
           <ManageItem
             functionRenderList1={() => setRenderList1(!renderList1)}
+            functionRenderList = {() => setRenderList(!renderList)}
             id={printer.printerId}
             queue={printer.printingJob.length + printer.printingQueue.length}
             status={printer.status === 1 ? "Hoạt động" : "Không hoạt động"}
@@ -81,28 +82,6 @@ const ManageStaff = () => {
             brand={printer.brand}
             model={printer.model}
             fileType={fileType}
-            setRenderList = {() => setRenderList(!renderList)}
-          />
-        ))} 
-        {printers?.map((printer, index) => (
-          <ManageItem
-            functionRenderList1={() => setRenderList1(!renderList1)}
-            functionRenderList={() => setRenderList(!renderList)}
-            model={printer.model}
-            description={printer.description}
-            brand={printer.brand}
-            key={index}
-            id={printer.printerId}
-            location={
-              printer.location.facility +
-              ", " +
-              printer.location.department +
-              ", " +
-              printer.location.room
-            }
-            date={printer.activatedTime.slice(0, 10)}
-            status={printer.status ? "Hoạt động" : "Không hoạt động"}
-            queue={printer.printingQueue.length}
           />
         ))}
       </div>
