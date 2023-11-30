@@ -7,11 +7,9 @@ import { useNavigate } from "react-router";
 import { FIlterManagePriterModal } from "../../Modals";
 import {
   getPrintersList,
-  editPrinter,
-  addPrinter,
+  addPrinter
 } from "../../APIs/SpsoAPI/SpsoAPI";
 import { value } from "../../Modals/FIlterManagePriterModal/FIlterManagePriterModal";
-import { newData } from "../../Modals/SPSO_EditPrinter/SPSO_EditPrinter";
 import { newPrinter } from "../../Modals/AddPrinterModal/AddPrinterModal";
 import { PrintersData } from "./FixedData";
 
@@ -19,14 +17,11 @@ const ManageSpso = () => {
   const [printersList, setPrintersList] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [renderList, setRenderList] = useState(true);
-  const [renderList1, setRenderList1] = useState(true);
-  const [renderList2, setRenderList2] = useState(true);
 
   const navigate = useNavigate();
   useEffect(() => {
     const handleSPSOApi = async (params) => {
       const response = await getPrintersList(params);
-      console.log("reponse from get printers api: ", response?.data?.data);
       //console.log(data);
       setPrintersList(response?.data?.data);
     };
@@ -50,22 +45,6 @@ const ManageSpso = () => {
     }
   }, [renderList]);
 
-  useEffect(() => {
-    const handleEditAPI = async (newData) => {
-      const request = await editPrinter(newData);
-      setRenderList(!renderList);
-    };
-    handleEditAPI(newData);
-  }, [renderList1]);
-  useEffect(() => {
-    const handleAddAPI = async (newData) => {
-      const request = await addPrinter(newData);
-      setRenderList(!renderList);
-    };
-    handleAddAPI(newPrinter);
-    console.log(newPrinter);
-  }, [renderList2]);
-
   const printers = printersList.printers;
 
   return (
@@ -76,7 +55,7 @@ const ManageSpso = () => {
         </h2>
         <div>
           <AddPrinterModal
-            functionRenderList2={() => setRenderList2(!renderList2)}
+            functionRenderList={() => setRenderList(!renderList)}
           >
             <button className="text-[14px] lg:text-[18px] text-white bg-[#3C8DBC] font-semibold md:px-[30px] px-[5px] mf:px-[10px] py-2 rounded-md">
               Thêm máy in
@@ -137,16 +116,15 @@ const ManageSpso = () => {
         <div className=" min-w-[800px] md:w-full max-h-[60px]  flex flex-row mx-auto justify-between shadow-lg items-center bg-[#3C8DBC] text-[16px]  lg:text-[18px] font-bold py-3 px-4 mt-8 rounded-sm  text-white">
           <div className="text-center w-[10%]">ID MÁY IN</div>
           <div className="w-[15%] text-center">TRẠNG THÁI</div>
-          <div className="text-center w-[15%]">VỊ TRÍ</div>
+          <div className="text-center w-[14%]">VỊ TRÍ</div>
           <div className="text-center w-[15%]"> KÍCH HOẠT</div>
-          <div className="text-center w-[5%]">QUEUE</div>
-          <div className="text-center w-[25%]">YÊU CẦU IN</div>
-          <div className="w-[15%] text-center">THIẾT LẬP</div>
+          <div className="text-center w-[9%]">ĐANG ĐỢI</div>
+          <div className="text-center w-[23%]">YÊU CẦU IN</div>
+          <div className="w-[14%] text-center">THIẾT LẬP</div>
         </div>
         {printers
           ? printers?.map((printer, index) => (
               <ManageSpsoItem
-                functionRenderList1={() => setRenderList1(!renderList1)}
                 functionRenderList={() => setRenderList(!renderList)}
                 model={printer.model}
                 description={printer.description}
@@ -167,7 +145,6 @@ const ManageSpso = () => {
             ))
           : PrintersData?.map((printer, index) => (
               <ManageSpsoItem
-                functionRenderList1={() => setRenderList1(!renderList1)}
                 functionRenderList={() => setRenderList(!renderList)}
                 model={printer.model}
                 description={printer.description}
