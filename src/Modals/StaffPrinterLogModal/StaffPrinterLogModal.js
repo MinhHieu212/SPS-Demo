@@ -24,23 +24,23 @@ const StaffPrinterLogModal = ({ children, log }) => {
                 >
                   <InfoField2
                     fieldName={"Thời gian"}
-                    fieldValue={request.createdAt.slice(0,10)}
+                    fieldValue={(new Date(request?.createdAt).toISOString().slice(0, 10) + " " + new Date(request?.createdAt).toISOString().slice(11, 19) || "...") || "..."}
                   ></InfoField2>
                   <InfoField2
                     fieldName={"Tên sinh viên"}
-                    fieldValue={request.lastName + " " + request.firstName}
+                    fieldValue={(request?.lastName + " " + request?.firstName) || "..."}
                   ></InfoField2>
                   <InfoField2
                     fieldName={"Mã sinh viên"}
-                    fieldValue={request.mssv}
+                    fieldValue={request?.mssv || "..."}
                   ></InfoField2>
                   <InfoField2
                     fieldName={"Tên file in"}
-                    fieldValue={request.document.title}
+                    fieldValue={request?.document.title || "..."}
                   ></InfoField2>
                   <InfoField2
                     fieldName={"Số bản in"}
-                    fieldValue={request.numVersion}
+                    fieldValue={request?.numVersion || "..."}
                   ></InfoField2>
                 </div>
               );
