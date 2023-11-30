@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 const FilterPrinterModal = ({ children, setParams = () => {} }) => {
   const [open, setOpen] = useState(false);
-  const [status, setStatus] = useState(null); //nullor 1 or 0
+  const [status, setStatus] = useState(null); //null or 1 or 0
   const [facility, setFacility] = useState(null); //nullor CS1 or CS2
   const [sortDirection, setSortDirection] = useState(1); // acsending or descending
   const [filterParams, setFilterParams] = useState({

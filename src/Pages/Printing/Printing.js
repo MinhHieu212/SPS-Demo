@@ -6,28 +6,43 @@ import { FilterPrinterModal } from "../../Modals";
 import { useNavigate } from "react-router-dom";
 import { getPrinterList } from "../../APIs/PrintersAPI/PrintersAPI";
 import { data } from "./FixedData";
+import { io } from "socket.io-client";
+
+const socket = io("https://ssps-7wxl.onrender.com");
 
 const Printing = () => {
   const navigate = useNavigate();
-  const [filterParams, setFilterParams] = useState({ per_page: 100 });
+  const [filterParams, setFilterParams] = useState({
+    status: null,
+    facility: null,
+    sortDirection: 1,
+    per_page: 100,
+  });
   const [searchParams, setSearchParams] = useState(null);
   const [printerList, setPrinterList] = useState(data);
 
+  const callAPI = async () => {
+    const response = await getPrinterList({
+      ...filterParams,
+    });
+    console.log("Response from get printer list api : ", response);
+    setPrinterList(response?.data?.printers);
+
+    return true;
+  };
+
+  const fetchDataAndUpdate = async () => {
+    await callAPI();
+  };
+
   useEffect(() => {
-    if (localStorage.getItem("accessToken") === null) {
-      navigate("/Login");
-    }
-
-    const callAPI = async () => {
-      const response = await getPrinterList({
-        ...filterParams,
-      });
-      console.log("Response from get printer lisr api : ", response);
-      setPrinterList(response?.data?.printers);
-    };
-
     callAPI();
   }, [filterParams]);
+
+  socket.on("update-printer-list", () => {
+    console.log("Received update-printer-list signal");
+    fetchDataAndUpdate();
+  });
 
   const handleSearch = () => {
     setFilterParams((filterParams) => {

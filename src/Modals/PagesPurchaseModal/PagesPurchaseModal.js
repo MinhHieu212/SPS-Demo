@@ -3,10 +3,12 @@ import CenterModal from "../BaseModals/CenterModal";
 import "./PagesPurchaseModal.scss";
 import { useNavigate } from "react-router-dom";
 import { confirmPayment } from "../../APIs/BKPayAPI/BKPayAPI";
+import { useUserInfo } from "../../Contexts/UserInfoContext";
 
 const PagesPurchaseModal = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
+  const userInfoContext = useUserInfo();
 
   const handleClose = () => {
     setOpenModal(false);
@@ -108,7 +110,7 @@ const PagesPurchaseModal = ({ children }) => {
                 Giá mỗi tờ:
               </span>
               <span className="text-[18px] font-semibold leading-7">
-                1000 VNĐ
+                {userInfoContext?.info?.currentA4Price} VNĐ
               </span>
             </div>
           </div>

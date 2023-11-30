@@ -14,6 +14,7 @@ export const UserInfoProvider = ({ children }) => {
     balance: 0,
     major: "...",
     classes: "...",
+    currentA4Price: 0,
   });
 
   const updateUserInfo = (newInfo) => {

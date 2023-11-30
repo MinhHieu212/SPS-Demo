@@ -32,7 +32,7 @@ const ConfigFile = () => {
 
       const response = await getPrinterInfo(params);
 
-      console.log("get information details: ", response);
+      // console.log("get information details: ", response);
 
       setPrinterInfo((printerInfo) => ({
         ...printerInfo,
@@ -167,6 +167,7 @@ const ConfigFile = () => {
                 id="dropzone-file"
                 type="file"
                 multiple
+                accept={[".docx", ".pdf"]}
                 className="cursor-pointer absolute block opacity-0 w-full h-full z-10"
                 onChange={handleFileChange}
               />
