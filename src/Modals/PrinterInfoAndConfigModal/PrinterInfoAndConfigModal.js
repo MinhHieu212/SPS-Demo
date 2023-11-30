@@ -86,7 +86,7 @@ const PrinterInfoAndConfigModal = ({
                   id="enable123"
                   value={"enable"}
                   onChange={(e) => setChecked(e.target.value)}
-                  // checked={checked === "enable"}
+                  checked={checked === "enable"}
                 />
                 <label
                   htmlFor="enable123"
@@ -103,7 +103,7 @@ const PrinterInfoAndConfigModal = ({
                   id="disable1234"
                   value={"disable"}
                   onChange={(e) => setChecked(e.target.value)}
-                  // checked={checked === "disable"}
+                  checked={checked === "disable"}
                 />
                 <label
                   htmlFor="disable1234"
