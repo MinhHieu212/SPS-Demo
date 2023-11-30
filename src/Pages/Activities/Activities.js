@@ -6,7 +6,7 @@ import { ActivitiesFilterModal } from "../../Modals";
 import { useNavigate } from "react-router-dom";
 import { activities } from "./FixedData";
 import { ActivityFilter } from "../../Modals/ActivitiesFilterModal/ActivitiesFilterModal";
-import { getStudents } from "../../APIs/SpsoAPI/SpsoAPI";
+import { getStudents, getDetailStudent } from "../../APIs/SpsoAPI/SpsoAPI";
 
 const Activities = () => {
   const [renderList, setRenderList] = useState(true);
@@ -23,9 +23,10 @@ const Activities = () => {
       sortName: ActivityFilter.sortName,
       sortPayment: ActivityFilter.sortPayment,
     };
-    console.log(params);
+    //console.log(params);
     const handleGetStudents = async (params) => {
       const response = await getStudents(params);
+      console.log(response?.data?.data);
       setFetchAct(response?.data?.data);
     };
     handleGetStudents(params);
@@ -33,6 +34,7 @@ const Activities = () => {
       navigate("/Login");
     }
   }, [renderList]);
+  
   return (
     <div className="Activities max-w-[1280px] px-[10px] md:px-[20px] bg-[white] mx-auto shadow-sm mb-5 min-h-[93vh]">
       <h2 className="text-2xl lg:text-3xl font-semibold mt-3  printing-title border-b-4 border-[#066DCC] pb-2 md:pb-3  text-[#066DCC]">
