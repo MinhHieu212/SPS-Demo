@@ -24,10 +24,6 @@ const ManageSpso = () => {
     setPrintersList(response?.data?.data);
   };
 
-  const fetchDataAndUpdate = async () => {
-    await handleSPSOApi(params);
-  };
-
   useEffect(() => {
     params = {};
     if (value.status === "all") delete params.status;
@@ -42,15 +38,21 @@ const ManageSpso = () => {
     if (value.timeActive === "ascending") params.sortDirection = "1";
     else params.sortDirection = "-1";
     params.searchField = value.searchField;
+
     handleSPSOApi(params);
+
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Login");
     }
   }, [renderList]);
 
-  socket.on("update-printer-list", () => {
-    console.log("Received update-printer-list signal");
-    fetchDataAndUpdate();
+  const fetchDataAndUpdate = async (params) => {
+    await handleSPSOApi(params);
+  };
+
+  socket.on("update-printer-list", (params) => {
+    console.log("Received update-printer-list Manage SPSO", params);
+    fetchDataAndUpdate(params);
   });
 
   const printers = printersList.printers;
