@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./Styles/index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, HashRouter } from "react-router-dom";
 import { RoleProvider } from "./Contexts/RoleContext";
 import { UserInfoProvider } from "./Contexts/UserInfoContext";
 
@@ -12,9 +12,9 @@ root.render(
   <React.StrictMode>
     <RoleProvider>
       <UserInfoProvider>
-        <BrowserRouter basename="/SPS-FE-Project">
+        <HashRouter>
           <App />
-        </BrowserRouter>
+        </HashRouter>
       </UserInfoProvider>
     </RoleProvider>
   </React.StrictMode>

@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import InfoField from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
-export const newPtr = {
-
-};
+export const newPtr = {};
 const PrinterInfoAndConfigModal = ({
   children,
   id,
@@ -12,13 +10,13 @@ const PrinterInfoAndConfigModal = ({
   description,
   status,
   fileType,
-  setRenderList1
+  setRenderList1,
 }) => {
   const [openModal, setOpenModal] = useState(false);
   const handleClose = () => {
     setOpenModal(false);
   };
-  
+
   const [printerInfo, setPrinterInfo] = useState("");
   const [fileTypes, setFileTypes] = useState([
     "pdf",
@@ -32,8 +30,10 @@ const PrinterInfoAndConfigModal = ({
     newPtr.printerId = id;
     setRenderList1();
     setOpenModal(false);
-  }
-  const [checked, setChecked] = useState(status === "Hoạt động" ? "enable" : "disable");
+  };
+  const [checked, setChecked] = useState(
+    status === "Hoạt động" ? "enable" : "disable"
+  );
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
@@ -48,18 +48,12 @@ const PrinterInfoAndConfigModal = ({
                 <p className="font-semibold text-[20] md:text-[24px] pb-2">
                   Thông tin máy in
                 </p>
-                <InfoField
-                  fieldName={"ID máy in"}
-                  fieldValue={id}
-                ></InfoField>
+                <InfoField fieldName={"ID máy in"} fieldValue={id}></InfoField>
                 <InfoField
                   fieldName={"Nhãn hiệu"}
                   fieldValue={brand}
                 ></InfoField>
-                <InfoField
-                  fieldName={"Mẫu máy"}
-                  fieldValue={model}
-                ></InfoField>
+                <InfoField fieldName={"Mẫu máy"} fieldValue={model}></InfoField>
                 <InfoField
                   fieldName={"Mô tả"}
                   fieldValue={description}
@@ -91,13 +85,13 @@ const PrinterInfoAndConfigModal = ({
                   type="radio"
                   className="w-5 h-5"
                   name="printerState5"
-                  id="enable5"
+                  id="enable123"
                   value={"enable"}
                   onChange={(e) => setChecked(e.target.value)}
-                  checked={checked === "enable"}
+                  // checked={checked === "enable"}
                 />
                 <label
-                  htmlFor="enable5"
+                  htmlFor="enable123"
                   className="ml-3 text-[16px] md:text-[20px] font-semibold"
                 >
                   Hoạt động
@@ -108,13 +102,13 @@ const PrinterInfoAndConfigModal = ({
                   type="radio"
                   className="w-5 h-5"
                   name="printerState5"
-                  id="disable5"
+                  id="disable1234"
                   value={"disable"}
                   onChange={(e) => setChecked(e.target.value)}
-                  checked={checked === "disable"}
+                  // checked={checked === "disable"}
                 />
                 <label
-                  htmlFor="disable5"
+                  htmlFor="disable1234"
                   className="ml-3 text-[16px] md:text-[20px] font-semibold"
                 >
                   Vô hiệu hóa
@@ -122,7 +116,10 @@ const PrinterInfoAndConfigModal = ({
               </div>
             </div>
             <div className="w-1/2 flex items-center justify-end pr-5">
-              <button onClick={handleClick} className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500 hover:bg-blue-300 h-[50px] p-3 w-[80%] md:w-[70%]  rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center">
+              <button
+                onClick={handleClick}
+                className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500 hover:bg-blue-300 h-[50px] p-3 w-[80%] md:w-[70%]  rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center"
+              >
                 Xác nhận
               </button>
             </div>
