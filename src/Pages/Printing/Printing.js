@@ -6,12 +6,11 @@ import { FilterPrinterModal } from "../../Modals";
 import { useNavigate } from "react-router-dom";
 import { getPrinterList } from "../../APIs/PrintersAPI/PrintersAPI";
 import { data } from "./FixedData";
-import { io } from "socket.io-client";
-
-const socket = io("https://ssps-7wxl.onrender.com");
+import { useSocket } from "../../Contexts/SocketIOContenxt";
 
 const Printing = () => {
   const navigate = useNavigate();
+  const socket = useSocket();
   const [filterParams, setFilterParams] = useState({
     status: null,
     facility: null,
@@ -37,6 +36,9 @@ const Printing = () => {
 
   useEffect(() => {
     callAPI();
+    if (localStorage.getItem("accessToken") === null) {
+      navigate("/Login");
+    }
   }, [filterParams]);
 
   socket.on("update-printer-list", () => {

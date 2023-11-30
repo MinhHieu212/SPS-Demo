@@ -5,27 +5,31 @@ import ManageSpsoItem from "./ManageSpsoItem";
 import { AddPrinterModal } from "../../Modals/AddPrinterModal/AddPrinterModal";
 import { useNavigate } from "react-router";
 import { FIlterManagePriterModal } from "../../Modals";
-import {
-  getPrintersList,
-  addPrinter
-} from "../../APIs/SpsoAPI/SpsoAPI";
+import { getPrintersList, addPrinter } from "../../APIs/SpsoAPI/SpsoAPI";
 import { value } from "../../Modals/FIlterManagePriterModal/FIlterManagePriterModal";
 import { newPrinter } from "../../Modals/AddPrinterModal/AddPrinterModal";
 import { PrintersData } from "./FixedData";
+import { useSocket } from "../../Contexts/SocketIOContenxt";
 
 const ManageSpso = () => {
   const [printersList, setPrintersList] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [renderList, setRenderList] = useState(true);
-
+  let params = {};
   const navigate = useNavigate();
+  const socket = useSocket();
+
+  const handleSPSOApi = async (params) => {
+    const response = await getPrintersList(params);
+    setPrintersList(response?.data?.data);
+  };
+
+  const fetchDataAndUpdate = async () => {
+    await handleSPSOApi(params);
+  };
+
   useEffect(() => {
-    const handleSPSOApi = async (params) => {
-      const response = await getPrintersList(params);
-      //console.log(data);
-      setPrintersList(response?.data?.data);
-    };
-    const params = {};
+    params = {};
     if (value.status === "all") delete params.status;
     else if (value.status === "enable") params.status = 1;
     else params.status = 0;
@@ -39,11 +43,15 @@ const ManageSpso = () => {
     else params.sortDirection = "-1";
     params.searchField = value.searchField;
     handleSPSOApi(params);
-    //console.log(params);
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Login");
     }
   }, [renderList]);
+
+  socket.on("update-printer-list", () => {
+    console.log("Received update-printer-list signal");
+    fetchDataAndUpdate();
+  });
 
   const printers = printersList.printers;
 

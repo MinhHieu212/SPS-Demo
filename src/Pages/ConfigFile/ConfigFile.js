@@ -4,9 +4,11 @@ import { AddIcon, DeleteIcon, FileIcon } from "../../Assets/Icons/Icons";
 import RemoveFileModal from "../../Modals/RemoveFileModal/RemoveFileModal";
 import { ConfirmPrintingModal } from "../../Modals";
 import { getPrinterInfo } from "../../APIs/PrintersAPI/PrintersAPI";
+import { useSocket } from "../../Contexts/SocketIOContenxt";
 
 const ConfigFile = () => {
   const navigate = useNavigate();
+  const socket = useSocket();
   const { PrinterID } = useParams();
   const [files, setFiles] = useState([]);
   const [renderInfo, setrednerInfo] = useState(true);
@@ -24,30 +26,40 @@ const ConfigFile = () => {
     }
   }, []);
 
-  useEffect(() => {
-    const callAPI = async () => {
-      const params = {
-        printerId: PrinterID,
-      };
-
-      const response = await getPrinterInfo(params);
-
-      // console.log("get information details: ", response);
-
-      setPrinterInfo((printerInfo) => ({
-        ...printerInfo,
-        id: PrinterID,
-        localtion:
-          response?.data?.location?.facility +
-          " - " +
-          response?.data?.location?.department,
-        room: response?.data?.location?.room,
-        queue: response?.data?.waiting_amount,
-      }));
+  const callAPI = async () => {
+    const params = {
+      printerId: PrinterID,
     };
 
+    const response = await getPrinterInfo(params);
+
+    setPrinterInfo((printerInfo) => ({
+      ...printerInfo,
+      id: PrinterID,
+      localtion:
+        response?.data?.location?.facility +
+        " - " +
+        response?.data?.location?.department,
+      room: response?.data?.location?.room,
+      queue: response?.data?.waiting_amount,
+    }));
+  };
+
+  const fetchDataAndUpdate = async () => {
+    await callAPI();
+  };
+
+  useEffect(() => {
     callAPI();
+    if (localStorage.getItem("accessToken") === null) {
+      navigate("/Login");
+    }
   }, [renderInfo]);
+
+  socket.on("update-printer-list", () => {
+    console.log("Received update-printer-list signal");
+    fetchDataAndUpdate();
+  });
 
   const handleFileChange = (e) => {
     const newFiles = Array.from(e.target.files).map((file, index) => {

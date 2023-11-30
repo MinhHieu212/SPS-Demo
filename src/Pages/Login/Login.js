@@ -10,6 +10,10 @@ import { UserInfoAPI } from "../../APIs/UserInfoAPI/UserInfoAPI";
 import { useRole } from "../../Contexts/RoleContext";
 import { useUserInfo } from "../../Contexts/UserInfoContext";
 
+import { io } from "socket.io-client";
+
+const socket = io("https://ssps-7wxl.onrender.com");
+
 const Login = () => {
   const roleContext = useRole();
   const userInfoContext = useUserInfo();
