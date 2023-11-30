@@ -18,7 +18,7 @@ const FIlterManagePriterModal = ({ children, functionRenderList }) => {
     value.status = "all";
     value.location = "all";
     value.timeActive = "ascending";
-    value.searchField = "";
+    //value.searchField = "";
     functionRenderList();
     setOpen(false);
   };
@@ -32,7 +32,7 @@ const FIlterManagePriterModal = ({ children, functionRenderList }) => {
     value.status = status;
     value.location = location;
     value.timeActive = timeActive;
-    value.searchField = "";
+    //value.searchField = "";
     //console.log(value);
     functionRenderList();
 
