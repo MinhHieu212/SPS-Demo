@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { PrinterQueueModal } from "../../Modals";
 import SPSOEditPrinterModal from "../../Modals/SPSO_EditPrinter/SPSO_EditPrinter";
 import { getPrinterQueue } from "../../APIs/SpsoAPI/SpsoAPI";
-import { QueueData } from "./FixedData";
+
 import DetailPrinterLogModal from "../../Modals/DetailPrinterLogModal/DetailPrinterLogModal";
 import { ManageSPSOItem } from "../../Utils/Skeleton";
 
 function ManageSpsoItem(props) {
-  const [printerQueue, setPrinterQueue] = useState([QueueData]);
+  const [printerQueue, setPrinterQueue] = useState([]);
 
   const handleGetQueue = async (id) => {
     const response = await getPrinterQueue(id);
