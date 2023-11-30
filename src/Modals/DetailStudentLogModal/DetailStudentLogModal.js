@@ -2,27 +2,37 @@ import React, { useState } from "react";
 import { InfoField2 } from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
 import { FilterModalIcon } from "../../Assets/Icons/Icons";
-
-const DetailStudentLogModal = ({ children, activity }) => {
+const date = {
+  startDate: null,
+  endDate: null
+}
+const DetailStudentLogModal = ({ children, activity, detail, cbGetDetail }) => {
   const [openModal, setOpenModal] = useState(false);
   const [openFilter, setOpenFilter] = useState(false);
   const [date1, setDate1] = useState(null);
   const [date2, setDate2] = useState(null);
 
   const handleClose = () => {
+    setDate1(null);
+    setDate2(null);
+    date.startDate = null;
+    date.endDate = null;
     setOpenModal(false);
     setOpenFilter(false);
   };
 
   const applyFilter = async () => {
-    console.log("Params of Filter on the printer history", date1, date2);
+    date.startDate = date1;
+    date.endDate = date2;
+    cbGetDetail({ studentId: activity._id, start: date.startDate, end: date.endDate });
     setOpenFilter(false);
   };
 
   const cancelFilter = async () => {
     setDate1(null);
     setDate2(null);
-
+    date.startDate = null;
+    date.endDate = null;
     setOpenFilter(false);
   };
 
@@ -49,6 +59,7 @@ const DetailStudentLogModal = ({ children, activity }) => {
                   <div className="flex items-center w-full px-3 justify-between">
                     <span className="mr-2 text-[18px] font-bold">Từ</span>
                     <input
+                      value={date1}
                       onChange={(e) => setDate1(e.target.value)}
                       type="date"
                       className="border-b-[1px] border-gray rounded-md pl-2 h-[40px] bg-[#E6E6E6] flex items-center justify-center font-semibold w-[75%] outline-none"
@@ -57,6 +68,7 @@ const DetailStudentLogModal = ({ children, activity }) => {
                   <div className="flex items-center w-full px-3 mt-[9px] justify-between">
                     <span className="mr-2 text-[18px] font-bold">Đến</span>
                     <input
+                      value={date2}
                       type="date"
                       onChange={(e) => setDate2(e.target.value)}
                       className="border-b-[1px] border-gray rounded-md pl-2 h-[40px] bg-[#E6E6E6] flex items-center justify-center font-semibold w-[75%] outline-none"
@@ -79,15 +91,8 @@ const DetailStudentLogModal = ({ children, activity }) => {
                 </div>
               </div>
             ) : (
-              activity?.history?.map((request, index) => {
-                const pageQuantity = (
-                  <p>
-                    <span className="text-[blue]"> A4: </span>{" "}
-                    <span className=" mr-3">{request.page_Quantity.A4}</span>
-                    <span className="text-[blue]"> A3: </span>{" "}
-                    <span> {request.page_Quantity.A3}</span>
-                  </p>
-                );
+              detail?.map((request, index) => {
+
                 return (
                   <div
                     className="w-[90%] rounded-md bg-[#f1eeee] py-2 border-[1px] border-[#367FA9]"
@@ -99,23 +104,23 @@ const DetailStudentLogModal = ({ children, activity }) => {
                     ></InfoField2>
                     <InfoField2
                       fieldName={"Tên file in"}
-                      fieldValue={request?.fileNames || "..."}
+                      fieldValue={request?.document.title || "..."}
                     ></InfoField2>
                     <InfoField2
                       fieldName={"Lượng giấy in"}
-                      fieldValue={pageQuantity || "..."}
+                      fieldValue={request?.document.pages || "..."}
                     ></InfoField2>
                     <InfoField2
                       fieldName={"Số bản in"}
-                      fieldValue={request?.quantity || "..."}
+                      fieldValue={request?.numVersion || "..."}
                     ></InfoField2>
                     <InfoField2
                       fieldName={"Thời gian"}
-                      fieldValue={request?.date || "..."}
+                      fieldValue={request?.finishDate?.slice(0, 10) + " " + request?.finishDate?.slice(11, 19) || "..."}
                     ></InfoField2>
                     <InfoField2
                       fieldName={"Trạng thái in"}
-                      fieldValue={activity?.status || "..."}
+                      fieldValue={request?.status || "..."}
                     ></InfoField2>
                   </div>
                 );
