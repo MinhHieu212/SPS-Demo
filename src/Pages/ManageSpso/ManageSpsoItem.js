@@ -7,7 +7,7 @@ import DetailPrinterLogModal from "../../Modals/DetailPrinterLogModal/DetailPrin
 import { ManageSPSOItem } from "../../Utils/Skeleton";
 
 function ManageSpsoItem(props) {
-  const [printerQueue, setPrinterQueue] = useState([QueueData]);
+  const [printerQueue, setPrinterQueue] = useState([]);
 
   const handleGetQueue = async (id) => {
     const response = await getPrinterQueue(id);

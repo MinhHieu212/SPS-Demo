@@ -13,7 +13,7 @@ const ConfigFile = () => {
   const [indexFile, setIndexFile] = useState(0);
   const [printerInfo, setPrinterInfo] = useState({
     id: PrinterID,
-    localtion: "......",
+    localtion: "....",
     room: "...",
     queue: "...",
   });
@@ -58,7 +58,7 @@ const ConfigFile = () => {
         colorOption: false,
         landScapeOption: false,
         pagesPerSheet: 1,
-        pageSideNumber: 1,
+        numSides: 1,
       };
     });
 
@@ -344,14 +344,14 @@ const ConfigFile = () => {
             <div className="w-[45%]">
               <p className="text-[#1488DB] mb-2">Cách in</p>
               <select
-                name="pageSideNumber"
-                id="pageSideNumber"
+                name="numSides"
+                id="numSides"
                 className="w-[100%]  mx-auto border-2 border-gray-400 rounded-md p-2"
-                value={files[indexFile]?.pageSideNumber}
+                value={files[indexFile]?.numSides}
                 onChange={(e) => {
                   if (files[indexFile]) {
                     const updatedFiles = [...files];
-                    updatedFiles[indexFile].pageSideNumber = e.target.value;
+                    updatedFiles[indexFile].numSides = e.target.value;
                     setFiles(updatedFiles);
                   }
                 }}
