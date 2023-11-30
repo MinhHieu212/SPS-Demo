@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CenterModal from "../BaseModals/CenterModal";
+import { editPrinter } from "../../APIs/SpsoAPI/SpsoAPI";
 export const newData = {
   location: {},
 };
@@ -12,9 +13,9 @@ const SPSOEditPrinterModal = ({
   brand,
   model,
   location,
+  functionRenderList,
   functionRenderList1,
 }) => {
-  //const [renderList1, setRenderList1] = useState(true);
   const [checked, setChecked] = useState(printerStatus);
   const [openModal, setOpenModal] = useState(false);
   const handleClose = () => {
@@ -38,7 +39,11 @@ const SPSOEditPrinterModal = ({
     newData.status = checked === "enable" ? 1 : 0;
     //handleEditAPI(newData);
     //setRenderList1(!renderList1);
-    functionRenderList1();
+    const handleEditAPI = async (newData) => {
+      const request = await editPrinter(newData);
+      functionRenderList();
+    };
+    handleEditAPI(newData);
     setOpenModal(false);
   };
   //console.log(checked);

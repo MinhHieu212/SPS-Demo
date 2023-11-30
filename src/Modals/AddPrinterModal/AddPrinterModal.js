@@ -3,13 +3,14 @@ import CenterModal from "../BaseModals/CenterModal";
 import "./AddPrinterModal.scss";
 import { InfoField2 } from "../../Utils/InfoField";
 import filled from "@material-tailwind/react/theme/components/timeline/timelineIconColors/filled";
+import { addPrinter } from "../../APIs/SpsoAPI/SpsoAPI";
 
 export const newPrinter = {
   location: {
 
   }
 }
-export const AddPrinterModal = ({ children, functionRenderList2 }) => {
+export const AddPrinterModal = ({ children, functionRenderList }) => {
   const [openAPModal, setOpenAPModal] = useState(false);
   const handleClose = () => {
     setOpenAPModal(false);
@@ -20,7 +21,7 @@ export const AddPrinterModal = ({ children, functionRenderList2 }) => {
     brand: "",
     model: "",
     location: { facility: "", department: "", room: "" },
-    description: "None",
+    description: "",
   });
 
   const [ID, setID] = useState(values_AP.ID);
@@ -112,9 +113,13 @@ export const AddPrinterModal = ({ children, functionRenderList2 }) => {
     newPrinter.location.department = dept;
     newPrinter.location.room = room;
     newPrinter.status = checked === "active" ? 1 : 0;
-    console.log(newPrinter);
+    newPrinter.description = desc;
+    const handleAddAPI = async (newData) => {
+      const request = await addPrinter(newData);
+      functionRenderList();
+    };
+    handleAddAPI(newPrinter);
     setOpenAPModal(false);
-    functionRenderList2();
   };
 
   return (
