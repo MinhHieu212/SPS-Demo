@@ -110,7 +110,7 @@ export const editPrinter = async (newData) => {
   const PrintersInfos = await SpssAPI.put(path1, newData)
     .then((response) => {
       //console.log("Response from api User infomation ", response);
-      
+
       return response;
     })
     .catch((error) => {
@@ -134,4 +134,18 @@ export const addPrinter = async (newData) => {
     });
 
   return PrintersInfo;
+}
+
+const pathDetailStudent = "/v1/spso/detailStudent";
+export const getDetailStudent = async (params) => {
+  const detail = await SpssAPI.get(pathDetailStudent, {
+    params: params
+  })
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error;
+    });
+  return detail;
 }

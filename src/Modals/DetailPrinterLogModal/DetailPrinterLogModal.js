@@ -31,7 +31,8 @@ const DetailPrinterLogModal = ({ children, printerLogs, id, cbGetLog }) => {
   const cancelFilter = async () => {
     setDate1(null);
     setDate2(null);
-
+    date.startDate = null;
+    date.endDate = null;
     setOpenFilter(false);
   };
 
