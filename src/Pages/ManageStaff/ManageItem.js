@@ -68,8 +68,7 @@ function ManageItem(props) {
             brand={props.brand}
             model={props.model}
             fileType={props.fileType}
-            setRenderList={() => props.setRenderList}
-            setRenderList1={props.functionRenderList1}
+            setRenderList={() => props.setRenderList()}
           >
             <button className="middle none center mr-4 rounded-md bg-[#3C8DBC] text-[14px] lg:text-[16px] py-1 px-3 font-sans font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
               Cấu hình

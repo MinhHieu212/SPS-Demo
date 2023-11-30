@@ -7,21 +7,12 @@ import { getPtr, editPtr } from "../../APIs/StaffAPI/StaffAPI";
 import { newPtr } from "../../Modals/PrinterInfoAndConfigModal/PrinterInfoAndConfigModal";
 const ManageStaff = () => {
   const [renderList, setRenderList] = useState(true);
-  const [renderList1, setRenderList1] = useState(true);
   const [data, setData] = useState([]);
   const [printerID, setPrinterID] = useState("");
   const [searchID, setSearchID] = useState("");
   const [printers, setPrinters] = useState([]);
   const [fileType, setFileType] = useState([]);
   const navigate = useNavigate();
-  useEffect(() => {
-    const handleEditAPI = async (newData) => {
-      const request = await editPtr(newData);
-      setRenderList(!renderList);
-    };
-    console.log(newPtr);
-    handleEditAPI(newPtr);
-  }, [renderList1])
   useEffect(() => {
     const handleGetPtr = async (params) => {
       const response = await getPtr(params);
@@ -71,9 +62,9 @@ const ManageStaff = () => {
           <div className="text-center  min-w-[20%]">LỊCH SỬ IN</div>
           <div className=" min-w-[30%]">TRẠNG THÁI</div>
         </div>
-        {printers?.map((printer) => (
+        {printers?.map((printer, index) => (
           <ManageItem
-            functionRenderList1={() => setRenderList1(!renderList1)}
+            key={index}
             id={printer.printerId}
             queue={printer.printingJob.length + printer.printingQueue.length}
             status={printer.status === 1 ? "Hoạt động" : "Không hoạt động"}
