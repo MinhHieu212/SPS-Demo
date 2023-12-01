@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const FilterHistoryModal = ({ children, handleChangeParams }) => {
+  const modalRef = useRef();
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState(null);
   const [facility, setFacility] = useState(null);
@@ -50,13 +51,28 @@ const FilterHistoryModal = ({ children, handleChangeParams }) => {
     setOpen(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="Wrapper relative z-10">
       <div className="Trigger" onClick={() => setOpen(!open)}>
         {children}
       </div>
       {open && (
-        <div className="content absolute z-10 top-[140%] md:right-0 right-[50%] translate-x-1/2 md:translate-x-0 h-[auto] p-3 bg-[#E6E6E6] rounded-lg min-h-[367px] w-[300px] md:w-[570px] text-[15px] md:text-[18px] shadow-lg border-[1px] border-[#367FA9]">
+        <div
+          className="content absolute z-10 top-[140%] md:right-0 right-[50%] translate-x-1/2 md:translate-x-0 h-[auto] p-3 bg-[#E6E6E6] rounded-lg min-h-[367px] w-[300px] md:w-[570px] text-[15px] md:text-[18px] shadow-lg border-[1px] border-[#367FA9]"
+          ref={modalRef}
+        >
           <div className="absolute w-[20px] h-[20px] rotate-45 bg-[#E6E6E6] top-[-10px] right-[15px] border-l-[1px] border-t-[1px] border-[#367FA9]"></div>
           <div className="flex-col flex md:flex-row items-end justify-center gap-3 mb-3">
             <div className="bg-white h-[170px] md:h-[200px] rounded-md flex-col flex items-center  shadow-md w-[90%] gap-2 mx-auto md:w-[48%] border-[1px] border-[#367FA9]">

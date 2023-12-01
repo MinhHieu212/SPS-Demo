@@ -32,6 +32,20 @@ function StudentInfoModal({ children }) {
     setUserInformation(userInformation?.data?.data);
   };
 
+  const handleClickOutside = (event) => {
+    if (elementRef.current && !elementRef.current.contains(event.target)) {
+      setOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="relative z-50 w-auto h-auto">
       <div

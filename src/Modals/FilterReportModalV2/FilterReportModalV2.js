@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 export const params = {
   year: 2023,
   sortDirection: 1,
-  month: null
-}
+  month: null,
+};
 const FilterReportModalV2 = ({ children, functionRenderList }) => {
+  const modalRef = useRef();
   const [open, setOpen] = useState(false);
   const [sort, setSort] = useState("latest");
   const [monthChecked, setMonthChecked] = useState("all");
@@ -16,7 +17,7 @@ const FilterReportModalV2 = ({ children, functionRenderList }) => {
     params.year = 2023;
     params.sortDirection = 1;
     params.month = null;
-    
+
     setSort("latest");
     setMonthChecked("all");
     setYearChecked("2023");
@@ -26,7 +27,7 @@ const FilterReportModalV2 = ({ children, functionRenderList }) => {
 
   const applyFilter = () => {
     params.year = Number(yearChecked);
-    params.month = (monthChecked === "all" ? null : Number(monthChecked));
+    params.month = monthChecked === "all" ? null : Number(monthChecked);
     params.sortDirection = sort === "latest" ? 1 : -1;
     functionRenderList();
     setOpen(false);
@@ -46,13 +47,31 @@ const FilterReportModalV2 = ({ children, functionRenderList }) => {
   const handleYear = (e) => {
     setYearChecked(e.target.value);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="Wrapper relative z-10 w-full">
       <div className="Trigger" onClick={() => setOpen(!open)}>
         {children}
       </div>
       {open && (
-        <div className="content absolute z-10 top-[140%] right-0  h-[auto] p-3 bg-[#E6E6E6] rounded-lg w-[300px] md:w-[570px] text-[15px] md:text-[18px] shadow-md border-[1px] border-[#367FA9]  ">
+        <div
+          className="content absolute z-10 top-[140%] right-0  h-[auto] p-3 bg-[#E6E6E6] rounded-lg w-[300px] md:w-[570px] text-[15px] md:text-[18px] shadow-md border-[1px] border-[#367FA9]  "
+          ref={modalRef}
+        >
           <div className="absolute w-[20px] h-[20px] rotate-45 bg-[#E6E6E6] border-l-[1px] border-t-[1px] border-[#367FA9] top-[-11px] z-0 right-[15px] "></div>
           <div className="flex-col flex md:flex-row items-start justify-center gap-3 mb-3 ">
             <div className="bg-white w-[90%] mx-auto md:w-[48%] h-[150px] rounded-lg flex-col flex items-center shadow-md border-[1px] border-[#367FA9] ">

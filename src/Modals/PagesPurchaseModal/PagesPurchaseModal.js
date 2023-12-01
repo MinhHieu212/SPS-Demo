@@ -120,7 +120,7 @@ const PagesPurchaseModal = ({ children }) => {
                 Thành tiền:
               </span>
               <span className="text-[18px] font-semibold leading-7">
-                {`${value * 1000}  VNĐ`}
+                {`${value * userInfoContext?.info?.currentA4Price}  VNĐ`}
               </span>
             </div>
           </div>

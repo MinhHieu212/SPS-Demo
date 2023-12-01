@@ -84,7 +84,7 @@ const History = () => {
         </div>
 
         <div className="flex flex-col w-full md:w-[60%] gap-2 mt-3 md:mt-0">
-          <div className="w-full border h-[50px] border-black rounded-md flex items-center justify-between pr-3 bg-white">
+          <div className="w-full border h-[50px] border-black text-[16px] md:text-[18px] rounded-md flex items-center justify-between pr-3 bg-white ">
             <input
               type="text"
               placeholder="Tìm theo tên tệp in"

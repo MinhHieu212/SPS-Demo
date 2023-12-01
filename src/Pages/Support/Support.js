@@ -12,7 +12,7 @@ const Support = () => {
 
   return (
     <div className="Support max-w-[1280px] px-[10px] lg:px-[20px] mx-auto mb-5 bg-[white] shadow-sm min-h-[93vh]">
-      <h1 className="text-2xl lg:text-3xl font-semibold mt-4 border-b-4 border-[#066DCC] pb-2 md:pb-3">
+      <h1 className="text-2xl lg:text-3xl font-semibold mt-3 border-b-4 border-[#066DCC] pb-2 md:pb-3">
         HƯỚNG DẪN
       </h1>
       <div className="guide text-[16px] lg:text-[18px] mt-4 pb-2 md:pb-3 items-center justify-evenly w-full mx-auto">
