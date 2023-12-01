@@ -4,16 +4,18 @@ import { AddIcon, DeleteIcon, FileIcon } from "../../Assets/Icons/Icons";
 import RemoveFileModal from "../../Modals/RemoveFileModal/RemoveFileModal";
 import { ConfirmPrintingModal } from "../../Modals";
 import { getPrinterInfo } from "../../APIs/PrintersAPI/PrintersAPI";
+import { useSocket } from "../../Contexts/SocketIOContenxt";
 
 const ConfigFile = () => {
   const navigate = useNavigate();
+  const socket = useSocket();
   const { PrinterID } = useParams();
   const [files, setFiles] = useState([]);
   const [renderInfo, setrednerInfo] = useState(true);
   const [indexFile, setIndexFile] = useState(0);
   const [printerInfo, setPrinterInfo] = useState({
     id: PrinterID,
-    localtion: "......",
+    localtion: "....",
     room: "...",
     queue: "...",
   });
@@ -24,30 +26,40 @@ const ConfigFile = () => {
     }
   }, []);
 
-  useEffect(() => {
-    const callAPI = async () => {
-      const params = {
-        printerId: PrinterID,
-      };
-
-      const response = await getPrinterInfo(params);
-
-      console.log("get information details: ", response);
-
-      setPrinterInfo((printerInfo) => ({
-        ...printerInfo,
-        id: PrinterID,
-        localtion:
-          response?.data?.location?.facility +
-          " - " +
-          response?.data?.location?.department,
-        room: response?.data?.location?.room,
-        queue: response?.data?.waiting_amount,
-      }));
+  const callAPI = async () => {
+    const params = {
+      printerId: PrinterID,
     };
 
+    const response = await getPrinterInfo(params);
+
+    setPrinterInfo((printerInfo) => ({
+      ...printerInfo,
+      id: PrinterID,
+      localtion:
+        response?.data?.location?.facility +
+        " - " +
+        response?.data?.location?.department,
+      room: response?.data?.location?.room,
+      queue: response?.data?.waiting_amount,
+    }));
+  };
+
+  const fetchDataAndUpdate = async () => {
+    await callAPI();
+  };
+
+  useEffect(() => {
     callAPI();
+    if (localStorage.getItem("accessToken") === null) {
+      navigate("/Login");
+    }
   }, [renderInfo]);
+
+  socket.on("update-printer-list", () => {
+    console.log("Received update-printer-list signal");
+    fetchDataAndUpdate();
+  });
 
   const handleFileChange = (e) => {
     const newFiles = Array.from(e.target.files).map((file, index) => {
@@ -58,7 +70,7 @@ const ConfigFile = () => {
         colorOption: false,
         landScapeOption: false,
         pagesPerSheet: 1,
-        pageSideNumber: 1,
+        numSides: 1,
       };
     });
 
@@ -167,6 +179,7 @@ const ConfigFile = () => {
                 id="dropzone-file"
                 type="file"
                 multiple
+                accept={[".docx", ".pdf"]}
                 className="cursor-pointer absolute block opacity-0 w-full h-full z-10"
                 onChange={handleFileChange}
               />
@@ -344,14 +357,14 @@ const ConfigFile = () => {
             <div className="w-[45%]">
               <p className="text-[#1488DB] mb-2">Cách in</p>
               <select
-                name="pageSideNumber"
-                id="pageSideNumber"
+                name="numSides"
+                id="numSides"
                 className="w-[100%]  mx-auto border-2 border-gray-400 rounded-md p-2"
-                value={files[indexFile]?.pageSideNumber}
+                value={files[indexFile]?.numSides}
                 onChange={(e) => {
                   if (files[indexFile]) {
                     const updatedFiles = [...files];
-                    updatedFiles[indexFile].pageSideNumber = e.target.value;
+                    updatedFiles[indexFile].numSides = e.target.value;
                     setFiles(updatedFiles);
                   }
                 }}

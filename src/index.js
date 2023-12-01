@@ -6,10 +6,12 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, HashRouter } from "react-router-dom";
 import { RoleProvider } from "./Contexts/RoleContext";
 import { UserInfoProvider } from "./Contexts/UserInfoContext";
+import { SocketProvider } from "./Contexts/SocketIOContenxt";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode off>
+  <SocketProvider>
     <RoleProvider>
       <UserInfoProvider>
         <HashRouter>
@@ -17,7 +19,8 @@ root.render(
         </HashRouter>
       </UserInfoProvider>
     </RoleProvider>
-  </React.StrictMode>
+  </SocketProvider>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

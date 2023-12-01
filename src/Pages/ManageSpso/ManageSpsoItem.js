@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { PrinterQueueModal } from "../../Modals";
 import SPSOEditPrinterModal from "../../Modals/SPSO_EditPrinter/SPSO_EditPrinter";
-import { getPrinterQueue } from "../../APIs/SpsoAPI/SpsoAPI";
-import { QueueData } from "./FixedData";
+import { getPrinterQueue, getPrinterLog } from "../../APIs/SpsoAPI/SpsoAPI";
 import DetailPrinterLogModal from "../../Modals/DetailPrinterLogModal/DetailPrinterLogModal";
 import { ManageSPSOItem } from "../../Utils/Skeleton";
 
@@ -14,10 +13,18 @@ function ManageSpsoItem(props) {
     setPrinterQueue(response?.data?.data.printingQueue);
   };
 
+
+
   const handleSubmit = (id) => {
     handleGetQueue({ printerId: id });
   };
 
+  const [printerLog, setPrinterLog] = useState([]);
+
+  const handleGetLog = async (params) => {
+    const response = await getPrinterLog(params);
+    setPrinterLog(response?.data?.data?.printingLog);
+  }
   return (
     <>
       {props.id !== "" ? (
@@ -32,14 +39,14 @@ function ManageSpsoItem(props) {
               {props.status}
             </p>
           </div>
-          <div className=" text-center w-[15%]">{props.location}</div>
+          <div className=" text-center w-[14%]">{props.location}</div>
           <div className=" text-center w-[15%]">{props.date}</div>
-          <div className=" text-center w-[5%]">
+          <div className=" text-center w-[9%]">
             <span className="w-[30px] text-[blue] text-center ">
               {props.queue}
             </span>
           </div>
-          <div className=" w-[25%] flex flex-row justify-center items-center gap-2">
+          <div className=" w-[23%] flex flex-row justify-center items-center gap-2">
             <PrinterQueueModal queue={printerQueue} printerId={props.id}>
               <button
                 onClick={(e) => handleSubmit(props.id)}
@@ -48,16 +55,16 @@ function ManageSpsoItem(props) {
                 Hiện tại
               </button>
             </PrinterQueueModal>
-            <DetailPrinterLogModal printerLogs={[]}>
+            <DetailPrinterLogModal printerLogs={printerLog} id={props.id} cbGetLog={(params) => handleGetLog(params)}>
               <button
-                onClick={(e) => handleSubmit(props.id)}
+                onClick={(e) => handleGetLog({printerId: props.id })}
                 className="middle none center  rounded-md bg-[#3C8DBC] text-[14px] lg:text-[16px] py-1 px-3 font-sans   font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               >
                 Lịch sử
               </button>
             </DetailPrinterLogModal>
           </div>
-          <div className="w-[15%] flex flex-row justify-between px-0 md:px-2 items-center">
+          <div className="w-[14%] flex flex-row justify-between px-0 md:px-2 items-center">
             <div className="overflow-hidden px-1  mx-auto ">
               <SPSOEditPrinterModal
                 printerLocation={props.location}

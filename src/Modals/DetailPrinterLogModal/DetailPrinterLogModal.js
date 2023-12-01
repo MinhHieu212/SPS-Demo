@@ -2,54 +2,37 @@ import React, { useState } from "react";
 import { InfoField2 } from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
 import { FilterModalIcon } from "../../Assets/Icons/Icons";
-
-const printerLogs = [
-  {
-    date: "21-12-2023",
-    user_id: 2114453,
-    user_name: "Trương Quỳnh Anh",
-    file_name: "BTL_MMT_2.pdf",
-    quantity: 2,
-    pages: 18,
-  },
-  {
-    date: "21-12-2023",
-    user_id: 2114453,
-    user_name: "Trương Quỳnh Anh",
-    file_name: "BTL_MMT_2.pdf",
-    quantity: 2,
-    pages: 18,
-  },
-  {
-    date: "21-12-2023",
-    user_id: 2114453,
-    user_name: "Trương Quỳnh Anh",
-    file_name: "BTL_MMT_2.pdf",
-    quantity: 2,
-    pages: 18,
-  },
-];
-
-const DetailPrinterLogModal = ({ children }) => {
+export const date = {
+  startDate: null,
+  endDate: null
+}
+const DetailPrinterLogModal = ({ children, printerLogs, id, cbGetLog }) => {
   const [openModal, setOpenModal] = useState(false);
   const [openFilter, setOpenFilter] = useState(false);
   const [date1, setDate1] = useState(null);
   const [date2, setDate2] = useState(null);
 
   const handleClose = () => {
+    setDate1(null);
+    setDate2(null);
+    date.startDate = null;
+    date.endDate = null;
     setOpenModal(false);
     setOpenFilter(false);
   };
 
   const applyFilter = async () => {
-    console.log("Params of Filter on the printer history", date1, date2);
+    date.startDate = date1;
+    date.endDate = date2;
+    cbGetLog({printerId: id, startDate: date.startDate, endDate: date.endDate});
     setOpenFilter(false);
   };
 
   const cancelFilter = async () => {
     setDate1(null);
     setDate2(null);
-
+    date.startDate = null;
+    date.endDate = null;
     setOpenFilter(false);
   };
 
@@ -76,17 +59,19 @@ const DetailPrinterLogModal = ({ children }) => {
                   <div className="flex items-center w-full px-3 justify-between">
                     <span className="mr-2 text-[18px] font-bold">Từ</span>
                     <input
+                      value={date1}
                       onChange={(e) => setDate1(e.target.value)}
                       type="date"
-                      className="border-b-[1px] border-gray rounded-md pl-2 h-[40px] bg-[#E6E6E6] flex items-center justify-center font-semibold w-[75%] outline-none"
+                      className="border-b-[1px] border-gray rounded-md pl-2 h-[40px] bg-[#F2F2F2] flex items-center justify-center font-semibold w-[75%] outline-none"
                     />
                   </div>
                   <div className="flex items-center w-full px-3 mt-[9px] justify-between">
                     <span className="mr-2 text-[18px] font-bold">Đến</span>
                     <input
+                      value={date2}
                       type="date"
                       onChange={(e) => setDate2(e.target.value)}
-                      className="border-b-[1px] border-gray rounded-md pl-2 h-[40px] bg-[#E6E6E6] flex items-center justify-center font-semibold w-[75%] outline-none"
+                      className="border-b-[1px] border-gray rounded-md pl-2 h-[40px] bg-[#F2F2F2] flex items-center justify-center font-semibold w-[75%] outline-none"
                     />
                   </div>
                   <div className="Buttoms flex mx-auto mt-4 md:mt-5 items-center justify-end gap-3 pr-2">
@@ -114,27 +99,27 @@ const DetailPrinterLogModal = ({ children }) => {
                   >
                     <InfoField2
                       fieldName={"Thời gian"}
-                      fieldValue={request?.date || "..."}
+                      fieldValue={new Date(request?.createdAt).toISOString().slice(0,10) + " " + new Date(request?.createdAt).toISOString().slice(11,19) || "..."}
                     ></InfoField2>
                     <InfoField2
                       fieldName={"ID sinh viên"}
-                      fieldValue={printerLogs?.user_id || "..."}
+                      fieldValue={request?.mssv || "..."}
                     ></InfoField2>
                     <InfoField2
                       fieldName={"Tên sinh viên"}
-                      fieldValue={printerLogs?.user_name || "..."}
+                      fieldValue={request?.lastName + " " + request?.firstName|| "..."}
                     ></InfoField2>
                     <InfoField2
                       fieldName={"Tên file in"}
-                      fieldValue={request?.file_name || "..."}
+                      fieldValue={request?.document.title|| "..."}
                     ></InfoField2>
                     <InfoField2
                       fieldName={"Lượng giấy in"}
-                      fieldValue={request?.pages || "..."}
+                      fieldValue={request?.document.pages || "..."}
                     ></InfoField2>
                     <InfoField2
                       fieldName={"Số bản in"}
-                      fieldValue={request?.quantity || "..."}
+                      fieldValue={request?.numVersion || "..."}
                     ></InfoField2>
                   </div>
                 );

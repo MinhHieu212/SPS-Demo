@@ -5,6 +5,8 @@ import ManageItem from "./ManageItem";
 import { useNavigate } from "react-router";
 import { getPtr, editPtr } from "../../APIs/StaffAPI/StaffAPI";
 import { newPtr } from "../../Modals/PrinterInfoAndConfigModal/PrinterInfoAndConfigModal";
+import { useSocket } from "../../Contexts/SocketIOContenxt";
+
 const ManageStaff = () => {
   const [renderList, setRenderList] = useState(true);
   const [data, setData] = useState([]);
@@ -13,20 +15,32 @@ const ManageStaff = () => {
   const [printers, setPrinters] = useState([]);
   const [fileType, setFileType] = useState([]);
   const navigate = useNavigate();
+  const socket = useSocket();
+
+  const handleGetPtr = async (params) => {
+    const response = await getPtr(params);
+    setData(response?.data?.data);
+    setPrinters(response?.data?.data?.printers);
+    setFileType(response?.data?.data?.currentFileType);
+  };
+
+  const fetchDataAndUpdate = async () => {
+    handleGetPtr({ searchField: searchID });
+  };
+
   useEffect(() => {
-    const handleGetPtr = async (params) => {
-      const response = await getPtr(params);
-      setData(response?.data?.data);
-      setPrinters(response?.data?.data?.printers);
-      setFileType(response?.data?.data?.currentFileType);
-    };
     handleGetPtr({ searchField: searchID });
 
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Login");
     }
   }, [renderList]);
-  console.log("CC: ", data);
+
+  socket.on("update-printer-list", () => {
+    console.log("Received update-printer-list signal");
+    fetchDataAndUpdate();
+  });
+
   return (
     <div className="Manage History max-w-[1280px] px-[10px] md:w-full lg:px-[20px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
       <h2 className="text-2xl lg:text-3xl font-semibold mt-3 printing-title border-b-4 border-[#066DCC] pb-2 md:pb-3  text-[#066DCC] ">
@@ -66,10 +80,11 @@ const ManageStaff = () => {
       </div>
       <div className="w-full overflow-x-auto">
         <div className="text-white flex flex-row justify-between items-center bg-[#3C8DBC] text-base lg:text-lg shadow-lg font-bold py-3 px-4 mt-8 rounded-sm min-w-[800px] md:w-full max-h-[60px]">
-          <div className="  min-w-[10%]">ID MÁY IN</div>
-          <div className="text-center min-w-[35%]">SỐ YÊU CẦU IN</div>
-          <div className="text-center  min-w-[20%]">LỊCH SỬ IN</div>
-          <div className=" min-w-[30%]">TRẠNG THÁI</div>
+          <div className=" text-center min-w-[10%]">ID MÁY IN</div>
+          <div className="text-center min-w-[30%]">SỐ YÊU CẦU IN</div>
+          <div className="text-center min-w-[20%]">LỊCH SỬ IN</div>
+          <div className="text-center min-w-[20%]">TRẠNG THÁI</div>
+          <div className="text-center min-w-[20%]">THIẾT LẬP</div>
         </div>
         {printers?.map((printer, index) => (
           <ManageItem

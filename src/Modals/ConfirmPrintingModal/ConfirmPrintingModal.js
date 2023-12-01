@@ -40,6 +40,7 @@ const ConfirmPrintingModal = ({
       colorOption: file?.colorOption,
       landScapeOption: file?.landScapeOption,
       pagesPerSheet: file?.pagesPerSheet,
+      numSides: file?.numSides,
     };
 
     documents.push(newDocument);

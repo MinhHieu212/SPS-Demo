@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Printing.scss";
 import { PrinterIcon } from "../../Assets/Icons/Icons";
 import { useNavigate } from "react-router-dom";
 import { PrintingSkeleton } from "../../Utils/Skeleton";
+import { toast } from "../../Utils/Toastify";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 function PrintingItem(props = null) {
   const navigate = useNavigate();
@@ -10,9 +12,13 @@ function PrintingItem(props = null) {
     <>
       {props.id !== "..." ? (
         <div
-          className="PrintingItem mt-3"
+          className={`PrintingItem mt-3`}
           onClick={() => {
-            navigate(`/Printing/${props.id}`);
+            if (props.status !== "Tạm dừng") {
+              navigate(`/Printing/${props.id}`);
+            } else {
+              toast.error("Máy in đang không hoạt động!");
+            }
           }}
         >
           <div className="bg-[#e8e7e7]   hover:shadow-lg hover:bg-[#d7d7db] transition-all duration-100 cursor-pointer flex rounded-md justify-evenly w-[100] shadow-md">
@@ -40,7 +46,13 @@ function PrintingItem(props = null) {
               <p className="text-[16px] lg:text-[18px] text-[#1488db] text-center font-semibold">
                 Trạng thái:
                 <span className="text-black pl-2 block md:inline text-center">
-                  {props.status}
+                  <span
+                    className={`${
+                      props.status === "Tạm dừng" ? "text-[red]" : ""
+                    }`}
+                  >
+                    {props.status}
+                  </span>
                 </span>
               </p>
               <p className="text-[16px] lg:text-[18px] text-[#1488db] text-center font-semibold">

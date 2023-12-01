@@ -5,6 +5,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { ConfigAPI, SendConfigAPI } from "../../APIs/ConfigAPI/ConfigAPI";
 import format from "date-fns/format";
 import { toast } from "../../Utils/Toastify";
+import ConfirmConfigSystemModal from "../../Modals/ConfirmConfigSystemModal/ConfirmConfigSystemModal";
 
 const Config = () => {
   // formInfo to save fetched data
@@ -79,7 +80,7 @@ const Config = () => {
 
   // Submitting
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const response = await SendConfigAPI(infoSend);
     console.log("reponse send to api: ", response.data);
     toast.success("Cập nhật thành công cấu hình cho hệ thống!");
@@ -231,7 +232,6 @@ const Config = () => {
               <span className="Err">{errorMessage}</span>
             </div>
           </div>
-
           <div className="formInput flex flex-col w-[100%]">
             <label className="text-[16px] lg:text-[18px] ">
               Giá của một tờ giấy A4 khi mua thêm
@@ -261,7 +261,6 @@ const Config = () => {
             </div>
             <span className="Err">{errorMessage}</span>
           </div>
-
           <h2 className="text-xl lg:text-2xl text-[#1488DB] font-semibold mt-4 border-b-2 border-[#1488DB] pb-2 md:pb-3">
             Cấu hình các loại file được in
           </h2>
@@ -293,7 +292,6 @@ const Config = () => {
               <div className="absolute -bottom-6 left-0">{errorMessage}</div>
             )}
           </div>
-
           <h3 className="text-[16px] lg:text-[18px] font-semibold mt-4 mb-2 pb-2 md:pb-3 relative">
             <span className="border-b-2 border-black">
               Loại file được phép in trong hệ thống
@@ -334,20 +332,17 @@ const Config = () => {
               })}
             </div>
           </div>
-
-          <button
-            className="Submit flex float-right items-center justify-center my-4 mx-[0.5rem] w-[5.25rem] h-[2.25rem] rounded-[0.3125rem] bg-[#066dcc] text-white text-[1rem] font-bold"
-            type="submit"
-          >
-            Áp dụng
-          </button>
-          <button
+          <ConfirmConfigSystemModal handleConfigSys={handleSubmit}>
+            <div className="Submit flex float-right items-center justify-center my-4 mx-[0.5rem] w-[5.25rem] h-[2.25rem] rounded-[0.3125rem] bg-[#066dcc] text-white text-[1rem] font-bold">
+              Áp dụng
+            </div>
+          </ConfirmConfigSystemModal>
+          <div
             className="Todefault flex float-right items-center justify-center my-4 mx-[0.5rem] w-[5.25rem] h-[2.25rem] rounded-[0.3125rem] bg-[#066dcc] text-white text-[1rem] font-bold"
-            // type="submit"
             onClick={() => setDefault()}
           >
             Mặc định
-          </button>
+          </div>
         </form>
       </div>
     </div>
