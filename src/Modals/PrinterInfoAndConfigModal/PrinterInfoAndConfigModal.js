@@ -15,15 +15,13 @@ const PrinterInfoAndConfigModal = ({
 }) => {
   const [openModal, setOpenModal] = useState(false);
   // const [checked3, setChecked3] = useState(status === "Hoạt động" ? "enable" : "disable");
-  const [checked3, setChecked3] = useState(status);
 
-  console.log("Trang thai may: ", checked3);
   const handleClose = () => {
     setOpenModal(false);
   };
 
   const handleClick = () => {
-    newPtr.status = checked3 === "enable" ? 1 : 0;
+    newPtr.status = checked === "enable" ? 1 : 0;
     newPtr.printerId = id;
     const handleEditAPI = async (newData) => {
       const request = await editPtr(newData);
@@ -33,9 +31,9 @@ const PrinterInfoAndConfigModal = ({
 
     setOpenModal(false);
   };
-  const [checked, setChecked] = useState(
-    status === "Hoạt động" ? "enable" : "disable"
-  );
+  const [checked, setChecked] = useState( status === "Hoạt động" ? "enable" : "disable");
+  
+  console.log("Trang thai may: ", checked);
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
@@ -44,7 +42,7 @@ const PrinterInfoAndConfigModal = ({
           <div className="header bg-[#3C8DBC] text-white text-[20px] pt-1 font-bold flex items-center justify-center h-[60px] w-full">
             CẤU HÌNH CỦA MÁY IN VÀ TÙY CHỈNH
           </div>
-          <div className="flex items-center justify-center text-[16px] md:text-[20px] font-semibold  ">
+          {/* <div className="flex items-center justify-center text-[16px] md:text-[20px] font-semibold  ">
             <div className="flex w-full">
               <div className="w-[60%] p-3 md:p-4">
                 <p className="font-semibold text-[20] md:text-[24px] pb-2">
@@ -79,20 +77,18 @@ const PrinterInfoAndConfigModal = ({
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="flex justify-between items-center mb-2">
             <div className="w-1/2 pl-5">
               <div className="w-[200px] flex items-center">
                 <input
-                  checked={checked3 === "enable"}
-                  onChange={(e) => setChecked3(e.target.value)}
+                  checked={checked === "enable"}
+                  onChange={(e) => setChecked(e.target.value)}
                   type="radio"
                   className="w-5 h-5"
                   name="printerState5"
                   id="enable123"
                   value={"enable"}
-                  onChange={(e) => setChecked(e.target.value)}
-                  checked={checked === "enable"}
                 />
                 <label
                   htmlFor="enable123"
@@ -103,15 +99,13 @@ const PrinterInfoAndConfigModal = ({
               </div>
               <div className="w-[200px] flex items-center">
                 <input
-                  checked={checked3 === "disable"}
-                  onChange={(e) => setChecked3(e.target.value)}
+                  checked={checked === "disable"}
+                  onChange={(e) => setChecked(e.target.value)}
                   type="radio"
                   className="w-5 h-5"
                   name="printerState5"
                   id="disable1234"
                   value={"disable"}
-                  onChange={(e) => setChecked(e.target.value)}
-                  checked={checked === "disable"}
                 />
                 <label
                   htmlFor="disable1234"

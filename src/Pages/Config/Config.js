@@ -343,7 +343,7 @@ const Config = () => {
           </button>
           <button
             className="Todefault flex float-right items-center justify-center my-4 mx-[0.5rem] w-[5.25rem] h-[2.25rem] rounded-[0.3125rem] bg-[#066dcc] text-white text-[1rem] font-bold"
-            type="submit"
+            // type="submit"
             onClick={() => setDefault()}
           >
             Mặc định
