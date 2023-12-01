@@ -42,7 +42,7 @@ const PrinterInfoAndConfigModal = ({
           <div className="header bg-[#3C8DBC] text-white text-[20px] pt-1 font-bold flex items-center justify-center h-[60px] w-full">
             CẤU HÌNH CỦA MÁY IN VÀ TÙY CHỈNH
           </div>
-          {/* <div className="flex items-center justify-center text-[16px] md:text-[20px] font-semibold  ">
+          <div className="flex items-center justify-center text-[16px] md:text-[20px] font-semibold  ">
             <div className="flex w-full">
               <div className="w-[60%] p-3 md:p-4">
                 <p className="font-semibold text-[20] md:text-[24px] pb-2">
@@ -77,7 +77,7 @@ const PrinterInfoAndConfigModal = ({
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
           <div className="flex justify-between items-center mb-2">
             <div className="w-1/2 pl-5">
               <div className="w-[200px] flex items-center">

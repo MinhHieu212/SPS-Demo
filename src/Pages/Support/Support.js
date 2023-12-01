@@ -37,31 +37,30 @@ const Support = () => {
           Sau khi đăng nhập, người dùng có thể tải xuống các tài liệu hướng dẫn
           sau và làm theo:
         </p>
-        {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8 md:px-16 text-[16px] md:text-[20px]"> */}
-        <div className="flex flex-col md:flex-row md:gap-20 gap-8 px-8 mb-4 md:mb-8 justify-between text-[16px] md:text-[20px]">
+        <div className="flex flex-col md:flex-row md:gap-16 gap-8 px-8 mb-4 md:mb-8 justify-between text-[16px] md:text-[20px]">
          
             <div className="onlySV text-center border rounded-2xl px-4 pt-4 pb-0 w-full md:w-1/3">
-              <a href="https://www.matbao.net/">
+              <a href="https://drive.google.com/file/d/1VbCwMirVQQDkUVRbwgtaEUmh5tp3crrb/view?usp=drive_link" target="_blank">
                 <img src={student} alt="ICON_SV" className="w-[40%] h-[40%] md:w-[50%] md:h-[50%] mx-auto"/>
-                <p className=" text-[16px] md:text-[24px] mt-4 font-semibold md:pb-4 my-2">
+                <p className=" text-[16px] md:text-[24px] mt-2 font-semibold md:pb-4 my-2">
                   Dành cho sinh viên
                 </p>
               </a>
             </div>
 
             <div className="onlySPSO text-center rounded-2xl px-4 pt-4 pb-0 shadow-xl w-full md:w-1/3">
-              <a href="https://www.matbao.net/">
+              <a href="https://drive.google.com/file/d/1VbCwMirVQQDkUVRbwgtaEUmh5tp3crrb/view?usp=drive_link" target="_blank">
                 <img src={manager} alt="ICON_MN" className="w-[40%] h-[40%] md:w-[50%] md:h-[50%] mx-auto"/>
-                <p className=" text-[16px] md:text-[24px] mt-4 md:pb-4 font-semibold my-2">
+                <p className=" text-[16px] md:text-[24px] mt-2 md:pb-4 font-semibold my-2">
                   Dành cho nhà quản lý
                 </p>
               </a>
             </div>
 
-            <div className="onlyST text-center rounded-2xl px-4 pt-4 pb-0  shadow-xl w-full md:w-1/3">
-              <a href="https://www.matbao.net/">
-              <img src={staff} alt="ICON_ST" className="w-[40%] h-[40%] md:w-[50%] md:h-[50%] mx-auto fill-blue-400"/>
-                <p className=" text-[16px] md:text-[24px] mt-4 font-semibold md:pb-4 my-2 ">
+            <div className="onlyST text-center rounded-2xl px-4 pt-4 pb-0 shadow-xl w-full md:w-1/3">
+              <a href="https://drive.google.com/file/d/1ps87hFv4aXH3TlBimgUZP4zKSZS1pJ2A/view?usp=sharing" target="_blank">
+              <img src={staff} alt="ICON_ST" className="w-[40%] h-[40%] md:w-[50%] md:h-[50%] mx-auto"/>
+                <p className=" text-[16px] md:text-[24px] mt-2 font-semibold md:pb-4 my-2 ">
                   Dành cho nhân viên
                 </p>
               </a>
