@@ -6,6 +6,7 @@ import { FilterHistoryModal } from "../../Modals";
 import { useNavigate } from "react-router-dom";
 import { filterHistory } from "../../APIs/HistoryAPI/HistoryAPI";
 import { data } from "./FixedData";
+import { useSocket } from "../../Contexts/SocketIOContenxt";
 
 const History = () => {
   const navigate = useNavigate();
@@ -14,35 +15,41 @@ const History = () => {
   const [filterParams, setFilterParams] = useState({ per_page: 100 });
   const [searchParams, setSearchParams] = useState(null);
   const [renderList, setRenderList] = useState(true);
+  const socket = useSocket();
 
-  useEffect(() => {
-    const handleCallAPI = async () => {
-      const response = await filterHistory({ ...filterParams, per_page: 100 });
-
-      const pages = {
-        A3: response?.data?.printedA3 || 0,
-        A4: response?.data?.printedA4 || 0,
-      };
-
-      setTotalPages(pages);
-
-      setHistoryLogs(response?.data?.printingLogs || []);
+  const handleCallAPI = async () => {
+    const response = await filterHistory({ ...filterParams, per_page: 100 });
+    const pages = {
+      A3: response?.data?.printedA3 || 0,
+      A4: response?.data?.printedA4 || 0,
     };
 
+    setTotalPages(pages);
+    setHistoryLogs(response?.data?.printingLogs || []);
+  };
+
+  const handleSearch = () => {
+    setFilterParams((filterParams) => {
+      return { ...filterParams, ["searchField"]: searchParams };
+    });
+  };
+
+  const fetchDataAndUpdate = async () => {
+    handleCallAPI();
+  };
+
+  socket.on("update-student-history", () => {
+    console.log("Received update-student-history signal");
+    fetchDataAndUpdate();
+  });
+
+  useEffect(() => {
     handleCallAPI();
 
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Login");
     }
   }, [filterParams, renderList]);
-
-  const handleSearch = () => {
-    // console.log("Search input", searchParams);
-    setFilterParams((filterParams) => {
-      return { ...filterParams, ["searchField"]: searchParams };
-    });
-    // console.log("filterParams", filterParams);
-  };
 
   return (
     <div className="History max-w-[1280px] w-full px-[10px] lg:px-[20px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
