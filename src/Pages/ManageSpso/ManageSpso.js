@@ -15,6 +15,7 @@ const ManageSpso = () => {
   const [printersList, setPrintersList] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [renderList, setRenderList] = useState(true);
+
   let params = {};
   const navigate = useNavigate();
   const socket = useSocket();
@@ -52,6 +53,11 @@ const ManageSpso = () => {
 
   socket.on("update-printer-list", (params) => {
     console.log("Received update-printer-list Manage SPSO", params);
+    fetchDataAndUpdate(params);
+  });
+
+  socket.on("update-student-history", (params) => {
+    console.log("Received update-student-history signal");
     fetchDataAndUpdate(params);
   });
 

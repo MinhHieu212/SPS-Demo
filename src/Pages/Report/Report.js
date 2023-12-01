@@ -6,6 +6,7 @@ import { FilterReportModalV2 } from "../../Modals";
 import { getReportPrinters, getReportChart } from "../../APIs/SpsoAPI/SpsoAPI";
 import { params } from "../../Modals/FilterReportModalV2/FilterReportModalV2";
 import { itemsData } from "./FixedData";
+import { useSocket } from "../../Contexts/SocketIOContenxt";
 
 const Report = () => {
   const navigate = useNavigate();
@@ -13,13 +14,15 @@ const Report = () => {
   const [reports, setReports] = useState([]);
   const [printers, setPrinters] = useState(itemsData);
   const [data, setData] = useState([]);
+  const socket = useSocket();
+
+  const handleGetReport = async (params) => {
+    const response = await getReportPrinters(params);
+    setReports(response?.data?.data);
+    setPrinters(response?.data?.data?.all_printers);
+    //console.log(response?.data?.data);
+  };
   useEffect(() => {
-    const handleGetReport = async (params) => {
-      const response = await getReportPrinters(params);
-      setReports(response?.data?.data);
-      setPrinters(response?.data?.data?.all_printers);
-      //console.log(response?.data?.data);
-    };
     handleGetReport(params);
     //console.log(params);
     if (localStorage.getItem("accessToken") === null) {
@@ -34,6 +37,21 @@ const Report = () => {
     };
     handleGetChart({ year: params.year });
   }, [renderList]);
+
+  const fetchDataAndUpdate = async (params) => {
+    await handleGetReport(params);
+  };
+
+  socket.on("update-printer-list", (params) => {
+    console.log("Received update-printer-list Manage SPSO", params);
+    fetchDataAndUpdate(params);
+  });
+
+  socket.on("update-student-history", (params) => {
+    console.log("Received update-student-history signal");
+    fetchDataAndUpdate(params);
+  });
+
   return (
     <div className="Report mx-auto max-w-[1280px] px-[10px]   md:px-[20px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
       <div className="flex flex-row mt-3 border-b-4 border-[#066DCC] pb-2 md:pb-3 mb-4 items-center justify-between">
