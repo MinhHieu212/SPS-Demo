@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Manage.scss";
-import { FilterIcon, SearchIcon } from "../../Assets/Icons/Icons";
+import { SearchIcon } from "../../Assets/Icons/Icons";
 import ManageItem from "./ManageItem";
 import { useNavigate } from "react-router";
 import { getPtr, editPtr } from "../../APIs/StaffAPI/StaffAPI";
