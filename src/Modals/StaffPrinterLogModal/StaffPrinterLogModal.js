@@ -16,7 +16,7 @@ const StaffPrinterLogModal = ({ children, log }) => {
             LỊCH SỬ IN ẤN
           </div>
           <div className="w-full h-[400px] flex justify-start py-2 gap-2 items-center flex-col text-[16px] md:text-[20px] overflow-y-scroll">
-            {log.map((request, index) => {
+            {log?.map((request, index) => {
               return (
                 <div
                   className="w-[90%] rounded-md bg-[#f1eeee] p-2 shadow-md border-[1px] border-[#367FA9]"
@@ -24,11 +24,21 @@ const StaffPrinterLogModal = ({ children, log }) => {
                 >
                   <InfoField2
                     fieldName={"Thời gian"}
-                    fieldValue={(new Date(request?.createdAt).toISOString().slice(0, 10) + " " + new Date(request?.createdAt).toISOString().slice(11, 19) || "...") || "..."}
+                    fieldValue={
+                      new Date(request?.createdAt).toISOString().slice(0, 10) +
+                        " " +
+                        new Date(request?.createdAt)
+                          .toISOString()
+                          .slice(11, 19) ||
+                      "..." ||
+                      "..."
+                    }
                   ></InfoField2>
                   <InfoField2
                     fieldName={"Tên sinh viên"}
-                    fieldValue={(request?.lastName + " " + request?.firstName) || "..."}
+                    fieldValue={
+                      request?.lastName + " " + request?.firstName || "..."
+                    }
                   ></InfoField2>
                   <InfoField2
                     fieldName={"Mã sinh viên"}

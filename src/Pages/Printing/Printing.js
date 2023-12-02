@@ -89,7 +89,7 @@ const Printing = () => {
       </div>
       <hr className="sm-hr mt-4" />
       <div className="max-h-[79vh] md:max-h-[87vh] lg:max-h-[79vh] w-full overflow-y-scroll ">
-        {printerList.map((printer, index) => (
+        {printerList?.map((printer, index) => (
           <PrintingItem
             id={printer.printerId}
             base={printer?.location?.facility}

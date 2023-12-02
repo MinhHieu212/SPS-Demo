@@ -30,7 +30,7 @@ const SideBar = ({ showSideBar, elementRef }) => {
 
       {/* Sidebar Item (Pages) */}
       <nav className="flex flex-col gap-y-3">
-        {userSideBar.map((item, index) => {
+        {userSideBar?.map((item, index) => {
           return (
             <SidebarItem
               title={item.title}

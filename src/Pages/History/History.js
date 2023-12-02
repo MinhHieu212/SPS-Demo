@@ -124,7 +124,7 @@ const History = () => {
           <div className="text-center w-[15%]">TÙY CHỌN</div>
         </div>
         <div className="max-h-[79vh] md:max-h-[87vh] lg:max-h-[79vh] min-w-[800px] md:w-full overflow-y-scroll">
-          {historyLogs.map((historyLog, index) => (
+          {historyLogs?.map((historyLog, index) => (
             <HistoryItem
               fileName={historyLog?.document?.title}
               printerId={historyLog?.printerId}

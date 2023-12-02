@@ -9,7 +9,7 @@ import { UserInfoAPI } from "./APIs/UserInfoAPI/UserInfoAPI";
 import { useUserInfo } from "./Contexts/UserInfoContext";
 
 function renderRoutes(routes, role = "") {
-  return routes.map((route, index) => {
+  return routes?.map((route, index) => {
     let Layout;
     if (!route.layout) {
       Layout = EmptyLayout;

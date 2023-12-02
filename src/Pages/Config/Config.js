@@ -267,7 +267,7 @@ const Config = () => {
               <option selected="selected" disabled="disable" value="">
                 Chọn loại tệp để thêm...
               </option>
-              {deffileTypes.map((fileType, index) => {
+              {deffileTypes?.map((fileType, index) => {
                 return (
                   <option key={index} value={fileType}>
                     {fileType}
@@ -306,7 +306,7 @@ const Config = () => {
                   );
                 }
               })()}
-              {curfileTypes.map((item, key) => {
+              {curfileTypes?.map((item, key) => {
                 return (
                   <div
                     className="current_list_item bg-white justify-between bg-transparent flex flex-row my-[0.5rem] md:py-[5px] px-[1rem] border-b-[2px] border-[#1488DB]"

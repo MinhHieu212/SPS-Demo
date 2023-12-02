@@ -159,7 +159,9 @@ const ManageSpso = () => {
                   }
                   date={printer.activatedTime.slice(0, 10)}
                   status={printer.status ? "Hoạt động" : "Tạm dừng"}
-                  queue={printer.printingQueue.length}
+                  queue={
+                    printer.printingQueue.length + printer.printingJob.length
+                  }
                 />
               ))
             : PrintersData?.map((printer, index) => (
@@ -179,7 +181,9 @@ const ManageSpso = () => {
                   }
                   date={printer.activatedTime.slice(0, 10)}
                   status={printer.status ? "Hoạt động" : "Tạm dừng"}
-                  queue={printer.printingQueue.length}
+                  queue={
+                    printer.printingQueue.length + printer.printingJob.length
+                  }
                 />
               ))}
         </div>

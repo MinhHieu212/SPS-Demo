@@ -206,7 +206,7 @@ export const AddPrinterModal = ({ children, functionRenderList }) => {
                   <option selected="true" disabled="disable" value="">
                     Tòa...
                   </option>
-                  {departments.map((dep, index) => {
+                  {departments?.map((dep, index) => {
                     return (
                       <option key={index} value={dep}>
                         {dep}
@@ -228,7 +228,7 @@ export const AddPrinterModal = ({ children, functionRenderList }) => {
                   <option selected="true" disabled="disable" value="">
                     Phòng...
                   </option>
-                  {rooms.map((rm, index) => {
+                  {rooms?.map((rm, index) => {
                     return (
                       <option key={index} value={rm}>
                         {rm}

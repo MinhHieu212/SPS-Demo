@@ -64,7 +64,7 @@ const PrinterInfoAndConfigModal = ({
                   Loại file được in
                 </p>
                 <div className="w-full h-[200px] flex flex-col items-center justify-start overflow-y-scroll rounded-md border-[1px] border-[#367FA9]">
-                  {fileType.map((type, index) => {
+                  {fileType?.map((type, index) => {
                     return (
                       <div
                         className="p-2 bg-[#e9e9e9] rounded-sm text-center w-[90%] h-[50px] mt-2 border-[1px] border-[#367FA9]"

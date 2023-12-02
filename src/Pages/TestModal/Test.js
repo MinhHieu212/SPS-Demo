@@ -11,7 +11,7 @@ const TestModalPopover = () => {
   const [files, setFiles] = useState(null);
 
   const handleFileChange = (e) => {
-    const newFiles = Array.from(e.target.files).map((file, index) => {
+    const newFiles = Array.from(e.target.files)?.map((file, index) => {
       return {
         file: file,
         quantity: 0,

@@ -65,7 +65,7 @@ const ConfigFile = () => {
   });
 
   const handleFileChange = (e) => {
-    const newFiles = Array.from(e.target.files).map((file, index) => {
+    const newFiles = Array.from(e.target.files)?.map((file, index) => {
       return {
         file: file,
         numVersion: 1,
