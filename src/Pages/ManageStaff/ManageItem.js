@@ -6,6 +6,7 @@ import StaffPrinterLogModal from "../../Modals/StaffPrinterLogModal/StaffPrinter
 
 import { getPtrLog, getPtrQueue } from "../../APIs/StaffAPI/StaffAPI";
 import { ManageStaffItemSkeleton } from "../../Utils/Skeleton";
+import { FixedPrintingLog, printingJob, printingQueue } from "./FixedData";
 
 function ManageItem(props) {
   const [data, setData] = useState([]);
@@ -14,6 +15,7 @@ function ManageItem(props) {
   const [queue, setQueue] = useState([]);
 
   const handleGetLogs = async (id) => {
+    setLog(FixedPrintingLog);
     const response = await getPtrLog(id);
     setData(response?.data?.data);
     setLog(response?.data?.data?.printingLog);
@@ -24,12 +26,15 @@ function ManageItem(props) {
   };
 
   const handleGetQueue = async (id) => {
+    setQueue([...printingJob, ...printingQueue]);
     const response = await getPtrQueue(id);
     setQueueData(response?.data?.data);
     setQueue([
       ...response?.data?.data?.printingJob,
       ...response?.data?.data?.printingQueue,
     ]);
+
+    console.log("Response from queue ", queue);
   };
 
   const handleSubmitQueue = () => {

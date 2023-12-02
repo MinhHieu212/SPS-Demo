@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import InfoField from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
 import { editPtr } from "../../APIs/StaffAPI/StaffAPI";
+import { toast } from "../../Utils/Toastify";
 export const newPtr = {};
 const PrinterInfoAndConfigModal = ({
   children,
@@ -23,16 +24,23 @@ const PrinterInfoAndConfigModal = ({
   const handleClick = () => {
     newPtr.status = checked === "enable" ? 1 : 0;
     newPtr.printerId = id;
-    const handleEditAPI = async (newData) => {
-      const request = await editPtr(newData);
-      setRenderList();
-    };
-    handleEditAPI(newPtr);
 
-    setOpenModal(false);
+    try {
+      const handleEditAPI = async (newData) => {
+        const request = await editPtr(newData);
+        setRenderList();
+      };
+      handleEditAPI(newPtr);
+      setOpenModal(false);
+      toast.success("Tùy chỉnh thông tin máy tin thành công");
+    } catch (error) {
+      toast.error("Tùy chỉnh thông tin máy tin thất bại");
+    }
   };
-  const [checked, setChecked] = useState( status === "Hoạt động" ? "enable" : "disable");
-  
+  const [checked, setChecked] = useState(
+    status === "Hoạt động" ? "enable" : "disable"
+  );
+
   console.log("Trang thai may: ", checked);
   return (
     <>

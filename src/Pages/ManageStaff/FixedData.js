@@ -160,3 +160,102 @@ export const fixedData = [
     __v: 0,
   },
 ];
+
+export const FixedPrintingLog = [
+  {
+    firstName: "phuc",
+    lastName: "nguyen",
+    mssv: "",
+    document: {
+      title: "Báo cáo sơ bộ BTL2.docx",
+      pages: 7,
+      fileType: "docx",
+    },
+    status: "Queued",
+    numVersion: 1,
+    user_id: "6555983eddab67d1ccad2cf9",
+    updatedAt: "2023-12-01T10:09:58.870Z",
+    createdAt: "2023-12-01T10:09:58.870Z",
+  },
+  {
+    firstName: "phuc",
+    lastName: "nguyen",
+    mssv: "",
+    document: {
+      title: "Báo cáo sơ bộ BTL2.docx",
+      pages: 7,
+      fileType: "docx",
+    },
+    status: "Queued",
+    numVersion: 1,
+    user_id: "6555983eddab67d1ccad2cf9",
+    updatedAt: "2023-12-01T10:09:58.870Z",
+    createdAt: "2023-12-01T10:09:58.870Z",
+  },
+  {
+    firstName: "phuc",
+    lastName: "nguyen",
+    mssv: "",
+    document: {
+      title: "Báo cáo sơ bộ BTL2.docx",
+      pages: 7,
+      fileType: "docx",
+    },
+    status: "Queued",
+    numVersion: 1,
+    user_id: "6555983eddab67d1ccad2cf9",
+    updatedAt: "2023-12-01T10:09:58.870Z",
+    createdAt: "2023-12-01T10:09:58.870Z",
+  },
+];
+
+export const printingJob = [
+  {
+    firstName: "phuc",
+    lastName: "nguyen",
+    mssv: "",
+    document: {
+      title: "Báo cáo sơ bộ BTL2.docx",
+      pages: 7,
+      fileType: "docx",
+    },
+    status: "Queued",
+    numVersion: 1,
+    user_id: "6555983eddab67d1ccad2cf9",
+    updatedAt: "2023-12-01T10:09:58.870Z",
+    createdAt: "2023-12-01T10:09:58.870Z",
+  },
+];
+
+export const printingQueue = [
+  {
+    firstName: "phuc",
+    lastName: "nguyen",
+    mssv: "",
+    document: {
+      title: "Báo cáo sơ bộ BTL2.docx",
+      pages: 7,
+      fileType: "docx",
+    },
+    status: "Queued",
+    numVersion: 1,
+    user_id: "6555983eddab67d1ccad2cf9",
+    updatedAt: "2023-12-01T10:09:58.870Z",
+    createdAt: "2023-12-01T10:09:58.870Z",
+  },
+  {
+    firstName: "phuc",
+    lastName: "nguyen",
+    mssv: "",
+    document: {
+      title: "Báo cáo sơ bộ BTL2.docx",
+      pages: 7,
+      fileType: "docx",
+    },
+    status: "Queued",
+    numVersion: 1,
+    user_id: "6555983eddab67d1ccad2cf9",
+    updatedAt: "2023-12-01T10:09:58.870Z",
+    createdAt: "2023-12-01T10:09:58.870Z",
+  },
+];
