@@ -3,6 +3,7 @@ import { InfoField2 } from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
 import { FilterModalIcon } from "../../Assets/Icons/Icons";
 import { DetailsStudentLogsSkeleton } from "../../Utils/Skeleton";
+import { convertTime } from "../../Utils/Time";
 const date = {
   startDate: null,
   endDate: null,
@@ -123,9 +124,9 @@ const DetailStudentLogModal = ({ children, activity, detail, cbGetDetail }) => {
                         <InfoField2
                           fieldName={"Thời gian"}
                           fieldValue={
-                            request?.finishDate?.slice(0, 10) +
+                            convertTime(request?.finishDate).slice(0, 10) +
                               " " +
-                              request?.finishDate?.slice(11, 19) || "..."
+                              convertTime(request?.finishDate).slice(11, 19) || "..."
                           }
                         ></InfoField2>
                         <InfoField2

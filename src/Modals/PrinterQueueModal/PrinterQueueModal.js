@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CenterModal from "../BaseModals/CenterModal";
 import { InfoField2 } from "../../Utils/InfoField";
 import { PrintingQueueLogsSkeleton } from "../../Utils/Skeleton";
-
+import { convertTime } from "../../Utils/Time";
 const PrinterQueueModal = ({ children, queue }) => {
   const [openModal, setOpenModal] = useState(false);
   const handleClose = () => {
@@ -29,11 +29,11 @@ const PrinterQueueModal = ({ children, queue }) => {
                       <InfoField2
                         fieldName={"Thời gian"}
                         fieldValue={
-                          new Date(request?.createdAt)
+                          new Date(convertTime(request?.createdAt))
                             .toISOString()
                             .slice(0, 10) +
                             " " +
-                            new Date(request?.createdAt)
+                            new Date(convertTime(request?.createdAt))
                               .toISOString()
                               .slice(11, 19) || "..."
                         }

@@ -3,6 +3,7 @@ import { InfoField2 } from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
 import { FilterModalIcon } from "../../Assets/Icons/Icons";
 import { PrinterhistoryLogsSkeleton } from "../../Utils/Skeleton";
+import { convertTime } from "../../Utils/Time";
 export const date = {
   startDate: null,
   endDate: null,
@@ -107,11 +108,11 @@ const DetailPrinterLogModal = ({ children, printerLogs, id, cbGetLog }) => {
                         <InfoField2
                           fieldName={"Thời gian"}
                           fieldValue={
-                            new Date(request?.createdAt)
+                            new Date(convertTime(request?.createdAt))
                               .toISOString()
                               .slice(0, 10) +
                             " " +
-                            new Date(request?.createdAt)
+                            new Date(convertTime(request?.createdAt))
                               .toISOString()
                               .slice(11, 19)
                           }
