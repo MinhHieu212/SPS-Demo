@@ -47,6 +47,11 @@ const ManageStaff = () => {
     fetchDataAndUpdate();
   });
 
+   socket.on("update-student-history", () => {
+     console.log("Received update-student-history signal");
+     fetchDataAndUpdate();
+   });
+
   return (
     <div className="Manage History max-w-[1280px] px-[10px] md:w-full lg:px-[20px] bg-[white] shadow-sm mb-5 min-h-[93vh]">
       <h2 className="text-2xl lg:text-3xl font-semibold mt-3 printing-title border-b-4 border-[#066DCC] pb-2 md:pb-3  text-[#066DCC] ">

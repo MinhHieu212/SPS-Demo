@@ -5,6 +5,7 @@ import RemoveFileModal from "../../Modals/RemoveFileModal/RemoveFileModal";
 import { ConfirmPrintingModal } from "../../Modals";
 import { getPrinterInfo } from "../../APIs/PrintersAPI/PrintersAPI";
 import { useSocket } from "../../Contexts/SocketIOContenxt";
+import { fi } from "date-fns/locale";
 
 const ConfigFile = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const ConfigFile = () => {
     localtion: "....",
     room: "...",
     queue: "...",
+    fileType: [],
   });
 
   useEffect(() => {
@@ -42,6 +44,7 @@ const ConfigFile = () => {
         response?.data?.location?.department,
       room: response?.data?.location?.room,
       queue: response?.data?.waiting_amount,
+      fileType: response?.data?.currentFileType,
     }));
   };
 
@@ -95,6 +98,8 @@ const ConfigFile = () => {
     );
   };
 
+  let fileTypes = printerInfo?.fileType.map((file) => "." + file);
+
   return (
     <div className="configFile max-w-[1280px] px-[10px] lg:px-[20px] w-full mx-auto bg-[white] shadow-sm min-h-[93vh]">
       <h2 className="w-full text-[#066DCC] text-2xl lg:text-3xl font-semibold mt-3 printing-title border-b-4 border-[#066DCC] pb-2 md:pb-3">
@@ -132,7 +137,24 @@ const ConfigFile = () => {
         </div>
 
         <div className="flex items-center justify-evenly lg:w-[80%] w-[100%]">
-          <div className="flex items-center justify-center w-full">
+          <div className="w-[20%] border-gray-300  border-3 rounded-lg mt-[30px] h-[120px] ">
+            <p className="text-[#1488DB]  border-b-[3px]  text-center text-[14px] lg:text-[16px] border-gray-300">
+              Cho phép
+            </p>
+            <div className="w-full h-[75%] overflow-scroll">
+              {printerInfo?.fileType.map((file, index) => {
+                return (
+                  <p
+                    className="text-center w-full text-gray-400 font-normal text-[14px] lg:text-[16px] pt-1"
+                    key={index}
+                  >
+                    .{file}
+                  </p>
+                );
+              })}
+            </div>
+          </div>
+          <div className="flex items-center justify-center w-[75%] ">
             <div className="flex flex-col relative items-center mt-[30px] justify-center w-[100%] h-[120px] border-3 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white">
               <div
                 className={`FilesList w-full h-full flex flex-col items-center justify-center overflow-x-scroll absolute ${
@@ -179,7 +201,7 @@ const ConfigFile = () => {
                 id="dropzone-file"
                 type="file"
                 multiple
-                accept={[".docx", ".pdf"]}
+                accept={fileTypes}
                 className="cursor-pointer absolute block opacity-0 w-full h-full z-10"
                 onChange={handleFileChange}
               />

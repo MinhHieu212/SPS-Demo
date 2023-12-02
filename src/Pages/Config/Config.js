@@ -8,10 +8,8 @@ import { toast } from "../../Utils/Toastify";
 import ConfirmConfigSystemModal from "../../Modals/ConfirmConfigSystemModal/ConfirmConfigSystemModal";
 
 const Config = () => {
-  // formInfo to save fetched data
   const [formInfo, setFormInfo] = useState([]);
 
-  // info to send to API
   const [infoSend, setInfoSend] = useState({
     currentBalance: 0,
     startDate1: "",
@@ -21,7 +19,6 @@ const Config = () => {
     isDefault: false,
   });
 
-  // 4 useStates to control first Section
   const [curpag_input, setCurpag_input] = useState();
   const [stday1_input, setStday1_input] = useState(
     format(new Date(), "yyyy-MM-dd")
@@ -30,16 +27,14 @@ const Config = () => {
     format(new Date(), "yyyy-MM-dd")
   );
   const [curprice_input, setCurprice_input] = useState();
-  // 2 useStates to control second Section
   const [deffileTypes, setDefFileTypes] = useState([]);
   const [curfileTypes, setCurfileTypes] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
 
-  // First launch
   useEffect(() => {
     const handleCallApi = async () => {
       const response = await ConfigAPI();
-      console.log("reponse from Conf api: ", response);
+      // console.log("reponse from Conf api: ", response);
 
       setFormInfo(response?.data?.data);
       setCurpag_input(response?.data?.data.currentBalance);

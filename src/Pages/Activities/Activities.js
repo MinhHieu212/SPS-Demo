@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { activities } from "./FixedData";
 import { ActivityFilter } from "../../Modals/ActivitiesFilterModal/ActivitiesFilterModal";
 import { getStudents, getDetailStudent } from "../../APIs/SpsoAPI/SpsoAPI";
+import { useSocket } from "../../Contexts/SocketIOContenxt";
 
 const Activities = () => {
   const [renderList, setRenderList] = useState(true);
@@ -16,6 +17,17 @@ const Activities = () => {
   var [id, setId] = useState(null);
   const navigate = useNavigate();
   const [fetchAct, setFetchAct] = useState(activities);
+  const socket = useSocket();
+
+  const handleGetStudents = async (params) => {
+    const response = await getStudents(params);
+    // console.log(response?.data?.data);
+    setFetchAct(response?.data?.data);
+  };
+
+  const fetchDataAndUpdate = async () => {
+    await handleGetStudents(params);
+  };
 
   useEffect(() => {
     const params = {
@@ -26,16 +38,21 @@ const Activities = () => {
     };
     //console.log(params);
     setFetchAct(activities);
-    const handleGetStudents = async (params) => {
-      const response = await getStudents(params);
-      console.log(response?.data?.data);
-      setFetchAct(response?.data?.data);
-    };
     handleGetStudents(params);
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Login");
-    }
+    } 
   }, [renderList]);
+
+  socket.on("update-printer-list", (params) => {
+    console.log("Received update-printer-list Manage SPSO", params);
+    fetchDataAndUpdate(params);
+  });
+
+  socket.on("update-student-history", (params) => {
+    console.log("Received update-student-history signal");
+    fetchDataAndUpdate(params);
+  });
 
   return (
     <div className="Activities max-w-[1280px] px-[10px] md:px-[20px] bg-[white] mx-auto shadow-sm mb-5 min-h-[93vh]">

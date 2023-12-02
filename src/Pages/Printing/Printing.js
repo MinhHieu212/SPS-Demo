@@ -24,7 +24,7 @@ const Printing = () => {
     const response = await getPrinterList({
       ...filterParams,
     });
-    console.log("Response from get printer list api : ", response);
+    // console.log("Response from get printer list api : ", response);
     setPrinterList(response?.data?.printers);
 
     return true;
@@ -44,6 +44,11 @@ const Printing = () => {
 
   socket.on("update-printer-list", () => {
     console.log("Received update-printer-list signal");
+    fetchDataAndUpdate();
+  });
+
+  socket.on("update-student-history", () => {
+    console.log("Received update-student-history signal");
     fetchDataAndUpdate();
   });
 
