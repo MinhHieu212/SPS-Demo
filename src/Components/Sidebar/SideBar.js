@@ -22,7 +22,7 @@ const SideBar = ({ showSideBar, elementRef }) => {
   return (
     <div
       className={`SideBar_Containter ${showSideBar ? "" : "SideBarHide"} 
-        flex flex-col gap-y-3  items-center justify-start fixed z-50 w-[250px] h-[100vh] bg-[#367FA9] transition-all`}
+        flex flex-col gap-y-3  items-center justify-start fixed z-50 w-[250px] h-[100vh] bg-[#367FA9] `}
       ref={elementRef}
     >
       {/* Short infomation of Student */}

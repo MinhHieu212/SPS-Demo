@@ -47,10 +47,10 @@ const ManageStaff = () => {
     fetchDataAndUpdate();
   });
 
-   socket.on("update-student-history", () => {
-     console.log("Received update-student-history signal");
-     fetchDataAndUpdate();
-   });
+  socket.on("update-student-history", () => {
+    console.log("Received update-student-history signal");
+    fetchDataAndUpdate();
+  });
 
   return (
     <div className="Manage History max-w-[1280px] px-[10px] md:w-full lg:px-[20px] bg-[white] shadow-sm mb-5 min-h-[93vh]">

@@ -6,6 +6,7 @@ import StaffPrinterLogModal from "../../Modals/StaffPrinterLogModal/StaffPrinter
 
 import { getPtrLog, getPtrQueue } from "../../APIs/StaffAPI/StaffAPI";
 import { ManageStaffItemSkeleton } from "../../Utils/Skeleton";
+import DetailPrinterLogModal from "../../Modals/DetailPrinterLogModal/DetailPrinterLogModal";
 
 function ManageItem(props) {
   const [data, setData] = useState([]);
@@ -13,15 +14,15 @@ function ManageItem(props) {
   const [queueData, setQueueData] = useState([]);
   const [queue, setQueue] = useState([]);
 
-  const handleGetLogs = async (id) => {
-    const response = await getPtrLog(id);
-    setData(response?.data?.data);
-    setLog(response?.data?.data?.printingLog);
-  };
+  // const handleGetLogs = async (id) => {
+  //   const response = await getPtrLog(id);
+  //   setData(response?.data?.data);
+  //   setLog(response?.data?.data?.printingLog);
+  // };
 
-  const handleSubmit = () => {
-    handleGetLogs({ printerId: props.id });
-  };
+  // const handleSubmit = () => {
+  //   handleGetLog({ printerId: props.id });
+  // };
 
   const handleGetQueue = async (id) => {
     const response = await getPtrQueue(id);
@@ -34,6 +35,12 @@ function ManageItem(props) {
 
   const handleSubmitQueue = () => {
     handleGetQueue({ printerId: props.id });
+  };
+
+  const handleGetLog = async (params) => {
+    setLog(LogsData);
+    const response = await getPtrLog(params);
+    setLog(response?.data?.data?.printingLog);
   };
 
   return (
@@ -53,14 +60,18 @@ function ManageItem(props) {
             </PrinterQueueModal>
           </div>
           <div className="min-w-[20%] flex justify-center items-center">
-            <StaffPrinterLogModal log={log}>
+            <DetailPrinterLogModal
+              printerLogs={log}
+              id={props.id}
+              cbGetLog={(params) => handleGetLog(params)}
+            >
               <button
-                onClick={handleSubmit}
-                className="rounded-md bg-[#3C8DBC] text-[14px] lg:text-[16px] py-1 px-3 font-sans font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                onClick={(e) => handleGetLog({ printerId: props.id })}
+                className="middle none center  rounded-md bg-[#3C8DBC] text-[14px] lg:text-[16px] py-1 px-3 font-sans   font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               >
                 Lịch sử
               </button>
-            </StaffPrinterLogModal>
+            </DetailPrinterLogModal>
           </div>
           <div className="w-[20%] flex flex-row justify-center px-0 md:px-2 items-center">
             <p
