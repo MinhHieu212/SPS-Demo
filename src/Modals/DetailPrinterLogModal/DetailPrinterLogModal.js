@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { InfoField2 } from "../../Utils/InfoField";
+import { InfoField2, InfoFieldStatus } from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
 import { FilterModalIcon } from "../../Assets/Icons/Icons";
 import { PrinterhistoryLogsSkeleton } from "../../Utils/Skeleton";
@@ -138,6 +138,10 @@ const DetailPrinterLogModal = ({ children, printerLogs, id, cbGetLog }) => {
                           fieldName={"Số bản in"}
                           fieldValue={request?.numVersion}
                         ></InfoField2>
+                        <InfoFieldStatus
+                          fieldName={"Trạng thái"}
+                          fieldValue={request?.status}
+                        ></InfoFieldStatus>
                       </div>
                     ) : (
                       <PrinterhistoryLogsSkeleton></PrinterhistoryLogsSkeleton>

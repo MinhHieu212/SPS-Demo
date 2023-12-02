@@ -236,6 +236,10 @@ export function PrinterhistoryLogsSkeleton() {
           <Skeleton height={"23px"} width={"40%"} radius={"3px"}></Skeleton>
           <Skeleton height={"23px"} width={"55%"} radius={"3px"}></Skeleton>
         </div>
+        <div className="px-5 mb-2 text-[16px] md:text-[20px] flex items-center justify-between gap-3 w-full">
+          <Skeleton height={"23px"} width={"40%"} radius={"3px"}></Skeleton>
+          <Skeleton height={"23px"} width={"55%"} radius={"3px"}></Skeleton>
+        </div>
       </div>
     </>
   );

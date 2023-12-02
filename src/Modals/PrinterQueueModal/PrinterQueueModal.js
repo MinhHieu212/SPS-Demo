@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CenterModal from "../BaseModals/CenterModal";
-import { InfoField2 } from "../../Utils/InfoField";
+import { InfoField2, InfoFieldStatus } from "../../Utils/InfoField";
 import { PrintingQueueLogsSkeleton } from "../../Utils/Skeleton";
 
 const PrinterQueueModal = ({ children, queue }) => {
@@ -58,14 +58,10 @@ const PrinterQueueModal = ({ children, queue }) => {
                         fieldName={"Số bản in"}
                         fieldValue={request?.numVersion || "..."}
                       ></InfoField2>
-                      <InfoField2
+                      <InfoFieldStatus
                         fieldName={"Trạng thái"}
-                        fieldValue={
-                          request?.status === "Queued"
-                            ? "Đang đợi"
-                            : "Đang in" || "..."
-                        }
-                      ></InfoField2>
+                        fieldValue={request?.status || "..."}
+                      ></InfoFieldStatus>
                     </div>
                   ) : (
                     <PrintingQueueLogsSkeleton></PrintingQueueLogsSkeleton>
