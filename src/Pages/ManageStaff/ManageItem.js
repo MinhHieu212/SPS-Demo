@@ -6,6 +6,7 @@ import StaffPrinterLogModal from "../../Modals/StaffPrinterLogModal/StaffPrinter
 
 import { getPtrLog, getPtrQueue } from "../../APIs/StaffAPI/StaffAPI";
 import { ManageStaffItemSkeleton } from "../../Utils/Skeleton";
+
 function ManageItem(props) {
   const [data, setData] = useState([]);
   const [log, setLog] = useState([]);
