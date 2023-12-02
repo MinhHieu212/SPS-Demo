@@ -62,7 +62,7 @@ const Report = () => {
           <FilterReportModalV2
             functionRenderList={() => setRenderList(!renderList)}
           >
-            <button className="text-[16px] lg:text-[18px] text-white bg-[#066DCC] font-semibold md:px-[30px] px-[10px] py-2 rounded-md">
+            <button className="text-[16px] lg:text-[18px] text-white bg-[#367FA9] font-semibold md:px-[30px] px-[10px] py-2 rounded-md">
               Lọc báo cáo
             </button>
           </FilterReportModalV2>
