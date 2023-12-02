@@ -58,6 +58,14 @@ const PrinterQueueModal = ({ children, queue }) => {
                         fieldName={"Số bản in"}
                         fieldValue={request?.numVersion || "..."}
                       ></InfoField2>
+                      <InfoField2
+                        fieldName={"Trạng thái"}
+                        fieldValue={
+                          request?.status === "Queued"
+                            ? "Đang đợi"
+                            : "Đang in" || "..."
+                        }
+                      ></InfoField2>
                     </div>
                   ) : (
                     <PrintingQueueLogsSkeleton></PrintingQueueLogsSkeleton>

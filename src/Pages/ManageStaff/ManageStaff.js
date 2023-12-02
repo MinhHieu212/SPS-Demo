@@ -20,10 +20,9 @@ const ManageStaff = () => {
 
   const handleGetPtr = async (params) => {
     const response = await getPtr(params);
-    console.log(
-      "RESPONSE <+++++++++++++++++++++++++>",
-      response?.data?.data?.printers
-    );
+
+    // console.log("RESPONSE form Staff QUUEUE", response?.data?.data?.printers);
+
     setData(response?.data?.data);
     setPrinters(response?.data?.data?.printers);
     setFileType(response?.data?.data?.currentFileType);

@@ -29,6 +29,7 @@ function ManageItem(props) {
     setQueue([...printingJob, ...printingQueue]);
     const response = await getPtrQueue(id);
     setQueueData(response?.data?.data);
+    
     setQueue([
       ...response?.data?.data?.printingJob,
       ...response?.data?.data?.printingQueue,
