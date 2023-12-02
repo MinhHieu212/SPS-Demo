@@ -21,10 +21,10 @@ const CancelPrintingModal = ({ children, printingLogId, renderList }) => {
       setIsButtonDisabled(true);
       const reponse = await cancelPrintingAPI(data);
       renderList();
-      toast.success("File deleted successfully");
+      toast.success("Hủy yêu cầu in thành cồng");
     } catch (error) {
       setIsButtonDisabled(false);
-      toast.error("Failed to delete file");
+      toast.error("Hủy yêu cầu in thất bại");
     } finally {
       setIsButtonDisabled(false);
     }

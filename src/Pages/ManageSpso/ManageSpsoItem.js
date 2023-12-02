@@ -4,16 +4,16 @@ import SPSOEditPrinterModal from "../../Modals/SPSO_EditPrinter/SPSO_EditPrinter
 import { getPrinterQueue, getPrinterLog } from "../../APIs/SpsoAPI/SpsoAPI";
 import DetailPrinterLogModal from "../../Modals/DetailPrinterLogModal/DetailPrinterLogModal";
 import { ManageSPSOItem } from "../../Utils/Skeleton";
+import { LogsData, QueueData } from "./FixedData";
 
 function ManageSpsoItem(props) {
   const [printerQueue, setPrinterQueue] = useState([]);
 
   const handleGetQueue = async (id) => {
+    setPrinterQueue(QueueData);
     const response = await getPrinterQueue(id);
     setPrinterQueue(response?.data?.data.printingQueue);
   };
-
-
 
   const handleSubmit = (id) => {
     handleGetQueue({ printerId: id });
@@ -22,13 +22,14 @@ function ManageSpsoItem(props) {
   const [printerLog, setPrinterLog] = useState([]);
 
   const handleGetLog = async (params) => {
+    setPrinterLog(LogsData);
     const response = await getPrinterLog(params);
     setPrinterLog(response?.data?.data?.printingLog);
-  }
+  };
   return (
     <>
       {props.id !== "" ? (
-        <div className="ManageSpsoItem flex flex-row justify-between items-center bg-[#ffffff] shadow-md text-[16px] lg:text-[18px] font-semibold  py-[12px] px-4 mt-2 rounded-sm border-b-2 border-black min-w-[800px] md:w-full max-h-[60px]">
+        <div className="ManageSpsoItem flex flex-row justify-between items-center bg-[#ffffff] shadow-md text-[16px] lg:text-[18px] font-semibold  py-[12px] px-4 mt-2 rounded-sm border-b-[1px] border-black min-w-[800px] md:w-full max-h-[60px]">
           <div className=" text-center w-[10%]">{props.id}</div>
           <div className=" text-center w-[15%]">
             <p
@@ -55,9 +56,13 @@ function ManageSpsoItem(props) {
                 Hiện tại
               </button>
             </PrinterQueueModal>
-            <DetailPrinterLogModal printerLogs={printerLog} id={props.id} cbGetLog={(params) => handleGetLog(params)}>
+            <DetailPrinterLogModal
+              printerLogs={printerLog}
+              id={props.id}
+              cbGetLog={(params) => handleGetLog(params)}
+            >
               <button
-                onClick={(e) => handleGetLog({printerId: props.id })}
+                onClick={(e) => handleGetLog({ printerId: props.id })}
                 className="middle none center  rounded-md bg-[#3C8DBC] text-[14px] lg:text-[16px] py-1 px-3 font-sans   font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               >
                 Lịch sử

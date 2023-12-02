@@ -1,14 +1,62 @@
 export const QueueData = [
   {
+    firstName: "",
+    lastName: "",
+    mssv: "",
     document: {
-      title: "... .... .....",
+      title: "",
+      pages: 57,
+      fileType: "pdf",
     },
-    firstName: "...",
-    lastName: "...",
-    mssv: "...",
-    numVersion: 0,
-    status: "...",
+    status: "Queued",
+    numVersion: 1,
     user_id: "6555983eddab67d1ccad2cf9",
+    createdAt: null,
+  },
+  {
+    firstName: "",
+    lastName: "",
+    mssv: "",
+    document: {
+      title: "",
+      pages: 57,
+      fileType: "pdf",
+    },
+    status: "Queued",
+    numVersion: 1,
+    user_id: "6555983eddab67d1ccad2cf9",
+    createdAt: null,
+  },
+];
+
+export const LogsData = [
+  {
+    firstName: "",
+    lastName: "",
+    mssv: "",
+    document: {
+      title: "",
+      pages: 57,
+      fileType: "pdf",
+    },
+    status: "Queued",
+    numVersion: 1,
+    user_id: "6555983eddab67d1ccad2cf9",
+    createdAt: null,
+  },
+  {
+    firstName: "",
+    lastName: "",
+    mssv: "",
+    document: {
+      title: "",
+      pages: 57,
+      fileType: "pdf",
+    },
+    status: "Queued",
+    numVersion: 1,
+    user_id: "6555983eddab67d1ccad2cf9",
+    createdAt: null,
   },
 ];
 

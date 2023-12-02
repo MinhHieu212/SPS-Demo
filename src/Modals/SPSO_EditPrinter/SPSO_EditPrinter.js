@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CenterModal from "../BaseModals/CenterModal";
 import { editPrinter } from "../../APIs/SpsoAPI/SpsoAPI";
+import { toast } from "../../Utils/Toastify";
 export const newData = {
   location: {},
 };
@@ -39,12 +40,19 @@ const SPSOEditPrinterModal = ({
     newData.status = checked === "enable" ? 1 : 0;
     //handleEditAPI(newData);
     //setRenderList1(!renderList1);
-    const handleEditAPI = async (newData) => {
-      const request = await editPrinter(newData);
-      functionRenderList();
-    };
-    handleEditAPI(newData);
-    setOpenModal(false);
+
+    try {
+      const handleEditAPI = async (newData) => {
+        const request = await editPrinter(newData);
+        functionRenderList();
+      };
+
+      handleEditAPI(newData);
+      toast.success("Tùy chỉnh thông tin máy tin thành công");
+      // setOpenModal(false);
+    } catch (error) {
+      toast.error("Tùy chỉnh thông tin máy tin thất bại");
+    }
   };
   //console.log(checked);
   return (
@@ -177,7 +185,7 @@ const SPSOEditPrinterModal = ({
                         htmlFor="disable"
                         className="text-[16px] md:text-[20px] font-semibold p-0"
                       >
-                        Không hoạt động
+                        Tạm dừng
                       </label>
                     </div>
                   </div>

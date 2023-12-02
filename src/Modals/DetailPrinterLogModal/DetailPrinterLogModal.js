@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { InfoField2 } from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
 import { FilterModalIcon } from "../../Assets/Icons/Icons";
+import { PrinterhistoryLogsSkeleton } from "../../Utils/Skeleton";
 export const date = {
   startDate: null,
-  endDate: null
-}
+  endDate: null,
+};
 const DetailPrinterLogModal = ({ children, printerLogs, id, cbGetLog }) => {
   const [openModal, setOpenModal] = useState(false);
   const [openFilter, setOpenFilter] = useState(false);
@@ -24,7 +25,11 @@ const DetailPrinterLogModal = ({ children, printerLogs, id, cbGetLog }) => {
   const applyFilter = async () => {
     date.startDate = date1;
     date.endDate = date2;
-    cbGetLog({printerId: id, startDate: date.startDate, endDate: date.endDate});
+    cbGetLog({
+      printerId: id,
+      startDate: date.startDate,
+      endDate: date.endDate,
+    });
     setOpenFilter(false);
   };
 
@@ -93,35 +98,51 @@ const DetailPrinterLogModal = ({ children, printerLogs, id, cbGetLog }) => {
             ) : (
               printerLogs?.map((request, index) => {
                 return (
-                  <div
-                    className="w-[90%] rounded-md bg-[#f1eeee] py-2 border-[1px] border-[#367FA9]"
-                    key={index}
-                  >
-                    <InfoField2
-                      fieldName={"Thời gian"}
-                      fieldValue={new Date(request?.createdAt).toISOString().slice(0,10) + " " + new Date(request?.createdAt).toISOString().slice(11,19) || "..."}
-                    ></InfoField2>
-                    <InfoField2
-                      fieldName={"ID sinh viên"}
-                      fieldValue={request?.mssv || "..."}
-                    ></InfoField2>
-                    <InfoField2
-                      fieldName={"Tên sinh viên"}
-                      fieldValue={request?.lastName + " " + request?.firstName|| "..."}
-                    ></InfoField2>
-                    <InfoField2
-                      fieldName={"Tên file in"}
-                      fieldValue={request?.document.title|| "..."}
-                    ></InfoField2>
-                    <InfoField2
-                      fieldName={"Lượng giấy in"}
-                      fieldValue={request?.document.pages || "..."}
-                    ></InfoField2>
-                    <InfoField2
-                      fieldName={"Số bản in"}
-                      fieldValue={request?.numVersion || "..."}
-                    ></InfoField2>
-                  </div>
+                  <>
+                    {request.mssv !== "" ? (
+                      <div
+                        className="w-[90%] rounded-md bg-[#f1eeee] py-2 border-[1px] border-[#367FA9]"
+                        key={index}
+                      >
+                        <InfoField2
+                          fieldName={"Thời gian"}
+                          fieldValue={
+                            new Date(request?.createdAt)
+                              .toISOString()
+                              .slice(0, 10) +
+                            " " +
+                            new Date(request?.createdAt)
+                              .toISOString()
+                              .slice(11, 19)
+                          }
+                        ></InfoField2>
+                        <InfoField2
+                          fieldName={"ID sinh viên"}
+                          fieldValue={request?.mssv}
+                        ></InfoField2>
+                        <InfoField2
+                          fieldName={"Tên sinh viên"}
+                          fieldValue={
+                            request?.lastName + " " + request?.firstName
+                          }
+                        ></InfoField2>
+                        <InfoField2
+                          fieldName={"Tên file in"}
+                          fieldValue={request?.document.title}
+                        ></InfoField2>
+                        <InfoField2
+                          fieldName={"Lượng giấy in"}
+                          fieldValue={request?.document.pages}
+                        ></InfoField2>
+                        <InfoField2
+                          fieldName={"Số bản in"}
+                          fieldValue={request?.numVersion}
+                        ></InfoField2>
+                      </div>
+                    ) : (
+                      <PrinterhistoryLogsSkeleton></PrinterhistoryLogsSkeleton>
+                    )}
+                  </>
                 );
               })
             )}

@@ -14,7 +14,7 @@ function ActivityItem({ activity }) {
   return (
     <>
       {activity?.studentId !== "" ? (
-        <div className="min-w-[800px] md:w-full max-h-[60px] Activity?Item flex flex-row justify-between items-center bg-[#ffffff] text-[16px] lg:text-[18px] font-bold py-3 px-4 mt-2 rounded-sm border-b-2 border-black ">
+        <div className="min-w-[800px] md:w-full max-h-[60px] Activity?Item flex flex-row justify-between items-center bg-[#ffffff] text-[16px] lg:text-[18px] font-bold py-3 px-4 mt-2 rounded-sm border-b-[1px] border-black ">
           <div className=" w-[18%] truncate overflow-clip ">
             {activity?.lastName + " " + activity?.firstName}
           </div>

@@ -40,6 +40,7 @@ const ManageSpso = () => {
     else params.sortDirection = "-1";
     params.searchField = value.searchField;
 
+    setPrintersList([]);
     handleSPSOApi(params);
 
     if (localStorage.getItem("accessToken") === null) {
@@ -61,7 +62,7 @@ const ManageSpso = () => {
     fetchDataAndUpdate(params);
   });
 
-  const printers = printersList.printers;
+  const printers = printersList?.printers;
 
   return (
     <div className="Manage mx-auto max-w-[1280px] w-full px-[10px] lg:px-[20px] bg-[white] shadow-sm pb-5 min-h-[93vh]">
@@ -95,22 +96,23 @@ const ManageSpso = () => {
           </div>
         </div>
         <div className="w-full md:w-1/2 lg:w-2/3 flex flex-col lg:flex-row gap-3 ">
-          <div className="w-full lg:w-1/2 border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white">
+          <form
+            className="w-full lg:w-1/2 border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white"
+            onSubmit={(e) => {
+              setRenderList(!renderList);
+              value.searchField = inputValue;
+            }}
+          >
             <input
               type="text"
               placeholder="Tìm theo ID máy in"
               className="w-full outline-none border-none"
               onChange={(e) => setInputValue(e.target.value)}
             />
-            <div
-              onClick={(e) => {
-                setRenderList(!renderList);
-                value.searchField = inputValue;
-              }}
-            >
+            <button type="submit">
               <SearchIcon></SearchIcon>
-            </div>
-          </div>
+            </button>
+          </form>
           <div className="w-[100%] lg:w-1/2">
             <FIlterManagePriterModal
               functionRenderList={() => setRenderList(!renderList)}
@@ -138,47 +140,49 @@ const ManageSpso = () => {
           <div className="text-center w-[23%]">YÊU CẦU IN</div>
           <div className="w-[14%] text-center">THIẾT LẬP</div>
         </div>
-        {printers
-          ? printers?.map((printer, index) => (
-              <ManageSpsoItem
-                functionRenderList={() => setRenderList(!renderList)}
-                model={printer.model}
-                description={printer.description}
-                brand={printer.brand}
-                key={index}
-                id={printer.printerId}
-                location={
-                  printer.location.facility +
-                  ", " +
-                  printer.location.department +
-                  ", " +
-                  printer.location.room
-                }
-                date={printer.activatedTime.slice(0, 10)}
-                status={printer.status ? "Hoạt động" : "Không hoạt động"}
-                queue={printer.printingQueue.length}
-              />
-            ))
-          : PrintersData?.map((printer, index) => (
-              <ManageSpsoItem
-                functionRenderList={() => setRenderList(!renderList)}
-                model={printer.model}
-                description={printer.description}
-                brand={printer.brand}
-                key={index}
-                id={printer.printerId}
-                location={
-                  printer.location.facility +
-                  ", " +
-                  printer.location.department +
-                  ", " +
-                  printer.location.room
-                }
-                date={printer.activatedTime.slice(0, 10)}
-                status={printer.status ? "Hoạt động" : "Không hoạt động"}
-                queue={printer.printingQueue.length}
-              />
-            ))}
+        <div className="max-h-[79vh] md:max-h-[87vh] lg:max-h-[79vh] min-w-[800px] md:w-full overflow-y-scroll">
+          {printers
+            ? printers?.map((printer, index) => (
+                <ManageSpsoItem
+                  functionRenderList={() => setRenderList(!renderList)}
+                  model={printer.model}
+                  description={printer.description}
+                  brand={printer.brand}
+                  key={index}
+                  id={printer.printerId}
+                  location={
+                    printer.location.facility +
+                    ", " +
+                    printer.location.department +
+                    ", " +
+                    printer.location.room
+                  }
+                  date={printer.activatedTime.slice(0, 10)}
+                  status={printer.status ? "Hoạt động" : "Tạm dừng"}
+                  queue={printer.printingQueue.length}
+                />
+              ))
+            : PrintersData?.map((printer, index) => (
+                <ManageSpsoItem
+                  functionRenderList={() => setRenderList(!renderList)}
+                  model={printer.model}
+                  description={printer.description}
+                  brand={printer.brand}
+                  key={index}
+                  id={printer.printerId}
+                  location={
+                    printer.location.facility +
+                    ", " +
+                    printer.location.department +
+                    ", " +
+                    printer.location.room
+                  }
+                  date={printer.activatedTime.slice(0, 10)}
+                  status={printer.status ? "Hoạt động" : "Tạm dừng"}
+                  queue={printer.printingQueue.length}
+                />
+              ))}
+        </div>
       </div>
     </div>
   );

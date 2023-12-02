@@ -3,16 +3,22 @@ import { AiOutlinePrinter } from "react-icons/ai";
 import { BiCart } from "react-icons/bi";
 import { makePayment } from "../../APIs/BKPayAPI/BKPayAPI";
 import { useState } from "react";
+import { toast } from "../../Utils/Toastify";
 
 function PaymentInfo(props) {
   const [biCarDisplay, setBiCartDisplay] = useState(props.remain !== 0);
 
   const handleMakePayment = async () => {
-    const data = {
-      payment_id: props.payment_id,
-    };
-    await makePayment(data);
-    setBiCartDisplay(false);
+    try {
+      const data = {
+        payment_id: props.payment_id,
+      };
+      await makePayment(data);
+      setBiCartDisplay(false);
+      toast.success("Thanh toán thành công");
+    } catch (error) {
+      toast.success("Thanh toán thất bại");
+    }
   };
 
   return (

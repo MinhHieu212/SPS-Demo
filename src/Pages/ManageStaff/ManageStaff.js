@@ -91,7 +91,7 @@ const ManageStaff = () => {
             key={index}
             id={printer.printerId}
             queue={printer.printingJob.length + printer.printingQueue.length}
-            status={printer.status === 1 ? "Hoạt động" : "Không hoạt động"}
+            status={printer.status === 1 ? "Hoạt động" : "Tạm dừng"}
             description={printer.description}
             brand={printer.brand}
             model={printer.model}

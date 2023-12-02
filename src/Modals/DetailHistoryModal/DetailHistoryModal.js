@@ -12,7 +12,7 @@ const DetailHistoryModal = ({ children, props, total_pages }) => {
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
       <CenterModal open={openModal} handleClose={handleClose}>
-        <div className="container w-[350px] md:w-[450px] p-0 rounded-lg overflow-hidden shadow-lg border-[1px] border-[#367FA9]">
+        <div className="container w-[350px] md:w-[550px] p-0 rounded-lg overflow-hidden shadow-lg border-[1px] border-[#367FA9]">
           <div className="header bg-[#3C8DBC] text-white text-[20px] font-bold flex items-center justify-center h-[60px] w-full">
             CHI TIẾT IN ẤN
           </div>

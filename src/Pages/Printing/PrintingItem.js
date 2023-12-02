@@ -17,7 +17,7 @@ function PrintingItem(props = null) {
             if (props.status !== "Tạm dừng") {
               navigate(`/Printing/${props.id}`);
             } else {
-              toast.error("Máy in đang không hoạt động!");
+              toast.error("Máy in đang Tạm dừng!");
             }
           }}
         >

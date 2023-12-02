@@ -10,6 +10,7 @@ import { UserInfoAPI } from "../../APIs/UserInfoAPI/UserInfoAPI";
 function StudentInfoModal({ children }) {
   const navigate = useNavigate();
   const elementRef = useRef();
+  const modalRef = useRef();
   const [open, setOpen] = useState(false);
   const userInfoContext = useUserInfo();
   const [userInformation, setUserInformation] = useState(userInfoContext.info);
@@ -31,20 +32,6 @@ function StudentInfoModal({ children }) {
 
     setUserInformation(userInformation?.data?.data);
   };
-
-  const handleClickOutside = (event) => {
-    if (elementRef.current && !elementRef.current.contains(event.target)) {
-      setOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   return (
     <div className="relative z-50 w-auto h-auto">
@@ -102,7 +89,7 @@ function StudentInfoModal({ children }) {
                   {Math.floor(userInformation?.balance)}
                 </div>
               </div>
-              <PagesPurchaseModal>
+              <PagesPurchaseModal ref={modalRef}>
                 <button className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500 mb-2 mt-4 to-#3C8DBC w-full h-[45px] rounded-md flex items-center justify-center text-white text-[16px] font-bold hover:bg-[#2c5d8d] hover:from-cyan-400 hover:to-[#345a96] transition-all duration-300">
                   MUA THÊM GIẤY
                 </button>

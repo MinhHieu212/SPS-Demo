@@ -38,13 +38,13 @@ const PagesPurchaseModal = ({ children }) => {
   };
 
   const handleAccept = async () => {
-    const data = { money: value * 1000 };
+    const data = { money: value * userInfoContext?.info?.currentA4Price };
 
     await confirmPayment(data);
 
     setTimeout(() => {
       navigate("/Bkpay");
-    }, 1000);
+    }, 500);
   };
 
   return (

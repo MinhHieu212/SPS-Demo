@@ -23,7 +23,6 @@ const History = () => {
       A3: response?.data?.printedA3 || 0,
       A4: response?.data?.printedA4 || 0,
     };
-
     setTotalPages(pages);
     setHistoryLogs(response?.data?.printingLogs || []);
   };
@@ -43,9 +42,14 @@ const History = () => {
     fetchDataAndUpdate();
   });
 
-  useEffect(() => {
-    handleCallAPI();
+  socket.on("update-printer-list", () => {
+    console.log("Received update-printer-list signal");
+    fetchDataAndUpdate();
+  });
 
+  useEffect(() => {
+    setHistoryLogs(data);
+    handleCallAPI();
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Login");
     }
@@ -84,22 +88,25 @@ const History = () => {
         </div>
 
         <div className="flex flex-col w-full md:w-[60%] gap-2 mt-3 md:mt-0">
-          <div className="w-full border h-[50px] border-black text-[16px] md:text-[18px] rounded-md flex items-center justify-between pr-3 bg-white ">
+          <form
+            className="w-full border pl-4  h-[50px] border-black text-[16px] md:text-[18px] rounded-md flex items-center justify-between pr-3 bg-white "
+            onSubmit={handleSearch}
+          >
             <input
               type="text"
               placeholder="Tìm theo tên tệp in"
               className="w-[90%] outline-none border-none"
               onInput={(e) => setSearchParams(e.target.value)}
             />
-            <div onClick={handleSearch}>
+            <button type="submit">
               <SearchIcon></SearchIcon>
-            </div>
-          </div>
+            </button>
+          </form>
           <div className="w-full">
             <FilterHistoryModal
               handleChangeParams={(params) => setFilterParams({ ...params })}
             >
-              <div className="w-full cursor-pointer border h-[50px] border-black rounded-md flex items-center justify-between pr-3 bg-white">
+              <div className="w-full pl-3 cursor-pointer border h-[50px] border-black rounded-md flex items-center justify-between pr-3 bg-white">
                 <span className="mx-3 text-[gray]">Lọc kết quả</span>
                 <FilterIcon></FilterIcon>
               </div>
@@ -116,29 +123,31 @@ const History = () => {
           <div className="text-center w-[15%]">NGÀY IN</div>
           <div className="text-center w-[15%]">TÙY CHỌN</div>
         </div>
-        {historyLogs.map((historyLog, index) => (
-          <HistoryItem
-            fileName={historyLog?.document?.title}
-            printerId={historyLog?.printerId}
-            position={
-              historyLog?.printers[0]?.location?.facility +
-                ", " +
-                historyLog?.printers[0]?.location?.department +
-                ", " +
-                historyLog?.printers[0]?.location?.room || "null"
-            }
-            date={historyLog?.createdAt.split("T")[0]}
-            status={historyLog?.status}
-            numVersion={historyLog?.numVersion}
-            page={historyLog?.document?.pages}
-            pagesPerSheet={historyLog?.pagesPerSheet}
-            paperSize={historyLog?.paperSize}
-            printingLogId={historyLog?._id}
-            total_pages={historyLog?.total_pages}
-            renderList={() => setRenderList(!renderList)}
-            key={index}
-          />
-        ))}
+        <div className="max-h-[79vh] md:max-h-[87vh] lg:max-h-[79vh] min-w-[800px] md:w-full overflow-y-scroll">
+          {historyLogs.map((historyLog, index) => (
+            <HistoryItem
+              fileName={historyLog?.document?.title}
+              printerId={historyLog?.printerId}
+              position={
+                historyLog?.printers[0]?.location?.facility +
+                  ", " +
+                  historyLog?.printers[0]?.location?.department +
+                  ", " +
+                  historyLog?.printers[0]?.location?.room || "null"
+              }
+              date={historyLog?.createdAt.split("T")[0]}
+              status={historyLog?.status}
+              numVersion={historyLog?.numVersion}
+              page={historyLog?.document?.pages}
+              pagesPerSheet={historyLog?.pagesPerSheet}
+              paperSize={historyLog?.paperSize}
+              printingLogId={historyLog?._id}
+              total_pages={historyLog?.total_pages}
+              renderList={() => setRenderList(!renderList)}
+              key={index}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -6,10 +6,8 @@ import filled from "@material-tailwind/react/theme/components/timeline/timelineI
 import { addPrinter } from "../../APIs/SpsoAPI/SpsoAPI";
 
 export const newPrinter = {
-  location: {
-
-  }
-}
+  location: {},
+};
 export const AddPrinterModal = ({ children, functionRenderList }) => {
   const [openAPModal, setOpenAPModal] = useState(false);
   const handleClose = () => {
@@ -108,7 +106,7 @@ export const AddPrinterModal = ({ children, functionRenderList }) => {
   const handleSubmit = () => {
     newPrinter.printerId = ID;
     newPrinter.brand = brand;
-    newPrinter.model = type; 
+    newPrinter.model = type;
     newPrinter.location.facility = facilities === "Cơ sở 1" ? "CS1" : "CS2";
     newPrinter.location.department = dept;
     newPrinter.location.room = room;
@@ -209,7 +207,11 @@ export const AddPrinterModal = ({ children, functionRenderList }) => {
                     Tòa...
                   </option>
                   {departments.map((dep, index) => {
-                    return <option key={index} value={dep}>{dep}</option>;
+                    return (
+                      <option key={index} value={dep}>
+                        {dep}
+                      </option>
+                    );
                   })}
                 </select>
 
@@ -227,7 +229,11 @@ export const AddPrinterModal = ({ children, functionRenderList }) => {
                     Phòng...
                   </option>
                   {rooms.map((rm, index) => {
-                    return <option key={index} value={rm}>{rm}</option>;
+                    return (
+                      <option key={index} value={rm}>
+                        {rm}
+                      </option>
+                    );
                   })}
                 </select>
               </div>
@@ -281,7 +287,7 @@ export const AddPrinterModal = ({ children, functionRenderList }) => {
                       htmlFor="inactive"
                       className="text-[16px] md:text-[20px] font-semibold p-0"
                     >
-                      Không hoạt động
+                      Tạm dừng
                     </label>
                   </div>
                 </div>
