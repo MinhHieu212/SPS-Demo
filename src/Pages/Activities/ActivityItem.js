@@ -1,16 +1,19 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./Activities.scss";
 import { ListIcon } from "../../Assets/Icons/Icons";
 import { DetailStudentLogModal } from "../../Modals";
 import { ActivitySkeleton } from "../../Utils/Skeleton";
 import { getDetailStudent } from "../../APIs/SpsoAPI/SpsoAPI";
+import { detailsLogsofStudent } from "./FixedData";
 
 function ActivityItem({ activity }) {
   const [detail, setDetail] = useState([]);
   const handleGetDetail = async (params) => {
+    setDetail(detailsLogsofStudent);
     const response = await getDetailStudent(params);
+    console.log("Response from detail activity", response);
     setDetail(response?.data?.data);
-  }
+  };
   return (
     <>
       {activity?.studentId !== "" ? (
@@ -31,8 +34,16 @@ function ActivityItem({ activity }) {
             {activity?.total_payment}
           </div>
           <div className=" flex justify-center w-[10%] truncate overflow-clip ">
-            <DetailStudentLogModal activity={activity} detail={detail} cbGetDetail={(params) => handleGetDetail(params)}>
-              <div onClick={(e) => handleGetDetail({studentId: activity._id})}><ListIcon></ListIcon></div>
+            <DetailStudentLogModal
+              activity={activity}
+              detail={detail}
+              cbGetDetail={(params) => handleGetDetail(params)}
+            >
+              <div
+                onClick={(e) => handleGetDetail({ studentId: activity._id })}
+              >
+                <ListIcon></ListIcon>
+              </div>
             </DetailStudentLogModal>
           </div>
         </div>

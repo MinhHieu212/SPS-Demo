@@ -236,3 +236,63 @@ export function PrinterhistoryLogsSkeleton() {
     </>
   );
 }
+
+export function DetailsStudentLogsSkeleton() {
+  return (
+    <>
+      <div className="w-[90%] rounded-md bg-[#ffffff] p-2 shadow-md border-[1px] border-[#367FA9]">
+        <div className="px-5 mb-2 text-[16px] md:text-[20px] flex items-center justify-between gap-3 w-full">
+          <Skeleton height={"23px"} width={"40%"} radius={"3px"}></Skeleton>
+          <Skeleton height={"23px"} width={"55%"} radius={"3px"}></Skeleton>
+        </div>
+        <div className="px-5 mb-2 text-[16px] md:text-[20px] flex items-center justify-between gap-3 w-full">
+          <Skeleton height={"23px"} width={"40%"} radius={"3px"}></Skeleton>
+          <Skeleton height={"23px"} width={"55%"} radius={"3px"}></Skeleton>
+        </div>
+        <div className="px-5 mb-2 text-[16px] md:text-[20px] flex items-center justify-between gap-3 w-full">
+          <Skeleton height={"23px"} width={"40%"} radius={"3px"}></Skeleton>
+          <Skeleton height={"23px"} width={"55%"} radius={"3px"}></Skeleton>
+        </div>
+        <div className="px-5 mb-2 text-[16px] md:text-[20px] flex items-center justify-between gap-3 w-full">
+          <Skeleton height={"23px"} width={"40%"} radius={"3px"}></Skeleton>
+          <Skeleton height={"23px"} width={"55%"} radius={"3px"}></Skeleton>
+        </div>
+        <div className="px-5 mb-2 text-[16px] md:text-[20px] flex items-center justify-between gap-3 w-full">
+          <Skeleton height={"23px"} width={"40%"} radius={"3px"}></Skeleton>
+          <Skeleton height={"23px"} width={"55%"} radius={"3px"}></Skeleton>
+        </div>
+        <div className="px-5 mb-2 text-[16px] md:text-[20px] flex items-center justify-between gap-3 w-full">
+          <Skeleton height={"23px"} width={"40%"} radius={"3px"}></Skeleton>
+          <Skeleton height={"23px"} width={"55%"} radius={"3px"}></Skeleton>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export function ManageStaffItemSkeleton() {
+  return (
+    <>
+      <div
+        className="ManageItem flex flex-row justify-between items-center bg-[#ffffff] text-[16px] lg:text-[18px] font-bold py-[12px] px-4 mt-2 rounded-sm 
+      border-b-[1px] border-black min-w-[800px] md:w-full max-h-[60px]"
+      >
+        <div className="min-w-[10%] text-center">
+          <Skeleton height={"27px"} width={"80%"} radius={"3px"}></Skeleton>
+        </div>
+        <div className="min-w-[30%] flex flex-row   items-center justify-center gap-4   px-5">
+          <Skeleton height={"27px"} width={"80%"} radius={"3px"}></Skeleton>
+        </div>
+        <div className="min-w-[20%] flex justify-center items-center">
+          <Skeleton height={"27px"} width={"80%"} radius={"3px"}></Skeleton>
+        </div>
+        <div className="w-[20%] flex flex-row justify-center px-0 md:px-2 items-center">
+          <Skeleton height={"27px"} width={"80%"} radius={"3px"}></Skeleton>
+        </div>
+        <div className="overflow-hidden px-1 flex items-center justify-center w-[20%]">
+          <Skeleton height={"27px"} width={"80%"} radius={"3px"}></Skeleton>
+        </div>
+      </div>
+    </>
+  );
+}

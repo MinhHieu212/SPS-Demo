@@ -1,3 +1,45 @@
+export const detailsLogsofStudent = [
+  {
+    document: {
+      title: "BTL XẤP XỈ TÍCH PHÂN_Nhóm 5.pdf",
+      pages: 16,
+      fileType: "pdf",
+    },
+    _id: "656850f4400c3f51c656e357",
+    status: "",
+    finishDate: "2023-12-02T02:24:30.425Z",
+    paperSize: "A4",
+    numVersion: 1,
+    user_id: "6555983eddab67d1ccad2cf9",
+  },
+  {
+    document: {
+      title: "BTL XẤP XỈ TÍCH PHÂN_Nhóm 5.pdf",
+      pages: 16,
+      fileType: "pdf",
+    },
+    _id: "656850f4400c3f51c656e357",
+    status: "",
+    finishDate: "2023-12-02T02:24:30.425Z",
+    paperSize: "A4",
+    numVersion: 1,
+    user_id: "6555983eddab67d1ccad2cf9",
+  },
+  {
+    document: {
+      title: "BTL XẤP XỈ TÍCH PHÂN_Nhóm 5.pdf",
+      pages: 16,
+      fileType: "pdf",
+    },
+    _id: "656850f4400c3f51c656e357",
+    status: "",
+    finishDate: "2023-12-02T02:24:30.425Z",
+    paperSize: "A4",
+    numVersion: 1,
+    user_id: "6555983eddab67d1ccad2cf9",
+  },
+];
+
 export const activities = [
   {
     studentName: "",

@@ -111,9 +111,11 @@ const Activities = () => {
             LỊCH SỬ
           </div>
         </div>
-        {fetchAct.map((activity, index) => (
-          <ActivityItem key={index} activity={activity} />
-        ))}
+        <div className="max-h-[79vh] md:max-h-[87vh] lg:max-h-[79vh] min-w-[800px] md:w-full overflow-y-scroll">
+          {fetchAct.map((activity, index) => (
+            <ActivityItem key={index} activity={activity} />
+          ))}
+        </div>
       </div>
     </div>
   );

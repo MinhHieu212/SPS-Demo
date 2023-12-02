@@ -129,23 +129,25 @@ const Report = () => {
           <div className="min-w-[15%] text-center">GIẤY A3 ĐÃ IN</div>
           <div className="min-w-[15%] text-center">GIẤY A4 ĐÃ IN</div>
         </div>
-        {printers?.map((item, index) => (
-          <ReportItem
-            key={index}
-            time={item.date}
-            id={item.printerId}
-            location={
-              item?.location?.facility +
-              ", " +
-              item?.location?.department +
-              ", " +
-              item?.location?.room
-            }
-            frequency={item?.printed}
-            a3={item?.totalA3Pages}
-            a4={item?.totalA4Pages}
-          />
-        ))}
+        <div className="max-h-[79vh] md:max-h-[87vh] lg:max-h-[79vh] min-w-[800px] md:w-full overflow-y-scroll">
+          {printers?.map((item, index) => (
+            <ReportItem
+              key={index}
+              time={item.date}
+              id={item.printerId}
+              location={
+                item?.location?.facility +
+                ", " +
+                item?.location?.department +
+                ", " +
+                item?.location?.room
+              }
+              frequency={item?.printed}
+              a3={item?.totalA3Pages}
+              a4={item?.totalA4Pages}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

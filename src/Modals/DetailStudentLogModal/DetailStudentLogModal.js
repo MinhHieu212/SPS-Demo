@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { InfoField2 } from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
 import { FilterModalIcon } from "../../Assets/Icons/Icons";
+import { DetailsStudentLogsSkeleton } from "../../Utils/Skeleton";
 const date = {
   startDate: null,
   endDate: null,
@@ -97,39 +98,45 @@ const DetailStudentLogModal = ({ children, activity, detail, cbGetDetail }) => {
             ) : (
               detail?.map((request, index) => {
                 return (
-                  <div
-                    className="w-[90%] rounded-md bg-[#f1eeee] py-2 border-[1px] border-[#367FA9]"
-                    key={index}
-                  >
-                    <InfoField2
-                      fieldName={"ID máy in"}
-                      fieldValue={activity?.printerId || "..."}
-                    ></InfoField2>
-                    <InfoField2
-                      fieldName={"Tên file in"}
-                      fieldValue={request?.document.title || "..."}
-                    ></InfoField2>
-                    <InfoField2
-                      fieldName={"Lượng giấy in"}
-                      fieldValue={request?.document.pages || "..."}
-                    ></InfoField2>
-                    <InfoField2
-                      fieldName={"Số bản in"}
-                      fieldValue={request?.numVersion || "..."}
-                    ></InfoField2>
-                    <InfoField2
-                      fieldName={"Thời gian"}
-                      fieldValue={
-                        request?.finishDate?.slice(0, 10) +
-                          " " +
-                          request?.finishDate?.slice(11, 19) || "..."
-                      }
-                    ></InfoField2>
-                    <InfoField2
-                      fieldName={"Trạng thái in"}
-                      fieldValue={request?.status || "..."}
-                    ></InfoField2>
-                  </div>
+                  <>
+                    {request.status !== "" ? (
+                      <div
+                        className="w-[90%] rounded-md bg-[#f1eeee] py-2 border-[1px] border-[#367FA9]"
+                        key={index}
+                      >
+                        <InfoField2
+                          fieldName={"ID máy in"}
+                          fieldValue={activity?.printerId || "..."}
+                        ></InfoField2>
+                        <InfoField2
+                          fieldName={"Tên file in"}
+                          fieldValue={request?.document.title || "..."}
+                        ></InfoField2>
+                        <InfoField2
+                          fieldName={"Lượng giấy in"}
+                          fieldValue={request?.document.pages || "..."}
+                        ></InfoField2>
+                        <InfoField2
+                          fieldName={"Số bản in"}
+                          fieldValue={request?.numVersion || "..."}
+                        ></InfoField2>
+                        <InfoField2
+                          fieldName={"Thời gian"}
+                          fieldValue={
+                            request?.finishDate?.slice(0, 10) +
+                              " " +
+                              request?.finishDate?.slice(11, 19) || "..."
+                          }
+                        ></InfoField2>
+                        <InfoField2
+                          fieldName={"Trạng thái in"}
+                          fieldValue={request?.status || "..."}
+                        ></InfoField2>
+                      </div>
+                    ) : (
+                      <DetailsStudentLogsSkeleton></DetailsStudentLogsSkeleton>
+                    )}
+                  </>
                 );
               })
             )}

@@ -23,7 +23,10 @@ const Home = () => {
 
   return (
     <div className="Home mb-5">
-      <div id="slider" className="relative w-full min-h-[400px] ">
+      <div
+        id="slider"
+        className="relative w-full min-h-[400px] lg:min-h-[700px]"
+      >
         <div className="slider__content absolute text-center text-[#0f6cbf] left-1/2 top-[40%]">
           <h1 className="slider__heading text-base text-[#2196f3] mb-1 md:text-2xl lg:text-3xl">
             TRƯỜNG ĐẠI HỌC BÁCH KHOA - ĐHQG TP.HCM
@@ -35,7 +38,9 @@ const Home = () => {
       </div>
       <div className=" bg-[white] shadow-sm mt-0 max-w-[1280px] mx-auto px-[10px] md:">
         <h2 className="w-full text-2xl md:text-3xl pb-2 lg:text-4xl text-center font-semibold text-[#367fa9] pt-[50px]">
-        <span className="border-[#367fa9] border-b-4">DỊCH VỤ CỦA CHÚNG TÔI</span>
+          <span className="border-[#367fa9] border-b-4">
+            DỊCH VỤ CỦA CHÚNG TÔI
+          </span>
         </h2>
         <div className="max-w-[1280px] px-[70px] mx-auto flex flex-col md:flex-row items-center justify-between w-[90%] gap-3 my-[25px]">
           <div className="relative w-[300px] md:w-[30%] h-[280px] lg:h-[350px] rounded-[1.5rem] overflow-hidden shadow-lg">
@@ -44,17 +49,13 @@ const Home = () => {
               alt=""
               className="w-full h-full object-fill"
             />
-            <p className="item-title absolute font-semibold  text-2xl lg:text-3xl text-white text-left drop-shadow-lg">
+            <p className="item-title absolute font-semibold text-center text-2xl lg:text-3xl text-white  drop-shadow-lg">
               Linh động trong tùy chọn in ấn
             </p>
           </div>
           <div className="relative  w-[300px] md:w-[30%] h-[280px] lg:h-[350px] rounded-[1.5rem] overflow-hidden shadow-lg">
-            <img
-              src={un1}
-              alt=""
-              className="w-full h-full object-fill"
-            />
-            <p className="item-title absolute font-semibold text-2xl lg:text-3xl text-white text-left drop-shadow-lg">
+            <img src={un1} alt="" className="w-full h-full object-fill" />
+            <p className="item-title absolute font-semibold text-2xl lg:text-3xl text-white text-center drop-shadow-lg">
               Xem lịch sử in ấn của bạn
             </p>
           </div>
@@ -64,14 +65,16 @@ const Home = () => {
               alt=""
               className="w-full h-full object-fill"
             />
-            <p className="item-title absolute font-semibold text-2xl lg:text-3xl text-white text-left drop-shadow-lg">
+            <p className="item-title absolute font-semibold text-2xl lg:text-3xl text-white text-center drop-shadow-lg">
               Thanh toán tiện lợi qua BKPay
             </p>
           </div>
         </div>
         <div className="max-w-[1280px] px-[10px]   md:px-[20px] mx-auto">
           <h2 className="text-2xl md:text-3xl lg:text-4xl text-center font-semibold text-[#367fa9] mb-8 mt-[50px]">
-            <span className="border-[#367fa9] border-b-4">ĐẶC ĐIỂM NỔI BẬT</span>
+            <span className="border-[#367fa9] border-b-4">
+              ĐẶC ĐIỂM NỔI BẬT
+            </span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-8 md:px-16 text-[16px] md:text-[20px]">
             <div className="text-center border border-black rounded-2xl p-4 shadow-xl">
@@ -117,7 +120,7 @@ const Home = () => {
         </div>
         <div className="max-w-[1280px] px-[10px] md:px-[20px] mx-auto">
           <h2 className="text-2xl md:text-3xl w-[80%] mx-auto lg:text-4xl text-center font-semibold text-[#367fa9] mt-[50px] mb-8">
-          VÌ SAO SINH VIÊN NÊN SỬ DỤNG SMART PRINTING SYSTEM?
+            VÌ SAO SINH VIÊN NÊN SỬ DỤNG SMART PRINTING SYSTEM?
           </h2>
           <div className="w-full ">
             <div className="flex flex-col mt-3 md:flex-row items-center justify-center">

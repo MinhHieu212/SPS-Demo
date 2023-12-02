@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { getPtr, editPtr } from "../../APIs/StaffAPI/StaffAPI";
 import { newPtr } from "../../Modals/PrinterInfoAndConfigModal/PrinterInfoAndConfigModal";
 import { useSocket } from "../../Contexts/SocketIOContenxt";
+import { fixedData } from "./FixedData";
 
 const ManageStaff = () => {
   const [renderList, setRenderList] = useState(true);
@@ -19,6 +20,10 @@ const ManageStaff = () => {
 
   const handleGetPtr = async (params) => {
     const response = await getPtr(params);
+    console.log(
+      "RESPONSE <+++++++++++++++++++++++++>",
+      response?.data?.data?.printers
+    );
     setData(response?.data?.data);
     setPrinters(response?.data?.data?.printers);
     setFileType(response?.data?.data?.currentFileType);
@@ -29,6 +34,7 @@ const ManageStaff = () => {
   };
 
   useEffect(() => {
+    setPrinters(fixedData);
     handleGetPtr({ searchField: searchID });
 
     if (localStorage.getItem("accessToken") === null) {
@@ -53,9 +59,11 @@ const ManageStaff = () => {
             <p className="text-base lg:text-xl w-[60%]">ĐANG HOẠT ĐỘNG</p>
           </div>
           <div className="bg-white flex flex-row text-base font-bold justify-center items-center text-center py-[14px]">
-            <p className="text-base lg:text-xl w-1/2">{data.totalPrinter}</p>
             <p className="text-base lg:text-xl w-1/2">
-              {data.activatedPrinter}
+              {data.totalPrinter || 0}
+            </p>
+            <p className="text-base lg:text-xl w-1/2">
+              {data.activatedPrinter || 0}
             </p>
           </div>
         </div>
