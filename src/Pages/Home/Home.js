@@ -46,7 +46,7 @@ const Home = () => {
           <div className="relative w-[300px] md:w-[30%] h-[280px] lg:h-[350px] rounded-[1.5rem] overflow-hidden shadow-lg">
             <img
               src="https://cdn.pixabay.com/photo/2017/09/28/21/56/print-2797178_1280.jpg"
-              alt=""
+              alt="Linh động in ấn"
               className="w-full h-full object-fill"
             />
             <p className="item-title absolute font-semibold text-center text-2xl lg:text-3xl text-white  drop-shadow-lg">
@@ -54,7 +54,7 @@ const Home = () => {
             </p>
           </div>
           <div className="relative  w-[300px] md:w-[30%] h-[280px] lg:h-[350px] rounded-[1.5rem] overflow-hidden shadow-lg">
-            <img src={un1} alt="" className="w-full h-full object-fill" />
+            <img src={un1} alt="Xem lịch sử" className="w-full h-full object-fill" />
             <p className="item-title absolute font-semibold text-2xl lg:text-3xl text-white text-center drop-shadow-lg">
               Xem lịch sử in ấn của bạn
             </p>
@@ -62,7 +62,7 @@ const Home = () => {
           <div className="relative  w-[300px] md:w-[30%] h-[280px] lg:h-[350px] rounded-[1.5rem] overflow-hidden shadow-lg">
             <img
               src="https://images.unsplash.com/photo-1580048915913-4f8f5cb481c4?auto=format&fit=crop&q=60&w=400&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzZ8fHBheW1lbnR8ZW58MHx8MHx8fDA%3D&fbclid=IwAR0cU5LfiJnLpvSu1mzTku2zeu06G_9i2ExmBBEK6jgcDAcjo6L1YAhgU-4"
-              alt=""
+              alt="Thanh toán tiện lợi"
               className="w-full h-full object-fill"
             />
             <p className="item-title absolute font-semibold text-2xl lg:text-3xl text-white text-center drop-shadow-lg">
