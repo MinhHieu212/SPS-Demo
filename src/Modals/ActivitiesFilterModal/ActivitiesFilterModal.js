@@ -14,6 +14,7 @@ const ActivitiesFilterModal = ({ children, functionSetRenderList }) => {
     setAlphabet("all");
     ActivityFilter.sortName = null;
     ActivityFilter.sortPayment = null;
+    functionSetRenderList();
   };
 
   const applyFilter = () => {

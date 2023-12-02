@@ -26,6 +26,7 @@ function ManageSpsoItem(props) {
     const response = await getPrinterLog(params);
     setPrinterLog(response?.data?.data?.printingLog);
   };
+  
   return (
     <>
       {props.id !== "" ? (

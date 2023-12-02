@@ -4,8 +4,8 @@ import CenterModal from "../BaseModals/CenterModal";
 import { FilterModalIcon } from "../../Assets/Icons/Icons";
 const date = {
   startDate: null,
-  endDate: null
-}
+  endDate: null,
+};
 const DetailStudentLogModal = ({ children, activity, detail, cbGetDetail }) => {
   const [openModal, setOpenModal] = useState(false);
   const [openFilter, setOpenFilter] = useState(false);
@@ -24,7 +24,11 @@ const DetailStudentLogModal = ({ children, activity, detail, cbGetDetail }) => {
   const applyFilter = async () => {
     date.startDate = date1;
     date.endDate = date2;
-    cbGetDetail({ studentId: activity._id, start: date.startDate, end: date.endDate });
+    cbGetDetail({
+      studentId: activity._id,
+      start: date.startDate,
+      end: date.endDate,
+    });
     setOpenFilter(false);
   };
 
@@ -92,7 +96,6 @@ const DetailStudentLogModal = ({ children, activity, detail, cbGetDetail }) => {
               </div>
             ) : (
               detail?.map((request, index) => {
-
                 return (
                   <div
                     className="w-[90%] rounded-md bg-[#f1eeee] py-2 border-[1px] border-[#367FA9]"
@@ -116,7 +119,11 @@ const DetailStudentLogModal = ({ children, activity, detail, cbGetDetail }) => {
                     ></InfoField2>
                     <InfoField2
                       fieldName={"Thời gian"}
-                      fieldValue={request?.finishDate?.slice(0, 10) + " " + request?.finishDate?.slice(11, 19) || "..."}
+                      fieldValue={
+                        request?.finishDate?.slice(0, 10) +
+                          " " +
+                          request?.finishDate?.slice(11, 19) || "..."
+                      }
                     ></InfoField2>
                     <InfoField2
                       fieldName={"Trạng thái in"}

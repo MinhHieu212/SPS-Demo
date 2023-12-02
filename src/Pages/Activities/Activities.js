@@ -16,6 +16,7 @@ const Activities = () => {
   var [id, setId] = useState(null);
   const navigate = useNavigate();
   const [fetchAct, setFetchAct] = useState(activities);
+
   useEffect(() => {
     const params = {
       studentId: id !== "" ? id : null,
@@ -24,6 +25,7 @@ const Activities = () => {
       sortPayment: ActivityFilter.sortPayment,
     };
     //console.log(params);
+    setFetchAct(activities);
     const handleGetStudents = async (params) => {
       const response = await getStudents(params);
       console.log(response?.data?.data);
@@ -34,7 +36,7 @@ const Activities = () => {
       navigate("/Login");
     }
   }, [renderList]);
-  
+
   return (
     <div className="Activities max-w-[1280px] px-[10px] md:px-[20px] bg-[white] mx-auto shadow-sm mb-5 min-h-[93vh]">
       <h2 className="text-2xl lg:text-3xl font-semibold mt-3  printing-title border-b-4 border-[#066DCC] pb-2 md:pb-3  text-[#066DCC]">
@@ -42,38 +44,40 @@ const Activities = () => {
       </h2>
       <div className="w-[100%] flex flex-col items-start md:flex-row mt-3 gap-3">
         <div className="flex flex-col md:flex-row w-[90%] mx-auto gap-3 md:w-[70%] activity-inner-flex-input">
-          <div className="w-[100%] border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white">
+          <form
+            className="w-[100%] border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white"
+            onSubmit={(e) => {
+              setId(stID);
+              setRenderList(!renderList);
+            }}
+          >
             <input
               type="text"
               placeholder="Tìm theo ID sinh viên"
               className="w-full outline-none border-none"
               onChange={(e) => setStID(e.target.value)}
             />
-            <div
-              onClick={(e) => {
-                setId(stID);
-                setRenderList(!renderList);
-              }}
-            >
+            <button type="submit">
               <SearchIcon></SearchIcon>
-            </div>
-          </div>
-          <div className="w-[100%]  mx-auto border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white">
+            </button>
+          </form>
+          <form
+            className="w-[100%]  mx-auto border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white"
+            onSubmit={(e) => {
+              setName(stName);
+              setRenderList(!renderList);
+            }}
+          >
             <input
               type="text"
               placeholder="Tìm theo Tên sinh viên"
               className="w-full outline-none border-none"
               onChange={(e) => setStName(e.target.value)}
             />
-            <div
-              onClick={(e) => {
-                setName(stName);
-                setRenderList(!renderList);
-              }}
-            >
+            <button type="submit">
               <SearchIcon></SearchIcon>
-            </div>
-          </div>
+            </button>
+          </form>
         </div>
 
         <div className="w-[90%] md:w-[30%] mx-auto">

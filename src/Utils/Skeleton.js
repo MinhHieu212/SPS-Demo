@@ -50,7 +50,7 @@ export function PrintingSkeleton() {
 
 export function ActivitySkeleton() {
   return (
-    <div className="min-w-[800px] md:w-full max-h-[60px] ActivityItem flex flex-row justify-between items-center bg-[#ffffff] text-[16px] lg:text-[18px] font-bold py-3 px-4 mt-2 rounded-sm border-b-2 border-black ">
+    <div className="min-w-[800px] md:w-full max-h-[60px] ActivityItem flex flex-row justify-between items-center bg-[#ffffff] text-[16px] lg:text-[18px] font-bold py-3 px-4 mt-2 rounded-sm border-b-[1px] border-black ">
       <div className=" w-[18%] truncate overflow-clip ">
         <Skeleton height={"27px"} radius={"3px"}></Skeleton>
       </div>
