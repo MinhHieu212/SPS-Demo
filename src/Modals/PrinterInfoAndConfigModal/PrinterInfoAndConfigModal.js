@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InfoField from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
 import { editPtr } from "../../APIs/StaffAPI/StaffAPI";
@@ -14,6 +14,8 @@ const PrinterInfoAndConfigModal = ({
   setRenderList,
 }) => {
   const [openModal, setOpenModal] = useState(false);
+  // const [checked3, setChecked3] = useState(status === "Hoạt động" ? "enable" : "disable");
+
   const handleClose = () => {
     setOpenModal(false);
   };
@@ -29,9 +31,9 @@ const PrinterInfoAndConfigModal = ({
 
     setOpenModal(false);
   };
-  const [checked, setChecked] = useState(
-    status === "Hoạt động" ? "enable" : "disable"
-  );
+  const [checked, setChecked] = useState( status === "Hoạt động" ? "enable" : "disable");
+  
+  console.log("Trang thai may: ", checked);
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
@@ -80,13 +82,13 @@ const PrinterInfoAndConfigModal = ({
             <div className="w-1/2 pl-5">
               <div className="w-[200px] flex items-center">
                 <input
+                  checked={checked === "enable"}
+                  onChange={(e) => setChecked(e.target.value)}
                   type="radio"
                   className="w-5 h-5"
                   name="printerState5"
                   id="enable123"
                   value={"enable"}
-                  onChange={(e) => setChecked(e.target.value)}
-                  checked={checked === "enable"}
                 />
                 <label
                   htmlFor="enable123"
@@ -97,13 +99,13 @@ const PrinterInfoAndConfigModal = ({
               </div>
               <div className="w-[200px] flex items-center">
                 <input
+                  checked={checked === "disable"}
+                  onChange={(e) => setChecked(e.target.value)}
                   type="radio"
                   className="w-5 h-5"
                   name="printerState5"
                   id="disable1234"
                   value={"disable"}
-                  onChange={(e) => setChecked(e.target.value)}
-                  checked={checked === "disable"}
                 />
                 <label
                   htmlFor="disable1234"
