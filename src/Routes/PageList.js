@@ -13,6 +13,7 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import ManageStaff from "../Pages/ManageStaff/ManageStaff";
 import ManageSpso from "../Pages/ManageSpso/ManageSpso";
 import HomeNoLogin from "../Pages/HomeNoLogin/HomeNoLogin";
+import Notice from "../Pages/Notice/Notice";
 
 const publicRoutes = [
   // { role: "", path: "*", component: <></> },
@@ -63,6 +64,12 @@ const privateRoutes = [
     role: "spso",
     path: "/Activities",
     component: Activities,
+    layout: "default",
+  },
+  {
+    role: "spso",
+    path: "/Notice",
+    component: Notice,
     layout: "default",
   },
 ];
