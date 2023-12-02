@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/SPS-FE-Project/static/css/main.9084ee93.css",
-    "main.js": "/SPS-FE-Project/static/js/main.4fc76177.js",
+    "main.js": "/SPS-FE-Project/static/js/main.082ee7fd.js",
     "static/js/787.7a8eec0c.chunk.js": "/SPS-FE-Project/static/js/787.7a8eec0c.chunk.js",
     "static/media/slbk2.jpg": "/SPS-FE-Project/static/media/slbk2.608c3fe277f93ccce81b.jpg",
     "static/media/sv.jpg": "/SPS-FE-Project/static/media/sv.2b20417f9b2c4e71e9f5.jpg",
@@ -13,11 +13,11 @@
     "static/media/employee-icon.svg": "/SPS-FE-Project/static/media/employee-icon.f9643d58b3ef777f50a15520cba86d53.svg",
     "index.html": "/SPS-FE-Project/index.html",
     "main.9084ee93.css.map": "/SPS-FE-Project/static/css/main.9084ee93.css.map",
-    "main.4fc76177.js.map": "/SPS-FE-Project/static/js/main.4fc76177.js.map",
+    "main.082ee7fd.js.map": "/SPS-FE-Project/static/js/main.082ee7fd.js.map",
     "787.7a8eec0c.chunk.js.map": "/SPS-FE-Project/static/js/787.7a8eec0c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9084ee93.css",
-    "static/js/main.4fc76177.js"
+    "static/js/main.082ee7fd.js"
   ]
 }
