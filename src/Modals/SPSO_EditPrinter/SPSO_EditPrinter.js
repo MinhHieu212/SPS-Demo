@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import CenterModal from "../BaseModals/CenterModal";
 import { editPrinter } from "../../APIs/SpsoAPI/SpsoAPI";
 import { toast } from "../../Utils/Toastify";
+import ReactSwitch from "react-switch";
 export const newData = {
   location: {},
 };
@@ -18,6 +19,9 @@ const SPSOEditPrinterModal = ({
   functionRenderList1,
 }) => {
   const [checked, setChecked] = useState(printerStatus);
+  const toggleState = () => {
+    setChecked((curr) => (curr === "enable" ? "disable" : "enable"));
+  }
   const [openModal, setOpenModal] = useState(false);
   const handleClose = () => {
     setOpenModal(false);
@@ -38,6 +42,7 @@ const SPSOEditPrinterModal = ({
     newData.model = type;
     newData.description = desc;
     newData.status = checked === "enable" ? 1 : 0;
+
     //handleEditAPI(newData);
     //setRenderList1(!renderList1);
 
@@ -53,8 +58,9 @@ const SPSOEditPrinterModal = ({
     } catch (error) {
       toast.error("Tùy chỉnh thông tin máy tin thất bại");
     }
+    setOpenModal(false);
   };
-  //console.log(checked);
+
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
@@ -143,11 +149,18 @@ const SPSOEditPrinterModal = ({
                 </div>
               </div>
               <div className="flex flex-col">
+                <div className="flex">
                 <p className="text-[#066DCC] text-[16px] md:text-[20px] font-bold w-[124px] mb-[8px]">
-                  Trạng thái:{" "}
+                  Hoạt động:{" "}
                 </p>
+                
+                <div className="switch flex">
+                    <ReactSwitch onChange={toggleState} checked={checked === "enable"}/>
+                  </div>
+                </div>
                 <div className="flex flex-row items-end ">
-                  <div>
+        
+                  {/* <div>
                     <div className="flex items-center mb-[4px] gap-[22px]">
                       <input
                         checked={checked === "enable"}
@@ -188,7 +201,7 @@ const SPSOEditPrinterModal = ({
                         Tạm dừng
                       </label>
                     </div>
-                  </div>
+                  </div> */}
                   <button
                     onClick={handleSubmit}
                     className="ml-auto bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500 hover:bg-blue-300 p-2 w-[154px] rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center"

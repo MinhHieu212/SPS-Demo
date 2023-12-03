@@ -95,7 +95,8 @@ function ManageItem(props) {
         </div>
       ) : (
         <ManageStaffItemSkeleton></ManageStaffItemSkeleton>
-      )}
+      )
+      }
     </>
   );
 }

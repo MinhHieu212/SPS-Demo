@@ -3,6 +3,8 @@ import InfoField from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
 import { editPtr } from "../../APIs/StaffAPI/StaffAPI";
 import { toast } from "../../Utils/Toastify";
+import ReactSwitch from "react-switch";
+
 export const newPtr = {};
 const PrinterInfoAndConfigModal = ({
   children,
@@ -15,7 +17,6 @@ const PrinterInfoAndConfigModal = ({
   setRenderList,
 }) => {
   const [openModal, setOpenModal] = useState(false);
-  // const [checked3, setChecked3] = useState(status === "Hoạt động" ? "enable" : "disable");
 
   const handleClose = () => {
     setOpenModal(false);
@@ -40,13 +41,16 @@ const PrinterInfoAndConfigModal = ({
   const [checked, setChecked] = useState(
     status === "Hoạt động" ? "enable" : "disable"
   );
+  const toggleState = (curr) => {
+    setChecked((curr) => (curr === "enable" ? "disable" : "enable"));
+  }
 
   console.log("Trang thai may: ", checked);
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
       <CenterModal open={openModal} handleClose={handleClose}>
-        <div className="w-[380px] md:w-[550px] mx-auto overflow-hidden rounded-lg border-[1px] border-[#367FA9]">
+        <div className="w-[20rem] md:w-[550px] mx-auto overflow-hidden rounded-lg border-[1px] border-[#367FA9]">
           <div className="header bg-[#3C8DBC] text-white text-[20px] pt-1 font-bold flex items-center justify-center h-[60px] w-full">
             CẤU HÌNH CỦA MÁY IN VÀ TÙY CHỈNH
           </div>
@@ -86,41 +90,22 @@ const PrinterInfoAndConfigModal = ({
               </div>
             </div>
           </div>
-          <div className="flex justify-between items-center mb-2">
-            <div className="w-1/2 pl-5">
-              <div className="w-[200px] flex items-center">
-                <input
-                  checked={checked === "enable"}
-                  onChange={(e) => setChecked(e.target.value)}
-                  type="radio"
-                  className="w-5 h-5"
-                  name="printerState5"
-                  id="enable123"
-                  value={"enable"}
-                />
-                <label
-                  htmlFor="enable123"
-                  className="ml-3 text-[16px] md:text-[20px] font-semibold"
-                >
-                  Hoạt động
-                </label>
-              </div>
-              <div className="w-[200px] flex items-center">
-                <input
-                  checked={checked === "disable"}
-                  onChange={(e) => setChecked(e.target.value)}
-                  type="radio"
-                  className="w-5 h-5"
-                  name="printerState5"
-                  id="disable1234"
-                  value={"disable"}
-                />
-                <label
-                  htmlFor="disable1234"
-                  className="ml-3 text-[16px] md:text-[20px] font-semibold"
-                >
-                  Vô hiệu hóa
-                </label>
+          <div className="flex justify-between  items-center mb-2 ml-4">
+            <div className="flex flex-col justify-start  w-1/2 md:w-1/3 gap-2 md:gap-3">
+              <p className="text-[#066DCC] w-full flex text-[16px] md:text-[20px] font-bold mb-[8px]">
+                  Trạng thái máy in:{" "}
+              </p>
+              <div className="flex justify-start">
+                {checked === "enable" ? 
+                <p className="text-[#066DCC] flex text-[16px] md:text-[20px] font-bold w-full mb-[8px]">
+                Hoạt động{" "}
+                </p> : <p className="text-red-500 flex italic text-[16px] md:text-[20px] font-bold w-full mb-[8px]">
+                      Vô hiệu hóa{" "}
+                </p>}
+
+                <div className="switch flex gap-8">
+                  <ReactSwitch onChange={toggleState} checked={checked === "enable"}/>
+                </div>
               </div>
             </div>
             <div className="w-1/2 flex items-center justify-end pr-5">
