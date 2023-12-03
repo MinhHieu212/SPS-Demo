@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from "react";
 import CenterModal from "../BaseModals/CenterModal";
-import { SendIcon } from "../../Assets/Icons/Icons";
+import { Loading, SendIcon } from "../../Assets/Icons/Icons";
 import UserItem from "./UserItem";
 import MessItem from "./MessItem";
-import { conversation_data, fetch_list_friend, mnembers } from "./FixedData";
 import {
   getConversation,
   getConversationId,
   getFriendList,
+  sendMessage,
 } from "../../APIs/ChatAPI/ChatAPI";
+import { Socket } from "socket.io-client";
 
 const ChatboxModal = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
   const [listFriend, setListFriend] = useState([]);
-  const [conversationId, setConversationId] = useState();
-  const [recieverId, setRecieverId] = useState();
+  const [currRecieverId, setCurrRecieverId] = useState();
+  const [currConversationId, setCurrConversationId] = useState();
+  const [currSocket, setCurrSocket] = useState(null);
   const [conversation, setConversation] = useState([]);
+  const [inputMessage, setInputMessage] = useState("");
   const handleClose = () => {
     setConversation([]);
     setOpenModal(false);
   };
-
-  // call api get lisst friend (recieverId list)
 
   useEffect(() => {
     try {
@@ -36,27 +37,56 @@ const ChatboxModal = ({ children }) => {
     }
   }, []);
 
-  // call API get conversation id -> call api get conversation
-  const handleGetConversation = async (reciever_Id) => {
+  const handleGetConversation = async (
+    reciever_Id,
+    conversation_Id,
+    userSocket
+  ) => {
+    setCurrConversationId(null);
+    setCurrSocket(null);
+    setCurrRecieverId(null);
+
     try {
-      setRecieverId(reciever_Id);
-      console.log("recieverId : ", recieverId);
+      setCurrRecieverId("");
 
-      const reponse1 = await getConversationId({ receiver_id: recieverId });
-
-      setConversationId(reponse1?.data?.data[0].conversationId);
-      console.log("ConversationId : ", conversationId);
-
-      const reponse2 = await getConversation({
-        conversationId: conversationId,
+      const response = await getConversation({
+        conversationId: conversation_Id,
       });
 
-      setConversation(reponse2?.data?.data);
-      console.log("conversation : ", conversation);
+      setConversation(response?.data?.data);
+
+      setCurrConversationId(conversation_Id);
+      setCurrSocket(userSocket);
+      setCurrRecieverId(reciever_Id);
     } catch (err) {
-      console.log(err);
+      console.log("Error from inProgress get Converastion: ", err);
     }
   };
+
+  const handleSubmit = async () => {
+    const data = {
+      conversationId: currConversationId,
+      text: inputMessage,
+    };
+
+    const reponse = await sendMessage(data);
+
+    console.log("Response for send message API: ", reponse);
+
+    await currSocket.emit("create-message", currConversationId);
+
+    setInputMessage("");
+  };
+
+  if (currSocket) {
+    currSocket.on("get-message", async () => {
+      const response = await getConversation({
+        conversationId: currConversationId,
+      });
+
+      setConversation(response?.data?.data);
+    });
+  }
 
   return (
     <>
@@ -69,6 +99,7 @@ const ChatboxModal = ({ children }) => {
           <div className=" h-[90px] border-b-2 border-[#3C8DBC] overflow-x-scroll flex items-center justify-start px-2 gap-2 scroll-smooth focus:overscroll-contain">
             {listFriend?.map((member, index) => (
               <UserItem
+                key={index}
                 receiver_Name={member.firstName + " " + member.lastName}
                 reciever_Id={member.receiver_id}
                 receiver_Role={member.role}
@@ -82,21 +113,32 @@ const ChatboxModal = ({ children }) => {
             ))}
           </div>
           <div className=" h-[420px] border-b-2 border-[#3C8DBC] bg-slate-200  flex flex-col items-center justify-start p-2 gap-2">
-            {conversation?.map((conversationItem, index) => {
-              {
+            {currRecieverId !== "" ? (
+              conversation?.map((conversationItem, index) => {
                 return (
                   <MessItem
                     conversationItem={conversationItem}
-                    recieverId={recieverId}
+                    recieverId={currRecieverId}
                   ></MessItem>
                 );
-              }
-            })}
+              })
+            ) : (
+              <div className="w-full h-full flex items-center justify-center">
+                <div className="animate-spin inline-block">
+                  <Loading></Loading>
+                </div>
+              </div>
+            )}
           </div>
-          <form className=" h-[80px] border-b-2 border-[#3C8DBC] bg-slate-200  flex items-center justify-start px-3 gap-2">
+          <form
+            className=" h-[80px] border-b-2 border-[#3C8DBC] bg-slate-200  flex items-center justify-start px-3 gap-2"
+            onSubmit={handleSubmit}
+          >
             <input
               type="text"
+              value={inputMessage}
               className="w-[90%] p-2 rounded-lg bg-slate-200 text-[16px] lg:text-[18px] outline-none border-2 border-[#3C8DBC]"
+              onInput={(e) => setInputMessage(e.target.value)}
             />
             <button
               type="submit"

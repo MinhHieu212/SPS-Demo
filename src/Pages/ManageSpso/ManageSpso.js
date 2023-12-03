@@ -7,7 +7,6 @@ import { useNavigate } from "react-router";
 import { FIlterManagePriterModal } from "../../Modals";
 import { getPrintersList, addPrinter } from "../../APIs/SpsoAPI/SpsoAPI";
 import { value } from "../../Modals/FIlterManagePriterModal/FIlterManagePriterModal";
-import { newPrinter } from "../../Modals/AddPrinterModal/AddPrinterModal";
 import { PrintersData } from "./FixedData";
 import { useSocket } from "../../Contexts/SocketIOContenxt";
 

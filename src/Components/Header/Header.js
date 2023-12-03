@@ -44,11 +44,13 @@ const Header = ({ showSideBar, setShowSideBar }) => {
         </div>
       </div>
 
-      <div className="mr-8 ml-auto ">
-        <ChatboxModal>
-          <ChatIcon></ChatIcon>
-        </ChatboxModal>
-      </div>
+      {userInformation.role !== "student" ? (
+        <div className="mr-8 ml-auto ">
+          <ChatboxModal>
+            <ChatIcon></ChatIcon>
+          </ChatboxModal>
+        </div>
+      ) : null}
       <div className="Header_UserInfo flex items-center justify-between gap-3  mr-3 lg:mr-4">
         <StudentInfoModal>
           <div className=" flex items-center justify-between gap-3  mr-3 lg:mr-4">
