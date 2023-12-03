@@ -88,10 +88,10 @@ const ManageSpso = () => {
           </div>
           <div className="bg-white flex flex-row text-base font-bold justify-center items-center text-center py-[14px]">
             <p className="text-base lg:text-xl w-[40%]">
-              {printersList.totalPrinter || 0}
+              {printersList?.totalPrinter || 0}
             </p>
             <p className="text-base lg:text-xl w-[60%]">
-              {printersList.activatedPrinter || 0}
+              {printersList?.activatedPrinter || 0}
             </p>
           </div>
         </div>
