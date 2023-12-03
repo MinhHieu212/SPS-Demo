@@ -14,7 +14,6 @@ const UserItem = ({
   reciever_Location,
   getConversation = () => {},
 }) => {
- 
   return (
     <div
       className="w-[100px] shrink-0 cursor-pointer bg-slate-300 hover:bg-slate-400 transition-all rounded-lg flex flex-col items-center justify-center"
