@@ -64,10 +64,10 @@ const ManageStaff = () => {
           </div>
           <div className="bg-white flex flex-row text-base font-bold justify-center items-center text-center py-[14px]">
             <p className="text-base lg:text-xl w-1/2">
-              {data.totalPrinter || 0}
+              {data?.totalPrinter || 0}
             </p>
             <p className="text-base lg:text-xl w-1/2">
-              {data.activatedPrinter || 0}
+              {data?.activatedPrinter || 0}
             </p>
           </div>
         </div>

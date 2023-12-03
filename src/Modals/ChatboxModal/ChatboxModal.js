@@ -3,78 +3,100 @@ import CenterModal from "../BaseModals/CenterModal";
 import { SendIcon } from "../../Assets/Icons/Icons";
 import UserItem from "./UserItem";
 import MessItem from "./MessItem";
-
-const mnembers = [
-  {
-    avatar:
-      "https://media.istockphoto.com/id/1410847427/vi/anh/%C4%91%C3%A0n-%C3%B4ng-%C4%91ang-nghe-nh%E1%BA%A1c-b%E1%BA%B1ng-tai-nghe-m%E1%BB%99t-c%C3%A1ch-tho%E1%BA%A3i-m%C3%A1i-v%C3%A0-vui-v%E1%BA%BB-3d-render.jpg?s=2048x2048&w=is&k=20&c=_8duVf0uul7mznJL4ACyevZA9KMvcJSNCD3R5TROK3E=",
-    name: "Trang Anh",
-    id: 2,
-    conversation: [
-      { id: 1, message: "Hello Minh Hieu" },
-      { id: 2, message: "Hello Hung Truong" },
-      { id: 2, message: "Ban Oke chu, chuc ban sinh nhat vui ve" },
-      { id: 1, message: "Hello em iu" },
-    ],
-  },
-  {
-    avatar:
-      "https://media.istockphoto.com/id/1410847427/vi/anh/%C4%91%C3%A0n-%C3%B4ng-%C4%91ang-nghe-nh%E1%BA%A1c-b%E1%BA%B1ng-tai-nghe-m%E1%BB%99t-c%C3%A1ch-tho%E1%BA%A3i-m%C3%A1i-v%C3%A0-vui-v%E1%BA%BB-3d-render.jpg?s=2048x2048&w=is&k=20&c=_8duVf0uul7mznJL4ACyevZA9KMvcJSNCD3R5TROK3E=",
-    name: "Trang Anh",
-    id: 1,
-    conversation: [
-      { id: 1, message: "Hello Minh Hieu" },
-      { id: 2, message: "Hello Hung Truong" },
-      { id: 2, message: "Ban Oke chu, chuc ban sinh nhat vui ve" },
-      { id: 1, message: "Hello em iu" },
-    ],
-  },
-];
+import { conversation_data, fetch_list_friend, mnembers } from "./FixedData";
+import {
+  getConversation,
+  getConversationId,
+  getFriendList,
+} from "../../APIs/ChatAPI/ChatAPI";
 
 const ChatboxModal = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
+  const [listFriend, setListFriend] = useState([]);
+  const [conversationId, setConversationId] = useState();
+  const [recieverId, setRecieverId] = useState();
   const [conversation, setConversation] = useState([]);
-  const [ownerId, serOwnweId] = useState();
-
   const handleClose = () => {
+    setConversation([]);
     setOpenModal(false);
   };
 
-  const handleRenderConversation = (conversation, id) => {
-    setConversation(conversation);
-    serOwnweId(id);
+  // call api get lisst friend (recieverId list)
+
+  useEffect(() => {
+    try {
+      const callAPI = async () => {
+        const reponse = await getFriendList();
+        setListFriend(reponse.data.data);
+      };
+
+      callAPI();
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
+  // call API get conversation id -> call api get conversation
+  const handleGetConversation = async (reciever_Id) => {
+    try {
+      setRecieverId(reciever_Id);
+      console.log("recieverId : ", recieverId);
+
+      const reponse1 = await getConversationId({ receiver_id: recieverId });
+
+      setConversationId(reponse1?.data?.data[0].conversationId);
+      console.log("ConversationId : ", conversationId);
+
+      const reponse2 = await getConversation({
+        conversationId: conversationId,
+      });
+
+      setConversation(reponse2?.data?.data);
+      console.log("conversation : ", conversation);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
       <CenterModal open={openModal} handleClose={handleClose}>
-        <div className="content w-[100%] md:w-[550px] h-[660px] overflow-hidden rounded-lg  border-[1px] border-[#367FA9]">
+        <div className="content w-[350px] md:w-[550px] h-[650px] overflow-hidden rounded-lg  border-[1px] border-[#367FA9]">
           <div className="header bg-[#3C8DBC] text-white text-[20px] font-bold flex items-center justify-center h-[60px] w-full">
             TIN NHẮN
           </div>
-          <div className=" h-[100px] border-b-2 border-[#3C8DBC] overflow-x-scroll flex items-center justify-start px-2 gap-2 scroll-smooth focus:overscroll-contain">
-            {mnembers?.map((member, index) => (
+          <div className=" h-[90px] border-b-2 border-[#3C8DBC] overflow-x-scroll flex items-center justify-start px-2 gap-2 scroll-smooth focus:overscroll-contain">
+            {listFriend?.map((member, index) => (
               <UserItem
-                name={member.name}
-                id={member.id}
-                avatar={member.avatar}
-                conversation={member.conversation}
-                renderConversation={handleRenderConversation}
+                receiver_Name={member.firstName + " " + member.lastName}
+                reciever_Id={member.receiver_id}
+                receiver_Role={member.role}
+                reciever_Location={
+                  member?.location?.facility +
+                  member?.location?.department +
+                  member?.location?.room
+                }
+                getConversation={handleGetConversation}
               ></UserItem>
             ))}
           </div>
           <div className=" h-[420px] border-b-2 border-[#3C8DBC] bg-slate-200  flex flex-col items-center justify-start p-2 gap-2">
-            {conversation?.map((item, index) => {
+            {conversation?.map((conversationItem, index) => {
               {
-                return <MessItem message={item} ownerId={ownerId}></MessItem>;
+                return (
+                  <MessItem
+                    conversationItem={conversationItem}
+                    recieverId={recieverId}
+                  ></MessItem>
+                );
               }
             })}
           </div>
           <form className=" h-[80px] border-b-2 border-[#3C8DBC] bg-slate-200  flex items-center justify-start px-3 gap-2">
             <input
               type="text"
-              className="w-[90%] p-2 rounded-lg bg-slate-200 outline-none border-2 border-[#3C8DBC]"
+              className="w-[90%] p-2 rounded-lg bg-slate-200 text-[16px] lg:text-[18px] outline-none border-2 border-[#3C8DBC]"
             />
             <button
               type="submit"

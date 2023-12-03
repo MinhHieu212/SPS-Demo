@@ -1,19 +1,18 @@
-import React, { Children } from "react";
+import React from "react";
 
-const MessItem = ({ message, ownerId }) => {
-  console.log(message.id, ownerId);
+const MessItem = ({ conversationItem, recieverId }) => {
   return (
     <div
-      className={`w-full mt-1 ${
-        ownerId === message.id ? "text-right" : "text-left"
+      className={`w-full text-[16px] lg:text-[18px] mt-1 ${
+        recieverId !== conversationItem.senderId ? "text-right" : "text-left"
       }`}
     >
       <div
         className={`max-w-[80%] p-2 inline-block rounded-lg text-white ${
-          ownerId === message.id ? "bg-[blue]" : "bg-[gray]"
+          recieverId !== conversationItem.senderId ? "bg-[blue]" : "bg-[gray]"
         }`}
       >
-        {message.message}
+        {conversationItem.text}
       </div>
     </div>
   );
