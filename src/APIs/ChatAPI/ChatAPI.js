@@ -59,6 +59,8 @@ export const getConversation = async (params) => {
 };
 
 export const sendMessage = async (data) => {
+  console.log("Data of getConversation: ", data);
+
   const Response = await SpssAPI.post(path4, data)
     .then((response) => {
       //   console.log("Success - Response sendMessage", response);

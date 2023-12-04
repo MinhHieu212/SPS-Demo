@@ -41,7 +41,9 @@ const UserItem = ({
           receiver_id: reciever_Id,
         });
 
-        setConversationId(response1?.data?.data[0].conversationId);
+        // while (conversationId === undefined) {
+        //   setConversationId(response1?.data?.data[0].conversationId);
+        // }
 
         socket.emit("join-room", response1?.data?.data[0].conversationId);
       } catch (err) {
@@ -52,10 +54,22 @@ const UserItem = ({
     callAPI();
   }, []);
 
+  console.log({
+    reciever_Id: reciever_Id,
+    conversationId: conversationId,
+    userSocket: userSocket,
+  });
+
   return (
     <div
       className="w-[100px] shrink-0 cursor-pointer bg-slate-300 hover:bg-slate-400 transition-all rounded-lg flex flex-col items-center justify-center"
-      onClick={() => getConversation(reciever_Id, conversationId, userSocket)}
+      onClick={() =>
+        getConversation({
+          reciever_Id: reciever_Id,
+          conversationId: conversationId,
+          userSocket: userSocket,
+        })
+      }
     >
       <div className="w-[45px] h-[45px] rounded-full mt-1 overflow-hidden border-2 border-black">
         <img

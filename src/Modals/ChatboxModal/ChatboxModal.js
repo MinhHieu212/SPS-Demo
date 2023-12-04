@@ -9,7 +9,6 @@ import {
   getFriendList,
   sendMessage,
 } from "../../APIs/ChatAPI/ChatAPI";
-import { Socket } from "socket.io-client";
 
 const ChatboxModal = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -19,6 +18,7 @@ const ChatboxModal = ({ children }) => {
   const [currSocket, setCurrSocket] = useState(null);
   const [conversation, setConversation] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
+
   const handleClose = () => {
     setConversation([]);
     setOpenModal(false);
@@ -37,11 +37,11 @@ const ChatboxModal = ({ children }) => {
     }
   }, []);
 
-  const handleGetConversation = async (
+  const handleGetConversation = async ({
     reciever_Id,
     conversation_Id,
-    userSocket
-  ) => {
+    userSocket,
+  }) => {
     setCurrConversationId(null);
     setCurrSocket(null);
     setCurrRecieverId(null);
@@ -63,18 +63,15 @@ const ChatboxModal = ({ children }) => {
     }
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     const data = {
       conversationId: currConversationId,
       text: inputMessage,
     };
-
     const reponse = await sendMessage(data);
-
-    console.log("Response for send message API: ", reponse);
-
+    console.log("Reponse for send message API: ", reponse);
     await currSocket.emit("create-message", currConversationId);
-
     setInputMessage("");
   };
 
@@ -112,11 +109,12 @@ const ChatboxModal = ({ children }) => {
               ></UserItem>
             ))}
           </div>
-          <div className=" h-[420px] border-b-2 border-[#3C8DBC] bg-slate-200  flex flex-col items-center justify-start p-2 gap-2">
+          <div className=" h-[420px] border-b-2 border-[#3C8DBC] bg-slate-200  flex flex-col items-center justify-start p-2 gap-2 overflow-y-scroll">
             {currRecieverId !== "" ? (
-              conversation?.map((conversationItem, index) => {
+              conversation?.reverse()?.map((conversationItem, index) => {
                 return (
                   <MessItem
+                    key={index}
                     conversationItem={conversationItem}
                     recieverId={currRecieverId}
                   ></MessItem>
