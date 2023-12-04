@@ -11,7 +11,7 @@ const ChatboxModal = ({ children }) => {
   const [listFriend, setListFriend] = useState([]);
   const [currRecieverId, setCurrRecieverId] = useState();
   const [currConversationId, setCurrConversationId] = useState();
-  // const [currSocket, setCurrSocket] = useState(null);
+  const [currSocket, setCurrSocket] = useState(null);
   const [conversation, setConversation] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
 
@@ -56,25 +56,14 @@ const ChatboxModal = ({ children }) => {
     }
   };
 
-  // if (currSocket) {
-  //   currSocket.on("get-message", async () => {
-  //     const response = await getConversation({
-  //       conversationId: currConversationId,
-  //     });
-  //     setConversation(response?.data?.data);
-  //   });
-  // }
-
   const handleGetConversation = async ({
     reciever_Id,
     conversation_Id,
     userSocket,
   }) => {
     setCurrConversationId(null);
-    // setCurrSocket(null);
     setCurrRecieverId(null);
     setInputMessage("");
-
     try {
       setCurrRecieverId("");
 
@@ -85,12 +74,22 @@ const ChatboxModal = ({ children }) => {
       if (response) setConversation(response?.data?.data);
 
       setCurrConversationId(conversation_Id);
-      // setCurrSocket(userSocket);
+      setCurrSocket(userSocket);
       setCurrRecieverId(reciever_Id);
     } catch (err) {
       console.log("Error from inProgress get Converastion: ", err);
     }
   };
+
+  // if (currSocket) {
+  //   currSocket.on("get-message", async () => {
+  //     // const response = await getConversation({
+  //     //   conversationId: currConversationId,
+  //     // });
+  //     // setConversation(response?.data?.data);
+  //     console.log("get-message signal");
+  //   });
+  // }
 
   return (
     <>
