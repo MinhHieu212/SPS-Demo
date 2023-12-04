@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NoticeItem from "./NoticeItem";
+import { getNotice } from "../../APIs/SpsoAPI/SpsoAPI";
+import { useNavigate } from "react-router";
+import { convertTime } from "../../Utils/Time";
 export var newNotifies = 6;
 const notices = [
   {
@@ -58,6 +61,21 @@ const notices = [
   }
 ]
 const Notice = () => {
+  const navigate = useNavigate();
+  const [renderList, setRenderList] = useState(true);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const handleGetNotice = async(params) => {
+      const response = await getNotice(params);
+      console.log(response?.data?.data.allNotices);
+      setData(response?.data?.data.allNotices);
+    }
+    handleGetNotice({});
+    if (localStorage.getItem("accessToken") === null) {
+      navigate("/Login");
+    }
+  }, [renderList])
   return <div className="Notice mx-auto max-w-[1280px] w-full px-[10px] lg:px-[20px] bg-[white] shadow-sm pb-5 min-h-[93vh]">
     <div className="flex flex-row mt-3 border-b-4 border-[#066DCC] pb-2 md:pb-3 mb-4 items-center justify-between">
       <h2 className="text-2xl lg:text-3xl font-semibold printing-title pb-2 md:pb-3 pt-2 text-[#066DCC] ">
@@ -71,15 +89,15 @@ const Notice = () => {
         <div className="text-center w-[20%]">VỊ TRÍ</div>
         <div className="text-center w-[20%]">THỜI GIAN</div>
       </div>
-        {notices?.map((notice, index) => (
+        {data?.map((item, index) => (
           <NoticeItem
-            new={newNotifies}
+            new={0}
             key={index}
             index={index}
-            role={notice.role}
-            content={notice.content}
-            location={notice.location}
-            time={notice.time}
+            role={item.sender.role}
+            content={""}
+            location={item.location.facility + ", " + item.location.department + ", " + item.location.room}
+            time={convertTime(item.createdAt).slice(0,10) + " " + convertTime(item.createdAt).slice(11,19)}
           />
         ))}
     </div>
