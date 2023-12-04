@@ -8,8 +8,10 @@ import { newPtr } from "../../Modals/PrinterInfoAndConfigModal/PrinterInfoAndCon
 import { useSocket } from "../../Contexts/SocketIOContenxt";
 import { fixedData } from "./FixedData";
 
+
 const ManageStaff = () => {
   const [renderList, setRenderList] = useState(true);
+  const [focus, setFocus] = useState(false);
   const [data, setData] = useState([]);
   const [printerID, setPrinterID] = useState("");
   const [searchID, setSearchID] = useState("");
@@ -41,6 +43,14 @@ const ManageStaff = () => {
     }
   }, [renderList]);
 
+
+  const emptyInput = (val) => {
+    if (val === "" && focus === true) {
+      console.log("CC");
+      setSearchID("");
+      setRenderList(!renderList);
+    }
+  }
   socket.on("update-printer-list", () => {
     console.log("Received update-printer-list signal");
     fetchDataAndUpdate();
@@ -76,7 +86,9 @@ const ManageStaff = () => {
             type="text"
             placeholder="Tìm theo ID máy in"
             className="w-full lg:w-[100%] border block border-black"
-            onChange={(e) => setPrinterID(e.target.value)}
+            onFocus={() => setFocus(true)}
+            onBlur={() => setFocus(false)}
+            onChange={(e) => {setPrinterID(e.target.value), emptyInput(e.target.value)}}
           />
           <div className="absolute right-[3%] bottom-1/2 translate-y-1/2">
             <div

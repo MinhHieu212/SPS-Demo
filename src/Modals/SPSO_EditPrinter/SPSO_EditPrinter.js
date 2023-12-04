@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import CenterModal from "../BaseModals/CenterModal";
 import { editPrinter } from "../../APIs/SpsoAPI/SpsoAPI";
 import { toast } from "../../Utils/Toastify";
+import ReactSwitch from "react-switch";
 export const newData = {
   location: {},
 };
@@ -18,6 +19,9 @@ const SPSOEditPrinterModal = ({
   functionRenderList1,
 }) => {
   const [checked, setChecked] = useState(printerStatus);
+  const toggleState = () => {
+    setChecked((curr) => (curr === "enable" ? "disable" : "enable"));
+  }
   const [openModal, setOpenModal] = useState(false);
   const handleClose = () => {
     setOpenModal(false);
@@ -38,6 +42,7 @@ const SPSOEditPrinterModal = ({
     newData.model = type;
     newData.description = desc;
     newData.status = checked === "enable" ? 1 : 0;
+
     //handleEditAPI(newData);
     //setRenderList1(!renderList1);
 
@@ -53,13 +58,14 @@ const SPSOEditPrinterModal = ({
     } catch (error) {
       toast.error("Tùy chỉnh thông tin máy tin thất bại");
     }
+    setOpenModal(false);
   };
-  //console.log(checked);
+
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
       <CenterModal open={openModal} handleClose={handleClose}>
-        <div className="w-[380px] md:w-[550px] mx-auto overflow-hidden rounded-lg border-[1px] border-[#367FA9] min-h-[581px] md:min-h-[610px]">
+        <div className="w-[380px] md:w-[550px] mx-auto overflow-hidden rounded-lg border-[1px] border-[#367FA9] min-h-[581px] md:min-h-[590px]">
           <div className="header bg-[#3C8DBC] text-white text-[20px] pt-1 font-bold flex items-center justify-center h-[60px] w-full">
             THÔNG TIN MÁY IN VÀ TÙY CHỈNH
           </div>
@@ -142,53 +148,25 @@ const SPSOEditPrinterModal = ({
                   ></textarea>
                 </div>
               </div>
-              <div className="flex flex-col">
-                <p className="text-[#066DCC] text-[16px] md:text-[20px] font-bold w-[124px] mb-[8px]">
+              <div className="flex justify-between items-center">
+                <div className="flex flex-col justify-start w-1/2 gap-2 md:gap-3">
+                <p className="text-[#066DCC] w-full flex text-[16px] md:text-[20px] font-bold mb-[8px]">
                   Trạng thái:{" "}
                 </p>
-                <div className="flex flex-row items-end ">
-                  <div>
-                    <div className="flex items-center mb-[4px] gap-[22px]">
-                      <input
-                        checked={checked === "enable"}
-                        onChange={(e) => {
-                          //e.preventDefault();
-                          setChecked(e.target.value);
-                        }}
-                        id="enable"
-                        type="radio"
-                        value="enable"
-                        name="statusPrinter2"
-                        className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300"
-                      />
-                      <label
-                        htmlFor="enable"
-                        className="text-[16px] md:text-[20px] font-semibold p-0"
-                      >
-                        Hoạt động
-                      </label>
-                    </div>
-                    <div className="flex items-center gap-[22px]">
-                      <input
-                        checked={checked === "disable"}
-                        onChange={(e) => {
-                          //e.preventDefault();
-                          setChecked(e.target.value);
-                        }}
-                        id="disable"
-                        type="radio"
-                        value="disable"
-                        name="statusPrinter2"
-                        className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300"
-                      />
-                      <label
-                        htmlFor="disable"
-                        className="text-[16px] md:text-[20px] font-semibold p-0"
-                      >
-                        Tạm dừng
-                      </label>
-                    </div>
-                  </div>
+                <div className="flex flex-row justify-start md:gap-4 gap-2 w-full">
+                {checked === "enable" ? 
+                <p className="text-[#066DCC] flex text-[16px] md:text-[20px] font-bold w-1/2 mb-[8px]">
+                Hoạt động{" "}
+                </p> : <p className="text-red-500 flex italic text-[16px] md:text-[20px] font-bold w-1/2 mb-[8px]">
+                      Vô hiệu hóa{" "}
+                </p>}
+
+                <div className="switch flex">
+                  <ReactSwitch onChange={toggleState} checked={checked === "enable"}/>
+                </div>
+              </div>
+            </div>
+                <div className="flex flex-col items-end justify-end">
                   <button
                     onClick={handleSubmit}
                     className="ml-auto bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500 hover:bg-blue-300 p-2 w-[154px] rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center"
