@@ -41,12 +41,18 @@ const ChatboxModal = ({ children }) => {
         text: inputMessage,
       };
 
+      setInputMessage("");
+
       const reponse = await sendMessage(data);
       console.log("Reponse for send message API: ", reponse);
 
-      // await currSocket.emit("create-message", currConversationId);
+      const response = await getConversation({
+        conversationId: currConversationId,
+      });
 
-      setInputMessage("");
+      if (response) setConversation(response?.data?.data);
+
+      // await currSocket.emit("create-message", currConversationId);
     }
   };
 
