@@ -1,9 +1,8 @@
 {
   "files": {
-    "main.css": "/SPS-FE-Project/static/css/main.5c65ecc6.css",
-    "main.js": "/SPS-FE-Project/static/js/main.6576ae63.js",
+    "main.css": "/SPS-FE-Project/static/css/main.b1014cc1.css",
+    "main.js": "/SPS-FE-Project/static/js/main.fbc4215e.js",
     "static/js/787.7a8eec0c.chunk.js": "/SPS-FE-Project/static/js/787.7a8eec0c.chunk.js",
-    "static/media/slbk2.jpg": "/SPS-FE-Project/static/media/slbk2.608c3fe277f93ccce81b.jpg",
     "static/media/sv.jpg": "/SPS-FE-Project/static/media/sv.2b20417f9b2c4e71e9f5.jpg",
     "static/media/un1.jpg": "/SPS-FE-Project/static/media/un1.59fdfacf873feba25037.jpg",
     "static/media/banner.png": "/SPS-FE-Project/static/media/banner.98438c68eee217183a6d.png",
@@ -13,12 +12,12 @@
     "static/media/student.svg": "/SPS-FE-Project/static/media/student.1af68e3b3c30f03eccd57aa8ead5efd9.svg",
     "static/media/employee-icon.svg": "/SPS-FE-Project/static/media/employee-icon.f9643d58b3ef777f50a15520cba86d53.svg",
     "index.html": "/SPS-FE-Project/index.html",
-    "main.5c65ecc6.css.map": "/SPS-FE-Project/static/css/main.5c65ecc6.css.map",
-    "main.6576ae63.js.map": "/SPS-FE-Project/static/js/main.6576ae63.js.map",
+    "main.b1014cc1.css.map": "/SPS-FE-Project/static/css/main.b1014cc1.css.map",
+    "main.fbc4215e.js.map": "/SPS-FE-Project/static/js/main.fbc4215e.js.map",
     "787.7a8eec0c.chunk.js.map": "/SPS-FE-Project/static/js/787.7a8eec0c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5c65ecc6.css",
-    "static/js/main.6576ae63.js"
+    "static/css/main.b1014cc1.css",
+    "static/js/main.fbc4215e.js"
   ]
 }
