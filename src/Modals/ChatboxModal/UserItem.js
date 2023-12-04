@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
-import {
-  getConversation,
-  getConversationId,
-  getFriendList,
-} from "../../APIs/ChatAPI/ChatAPI";
+import { getConversationId } from "../../APIs/ChatAPI/ChatAPI";
 
 export const avatars = [
   "https://media.istockphoto.com/id/1410847427/vi/anh/%C4%91%C3%A0n-%C3%B4ng-%C4%91ang-nghe-nh%E1%BA%A1c-b%E1%BA%B1ng-tai-nghe-m%E1%BB%99t-c%C3%A1ch-tho%E1%BA%A3i-m%C3%A1i-v%C3%A0-vui-v%E1%BA%BB-3d-render.jpg?s=2048x2048&w=is&k=20&c=_8duVf0uul7mznJL4ACyevZA9KMvcJSNCD3R5TROK3E=",
@@ -41,9 +37,7 @@ const UserItem = ({
           receiver_id: reciever_Id,
         });
 
-        // while (conversationId === undefined) {
-        //   setConversationId(response1?.data?.data[0].conversationId);
-        // }
+        setConversationId(response1?.data?.data[0].conversationId);
 
         socket.emit("join-room", response1?.data?.data[0].conversationId);
       } catch (err) {
@@ -54,22 +48,16 @@ const UserItem = ({
     callAPI();
   }, []);
 
-  console.log({
-    reciever_Id: reciever_Id,
-    conversationId: conversationId,
-    userSocket: userSocket,
-  });
-
   return (
     <div
       className="w-[100px] shrink-0 cursor-pointer bg-slate-300 hover:bg-slate-400 transition-all rounded-lg flex flex-col items-center justify-center"
-      onClick={() =>
+      onClick={() => {
         getConversation({
           reciever_Id: reciever_Id,
-          conversationId: conversationId,
+          conversation_Id: conversationId,
           userSocket: userSocket,
-        })
-      }
+        });
+      }}
     >
       <div className="w-[45px] h-[45px] rounded-full mt-1 overflow-hidden border-2 border-black">
         <img

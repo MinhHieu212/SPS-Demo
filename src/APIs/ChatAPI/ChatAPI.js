@@ -24,7 +24,7 @@ export const getFriendList = async () => {
 };
 
 export const getConversationId = async (params) => {
-  console.log("parmas of getConversationId: ", params);
+  // console.log("parmas of getConversationId: ", params);
   const Response = await SpssAPI.get(path2, {
     params: params,
   })
@@ -41,7 +41,7 @@ export const getConversationId = async (params) => {
 };
 
 export const getConversation = async (params) => {
-  console.log("parmas of getConversation: ", params);
+  // console.log("parmas of getConversation: ", params);
 
   const Response = await SpssAPI.get(path3, {
     params: params,
@@ -59,7 +59,7 @@ export const getConversation = async (params) => {
 };
 
 export const sendMessage = async (data) => {
-  console.log("Data of getConversation: ", data);
+  // console.log("Data of getConversation: ", data);
 
   const Response = await SpssAPI.post(path4, data)
     .then((response) => {

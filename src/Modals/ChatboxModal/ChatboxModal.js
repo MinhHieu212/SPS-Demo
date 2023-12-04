@@ -53,7 +53,7 @@ const ChatboxModal = ({ children }) => {
         conversationId: conversation_Id,
       });
 
-      setConversation(response?.data?.data);
+      if (response) setConversation(response?.data?.data);
 
       setCurrConversationId(conversation_Id);
       setCurrSocket(userSocket);
@@ -65,10 +65,12 @@ const ChatboxModal = ({ children }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const data = {
       conversationId: currConversationId,
       text: inputMessage,
     };
+
     const reponse = await sendMessage(data);
     console.log("Reponse for send message API: ", reponse);
     await currSocket.emit("create-message", currConversationId);
@@ -80,7 +82,6 @@ const ChatboxModal = ({ children }) => {
       const response = await getConversation({
         conversationId: currConversationId,
       });
-
       setConversation(response?.data?.data);
     });
   }
