@@ -54,7 +54,11 @@ const Home = () => {
             </p>
           </div>
           <div className="relative  w-[300px] md:w-[30%] h-[280px] lg:h-[350px] rounded-[1.5rem] overflow-hidden shadow-lg">
-            <img src={un1} alt="Xem lịch sử" className="w-full h-full object-fill" />
+            <img
+              src={un1}
+              alt="Xem lịch sử"
+              className="w-full h-full object-fill"
+            />
             <p className="item-title absolute font-semibold text-2xl lg:text-3xl text-white text-center drop-shadow-lg">
               Xem lịch sử in ấn của bạn
             </p>
@@ -172,7 +176,7 @@ const Home = () => {
               <div className="w-[50%] md:w-[35%] flex items-center justify-center ">
                 <FontAwesomeIcon
                   icon={faGaugeHigh}
-                  size="6x "
+                  size="6x"
                   color="#1B9B2F"
                   className="mb-2 md:w-2/5"
                 />

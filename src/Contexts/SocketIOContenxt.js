@@ -7,7 +7,7 @@ export const SocketProvider = ({ children }) => {
   const socket = io("https://ssps-7wxl.onrender.com");
 
   socket.on("connect", () => {
-    console.log("Connecttion signal");
+    console.log("Init Socket IO Connecttion Signal", socket.id);
   });
 
   return (

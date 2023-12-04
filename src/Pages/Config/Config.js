@@ -180,7 +180,7 @@ const Config = () => {
                   className="inline border-1 border-[#1488DB] rounded-md"
                   type="date"
                   name="date"
-                  id="datepicker"
+                  id="datepicker1"
                   required
                   onChange={(e) => {
                     const dayValue = format(
@@ -208,7 +208,7 @@ const Config = () => {
                   className="inline border-1 border-[#1488DB] rounded-md"
                   type="date"
                   name="date"
-                  id="datepicker"
+                  id="datepicker2"
                   required
                   onChange={(e) => {
                     const dayValue = format(

@@ -3,19 +3,15 @@ import CenterModal from "../BaseModals/CenterModal";
 import { Loading, SendIcon } from "../../Assets/Icons/Icons";
 import UserItem from "./UserItem";
 import MessItem from "./MessItem";
-import {
-  getConversation,
-  getConversationId,
-  getFriendList,
-  sendMessage,
-} from "../../APIs/ChatAPI/ChatAPI";
+import { getConversation, getFriendList } from "../../APIs/ChatAPI/ChatAPI";
+import { sendMessage } from "../../APIs/ChatAPI/SendMessAPI";
 
 const ChatboxModal = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
   const [listFriend, setListFriend] = useState([]);
   const [currRecieverId, setCurrRecieverId] = useState();
   const [currConversationId, setCurrConversationId] = useState();
-  const [currSocket, setCurrSocket] = useState(null);
+  // const [currSocket, setCurrSocket] = useState(null);
   const [conversation, setConversation] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
 
@@ -37,14 +33,41 @@ const ChatboxModal = ({ children }) => {
     }
   }, []);
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (inputMessage !== "") {
+      const data = {
+        conversationId: currConversationId,
+        text: inputMessage,
+      };
+
+      const reponse = await sendMessage(data);
+      console.log("Reponse for send message API: ", reponse);
+
+      // await currSocket.emit("create-message", currConversationId);
+
+      setInputMessage("");
+    }
+  };
+
+  // if (currSocket) {
+  //   currSocket.on("get-message", async () => {
+  //     const response = await getConversation({
+  //       conversationId: currConversationId,
+  //     });
+  //     setConversation(response?.data?.data);
+  //   });
+  // }
+
   const handleGetConversation = async ({
     reciever_Id,
     conversation_Id,
     userSocket,
   }) => {
     setCurrConversationId(null);
-    setCurrSocket(null);
+    // setCurrSocket(null);
     setCurrRecieverId(null);
+    setInputMessage("");
 
     try {
       setCurrRecieverId("");
@@ -56,45 +79,22 @@ const ChatboxModal = ({ children }) => {
       if (response) setConversation(response?.data?.data);
 
       setCurrConversationId(conversation_Id);
-      setCurrSocket(userSocket);
+      // setCurrSocket(userSocket);
       setCurrRecieverId(reciever_Id);
     } catch (err) {
       console.log("Error from inProgress get Converastion: ", err);
     }
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const data = {
-      conversationId: currConversationId,
-      text: inputMessage,
-    };
-
-    const reponse = await sendMessage(data);
-    console.log("Reponse for send message API: ", reponse);
-    await currSocket.emit("create-message", currConversationId);
-    setInputMessage("");
-  };
-
-  if (currSocket) {
-    currSocket.on("get-message", async () => {
-      const response = await getConversation({
-        conversationId: currConversationId,
-      });
-      setConversation(response?.data?.data);
-    });
-  }
-
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
       <CenterModal open={openModal} handleClose={handleClose}>
-        <div className="content w-[350px] md:w-[550px] h-[650px] overflow-hidden rounded-lg  border-[1px] border-[#367FA9]">
+        <div className="content w-[350px] md:w-[550px] h-[645px] overflow-hidden rounded-[15px]  border-[1px] border-[#367FA9]">
           <div className="header bg-[#3C8DBC] text-white text-[20px] font-bold flex items-center justify-center h-[60px] w-full">
             TIN NHẮN
           </div>
-          <div className=" h-[90px] border-b-2 border-[#3C8DBC] overflow-x-scroll flex items-center justify-start px-2 gap-2 scroll-smooth focus:overscroll-contain">
+          <div className=" h-[85px]  border-b-2 border-[#3C8DBC] rounded-lg overflow-x-scroll flex items-center justify-start px-2 gap-2 scroll-smooth focus:overscroll-contain">
             {listFriend?.map((member, index) => (
               <UserItem
                 key={index}
@@ -112,7 +112,7 @@ const ChatboxModal = ({ children }) => {
           </div>
           <div className=" h-[420px] border-b-2 border-[#3C8DBC] bg-slate-200  flex flex-col items-center justify-start p-2 gap-2 overflow-y-scroll">
             {currRecieverId !== "" ? (
-              conversation?.reverse()?.map((conversationItem, index) => {
+              conversation?.map((conversationItem, index) => {
                 return (
                   <MessItem
                     key={index}
@@ -136,7 +136,7 @@ const ChatboxModal = ({ children }) => {
             <input
               type="text"
               value={inputMessage}
-              className="w-[90%] p-2 rounded-lg bg-slate-200 text-[16px] lg:text-[18px] outline-none border-2 border-[#3C8DBC]"
+              className="w-[90%] p-2 rounded-lg bg-slate-200 text-[16px] lg:text-[18px] outline-none border-3 border-[#3C8DBC]"
               onInput={(e) => setInputMessage(e.target.value)}
             />
             <button
