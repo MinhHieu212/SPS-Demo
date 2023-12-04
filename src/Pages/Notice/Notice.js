@@ -4,62 +4,6 @@ import { getNotice } from "../../APIs/SpsoAPI/SpsoAPI";
 import { useNavigate } from "react-router";
 import { convertTime } from "../../Utils/Time";
 export var newNotifies = 6;
-const notices = [
-  {
-    role: "SPSO",
-    content: "David Nguyễn đã vô hiệu hóa máy in H3301",
-    location: "CS2, H3, 301",
-    time: "2023-11-21 19:23:07"
-  },
-  {
-    role: "SPSO",
-    content: "David Nguyễn đã vô hiệu hóa máy in H3301",
-    location: "CS2, H3, 301",
-    time: "2023-11-21 19:23:07"
-  },
-  {
-    role: "SPSO",
-    content: "David Nguyễn đã vô hiệu hóa máy in H3301",
-    location: "CS2, H3, 301",
-    time: "2023-11-21 19:23:07"
-  },
-  {
-    role: "SPSO",
-    content: "David Nguyễn đã vô hiệu hóa máy in H3301",
-    location: "CS2, H3, 301",
-    time: "2023-11-21 19:23:07"
-  },
-  {
-    role: "SPSO",
-    content: "David Nguyễn đã vô hiệu hóa máy in H3301",
-    location: "CS2, H3, 301",
-    time: "2023-11-21 19:23:07"
-  },
-  {
-    role: "SPSO",
-    content: "David Nguyễn đã vô hiệu hóa máy in H3301",
-    location: "CS2, H3, 301",
-    time: "2023-11-21 19:23:07"
-  },
-  {
-    role: "SPSO",
-    content: "David Nguyễn đã vô hiệu hóa máy in H3301",
-    location: "CS2, H3, 301",
-    time: "2023-11-21 19:23:07"
-  },
-  {
-    role: "SPSO",
-    content: "David Nguyễn đã vô hiệu hóa máy in H3301",
-    location: "CS2, H3, 301",
-    time: "2023-11-21 19:23:07"
-  },
-  {
-    role: "SPSO",
-    content: "David Nguyễn đã vô hiệu hóa máy in H3301",
-    location: "CS2, H3, 301",
-    time: "2023-11-21 19:23:07"
-  }
-]
 const Notice = () => {
   const navigate = useNavigate();
   const [renderList, setRenderList] = useState(true);
