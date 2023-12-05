@@ -34,12 +34,11 @@ const ChatboxModal = ({ children }) => {
     }
 
     if (UserSocket) {
-      UserSocket?.socket?.on("get-message", async () => {
+      UserSocket?.socket?.on("get-message", async (data) => {
         const response = await getConversation({
-          conversationId: currConversationId,
+          conversationId: data.conversationId,
         });
         setConversation(response?.data?.data);
-        console.log("get-message signal and re-render conversation");
       });
     }
   }, []);
@@ -55,24 +54,28 @@ const ChatboxModal = ({ children }) => {
       setInputMessage("");
 
       const reponse = await sendMessage(data);
-      console.log("Reponse for send message API: ", reponse);
-
-      const response = await getConversation({
-        conversationId: currConversationId,
-      });
-
-      if (response) setConversation(response?.data?.data);
 
       if (UserSocket) {
-        await UserSocket?.socket?.emit("create-message", currConversationId);
+        await UserSocket?.socket?.emit(
+          "create-message",
+          currConversationId,
+          data.text
+        );
       }
     }
   };
 
   const handleGetConversation = async ({ reciever_Id, conversation_Id }) => {
-    setCurrConversationId(null);
+    setCurrConversationId(conversation_Id);
     setCurrRecieverId(null);
     setInputMessage("");
+
+    console.log(
+      "Beforce set conversatoin id and reciever id",
+      reciever_Id,
+      conversation_Id
+    );
+
     try {
       setCurrRecieverId("");
 
@@ -81,13 +84,10 @@ const ChatboxModal = ({ children }) => {
       });
 
       if (response) setConversation(response?.data?.data);
-
-      setCurrConversationId(conversation_Id);
-
-      setCurrRecieverId(reciever_Id);
     } catch (err) {
       console.log("Error from inProgress get Converastion: ", err);
     }
+    setCurrRecieverId(reciever_Id);
   };
 
   return (

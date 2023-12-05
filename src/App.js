@@ -41,19 +41,19 @@ function renderRoutes(routes, role = "") {
 
 function App() {
   const roleContext = useRole();
-  // const userInfoContext = useUserInfo();
+  const userInfoContext = useUserInfo();
 
-  // console.log("RoleContext", roleContext);
+  console.log("RoleContext", roleContext);
 
-  // useEffect(() => {
-  //   const handleReload = async () => {
-  //     const userInformation = await UserInfoAPI();
+  useEffect(() => {
+    const handleReload = async () => {
+      const userInformation = await UserInfoAPI();
 
-  //     await roleContext.updateRole(userInformation?.data?.data?.role);
-  //     await userInfoContext.updateUserInfo(userInformation?.data?.data);
-  //   };
-  //   handleReload();
-  // }, []);
+      await roleContext.updateRole(userInformation?.data?.data?.role);
+      await userInfoContext.updateUserInfo(userInformation?.data?.data);
+    };
+    handleReload();
+  }, []);
 
   return (
     <Routes>

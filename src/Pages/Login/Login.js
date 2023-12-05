@@ -56,8 +56,8 @@ const Login = () => {
 
     await userInfoContext.updateUserInfo(userInformation?.data?.data);
 
-    // const socket = io("http://172.16.1.230:8000");
-    const socket = io("https://ssps-7wxl.onrender.com");
+    const socket = io("http://172.16.1.230:8000");
+    // const socket = io("https://ssps-7wxl.onrender.com");
 
     socket.on("connect", () => {
       console.log("Init Socket IO Connecttion Signal", socket?.id);
