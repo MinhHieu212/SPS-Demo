@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const SendMessAPI = axios.create({
-  // baseURL: "https://ssps-7wxl.onrender.com",
-  baseURL: "http://172.16.1.230:8000",
+  baseURL: "https://ssps-7wxl.onrender.com",
+  // baseURL: "http://172.16.1.230:8000",
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
   },
