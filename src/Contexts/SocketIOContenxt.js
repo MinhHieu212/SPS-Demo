@@ -1,17 +1,18 @@
-import React, { createContext, useContext } from "react";
-import { io } from "socket.io-client";
+import React, { createContext, useContext, useState } from "react";
 
 const SocketIOContenxt = createContext();
 
 export const SocketProvider = ({ children }) => {
-  const socket = io("https://ssps-7wxl.onrender.com");
+  const [socket, setSocket] = useState();
 
-  socket.on("connect", () => {
-    console.log("Init Socket IO Connecttion Signal", socket.id);
-  });
+  const connectSocket = (newSocket) => {
+    setSocket(newSocket);
+  };
+
+  const value = { socket, connectSocket };
 
   return (
-    <SocketIOContenxt.Provider value={socket}>
+    <SocketIOContenxt.Provider value={value}>
       {children}
     </SocketIOContenxt.Provider>
   );

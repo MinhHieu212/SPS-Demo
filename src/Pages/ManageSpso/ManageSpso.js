@@ -17,7 +17,7 @@ const ManageSpso = () => {
 
   let params = {};
   const navigate = useNavigate();
-  const socket = useSocket();
+  const Usersocket = useSocket();
 
   const handleSPSOApi = async (params) => {
     const response = await getPrintersList(params);
@@ -51,12 +51,12 @@ const ManageSpso = () => {
     await handleSPSOApi(params);
   };
 
-  socket.on("update-printer-list", (params) => {
+  Usersocket?.socket?.on("update-printer-list", (params) => {
     console.log("Received update-printer-list Manage SPSO", params);
     fetchDataAndUpdate(params);
   });
 
-  socket.on("update-student-history", (params) => {
+  Usersocket?.socket?.on("update-student-history", (params) => {
     console.log("Received update-student-history signal");
     fetchDataAndUpdate(params);
   });

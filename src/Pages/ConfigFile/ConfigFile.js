@@ -9,7 +9,7 @@ import { fi } from "date-fns/locale";
 
 const ConfigFile = () => {
   const navigate = useNavigate();
-  const socket = useSocket();
+  const UserSocket = useSocket();
   const { PrinterID } = useParams();
   const [files, setFiles] = useState([]);
   const [renderInfo, setrednerInfo] = useState(true);
@@ -59,7 +59,7 @@ const ConfigFile = () => {
     }
   }, [renderInfo]);
 
-  socket.on("update-printer-list", () => {
+  UserSocket?.socket?.on("update-printer-list", () => {
     console.log("Received update-printer-list signal");
     fetchDataAndUpdate();
   });

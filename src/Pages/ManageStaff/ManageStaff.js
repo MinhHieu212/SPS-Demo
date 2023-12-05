@@ -8,7 +8,6 @@ import { newPtr } from "../../Modals/PrinterInfoAndConfigModal/PrinterInfoAndCon
 import { useSocket } from "../../Contexts/SocketIOContenxt";
 import { fixedData } from "./FixedData";
 
-
 const ManageStaff = () => {
   const [renderList, setRenderList] = useState(true);
   const [focus, setFocus] = useState(false);
@@ -18,7 +17,7 @@ const ManageStaff = () => {
   const [printers, setPrinters] = useState([]);
   const [fileType, setFileType] = useState([]);
   const navigate = useNavigate();
-  const socket = useSocket();
+  const UserSocket = useSocket();
 
   const handleGetPtr = async (params) => {
     const response = await getPtr(params);
@@ -43,20 +42,19 @@ const ManageStaff = () => {
     }
   }, [renderList]);
 
-
   const emptyInput = (val) => {
     if (val === "" && focus === true) {
       console.log("CC");
       setSearchID("");
       setRenderList(!renderList);
     }
-  }
-  socket.on("update-printer-list", () => {
+  };
+  UserSocket?.socket?.on("update-printer-list", () => {
     console.log("Received update-printer-list signal");
     fetchDataAndUpdate();
   });
 
-  socket.on("update-student-history", () => {
+  UserSocket?.socket?.on("update-student-history", () => {
     console.log("Received update-student-history signal");
     fetchDataAndUpdate();
   });
@@ -88,7 +86,9 @@ const ManageStaff = () => {
             className="w-full lg:w-[100%] border block border-black"
             onFocus={() => setFocus(true)}
             onBlur={() => setFocus(false)}
-            onChange={(e) => {setPrinterID(e.target.value), emptyInput(e.target.value)}}
+            onChange={(e) => {
+              setPrinterID(e.target.value), emptyInput(e.target.value);
+            }}
           />
           <div className="absolute right-[3%] bottom-1/2 translate-y-1/2">
             <div

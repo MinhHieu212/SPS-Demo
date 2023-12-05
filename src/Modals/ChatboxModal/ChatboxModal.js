@@ -5,15 +5,16 @@ import UserItem from "./UserItem";
 import MessItem from "./MessItem";
 import { getConversation, getFriendList } from "../../APIs/ChatAPI/ChatAPI";
 import { sendMessage } from "../../APIs/ChatAPI/SendMessAPI";
+import { useSocket } from "../../Contexts/SocketIOContenxt";
 
 const ChatboxModal = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
   const [listFriend, setListFriend] = useState([]);
   const [currRecieverId, setCurrRecieverId] = useState();
   const [currConversationId, setCurrConversationId] = useState();
-  const [currSocket, setCurrSocket] = useState(null);
   const [conversation, setConversation] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
+  const UserSocket = useSocket();
 
   const handleClose = () => {
     setConversation([]);
@@ -30,6 +31,18 @@ const ChatboxModal = ({ children }) => {
       callAPI();
     } catch (err) {
       console.log(err);
+    }
+
+    console.log("Befoce get message signel");
+
+    if (UserSocket) {
+      UserSocket?.socket?.on("get-message", async () => {
+        // const response = await getConversation({
+        //   conversationId: currConversationId,
+        // });
+        // setConversation(response?.data?.data);
+        console.log("get-message signal");
+      });
     }
   }, []);
 
@@ -52,15 +65,13 @@ const ChatboxModal = ({ children }) => {
 
       if (response) setConversation(response?.data?.data);
 
-      // await currSocket.emit("create-message", currConversationId);
+      if (UserSocket) {
+        await UserSocket?.socket?.emit("create-message", currConversationId);
+      }
     }
   };
 
-  const handleGetConversation = async ({
-    reciever_Id,
-    conversation_Id,
-    userSocket,
-  }) => {
+  const handleGetConversation = async ({ reciever_Id, conversation_Id }) => {
     setCurrConversationId(null);
     setCurrRecieverId(null);
     setInputMessage("");
@@ -74,22 +85,12 @@ const ChatboxModal = ({ children }) => {
       if (response) setConversation(response?.data?.data);
 
       setCurrConversationId(conversation_Id);
-      setCurrSocket(userSocket);
+
       setCurrRecieverId(reciever_Id);
     } catch (err) {
       console.log("Error from inProgress get Converastion: ", err);
     }
   };
-
-  // if (currSocket) {
-  //   currSocket.on("get-message", async () => {
-  //     // const response = await getConversation({
-  //     //   conversationId: currConversationId,
-  //     // });
-  //     // setConversation(response?.data?.data);
-  //     console.log("get-message signal");
-  //   });
-  // }
 
   return (
     <>
@@ -103,6 +104,7 @@ const ChatboxModal = ({ children }) => {
             {listFriend?.map((member, index) => (
               <UserItem
                 key={index}
+                socket={UserSocket}
                 receiver_Name={member.firstName + " " + member.lastName}
                 reciever_Id={member.receiver_id}
                 receiver_Role={member.role}

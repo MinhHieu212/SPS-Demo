@@ -14,7 +14,7 @@ const Report = () => {
   const [reports, setReports] = useState([]);
   const [printers, setPrinters] = useState(itemsData);
   const [data, setData] = useState([]);
-  const socket = useSocket();
+  const UserSocket = useSocket();
 
   const handleGetReport = async (params) => {
     const response = await getReportPrinters(params);
@@ -42,12 +42,12 @@ const Report = () => {
     await handleGetReport(params);
   };
 
-  socket.on("update-printer-list", (params) => {
+  UserSocket?.socket.on("update-printer-list", (params) => {
     console.log("Received update-printer-list Manage SPSO", params);
     fetchDataAndUpdate(params);
   });
 
-  socket.on("update-student-history", (params) => {
+  UserSocket?.socket.on("update-student-history", (params) => {
     console.log("Received update-student-history signal");
     fetchDataAndUpdate(params);
   });

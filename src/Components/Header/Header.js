@@ -44,7 +44,7 @@ const Header = ({ showSideBar, setShowSideBar }) => {
         </div>
       </div>
 
-      {userInformation.role !== "student" ? (
+      {userInformation?.role !== "student" ? (
         <div className="mr-6 ml-auto ">
           <ChatboxModal>
             <ChatIcon></ChatIcon>

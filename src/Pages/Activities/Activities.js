@@ -17,7 +17,7 @@ const Activities = () => {
   var [id, setId] = useState(null);
   const navigate = useNavigate();
   const [fetchAct, setFetchAct] = useState(activities);
-  const socket = useSocket();
+  const UserSocket = useSocket();
 
   const handleGetStudents = async (params) => {
     const response = await getStudents(params);
@@ -41,15 +41,15 @@ const Activities = () => {
     handleGetStudents(params);
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Login");
-    } 
+    }
   }, [renderList]);
 
-  socket.on("update-printer-list", (params) => {
+  UserSocket?.socket?.on("update-printer-list", (params) => {
     console.log("Received update-printer-list Manage SPSO", params);
     fetchDataAndUpdate(params);
   });
 
-  socket.on("update-student-history", (params) => {
+  UserSocket?.socket?.on("update-student-history", (params) => {
     console.log("Received update-student-history signal");
     fetchDataAndUpdate(params);
   });

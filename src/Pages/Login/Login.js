@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -9,12 +9,11 @@ import { LoginAPI } from "../../APIs/LoginAPI/LoginAPI";
 import { UserInfoAPI } from "../../APIs/UserInfoAPI/UserInfoAPI";
 import { useRole } from "../../Contexts/RoleContext";
 import { useUserInfo } from "../../Contexts/UserInfoContext";
-
+import { useSocket } from "../../Contexts/SocketIOContenxt";
 import { io } from "socket.io-client";
 
-const socket = io("https://ssps-7wxl.onrender.com");
-
 const Login = () => {
+  const UserSocket = useSocket();
   const roleContext = useRole();
   const userInfoContext = useUserInfo();
   const navigate = useNavigate();
@@ -56,6 +55,14 @@ const Login = () => {
     await roleContext.updateRole(userInformation?.data?.data?.role);
 
     await userInfoContext.updateUserInfo(userInformation?.data?.data);
+
+    const socket = io("http://172.16.1.230:8000");
+
+    socket.on("connect", () => {
+      console.log("Init Socket IO Connecttion Signal", socket?.id);
+    });
+
+    UserSocket?.connectSocket(socket);
 
     if (response?.status === 200) {
       if (!Object.keys(errors).length) {

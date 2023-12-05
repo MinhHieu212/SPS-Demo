@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { io } from "socket.io-client";
 import { getConversationId } from "../../APIs/ChatAPI/ChatAPI";
 
 export const avatars = [
@@ -13,29 +12,25 @@ const UserItem = ({
   receiver_Name,
   reciever_Id,
   reciever_Location,
+  socket,
   getConversation = () => {},
 }) => {
   const [conversationId, setConversationId] = useState();
-  const [userSocket, setUserSocket] = useState(null);
 
   useEffect(() => {
-    const socket = io("https://ssps-7wxl.onrender.com");
-
-    socket.on("connect", () => {
-      console.log("CHATNAME === ", receiver_Name, " === SOCKET ID", socket.id);
-    });
-
-    setUserSocket(socket);
-
     const callApiGetConversationId = async () => {
       try {
         const response1 = await getConversationId({
           receiver_id: reciever_Id,
         });
+        console.log(" Join Room with", response1?.data?.data[0].conversationId);
+
+        socket?.socket?.emit(
+          "join-room",
+          response1?.data?.data[0].conversationId
+        );
 
         setConversationId(response1?.data?.data[0].conversationId);
-
-        socket.emit("join-room", response1?.data?.data[0].conversationId);
       } catch (err) {
         console.log("Error from inProgress get Converastion: ", err);
       }
@@ -51,7 +46,6 @@ const UserItem = ({
         getConversation({
           reciever_Id: reciever_Id,
           conversation_Id: conversationId,
-          userSocket: userSocket,
         });
       }}
     >
