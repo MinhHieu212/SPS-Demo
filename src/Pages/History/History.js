@@ -15,7 +15,7 @@ const History = () => {
   const [filterParams, setFilterParams] = useState({ per_page: 100 });
   const [searchParams, setSearchParams] = useState(null);
   const [renderList, setRenderList] = useState(true);
-  const socket = useSocket();
+  const UserSocket = useSocket();
 
   const handleCallAPI = async () => {
     const response = await filterHistory({ ...filterParams, per_page: 100 });
@@ -37,12 +37,12 @@ const History = () => {
     handleCallAPI();
   };
 
-  socket.on("update-student-history", () => {
+  UserSocket?.socket?.on("update-student-history", () => {
     console.log("Received update-student-history signal");
     fetchDataAndUpdate();
   });
 
-  socket.on("update-printer-list", () => {
+  UserSocket?.socket?.on("update-printer-list", () => {
     console.log("Received update-printer-list signal");
     fetchDataAndUpdate();
   });

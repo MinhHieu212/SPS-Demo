@@ -10,7 +10,7 @@ import { useSocket } from "../../Contexts/SocketIOContenxt";
 
 const Printing = () => {
   const navigate = useNavigate();
-  const socket = useSocket();
+  const UserSocket = useSocket();
   const [filterParams, setFilterParams] = useState({
     status: null,
     facility: null,
@@ -42,12 +42,12 @@ const Printing = () => {
     }
   }, [filterParams]);
 
-  socket.on("update-printer-list", () => {
+  UserSocket?.socket.on("update-printer-list", () => {
     console.log("Received update-printer-list signal");
     fetchDataAndUpdate();
   });
 
-  socket.on("update-student-history", () => {
+  UserSocket?.socket.on("update-student-history", () => {
     console.log("Received update-student-history signal");
     fetchDataAndUpdate();
   });

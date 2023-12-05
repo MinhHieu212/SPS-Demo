@@ -26,7 +26,7 @@ const CenterModal = ({
         className="overlay absolute inset-0 bg-black bg-opacity-50"
         onClick={handleClose}
       ></div>
-      <div className="content relative w-[auto] h-[auto] z-10 bg-white rounded-lg overflow-hidden">
+      <div className="content relative w-[auto] h-[auto] z-10 bg-white rounded-[15px] overflow-hidden">
         <span
           className="absolute left-2 top-4 p-2 md:flex items-center justify-center rounded-full z-10 "
           onClick={handleFilterOpen}

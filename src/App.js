@@ -43,7 +43,7 @@ function App() {
   const roleContext = useRole();
   const userInfoContext = useUserInfo();
 
-  // console.log("RoleContext", roleContext);
+  console.log("RoleContext", roleContext);
 
   useEffect(() => {
     const handleReload = async () => {

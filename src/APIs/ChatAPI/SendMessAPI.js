@@ -1,14 +1,14 @@
 import axios from "axios";
 
-const SpssAPI = axios.create({
-  // baseURL: "http://172.16.1.230:8000",
+const SendMessAPI = axios.create({
   baseURL: "https://ssps-7wxl.onrender.com",
+  // baseURL: "http://172.16.1.230:8000",
   headers: {
-    "Content-Type": "application/json",
+    "Content-Type": "application/x-www-form-urlencoded",
   },
 });
 
-SpssAPI.interceptors.request.use(
+SendMessAPI.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("accessToken");
     if (token) {
@@ -21,7 +21,7 @@ SpssAPI.interceptors.request.use(
   }
 );
 
-SpssAPI.interceptors.response.use(
+SendMessAPI.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -55,4 +55,18 @@ SpssAPI.interceptors.response.use(
   }
 );
 
-export default SpssAPI;
+const path4 = "/v1/user/message";
+
+export const sendMessage = async (data) => {
+  const params = new URLSearchParams(data).toString();
+
+  const Response = await SendMessAPI.post(path4, params)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error;
+    });
+
+  return Response;
+};
