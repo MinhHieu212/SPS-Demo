@@ -33,15 +33,13 @@ const ChatboxModal = ({ children }) => {
       console.log(err);
     }
 
-    console.log("Befoce get message signel");
-
     if (UserSocket) {
       UserSocket?.socket?.on("get-message", async () => {
-        // const response = await getConversation({
-        //   conversationId: currConversationId,
-        // });
-        // setConversation(response?.data?.data);
-        console.log("get-message signal");
+        const response = await getConversation({
+          conversationId: currConversationId,
+        });
+        setConversation(response?.data?.data);
+        console.log("get-message signal and re-render conversation");
       });
     }
   }, []);
