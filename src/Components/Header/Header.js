@@ -22,14 +22,14 @@ const Header = ({ showSideBar, setShowSideBar }) => {
       <div className="Header_SystemName flex items-center transition-all">
         {!showSideBar && (
           <Link to="/Home">
-            <div className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] md:h-[55px] w-[66px] border-r-[0.05px]  border-b-[0.05px]  border-white  rounded-es-2xl rounded-se-2xl ">
+            <div className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] md:h-[55px] w-[66px] border-r-[0.1px]  border-b-[0.1px]  border-white  rounded-es-2xl rounded-se-2xl shadow-xl">
               BK
             </div>
           </Link>
         )}
         {showSideBar && (
           <Link to="/Home">
-            <div className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] md:h-[55px] w-[250px] border-r-[0.05px]  border-b-[0.05px] border-white rounded-es-2xl rounded-se-2xl">
+            <div className="flex items-center justify-center text-white font-bold text-[20px] bg-[#367FA9] h-[66px] md:h-[55px] w-[250px] border-r-[0.1px]  border-b-[0.1px] border-white rounded-es-2xl rounded-se-2xl shadow-xl">
               Smart Printing System
             </div>
           </Link>

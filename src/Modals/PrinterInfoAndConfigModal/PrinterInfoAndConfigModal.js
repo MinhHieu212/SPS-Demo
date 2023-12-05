@@ -43,9 +43,8 @@ const PrinterInfoAndConfigModal = ({
   );
   const toggleState = (curr) => {
     setChecked((curr) => (curr === "enable" ? "disable" : "enable"));
-  }
+  };
 
-  console.log("Trang thai may: ", checked);
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
@@ -93,18 +92,24 @@ const PrinterInfoAndConfigModal = ({
           <div className="flex justify-between  items-center mb-2 ml-4">
             <div className="flex flex-col justify-start  w-1/2 md:w-1/3 gap-2 md:gap-3">
               <p className="text-[#066DCC] w-full flex text-[16px] md:text-[20px] font-bold mb-[8px]">
-                  Trạng thái máy in:{" "}
+                Trạng thái máy in:{" "}
               </p>
               <div className="flex justify-start">
-                {checked === "enable" ? 
-                <p className="text-[#066DCC] flex text-[16px] md:text-[20px] font-bold w-full mb-[8px]">
-                Hoạt động{" "}
-                </p> : <p className="text-red-500 flex italic text-[16px] md:text-[20px] font-bold w-full mb-[8px]">
-                      Vô hiệu hóa{" "}
-                </p>}
+                {checked === "enable" ? (
+                  <p className="text-[#066DCC] flex text-[16px] md:text-[20px] font-bold w-full mb-[8px]">
+                    Hoạt động{" "}
+                  </p>
+                ) : (
+                  <p className="text-red-500 flex italic text-[16px] md:text-[20px] font-bold w-full mb-[8px]">
+                    Vô hiệu hóa{" "}
+                  </p>
+                )}
 
                 <div className="switch flex gap-8">
-                  <ReactSwitch onChange={toggleState} checked={checked === "enable"}/>
+                  <ReactSwitch
+                    onChange={toggleState}
+                    checked={checked === "enable"}
+                  />
                 </div>
               </div>
             </div>

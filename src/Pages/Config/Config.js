@@ -19,6 +19,12 @@ const Config = () => {
     isDefault: false,
   });
 
+  useEffect(() => {
+    if (localStorage.getItem("accessToken") === null) {
+      navigate("/Login");
+    }
+  }, []);
+
   const [curpag_input, setCurpag_input] = useState();
   const [stday1_input, setStday1_input] = useState(
     format(new Date(), "yyyy-MM-dd")

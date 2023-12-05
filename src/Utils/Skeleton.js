@@ -304,3 +304,25 @@ export function ManageStaffItemSkeleton() {
     </>
   );
 }
+
+export const NoticeItemSkeleton = () => {
+  return (
+    <div className="bg-white cursor-pointer NoticeItem flex flex-row justify-between items-center shadow-md text-[16px] lg:text-[18px] font-semibold py-[12px] px-4 mt-2 rounded-lg border-b-[1px] border-black min-w-[800px] md:w-full h-[80px]">
+      <div className="text-center w-[15%]">
+        <Skeleton height={"27px"} width={"80%"} radius={"3px"}></Skeleton>
+      </div>
+      <div className="text-center w-[15%]">
+        <Skeleton height={"27px"} width={"80%"} radius={"3px"}></Skeleton>
+      </div>
+      <div className="text-center w-[15%]">
+        <Skeleton height={"27px"} width={"80%"} radius={"3px"}></Skeleton>
+      </div>
+      <div className="text-center w-[40%]">
+        <Skeleton height={"40px"} width={"80%"} radius={"3px"}></Skeleton>
+      </div>
+      <div className="text-center w-[15%]">
+        <Skeleton height={"27px"} width={"80%"} radius={"3px"}></Skeleton>
+      </div>
+    </div>
+  );
+};

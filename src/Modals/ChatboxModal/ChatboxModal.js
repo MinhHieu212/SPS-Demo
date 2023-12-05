@@ -37,7 +37,7 @@ const ChatboxModal = ({ children }) => {
       UserSocket?.socket?.on("get-message", async (data) => {
         try {
           console.log("Socket on - get_message - signal");
-
+          console.log("Data from get-mesage: ", data);
           const response = await getConversation({
             conversationId: data.conversationId,
           });
@@ -132,7 +132,7 @@ const ChatboxModal = ({ children }) => {
             ))}
           </div>
           <div
-            className=" h-[420px] border-b-2 border-[#3C8DBC] px-3 bg-white flex flex-col items-center justify-start p-2 gap-2 overflow-y-scroll"
+            className=" h-[420px] border-b-2 border-[#3C8DBC] px-3 bg-transparent flex flex-col items-center justify-start p-2 gap-2 overflow-y-scroll"
             style={{
               flexDirection: "column-reverse",
             }}

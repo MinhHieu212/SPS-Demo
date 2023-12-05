@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import NoticeItem from "./NoticeItem";
-import { confirmCheckNotice, getNotice } from "../../APIs/SpsoAPI/SpsoAPI";
+import NoticeItem from "./NoticeItemStaff";
 import { useNavigate } from "react-router";
 import { convertTime } from "../../Utils/Time";
 import { useSocket } from "../../Contexts/SocketIOContenxt";
 import { useNewNotice } from "../../Contexts/NoticeContext";
-import { dataFake } from "./FixedData";
+import { dataFake } from "./FixedDataStaff";
+import {
+  confirmCheckNoticeStaff,
+  getNoticeStaff,
+} from "../../APIs/StaffAPI/StaffAPI";
 
-export var newNotifies = 0;
-const Notice = () => {
+
+const NoticeStaff = () => {
   const navigate = useNavigate();
   const UserSocket = useSocket();
   const [data, setData] = useState(dataFake);
@@ -23,7 +26,7 @@ const Notice = () => {
 
   const handleGetNotice = async (params) => {
     setData(dataFake);
-    const response = await getNotice(params);
+    const response = await getNoticeStaff(params);
     setData(response?.data?.data.allNotices);
     NewNoticeContext?.updateNewNotice(response?.data?.data.news);
   };
@@ -44,7 +47,7 @@ const Notice = () => {
   const handleConfirmNotice = async () => {
     try {
       setData(dataFake);
-      await confirmCheckNotice();
+      await confirmCheckNoticeStaff();
       await handleGetNotice();
     } catch (err) {
       console.log("Error handle confirm check notice");
@@ -101,4 +104,4 @@ const Notice = () => {
   );
 };
 
-export default Notice;
+export default NoticeStaff;

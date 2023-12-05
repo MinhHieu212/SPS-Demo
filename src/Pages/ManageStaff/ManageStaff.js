@@ -110,19 +110,21 @@ const ManageStaff = () => {
           <div className="text-center min-w-[20%]">TRẠNG THÁI</div>
           <div className="text-center min-w-[20%]">THIẾT LẬP</div>
         </div>
-        {printers?.map((printer, index) => (
-          <ManageItem
-            key={index}
-            id={printer.printerId}
-            queue={printer.printingJob.length + printer.printingQueue.length}
-            status={printer.status === 1 ? "Hoạt động" : "Tạm dừng"}
-            description={printer.description}
-            brand={printer.brand}
-            model={printer.model}
-            fileType={fileType}
-            setRenderList={() => setRenderList(!renderList)}
-          />
-        ))}
+        <div className="max-h-[79vh] md:max-h-[87vh] lg:max-h-[79vh] min-w-[800px] md:w-full overflow-y-scroll">
+          {printers?.map((printer, index) => (
+            <ManageItem
+              key={index}
+              id={printer.printerId}
+              queue={printer.printingJob.length + printer.printingQueue.length}
+              status={printer.status === 1 ? "Hoạt động" : "Tạm dừng"}
+              description={printer.description}
+              brand={printer.brand}
+              model={printer.model}
+              fileType={fileType}
+              setRenderList={() => setRenderList(!renderList)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

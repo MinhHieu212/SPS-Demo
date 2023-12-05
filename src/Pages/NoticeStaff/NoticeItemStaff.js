@@ -1,7 +1,7 @@
 import React from "react";
 import { NoticeItemSkeleton } from "../../Utils/Skeleton";
 
-const NoticeItem = (props) => {
+const NoticeItemStaff = (props) => {
   return (
     <>
       {props.content !== "" ? (
@@ -30,4 +30,4 @@ const NoticeItem = (props) => {
   );
 };
 
-export default NoticeItem;
+export default NoticeItemStaff;

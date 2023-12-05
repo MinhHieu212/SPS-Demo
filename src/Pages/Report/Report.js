@@ -42,12 +42,12 @@ const Report = () => {
     await handleGetReport(params);
   };
 
-  UserSocket?.socket.on("update-printer-list", (params) => {
+  UserSocket?.socket?.on("update-printer-list", (params) => {
     console.log("Received update-printer-list Manage SPSO", params);
     fetchDataAndUpdate(params);
   });
 
-  UserSocket?.socket.on("update-student-history", (params) => {
+  UserSocket?.socket?.on("update-student-history", (params) => {
     console.log("Received update-student-history signal");
     fetchDataAndUpdate(params);
   });
@@ -78,25 +78,25 @@ const Report = () => {
             <span className="   text-[#1488db] font-semibold">
               Tổng lượng giấy đã in:{" "}
             </span>
-            {reports.total_pages || 0}
+            {reports?.total_pages || 0}
           </p>
           <p className="text-[16px] lg:text-[18px]  text-black font-semibold">
             <span className="  text-[#1488db] font-semibold">
               Tổng lượng giấy A3 đã in:{" "}
             </span>
-            {reports.total_A3 || 0}
+            {reports?.total_A3 || 0}
           </p>
           <p className="text-[16px] lg:text-[18px]  text-black font-semibold">
             <span className="   text-[#1488db] font-semibold">
               Tổng lượng giấy A4 đã in:{" "}
             </span>
-            {reports.total_A4 || 0}
+            {reports?.total_A4 || 0}
           </p>
           <p className="text-[16px] lg:text-[18px]  text-black font-semibold">
             <span className="  text-[#1488db] font-semibold">
               Tổng số lần bảo trì:{" "}
             </span>
-            {reports.total_Printed || 0}
+            {reports?.total_Printed || 0}
           </p>
         </div>
         <div className="w-full lg:w-1/2 flex flex-col gap-3 ">
@@ -104,19 +104,19 @@ const Report = () => {
             <span className="   text-[#1488db] font-semibold">
               Trung bình lượng giấy A3 trên mỗi máy:{" "}
             </span>
-            {reports.avg_A3 || 0}
+            {reports?.avg_A3 || 0}
           </p>
           <p className="text-[16px] lg:text-[18px]  text-black font-semibold">
             <span className="   text-[#1488db] font-semibold">
               Trung bình lượng giấy A4 trên mỗi máy:{" "}
             </span>
-            {reports.avg_A4 || 0}
+            {reports?.avg_A4 || 0}
           </p>
           <p className="text-[16px] lg:text-[18px]  text-black font-semibold">
             <span className="   text-[#1488db] font-semibold">
               Trung bình số lần in trên mỗi máy:{" "}
             </span>
-            {reports.avg_Printed || 0}
+            {reports?.avg_Printed || 0}
           </p>
         </div>
       </div>

@@ -14,6 +14,7 @@ import ManageStaff from "../Pages/ManageStaff/ManageStaff";
 import ManageSpso from "../Pages/ManageSpso/ManageSpso";
 import HomeNoLogin from "../Pages/HomeNoLogin/HomeNoLogin";
 import Notice from "../Pages/Notice/Notice";
+import NoticeStaff from "../Pages/NoticeStaff/NoticeStaff";
 
 const publicRoutes = [
   // { role: "", path: "*", component: <></> },
@@ -70,6 +71,12 @@ const privateRoutes = [
     role: "spso",
     path: "/Notice",
     component: Notice,
+    layout: "default",
+  },
+  {
+    role: "staff",
+    path: "/NoticeStaff",
+    component: NoticeStaff,
     layout: "default",
   },
 ];

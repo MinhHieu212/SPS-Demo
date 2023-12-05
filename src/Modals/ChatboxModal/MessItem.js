@@ -17,7 +17,7 @@ const MessItem = ({ conversationItem, recieverId }) => {
         >
           <p>{conversationItem.text}</p>
         </div>
-        <p className="text-gray-600 text-[10px]">
+        <p className="text-[12px] text-white">
           {formatTime(conversationItem.createdAt)}
         </p>
       </div>

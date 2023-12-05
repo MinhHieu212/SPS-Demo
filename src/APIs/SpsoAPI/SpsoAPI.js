@@ -10,9 +10,10 @@ const path4 = "/v1/spso/reports";
 const path5 = "/v1/spso/viewReport";
 
 const path_notice = "/v1/spso/notices";
+
 export const getNotice = async (params) => {
   const res = await SpssAPI.get(path_notice, {
-    params: params
+    params: params,
   })
     .then((response) => {
       //console.log("Response from api User infomation ", response);
@@ -25,10 +26,26 @@ export const getNotice = async (params) => {
     });
 
   return res;
-}
+};
+
+export const confirmCheckNotice = async () => {
+  const res = await SpssAPI.put(path_notice)
+    .then((response) => {
+      //console.log("Response from api User infomation ", response);
+      //console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      //console.log("Fail get User infomation ", error);
+      return error;
+    });
+
+  return res;
+};
+
 export const getReportChart = async (params) => {
   const res = await SpssAPI.get(path5, {
-    params: params
+    params: params,
   })
     .then((response) => {
       //console.log("Response from api User infomation ", response);
@@ -41,10 +58,11 @@ export const getReportChart = async (params) => {
     });
 
   return res;
-}
+};
+
 export const getReportPrinters = async (params) => {
   const res = await SpssAPI.get(path4, {
-    params: params
+    params: params,
   })
     .then((response) => {
       //console.log("Response from api User infomation ", response);
@@ -57,12 +75,12 @@ export const getReportPrinters = async (params) => {
     });
 
   return res;
-}
+};
 
 const path7 = "/v1/spso/students";
 export const getStudents = async (params) => {
   const StInfos = await SpssAPI.get(path7, {
-    params: params
+    params: params,
   })
     .then((response) => {
       //console.log("Response from api User infomation ", response);
@@ -75,10 +93,11 @@ export const getStudents = async (params) => {
     });
 
   return StInfos;
-}
+};
+
 export const getPrintersList = async (params) => {
   const PrintersInfos = await SpssAPI.get(path, {
-    params: params
+    params: params,
   })
     .then((response) => {
       //console.log("Response from api User infomation ", response);
@@ -95,7 +114,7 @@ export const getPrintersList = async (params) => {
 
 export const getPrinterQueue = async (params) => {
   const PrinterQueue = await SpssAPI.get(path2, {
-    params: params
+    params: params,
   })
     .then((response) => {
       //console.log("Response from api User infomation ", response);
@@ -107,11 +126,11 @@ export const getPrinterQueue = async (params) => {
       return error;
     });
   return PrinterQueue;
-}
+};
 
 export const getPrinterLog = async (params) => {
   const PrinterLog = await SpssAPI.get(path3, {
-    params: params
+    params: params,
   })
     .then((response) => {
       //console.log("Response from api User infomation ", response);
@@ -123,7 +142,8 @@ export const getPrinterLog = async (params) => {
       return error;
     });
   return PrinterLog;
-}
+};
+
 export const editPrinter = async (newData) => {
   const PrintersInfos = await SpssAPI.put(path1, newData)
     .then((response) => {
@@ -152,12 +172,13 @@ export const addPrinter = async (newData) => {
     });
 
   return PrintersInfo;
-}
+};
 
 const pathDetailStudent = "/v1/spso/detailStudent";
+
 export const getDetailStudent = async (params) => {
   const detail = await SpssAPI.get(pathDetailStudent, {
-    params: params
+    params: params,
   })
     .then((response) => {
       return response;
@@ -166,4 +187,4 @@ export const getDetailStudent = async (params) => {
       return error;
     });
   return detail;
-}
+};

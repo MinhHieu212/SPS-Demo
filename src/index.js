@@ -7,6 +7,7 @@ import { BrowserRouter, HashRouter } from "react-router-dom";
 import { RoleProvider } from "./Contexts/RoleContext";
 import { UserInfoProvider } from "./Contexts/UserInfoContext";
 import { SocketProvider } from "./Contexts/SocketIOContenxt";
+import { NewNoticeProvider } from "./Contexts/NoticeContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,9 +15,11 @@ root.render(
   <SocketProvider>
     <RoleProvider>
       <UserInfoProvider>
-        <HashRouter>
-          <App />
-        </HashRouter>
+        <NewNoticeProvider>
+          <HashRouter>
+            <App />
+          </HashRouter>
+        </NewNoticeProvider>
       </UserInfoProvider>
     </RoleProvider>
   </SocketProvider>
