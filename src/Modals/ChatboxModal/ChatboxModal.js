@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import CenterModal from "../BaseModals/CenterModal";
 import { Loading, SendIcon } from "../../Assets/Icons/Icons";
 import UserItem from "./UserItem";
@@ -35,10 +35,19 @@ const ChatboxModal = ({ children }) => {
 
     if (UserSocket) {
       UserSocket?.socket?.on("get-message", async (data) => {
-        const response = await getConversation({
-          conversationId: data.conversationId,
-        });
-        setConversation(response?.data?.data);
+        try {
+          console.log("Socket on - get_message - signal");
+
+          const response = await getConversation({
+            conversationId: data.conversationId,
+          });
+
+          setConversation(response?.data?.data);
+
+          console.log("Socket.on - reciever conversation signal");
+        } catch (error) {
+          console.error("Error processing get-message event:");
+        }
       });
     }
   }, []);
@@ -53,14 +62,19 @@ const ChatboxModal = ({ children }) => {
 
       setInputMessage("");
 
-      const reponse = await sendMessage(data);
-
       if (UserSocket) {
-        await UserSocket?.socket?.emit(
-          "create-message",
-          currConversationId,
-          data.text
-        );
+        try {
+          const reponse = await sendMessage(data);
+
+          await UserSocket?.socket?.emit(
+            "create-message",
+            currConversationId,
+            data.text
+          );
+          console.log("Socket emit - send_message - boastcast signal");
+        } catch (error) {
+          console.error("Error emitting socket event:", error);
+        }
       }
     }
   };
@@ -69,12 +83,6 @@ const ChatboxModal = ({ children }) => {
     setCurrConversationId(conversation_Id);
     setCurrRecieverId(null);
     setInputMessage("");
-
-    console.log(
-      "Beforce set conversatoin id and reciever id",
-      reciever_Id,
-      conversation_Id
-    );
 
     try {
       setCurrRecieverId("");
@@ -94,11 +102,19 @@ const ChatboxModal = ({ children }) => {
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
       <CenterModal open={openModal} handleClose={handleClose}>
-        <div className="content w-[350px] md:w-[550px] h-[645px] overflow-hidden rounded-[15px]  border-[1px] border-[#367FA9]">
+        <div
+          className="content w-[350px] md:w-[550px] h-[660px] overflow-hidden rounded-[15px]  border-[1px] border-[#367FA9]"
+          style={{
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1686283201463-8cbc4011a56e?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+            backgroundPosition: "center",
+            objectPosition: "fit",
+          }}
+        >
           <div className="header bg-[#3C8DBC] text-white text-[20px] font-bold flex items-center justify-center h-[60px] w-full">
             TIN NHẮN
           </div>
-          <div className=" h-[85px]  border-b-2 border-[#3C8DBC] rounded-lg overflow-x-scroll flex items-center justify-start px-2 gap-2 scroll-smooth focus:overscroll-contain">
+          <div className=" h-[100px]  overflow-x-scroll flex items-center justify-start px-2 gap-2 scroll-smooth focus:overscroll-contain">
             {listFriend?.map((member, index) => (
               <UserItem
                 key={index}
@@ -115,7 +131,12 @@ const ChatboxModal = ({ children }) => {
               ></UserItem>
             ))}
           </div>
-          <div className=" h-[420px] border-b-2 border-[#3C8DBC] bg-slate-200  flex flex-col items-center justify-start p-2 gap-2 overflow-y-scroll">
+          <div
+            className=" h-[420px] border-b-2 border-[#3C8DBC] px-3 bg-white flex flex-col items-center justify-start p-2 gap-2 overflow-y-scroll"
+            style={{
+              flexDirection: "column-reverse",
+            }}
+          >
             {currRecieverId !== "" ? (
               conversation?.map((conversationItem, index) => {
                 return (
@@ -135,7 +156,7 @@ const ChatboxModal = ({ children }) => {
             )}
           </div>
           <form
-            className=" h-[80px] border-b-2 border-[#3C8DBC] bg-slate-200  flex items-center justify-start px-3 gap-2"
+            className=" h-[80px] border-b-2 border-[#3C8DBC] bg-slate-200  flex items-center justify-start px-3 gap-2 bg-transparent"
             onSubmit={handleSubmit}
           >
             <input
