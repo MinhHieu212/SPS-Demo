@@ -8,6 +8,24 @@ const path3 = "/v1/spso/printingLog";
 
 const path4 = "/v1/spso/reports";
 const path5 = "/v1/spso/viewReport";
+
+const path_notice = "/v1/spso/notices";
+export const getNotice = async (params) => {
+  const res = await SpssAPI.get(path_notice, {
+    params: params
+  })
+    .then((response) => {
+      //console.log("Response from api User infomation ", response);
+      //console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      //console.log("Fail get User infomation ", error);
+      return error;
+    });
+
+  return res;
+}
 export const getReportChart = async (params) => {
   const res = await SpssAPI.get(path5, {
     params: params
