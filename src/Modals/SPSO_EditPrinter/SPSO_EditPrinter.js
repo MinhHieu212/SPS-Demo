@@ -38,7 +38,7 @@ const SPSOEditPrinterModal = ({
     newData.location.facility = locationName.slice(0, 3);
     newData.location.department = locationName.slice(5, 7);
     newData.location.room = locationName.slice(9, 12);
-    newData.brand = brand;
+    newData.brand = brandName;
     newData.model = type;
     newData.description = desc;
     newData.status = checked === "enable" ? 1 : 0;
@@ -51,7 +51,7 @@ const SPSOEditPrinterModal = ({
         const request = await editPrinter(newData);
         functionRenderList();
       };
-
+      //console.log(newData);
       handleEditAPI(newData);
       toast.success("Tùy chỉnh thông tin máy tin thành công");
       // setOpenModal(false);
