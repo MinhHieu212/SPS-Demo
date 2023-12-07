@@ -145,7 +145,7 @@ const ConfigFile = () => {
               {printerInfo?.fileType.map((file, index) => {
                 return (
                   <p
-                    className="text-center w-full text-gray-400 font-normal text-[14px] lg:text-[16px] pt-1"
+                    className="text-center w-full text-gray-600 font-normal text-[14px] lg:text-[16px] pt-1"
                     key={index}
                   >
                     .{file}
