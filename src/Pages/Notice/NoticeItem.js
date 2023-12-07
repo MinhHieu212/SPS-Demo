@@ -1,6 +1,6 @@
 import React from "react";
 import { NoticeItemSkeleton } from "../../Utils/Skeleton";
-
+import "./Notice.scss"
 const NoticeItem = (props) => {
   return (
     <>
@@ -8,8 +8,8 @@ const NoticeItem = (props) => {
         <div
           className={
             !props.seen
-              ? "bg-[#f7e4e4] hover:bg-white cursor-pointer NoticeItem flex flex-row justify-between items-center shadow-md text-[16px] lg:text-[18px] font-semibold  py-[12px] px-4 mt-2 rounded-lg border-b-[1px] border-black min-w-[800px] md:w-full max-h-[80px]"
-              : "bg-white cursor-pointer NoticeItem flex flex-row justify-between items-center shadow-md text-[16px] lg:text-[18px] font-semibold py-[12px] px-4 mt-2 rounded-lg border-b-[1px] border-black min-w-[800px] md:w-full max-h-[80px]"
+              ? "bg-[#f7e4e4] cursor-pointer NoticeItem flex flex-row justify-between items-center text-[16px] lg:text-[18px] font-semibold  py-[12px] px-4 mt-2 rounded-lg border-b-[1px] border-black min-w-[800px] md:w-full max-h-[80px]"
+              : "bg-white cursor-pointer NoticeItem flex flex-row justify-between items-center text-[16px] lg:text-[18px] font-semibold py-[12px] px-4 mt-2 rounded-lg border-b-[1px] border-black min-w-[800px] md:w-full max-h-[80px]"
           }
         >
           <div className="text-center w-[15%]">{props?.time}</div>
