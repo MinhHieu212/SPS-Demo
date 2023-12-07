@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { getPaymentsList } from "../../APIs/BKPayAPI/BKPayAPI";
 import { LogOutIcon } from "../../Assets/Icons/Icons";
 import { useUserInfo } from "../../Contexts/UserInfoContext";
+import { convertTime } from "../../Utils/Time";
 
 const Bkpay = () => {
   const userInfoContext = useUserInfo();
@@ -107,18 +108,18 @@ const Bkpay = () => {
                   batch={info?._id?.slice(0, 10)}
                   type={"Tiền mua giấy in"}
                   date={
-                    info?.updatedAt.split("T")[0] +
+                    convertTime(info?.updatedAt).split("T")[0] +
                     " " +
-                    info?.updatedAt.split("T")[1].substring(0, 8)
+                    convertTime(info?.updatedAt).split("T")[1].substring(0, 8)
                   }
                   total={info?.money}
                   fee={0}
                   checkout={info?.paidMoney}
                   remain={info?.leftMoney}
                   checkoutDate={
-                    info?.updatedAt.split("T")[0] +
+                    convertTime(info?.updatedAt).split("T")[0] +
                     " " +
-                    info?.updatedAt?.split("T")[1].substring(0, 8)
+                    convertTime(info?.updatedAt).split("T")[1].substring(0, 8)
                   }
                   order={info?.stt}
                   id={info?._id?.slice(0, 10)}
