@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CenterModal from "../BaseModals/CenterModal";
-import { InfoField2 } from "../../Utils/InfoField";
+import { InfoField2, InfoFieldStatus } from "../../Utils/InfoField";
 
 const DetailHistoryModal = ({ children, props, total_pages }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -29,10 +29,10 @@ const DetailHistoryModal = ({ children, props, total_pages }) => {
               fieldName={"Ngày in"}
               fieldValue={props.date}
             ></InfoField2>
-            <InfoField2
+            <InfoFieldStatus
               fieldName={"Trạng thái"}
               fieldValue={props.status}
-            ></InfoField2>
+            ></InfoFieldStatus>
             <InfoField2
               fieldName={"Tên file"}
               fieldValue={props.fileName}
