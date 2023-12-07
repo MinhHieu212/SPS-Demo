@@ -81,7 +81,7 @@ const Config = () => {
 
   // Submitting
   const handleSubmit = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     const response = await SendConfigAPI(infoSend);
     console.log("reponse send to api: ", response.data);
     toast.success("Cập nhật thành công cấu hình cho hệ thống!");

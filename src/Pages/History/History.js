@@ -27,7 +27,8 @@ const History = () => {
     setHistoryLogs(response?.data?.printingLogs || []);
   };
 
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    e.preventDefault();
     setFilterParams((filterParams) => {
       return { ...filterParams, ["searchField"]: searchParams };
     });

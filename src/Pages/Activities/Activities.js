@@ -64,6 +64,7 @@ const Activities = () => {
           <form
             className="w-[100%] border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white"
             onSubmit={(e) => {
+              e.preventDefault();
               setId(stID);
               setRenderList(!renderList);
             }}
@@ -81,6 +82,7 @@ const Activities = () => {
           <form
             className="w-[100%]  mx-auto border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white"
             onSubmit={(e) => {
+              e.preventDefault();
               setName(stName);
               setRenderList(!renderList);
             }}

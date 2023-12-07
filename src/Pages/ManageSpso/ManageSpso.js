@@ -98,6 +98,7 @@ const ManageSpso = () => {
           <form
             className="w-full lg:w-1/2 border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white"
             onSubmit={(e) => {
+              e.preventDefault();
               setRenderList(!renderList);
               value.searchField = inputValue;
             }}

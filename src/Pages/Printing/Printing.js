@@ -52,7 +52,8 @@ const Printing = () => {
     fetchDataAndUpdate();
   });
 
-  const handleSearch = () => {
+  const handleSearch = (event) => {
+    event.preventDefault();
     setFilterParams((filterParams) => {
       return { ...filterParams, ["searchField"]: searchParams };
     });
@@ -72,7 +73,10 @@ const Printing = () => {
             type="text"
             placeholder="Tìm theo ID máy in"
             className="w-[90%] outline-none border-none"
-            onInput={(e) => setSearchParams(e.target.value)}
+            onInput={(e) => {
+              e.preventDefault();
+              setSearchParams(e.target.value);
+            }}
           />
           <button type="submit">
             <SearchIcon></SearchIcon>
