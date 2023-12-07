@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CenterModal from "../BaseModals/CenterModal";
-import { InfoField2 } from "../../Utils/InfoField";
+import { InfoField2, InfoFieldStatus } from "../../Utils/InfoField";
 import { PrintingQueueLogsSkeleton } from "../../Utils/Skeleton";
 import { convertTime } from "../../Utils/Time";
 
@@ -9,6 +9,7 @@ const StaffPrinterLogModal = ({ children, log }) => {
   const handleClose = () => {
     setOpenModal(false);
   };
+
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
@@ -54,6 +55,14 @@ const StaffPrinterLogModal = ({ children, log }) => {
                         fieldName={"Tên file in"}
                         fieldValue={request?.document.title || "..."}
                       ></InfoField2>
+                      <InfoField2
+                        fieldName={"Lượng giấy in"}
+                        fieldValue={request?.document.pages}
+                      ></InfoField2>
+                      <InfoFieldStatus
+                        fieldName={"Trạng thái"}
+                        fieldValue={request?.status || "..."}
+                      ></InfoFieldStatus>
                       <InfoField2
                         fieldName={"Số bản in"}
                         fieldValue={request?.numVersion || "..."}

@@ -36,17 +36,17 @@ const ChatboxModal = ({ children }) => {
     if (UserSocket) {
       UserSocket?.socket?.on("get-message", async (data) => {
         try {
-          console.log("Socket on - get_message - signal");
-          console.log("Data from get-mesage: ", data);
+          // console.log("Socket on - get_message - signal");
+          // console.log("Data from get-mesage: ", data);
           const response = await getConversation({
             conversationId: data.conversationId,
           });
 
           setConversation(response?.data?.data);
 
-          console.log("Socket.on - reciever conversation signal");
+          // console.log("Socket.on - reciever conversation signal");
         } catch (error) {
-          console.error("Error processing get-message event:");
+          // console.error("Error processing get-message event:");
         }
       });
     }
@@ -71,9 +71,9 @@ const ChatboxModal = ({ children }) => {
             currConversationId,
             data.text
           );
-          console.log("Socket emit - send_message - boastcast signal");
+          // console.log("Socket emit - send_message - boastcast signal");
         } catch (error) {
-          console.error("Error emitting socket event:", error);
+          // console.error("Error emitting socket event:", error);
         }
       }
     }
