@@ -25,7 +25,7 @@ const Activities = () => {
     setFetchAct(response?.data?.data);
   };
 
-  const fetchDataAndUpdate = async () => {
+  const fetchDataAndUpdate = async (params) => {
     await handleGetStudents(params);
   };
 

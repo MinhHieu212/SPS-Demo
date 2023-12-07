@@ -119,6 +119,7 @@ const ChatboxModal = ({ children }) => {
               <UserItem
                 key={index}
                 socket={UserSocket}
+                currReciever_Id={currRecieverId}
                 receiver_Name={member.firstName + " " + member.lastName}
                 reciever_Id={member.receiver_id}
                 receiver_Role={member.role}

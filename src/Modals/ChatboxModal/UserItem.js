@@ -12,11 +12,11 @@ const UserItem = ({
   receiver_Name,
   reciever_Id,
   reciever_Location,
+  currReciever_Id,
   socket,
   getConversation = () => {},
 }) => {
   const [conversationId, setConversationId] = useState();
-
   useEffect(() => {
     const callApiGetConversationId = async () => {
       try {
@@ -41,7 +41,9 @@ const UserItem = ({
 
   return (
     <div
-      className="w-[100px] shadow-md shrink-0 cursor-pointer border-[1px] border-[blue] bg-slate-200 hover:bg-slate-400 transition-all rounded-lg flex flex-col items-center justify-center"
+      className={`w-[100px] shadow-md shrink-0 cursor-pointer border-[1px] border-[blue] bg-slate-200 hover:bg-slate-400 transition-all rounded-lg flex flex-col items-center justify-center ${
+        currReciever_Id === reciever_Id ? "bg-slate-500 text-[white]" : ""
+      }`}
       onClick={() => {
         getConversation({
           reciever_Id: reciever_Id,
