@@ -3,6 +3,7 @@ import CenterModal from "../BaseModals/CenterModal";
 import { InfoField2 } from "../../Utils/InfoField";
 import { PrintingQueueLogsSkeleton } from "../../Utils/Skeleton";
 import { convertTime } from "../../Utils/Time";
+
 const StaffPrinterLogModal = ({ children, log }) => {
   const [openModal, setOpenModal] = useState(false);
   const handleClose = () => {

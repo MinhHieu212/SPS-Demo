@@ -15,7 +15,7 @@ const MessItem = ({ conversationItem, recieverId }) => {
               : "bg-[#8b7b7b]"
           }`}
         >
-          <p>{conversationItem.text}</p>
+          <p className="text-left">{conversationItem.text}</p>
         </div>
         <p className="text-[12px] text-white">
           {formatTime(conversationItem.createdAt)}

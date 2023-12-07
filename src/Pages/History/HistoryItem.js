@@ -12,7 +12,27 @@ function HistoryItem(props) {
           <div className="truncate overflow-clip w-[25%] ">
             {props.fileName}
           </div>
-          <div className="text-center w-[15%]">{props.status}</div>
+
+          <div
+            className={`text-center w-[15%] ${
+              props.status === "Completed"
+                ? "text-[#4CAF50]"
+                : props.status === "Queued"
+                ? "text-[#9E9E9E]"
+                : props.status === "InProgress"
+                ? "text-[#f3ff48]"
+                : "text-[#FF0000]"
+            }`}
+          >
+            {props.status === "Completed"
+              ? "Đã in"
+              : props.status === "Queued"
+              ? "Đang đợi"
+              : props.status === "InProgress"
+              ? "Đang in"
+              : "Đã hủy"}
+          </div>
+
           <div className="text-center w-[15%]">{props.printerId}</div>
           <div className="text-center w-[15%]">{props.position}</div>
           <div className="text-center w-[15%]">{props.date}</div>

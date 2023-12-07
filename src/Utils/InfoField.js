@@ -35,11 +35,11 @@ export const InfoFieldStatus = ({ fieldName, fieldValue }) => {
       <span
         className={`text-[16px] md:text-[20px] font-semibold leading-7 truncate overflow-clip w-[60%] ${
           fieldValue === "Completed"
-            ? "text-[#2196F3]"
+            ? "text-[#4CAF50]"
             : fieldValue === "Queued"
             ? "text-[#9E9E9E]"
             : fieldValue === "InProgress"
-            ? "text-[#4CAF50]"
+            ? "text-[#f3ff48]"
             : "text-[#FF0000]"
         }`}
       >
