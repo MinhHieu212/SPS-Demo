@@ -42,8 +42,6 @@ const DetailStudentLogModal = ({ children, activity, detail, cbGetDetail }) => {
     setOpenFilter(false);
   };
 
-  console.log(activity);
-
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
@@ -109,7 +107,7 @@ const DetailStudentLogModal = ({ children, activity, detail, cbGetDetail }) => {
                       >
                         <InfoField2
                           fieldName={"ID máy in"}
-                          fieldValue={activity?.printerId || "..."}
+                          fieldValue={request?.printerId || "..."}
                         ></InfoField2>
                         <InfoField2
                           fieldName={"Tên file in"}
