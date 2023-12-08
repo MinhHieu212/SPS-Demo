@@ -42,6 +42,8 @@ const DetailStudentLogModal = ({ children, activity, detail, cbGetDetail }) => {
     setOpenFilter(false);
   };
 
+  console.log(activity);
+
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
@@ -126,7 +128,8 @@ const DetailStudentLogModal = ({ children, activity, detail, cbGetDetail }) => {
                           fieldValue={
                             convertTime(request?.finishDate).slice(0, 10) +
                               " " +
-                              convertTime(request?.finishDate).slice(11, 19) || "..."
+                              convertTime(request?.finishDate).slice(11, 19) ||
+                            "..."
                           }
                         ></InfoField2>
                         <InfoField2
