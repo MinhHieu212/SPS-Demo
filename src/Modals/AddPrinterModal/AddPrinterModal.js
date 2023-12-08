@@ -35,7 +35,7 @@ export const AddPrinterModal = ({ children, functionRenderList }) => {
 
   useEffect(() => {
     if (location.facility === "Cơ sở 1") {
-      setDepartments(["B1", "B2", "B3"]);
+      setDepartments(["B1", "B2", "B3", "B4", "B5"]);
     } else if (location.facility === "Cơ sở 2") {
       setDepartments(["H1", "H3", "H6"]);
     }
@@ -43,17 +43,21 @@ export const AddPrinterModal = ({ children, functionRenderList }) => {
 
   useEffect(() => {
     if (location.department === "B1") {
-      setRooms(["304", "305", "306"]);
+      setRooms(["109", "305", "306"]);
     } else if (location.department === "B2") {
       setRooms(["404", "405", "406"]);
     } else if (location.department === "B3") {
       setRooms(["504", "505", "506"]);
+    } else if (location.department === "B4") {
+      setRooms(["105", "405", "407"]);
+    } else if (location.department === "B5") {
+      setRooms(["203", "204", "205"]);
     } else if (location.department === "H1") {
-      setRooms(["704", "705", "706"]);
+      setRooms(["109", "110", "111"]);
     } else if (location.department === "H3") {
-      setRooms(["604", "605", "606"]);
+      setRooms(["401", "402", "403"]);
     } else if (location.department === "H6") {
-      setRooms(["204", "205", "206"]);
+      setRooms(["211", "312", "601", "602"]);
     }
   }, [location.department]);
 

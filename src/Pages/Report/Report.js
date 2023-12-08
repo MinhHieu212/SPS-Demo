@@ -92,12 +92,6 @@ const Report = () => {
             </span>
             {reports?.total_A4 || 0}
           </p>
-          <p className="text-[16px] lg:text-[18px]  text-black font-semibold">
-            <span className="  text-[#1488db] font-semibold">
-              Tổng số lần bảo trì:{" "}
-            </span>
-            {reports?.total_Printed || 0}
-          </p>
         </div>
         <div className="w-full lg:w-1/2 flex flex-col gap-3 ">
           <p className="text-[16px] lg:text-[18px]  text-black font-semibold">
