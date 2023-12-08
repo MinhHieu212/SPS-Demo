@@ -55,7 +55,7 @@ const Support = () => {
 
           <div className="onlySPSO text-center rounded-2xl px-4 pt-4 pb-0 shadow-xl w-full md:w-1/3">
             <a
-              href="https://drive.google.com/file/d/1VbCwMirVQQDkUVRbwgtaEUmh5tp3crrb/view?usp=drive_link"
+              href="https://drive.google.com/file/d/1GuXqqYvH8oNw1lYiQbrDuXVw9CHq1G3y/view"
               target="_blank"
             >
               <img
