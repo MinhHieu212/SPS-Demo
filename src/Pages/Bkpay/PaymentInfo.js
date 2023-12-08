@@ -64,11 +64,13 @@ function PaymentInfo(props) {
               await props.functionRenderList();
             }}
           >
-            {biCarDisplay && <BiCart className="text-lg lg:text-2xl" />}
+            {biCarDisplay && (
+              <BiCart className="text-lg lg:text-2xl cursor-pointer" />
+            )}
           </div>
         </div>
         <div>
-          <AiOutlinePrinter className="text-lg lg:text-2xl" />
+          <AiOutlinePrinter className="text-lg lg:text-2xl cursor-pointer" />
         </div>
       </div>
     </div>
