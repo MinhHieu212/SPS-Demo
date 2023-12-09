@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -9,11 +9,18 @@ import { LoginAPI } from "../../APIs/LoginAPI/LoginAPI";
 import { UserInfoAPI } from "../../APIs/UserInfoAPI/UserInfoAPI";
 import { useRole } from "../../Contexts/RoleContext";
 import { useUserInfo } from "../../Contexts/UserInfoContext";
+import { useSocket } from "../../Contexts/SocketIOContenxt";
+import { io } from "socket.io-client";
+import { getNoticeStaff } from "../../APIs/StaffAPI/StaffAPI";
+import { getNotice } from "../../APIs/SpsoAPI/SpsoAPI";
+import { useNewNotice } from "../../Contexts/NoticeContext";
 
 const Login = () => {
+  const UserSocket = useSocket();
   const roleContext = useRole();
   const userInfoContext = useUserInfo();
   const navigate = useNavigate();
+  const NewNoticeContext = useNewNotice();
 
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
@@ -39,19 +46,18 @@ const Login = () => {
 
     const userInformation = await UserInfoAPI();
 
-    console.log("Responce from Login API ", response);
-    console.log(
-      "Responce from User Information API (Role)",
-      userInformation?.data?.data?.role
-    );
-    console.log(
-      "Responce from User Information API",
-      userInformation?.data?.data
-    );
-
     await roleContext.updateRole(userInformation?.data?.data?.role);
 
     await userInfoContext.updateUserInfo(userInformation?.data?.data);
+
+    // const socket = io("http://172.16.1.230:8000");
+    const socket = io("https://ssps-7wxl.onrender.com");
+
+    socket.on("connect", () => {
+      console.log("Init Socket IO Connecttion Signal", socket?.id);
+    });
+
+    UserSocket?.connectSocket(socket);
 
     if (response?.status === 200) {
       if (!Object.keys(errors).length) {
@@ -60,8 +66,15 @@ const Login = () => {
     } else {
       setLoginStatus(response?.response?.data?.message);
     }
-  };
 
+    if (userInformation?.data?.data?.role === "spso") {
+      const responseNoticeSpso = await getNotice({});
+      NewNoticeContext?.updateNewNotice(responseNoticeSpso?.data?.data.news);
+    } else if (userInformation?.data?.data?.role === "staff") {
+      const responseNoticeStaff = await getNoticeStaff({});
+      NewNoticeContext?.updateNewNotice(responseNoticeStaff?.data?.data.news);
+    }
+  };
   const handleReset = () => {
     reset();
     setLoginStatus(null);

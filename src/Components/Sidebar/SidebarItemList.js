@@ -7,7 +7,9 @@ import {
   MangageIcon,
   ReportIcon,
   ActivitiesIcon,
+  NoticeIcon,
 } from "../../Assets/Icons/Icons";
+import { useNewNotice } from "../../Contexts/NoticeContext";
 
 export const StudentSideBarOption = [
   { title: "Trang chủ", icon: <HomeIcon />, to: "/Home" },
@@ -22,11 +24,21 @@ export const SPSOSideBarOption = [
   { title: "Cấu hình hệ thống", icon: <ConfigIcon />, to: "/Config" },
   { title: "Hoạt động In Ấn", icon: <ActivitiesIcon />, to: "/Activities" },
   { title: "Báo cáo", icon: <ReportIcon />, to: "/Report" },
+  {
+    title: "Thông báo",
+    icon: <NoticeIcon />,
+    to: "/Notice",
+  },
   { title: "Hướng dẫn", icon: <SupportIcon />, to: "/Support" },
 ];
 
 export const StaffSideBarOption = [
   { title: "Trang chủ", icon: <HomeIcon />, to: "/Home" },
   { title: "Hệ thống máy in", icon: <MangageIcon />, to: "/ManageStaff" },
+  {
+    title: "Thông báo",
+    icon: <NoticeIcon />,
+    to: "/NoticeStaff",
+  },
   { title: "Hướng dẫn", icon: <SupportIcon />, to: "/Support" },
 ];

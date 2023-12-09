@@ -1,35 +1,55 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InfoField from "../../Utils/InfoField";
 import CenterModal from "../BaseModals/CenterModal";
+import { editPtr } from "../../APIs/StaffAPI/StaffAPI";
+import { toast } from "../../Utils/Toastify";
+import ReactSwitch from "react-switch";
 
+export const newPtr = {};
 const PrinterInfoAndConfigModal = ({
   children,
-  PrinterProps = {
-    printerId: "1234",
-    brand: "Sony",
-    model: "PIXMA E4750",
-    desc: "Tốc độ in tiêu chuẩn ISO (A4): 3.9 ipm đen/màu",
-  },
+  id,
+  brand,
+  model,
+  description,
+  status,
+  fileType,
+  setRenderList,
 }) => {
   const [openModal, setOpenModal] = useState(false);
+
   const handleClose = () => {
     setOpenModal(false);
   };
 
-  const [printerInfo, setPrinterInfo] = useState(PrinterProps);
-  const [fileTypes, setFileTypes] = useState([
-    "pdf",
-    "docx",
-    "pptx",
-    "docx",
-    "pptx",
-  ]);
+  const handleClick = () => {
+    newPtr.status = checked === "enable" ? 1 : 0;
+    newPtr.printerId = id;
+
+    try {
+      const handleEditAPI = async (newData) => {
+        const request = await editPtr(newData);
+        setRenderList();
+      };
+      handleEditAPI(newPtr);
+      setOpenModal(false);
+      toast.success("Tùy chỉnh thông tin máy tin thành công");
+    } catch (error) {
+      toast.error("Tùy chỉnh thông tin máy tin thất bại");
+    }
+  };
+  const [checked, setChecked] = useState(
+    status === "Hoạt động" ? "enable" : "disable"
+  );
+  const toggleState = (curr) => {
+    setChecked((curr) => (curr === "enable" ? "disable" : "enable"));
+  };
 
   return (
     <>
       <div onClick={() => setOpenModal(true)}> {children}</div>
       <CenterModal open={openModal} handleClose={handleClose}>
-        <div className="w-[380px] md:w-[550px] mx-auto overflow-hidden rounded-lg border-[1px] border-[#367FA9]">
+        <div className="w-[20rem] md:w-[550px] mx-auto overflow-hidden rounded-lg border-[1px] border-[#367FA9]">
           <div className="header bg-[#3C8DBC] text-white text-[20px] pt-1 font-bold flex items-center justify-center h-[60px] w-full">
             CẤU HÌNH CỦA MÁY IN VÀ TÙY CHỈNH
           </div>
@@ -39,21 +59,15 @@ const PrinterInfoAndConfigModal = ({
                 <p className="font-semibold text-[20] md:text-[24px] pb-2">
                   Thông tin máy in
                 </p>
-                <InfoField
-                  fieldName={"ID máy in"}
-                  fieldValue={printerInfo?.printerId}
-                ></InfoField>
+                <InfoField fieldName={"ID máy in"} fieldValue={id}></InfoField>
                 <InfoField
                   fieldName={"Nhãn hiệu"}
-                  fieldValue={printerInfo?.brand}
+                  fieldValue={brand}
                 ></InfoField>
-                <InfoField
-                  fieldName={"Mẫu máy"}
-                  fieldValue={printerInfo?.model}
-                ></InfoField>
+                <InfoField fieldName={"Mẫu máy"} fieldValue={model}></InfoField>
                 <InfoField
                   fieldName={"Mô tả"}
-                  fieldValue={printerInfo?.desc}
+                  fieldValue={description}
                 ></InfoField>
               </div>
               <div className="w-[40%]  p-3 md:p-4">
@@ -61,10 +75,10 @@ const PrinterInfoAndConfigModal = ({
                   Loại file được in
                 </p>
                 <div className="w-full h-[200px] flex flex-col items-center justify-start overflow-y-scroll rounded-md border-[1px] border-[#367FA9]">
-                  {fileTypes.map((type, index) => {
+                  {fileType?.map((type, index) => {
                     return (
                       <div
-                        className="p-2 bg-[#E6E6E6] rounded-sm text-center w-[90%] h-[100px] mt-2 border-[1px] border-[#367FA9]"
+                        className="p-2 bg-[#e9e9e9] rounded-sm text-center w-[90%] h-[50px] mt-2 border-[1px] border-[#367FA9]"
                         key={index}
                       >
                         {type}
@@ -75,40 +89,35 @@ const PrinterInfoAndConfigModal = ({
               </div>
             </div>
           </div>
-          <div className="flex justify-between items-center mb-2">
-            <div className="w-1/2 pl-5">
-              <div className="w-[200px] flex items-center">
-                <input
-                  type="radio"
-                  className="w-5 h-5"
-                  name="printerState"
-                  id="enable"
-                />
-                <label
-                  htmlFor="enable"
-                  className="ml-3 text-[16px] md:text-[20px] font-semibold"
-                  ld
-                >
-                  Hoạt động
-                </label>
-              </div>
-              <div className="w-[200px] flex items-center">
-                <input
-                  type="radio"
-                  className="w-5 h-5"
-                  name="printerState"
-                  id="disable"
-                />
-                <label
-                  htmlFor="disable"
-                  className="ml-3 text-[16px] md:text-[20px] font-semibold"
-                >
-                  Vô hiệu hóa
-                </label>
+          <div className="flex justify-between  items-center mb-2 ml-4">
+            <div className="flex flex-col justify-start  w-1/2 md:w-1/3 gap-2 md:gap-3">
+              <p className="text-[#066DCC] w-full flex text-[16px] md:text-[20px] font-bold mb-[8px]">
+                Trạng thái máy in:{" "}
+              </p>
+              <div className="flex justify-start">
+                {checked === "enable" ? (
+                  <p className="text-[#066DCC] flex text-[16px] md:text-[20px] font-bold w-full mb-[8px]">
+                    Hoạt động{" "}
+                  </p>
+                ) : (
+                  <p className="text-red-500 flex italic text-[16px] md:text-[20px] font-bold w-full mb-[8px]">
+                    Vô hiệu hóa{" "}
+                  </p>
+                )}
+
+                <div className="switch flex gap-8">
+                  <ReactSwitch
+                    onChange={toggleState}
+                    checked={checked === "enable"}
+                  />
+                </div>
               </div>
             </div>
             <div className="w-1/2 flex items-center justify-end pr-5">
-              <button className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500 hover:bg-blue-300 h-[50px] p-3 w-[80%] md:w-[70%]  rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center">
+              <button
+                onClick={handleClick}
+                className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500 hover:bg-blue-300 h-[50px] p-3 w-[80%] md:w-[70%]  rounded-lg text-[16px] md:text-[20px]  font-semibold text-white flex items-center justify-center"
+              >
                 Xác nhận
               </button>
             </div>

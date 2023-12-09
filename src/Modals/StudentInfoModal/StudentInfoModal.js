@@ -10,6 +10,7 @@ import { UserInfoAPI } from "../../APIs/UserInfoAPI/UserInfoAPI";
 function StudentInfoModal({ children }) {
   const navigate = useNavigate();
   const elementRef = useRef();
+  const modalRef = useRef();
   const [open, setOpen] = useState(false);
   const userInfoContext = useUserInfo();
   const [userInformation, setUserInformation] = useState(userInfoContext.info);
@@ -84,11 +85,11 @@ function StudentInfoModal({ children }) {
                 <span className="text-[#066DCC] text-[20px] font-bold mr-3 leading-7">
                   Số dư hiện tại (tờ):
                 </span>
-                <div className="text-[20px] font-semibold w-[135px] h-[40px] bg-[#D9D9D9] flex items-center justify-center rounded-lg">
+                <div className="text-[20px] font-semibold w-[135px] h-[40px] bg-[#f1eeee] flex items-center justify-center rounded-lg">
                   {Math.floor(userInformation?.balance)}
                 </div>
               </div>
-              <PagesPurchaseModal>
+              <PagesPurchaseModal ref={modalRef}>
                 <button className="bg-[#3C8DBC] bg-gradient-to-br outline-none from-cyan-500 mb-2 mt-4 to-#3C8DBC w-full h-[45px] rounded-md flex items-center justify-center text-white text-[16px] font-bold hover:bg-[#2c5d8d] hover:from-cyan-400 hover:to-[#345a96] transition-all duration-300">
                   MUA THÊM GIẤY
                 </button>

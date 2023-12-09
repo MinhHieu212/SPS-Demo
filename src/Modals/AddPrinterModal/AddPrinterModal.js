@@ -3,19 +3,23 @@ import CenterModal from "../BaseModals/CenterModal";
 import "./AddPrinterModal.scss";
 import { InfoField2 } from "../../Utils/InfoField";
 import filled from "@material-tailwind/react/theme/components/timeline/timelineIconColors/filled";
+import { addPrinter } from "../../APIs/SpsoAPI/SpsoAPI";
 
-export const AddPrinterModal = ({ children }) => {
+export const newPrinter = {
+  location: {},
+};
+export const AddPrinterModal = ({ children, functionRenderList }) => {
   const [openAPModal, setOpenAPModal] = useState(false);
   const handleClose = () => {
     setOpenAPModal(false);
   };
 
   const [values_AP, setValues_AP] = useState({
-    ID: "0953",
+    ID: "",
     brand: "",
     model: "",
     location: { facility: "", department: "", room: "" },
-    description: "None",
+    description: "",
   });
 
   const [ID, setID] = useState(values_AP.ID);
@@ -26,10 +30,12 @@ export const AddPrinterModal = ({ children }) => {
   const [facilities, setFacilities] = useState("");
   const [departments, setDepartments] = useState([]);
   const [rooms, setRooms] = useState([]);
+  const [room, setRoom] = useState("");
+  const [dept, setDept] = useState("");
 
   useEffect(() => {
     if (location.facility === "Cơ sở 1") {
-      setDepartments(["B1", "B2", "B3"]);
+      setDepartments(["B1", "B2", "B3", "B4", "B5"]);
     } else if (location.facility === "Cơ sở 2") {
       setDepartments(["H1", "H3", "H6"]);
     }
@@ -37,17 +43,21 @@ export const AddPrinterModal = ({ children }) => {
 
   useEffect(() => {
     if (location.department === "B1") {
-      setRooms(["304", "305", "306"]);
+      setRooms(["109", "305", "306"]);
     } else if (location.department === "B2") {
       setRooms(["404", "405", "406"]);
     } else if (location.department === "B3") {
       setRooms(["504", "505", "506"]);
+    } else if (location.department === "B4") {
+      setRooms(["105", "405", "407"]);
+    } else if (location.department === "B5") {
+      setRooms(["203", "204", "205"]);
     } else if (location.department === "H1") {
-      setRooms(["704", "705", "706"]);
+      setRooms(["109", "110", "111"]);
     } else if (location.department === "H3") {
-      setRooms(["604", "605", "606"]);
+      setRooms(["401", "402", "403"]);
     } else if (location.department === "H6") {
-      setRooms(["204", "205", "206"]);
+      setRooms(["211", "312", "601", "602"]);
     }
   }, [location.department]);
 
@@ -97,8 +107,21 @@ export const AddPrinterModal = ({ children }) => {
     setValues_AP({ ...values_AP, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    newPrinter.printerId = ID;
+    newPrinter.brand = brand;
+    newPrinter.model = type;
+    newPrinter.location.facility = facilities === "Cơ sở 1" ? "CS1" : "CS2";
+    newPrinter.location.department = dept;
+    newPrinter.location.room = room;
+    newPrinter.status = checked === "active" ? 1 : 0;
+    newPrinter.description = desc;
+    const handleAddAPI = async (newData) => {
+      const request = await addPrinter(newData);
+      functionRenderList();
+    };
+    handleAddAPI(newPrinter);
+    setOpenAPModal(false);
   };
 
   return (
@@ -124,7 +147,7 @@ export const AddPrinterModal = ({ children }) => {
                   type="text"
                   className="block w-full"
                   value={ID}
-                  readOnly
+                  onChange={(e) => setID(e.target.value)}
                 />
               </div>
             </div>
@@ -167,7 +190,6 @@ export const AddPrinterModal = ({ children }) => {
                   onChange={(e) => handleSelectChange(e, "facility")}
                 >
                   {" "}
-                  {/*onChange={updateBuilding} */}
                   <option selected="true" disabled="disable" value="">
                     Cơ sở...
                   </option>
@@ -180,13 +202,20 @@ export const AddPrinterModal = ({ children }) => {
                   className="w-[35%] h-[2.5rem] border-1 border-[black] focus:outline-none rounded-[0.5rem]"
                   name="department"
                   id="department"
-                  onChange={(e) => handleSelectChange(e, "department")}
+                  onChange={(e) => {
+                    handleSelectChange(e, "department");
+                    setDept(e.target.value);
+                  }}
                 >
                   <option selected="true" disabled="disable" value="">
                     Tòa...
                   </option>
-                  {departments.map((dep) => {
-                    return <option value={dep}>{dep}</option>;
+                  {departments?.map((dep, index) => {
+                    return (
+                      <option key={index} value={dep}>
+                        {dep}
+                      </option>
+                    );
                   })}
                 </select>
 
@@ -195,13 +224,20 @@ export const AddPrinterModal = ({ children }) => {
                   className="w-[40%] h-[2.5rem] border-1 border-[black] focus:outline-none rounded-[0.5rem]"
                   name="room"
                   id="room"
-                  onChange={(e) => handleSelectChange(e, "room")}
+                  onChange={(e) => {
+                    handleSelectChange(e, "room");
+                    setRoom(Number(e.target.value));
+                  }}
                 >
                   <option selected="true" disabled="disable" value="">
                     Phòng...
                   </option>
-                  {rooms.map((rm) => {
-                    return <option value={rm}>{rm}</option>;
+                  {rooms?.map((rm, index) => {
+                    return (
+                      <option key={index} value={rm}>
+                        {rm}
+                      </option>
+                    );
                   })}
                 </select>
               </div>
@@ -255,7 +291,7 @@ export const AddPrinterModal = ({ children }) => {
                       htmlFor="inactive"
                       className="text-[16px] md:text-[20px] font-semibold p-0"
                     >
-                      Không hoạt động
+                      Tạm dừng
                     </label>
                   </div>
                 </div>

@@ -1,36 +1,48 @@
-import React, { useEffect, useState } from "react";
-
-const ActivitiesFilterModal = ({ children }) => {
+import React, { useEffect, useRef, useState } from "react";
+export const ActivityFilter = {
+  sortName: null,
+  sortPayment: null,
+};
+const ActivitiesFilterModal = ({ children, functionSetRenderList }) => {
   const [open, setOpen] = useState(false);
-
+  const modalRef = useRef();
   const [alphabet, setAlphabet] = useState("all");
   const [sort, setSort] = useState("all");
-
   const cancelFilter = () => {
     setOpen(false);
     setSort("all");
     setAlphabet("all");
+    ActivityFilter.sortName = null;
+    ActivityFilter.sortPayment = null;
+    functionSetRenderList();
   };
 
   const applyFilter = () => {
-    console.log("Params Filter Activity : ", {
-      alphabet: alphabet,
-      sort: sort,
-    });
+    if (alphabet === "a-z") ActivityFilter.sortName = 1;
+    else if (alphabet === "z-a") ActivityFilter.sortName = -1;
+    else ActivityFilter.sortName = null;
+
+    if (sort === "ascending") ActivityFilter.sortPayment = 1;
+    else if (sort === "descending") ActivityFilter.sortPayment = -1;
+    else ActivityFilter.sortPayment = null;
+
+    functionSetRenderList();
     setOpen(false);
   };
 
   useEffect(() => {
-    if (alphabet !== "all") {
-      setSort("all");
-    }
-  }, [sort]);
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
 
-  useEffect(() => {
-    if (sort !== "all") {
-      setAlphabet("all");
-    }
-  }, [alphabet]);
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="Wrapper relative h-[auto] z-10 w-full">
@@ -41,7 +53,10 @@ const ActivitiesFilterModal = ({ children }) => {
         {children}
       </div>
       {open && (
-        <div className="content absolute z-10 top-[140%] right-[50%] translate-x-1/2 md:right-[0] md:translate-x-0 h-[auto] p-3 bg-[#E6E6E6] rounded-lg min-h-[250px] w-[300px] md:w-[570px] text-[15px] md:text-[18px] shadow-md border-[1px] border-[#367FA9] ">
+        <div
+          className="content absolute z-10 top-[140%] right-[50%] translate-x-1/2 md:right-[0] md:translate-x-0 h-[auto] p-3 bg-[#E6E6E6] rounded-lg min-h-[250px] w-[300px] md:w-[570px] text-[15px] md:text-[18px] shadow-md border-[1px] border-[#367FA9] "
+          ref={modalRef}
+        >
           <div className="absolute w-[20px] h-[20px] rotate-45 bg-[#E6E6E6] top-[-10px] right-[15px]  border-l-[1px] border-t-[1px] border-[#367FA9]"></div>
           <p className="w-[80%] mx-auto mb-1 text-center text-[blue] font-bold">
             (Chỉ có thể chọn một trong hai kiểu lọc dưới đây)
@@ -77,7 +92,7 @@ const ActivitiesFilterModal = ({ children }) => {
               </div>
             </div>
             <div className="bg-white w-[90%] md:w-[48%] h-[170px] md:h-[180px] mx-auto rounded-md flex-col flex items-center shadow-md border-[1px] border-[#367FA9]">
-              <div className="text-[#1488DB] uppercase border-b-[3px] border-black h-[40px] flex items-center  justify-center font-bold w-full my-2 text-[18px]">
+              <div className="text-[#1488DB] uppercase border-b-[3px] border-[#367FA9] h-[40px] flex items-center  justify-center font-bold w-full my-2 text-[18px]">
                 Hiển thị số lần in
               </div>
               <div

@@ -4,18 +4,22 @@ import { AddIcon, DeleteIcon, FileIcon } from "../../Assets/Icons/Icons";
 import RemoveFileModal from "../../Modals/RemoveFileModal/RemoveFileModal";
 import { ConfirmPrintingModal } from "../../Modals";
 import { getPrinterInfo } from "../../APIs/PrintersAPI/PrintersAPI";
+import { useSocket } from "../../Contexts/SocketIOContenxt";
+import { fi } from "date-fns/locale";
 
 const ConfigFile = () => {
   const navigate = useNavigate();
+  const UserSocket = useSocket();
   const { PrinterID } = useParams();
   const [files, setFiles] = useState([]);
   const [renderInfo, setrednerInfo] = useState(true);
   const [indexFile, setIndexFile] = useState(0);
   const [printerInfo, setPrinterInfo] = useState({
     id: PrinterID,
-    localtion: "......",
+    localtion: "....",
     room: "...",
     queue: "...",
+    fileType: [],
   });
 
   useEffect(() => {
@@ -24,33 +28,44 @@ const ConfigFile = () => {
     }
   }, []);
 
-  useEffect(() => {
-    const callAPI = async () => {
-      const params = {
-        printerId: PrinterID,
-      };
-
-      const response = await getPrinterInfo(params);
-
-      console.log("get information details: ", response);
-
-      setPrinterInfo((printerInfo) => ({
-        ...printerInfo,
-        id: PrinterID,
-        localtion:
-          response?.data?.location?.facility +
-          " - " +
-          response?.data?.location?.department,
-        room: response?.data?.location?.room,
-        queue: response?.data?.waiting_amount,
-      }));
+  const callAPI = async () => {
+    const params = {
+      printerId: PrinterID,
     };
 
+    const response = await getPrinterInfo(params);
+
+    setPrinterInfo((printerInfo) => ({
+      ...printerInfo,
+      id: PrinterID,
+      localtion:
+        response?.data?.location?.facility +
+        " - " +
+        response?.data?.location?.department,
+      room: response?.data?.location?.room,
+      queue: response?.data?.waiting_amount,
+      fileType: response?.data?.currentFileType,
+    }));
+  };
+
+  const fetchDataAndUpdate = async () => {
+    await callAPI();
+  };
+
+  useEffect(() => {
     callAPI();
+    if (localStorage.getItem("accessToken") === null) {
+      navigate("/Login");
+    }
   }, [renderInfo]);
 
+  UserSocket?.socket?.on("update-printer-list", () => {
+    console.log("Received update-printer-list signal");
+    fetchDataAndUpdate();
+  });
+
   const handleFileChange = (e) => {
-    const newFiles = Array.from(e.target.files).map((file, index) => {
+    const newFiles = Array.from(e.target.files)?.map((file, index) => {
       return {
         file: file,
         numVersion: 1,
@@ -58,7 +73,7 @@ const ConfigFile = () => {
         colorOption: false,
         landScapeOption: false,
         pagesPerSheet: 1,
-        pageSideNumber: 1,
+        numSides: 1,
       };
     });
 
@@ -82,6 +97,8 @@ const ConfigFile = () => {
       prevFiles.filter((file) => file.file.name !== fileName)
     );
   };
+
+  let fileTypes = printerInfo?.fileType.map((file) => "." + file);
 
   return (
     <div className="configFile max-w-[1280px] px-[10px] lg:px-[20px] w-full mx-auto bg-[white] shadow-sm min-h-[93vh]">
@@ -120,7 +137,24 @@ const ConfigFile = () => {
         </div>
 
         <div className="flex items-center justify-evenly lg:w-[80%] w-[100%]">
-          <div className="flex items-center justify-center w-full">
+          <div className="w-[20%] border-gray-300  border-3 rounded-lg mt-[30px] h-[120px] ">
+            <p className="text-[#1488DB]  border-b-[3px]  text-center text-[14px] lg:text-[16px] border-gray-300">
+              Cho phép
+            </p>
+            <div className="w-full h-[75%] overflow-scroll">
+              {printerInfo?.fileType.map((file, index) => {
+                return (
+                  <p
+                    className="text-center w-full text-gray-600 font-normal text-[14px] lg:text-[16px] pt-1"
+                    key={index}
+                  >
+                    .{file}
+                  </p>
+                );
+              })}
+            </div>
+          </div>
+          <div className="flex items-center justify-center w-[75%] ">
             <div className="flex flex-col relative items-center mt-[30px] justify-center w-[100%] h-[120px] border-3 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white">
               <div
                 className={`FilesList w-full h-full flex flex-col items-center justify-center overflow-x-scroll absolute ${
@@ -167,6 +201,7 @@ const ConfigFile = () => {
                 id="dropzone-file"
                 type="file"
                 multiple
+                accept={fileTypes}
                 className="cursor-pointer absolute block opacity-0 w-full h-full z-10"
                 onChange={handleFileChange}
               />
@@ -175,14 +210,16 @@ const ConfigFile = () => {
                 <div className="absolute z-10 top-0 -translate-y-[45px] right-0 flex gap-3 items-center">
                   <label
                     htmlFor="dropzone-file"
-                    className="flex gap-1 items-center justify-center"
+                    className="flex gap-1 items-center justify-center cursor-pointer"
                   >
                     <AddIcon></AddIcon>
-                    <span className="text-[16px] md:text-[20px]">Thêm tệp</span>
+                    <span className="text-[16px] md:text-[20px] ">
+                      Thêm tệp
+                    </span>
                   </label>
 
                   <RemoveFileModal files={files} removeFile={removeFile}>
-                    <div className="flex gap-1 items-center justify-center">
+                    <div className="flex gap-1 items-center justify-center cursor-pointer">
                       <DeleteIcon></DeleteIcon>
                       <span className="text-[16px] md:text-[20px]">
                         Xóa tệp
@@ -342,14 +379,14 @@ const ConfigFile = () => {
             <div className="w-[45%]">
               <p className="text-[#1488DB] mb-2">Cách in</p>
               <select
-                name="pageSideNumber"
-                id="pageSideNumber"
+                name="numSides"
+                id="numSides"
                 className="w-[100%]  mx-auto border-2 border-gray-400 rounded-md p-2"
-                value={files[indexFile]?.pageSideNumber}
+                value={files[indexFile]?.numSides}
                 onChange={(e) => {
                   if (files[indexFile]) {
                     const updatedFiles = [...files];
-                    updatedFiles[indexFile].pageSideNumber = e.target.value;
+                    updatedFiles[indexFile].numSides = e.target.value;
                     setFiles(updatedFiles);
                   }
                 }}

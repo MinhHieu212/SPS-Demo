@@ -9,7 +9,7 @@ import { UserInfoAPI } from "./APIs/UserInfoAPI/UserInfoAPI";
 import { useUserInfo } from "./Contexts/UserInfoContext";
 
 function renderRoutes(routes, role = "") {
-  return routes.map((route, index) => {
+  return routes?.map((route, index) => {
     let Layout;
     if (!route.layout) {
       Layout = EmptyLayout;
@@ -21,7 +21,6 @@ function renderRoutes(routes, role = "") {
     const Page = route.component;
 
     if (route.role === role || route.role === "all") {
-      // console.log("OKE", route.path);
       return (
         <Route
           key={index}
@@ -34,7 +33,6 @@ function renderRoutes(routes, role = "") {
         ></Route>
       );
     } else {
-      // console.log("NOT HAVE", route.path);
     }
   });
 }

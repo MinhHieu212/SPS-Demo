@@ -1,273 +1,59 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Activities.scss";
 import { FilterIcon, SearchIcon } from "../../Assets/Icons/Icons";
 import ActivityItem from "./ActivityItem";
 import { ActivitiesFilterModal } from "../../Modals";
 import { useNavigate } from "react-router-dom";
-
-const activities = [
-  {
-    studentName: "Nguyễn Phạm Thiên Phúc",
-    studentId: "2113619",
-    classes: "MT21KH12",
-    totlePages: 140,
-    major: "Khoa học và kỹ thuật máy tính",
-    history: [
-      {
-        date: "12/2/2023",
-        fileNames: "dstt.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-      {
-        date: "12/2/2023",
-        fileNames: "dstt.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-      {
-        date: "12/2/2023",
-        fileNames: "giaitich.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-      {
-        date: "12/2/2023",
-        fileNames: "giaitich.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-    ],
-  },
-
-  {
-    studentName: "David Nguyễn",
-    studentId: "2114455",
-    classes: "MT21KH12",
-    totlePages: 140,
-    major: "Khoa học và kỹ thuật máy tính",
-    history: [
-      {
-        date: "12/2/2023",
-        fileNames: "dstt.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-      {
-        date: "12/2/2023",
-        fileNames: "giaitich.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-    ],
-  },
-  {
-    studentName: "Trần Minh Hiếu",
-    studentId: "2113363",
-    classes: "MT21KH12",
-    totlePages: 140,
-    major: "Khoa học và kỹ thuật máy tính",
-    history: [
-      {
-        date: "12/2/2023",
-        fileNames: "dstt.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-      {
-        date: "12/2/2023",
-        fileNames: "giaitich.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-      {
-        date: "12/2/2023",
-        fileNames: "giaitich.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-    ],
-  },
-  {
-    studentName: "David Nguyễn",
-    studentId: "2114455",
-    classes: "MT21KH12",
-    totlePages: 140,
-    major: "Khoa học và kỹ thuật máy tính",
-    history: [
-      {
-        date: "12/2/2023",
-        fileNames: "dstt.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-      {
-        date: "12/2/2023",
-        fileNames: "giaitich.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-    ],
-  },
-  {
-    studentName: "Trần Minh Hiếu",
-    studentId: "2113363",
-    classes: "MT21KH12",
-    totlePages: 140,
-    major: "Khoa học và kỹ thuật máy tính",
-    history: [
-      {
-        date: "12/2/2023",
-        fileNames: "dstt.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-      {
-        date: "12/2/2023",
-        fileNames: "giaitich.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-      {
-        date: "12/2/2023",
-        fileNames: "giaitich.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-    ],
-  },
-  {
-    studentName: "David Nguyễn",
-    studentId: "2114455",
-    classes: "MT21KH12",
-    totlePages: 140,
-    major: "Khoa học và kỹ thuật máy tính",
-    history: [
-      {
-        date: "12/2/2023",
-        fileNames: "dstt.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-      {
-        date: "12/2/2023",
-        fileNames: "giaitich.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-    ],
-  },
-  {
-    studentName: "Trần Minh Hiếu",
-    studentId: "2113363",
-    classes: "MT21KH12",
-    totlePages: 140,
-    major: "Khoa học và kỹ thuật máy tính",
-    history: [
-      {
-        date: "12/2/2023",
-        fileNames: "dstt.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-      {
-        date: "12/2/2023",
-        fileNames: "giaitich.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-      {
-        date: "12/2/2023",
-        fileNames: "giaitich.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-    ],
-  },
-  {
-    studentName: "David Nguyễn",
-    studentId: "2114455",
-    classes: "MT21KH12",
-    totlePages: 140,
-    major: "Khoa học và kỹ thuật máy tính",
-    history: [
-      {
-        date: "12/2/2023",
-        fileNames: "dstt.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-      {
-        date: "12/2/2023",
-        fileNames: "giaitich.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-    ],
-  },
-  {
-    studentName: "Võ Tấn Hưng",
-    studentId: "2113619",
-    classes: "MT21KH12",
-    totlePages: 140,
-    major: "Khoa học và kỹ thuật máy tính",
-    history: [
-      {
-        date: "12/2/2023",
-        fileNames: "dstt.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-      {
-        date: "12/2/2023",
-        fileNames: "giaitich.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-      {
-        date: "12/2/2023",
-        fileNames: "giaitich.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-    ],
-  },
-  {
-    studentName: "Trương Thuận Hưng",
-    studentId: "2113336",
-    classes: "MT21KH12",
-    totlePages: 140,
-    major: "Khoa học và kỹ thuật máy tính",
-    history: [
-      {
-        date: "12/2/2023",
-        fileNames: "dstt.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-      {
-        date: "12/2/2023",
-        fileNames: "giaitich.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-      {
-        date: "12/2/2023",
-        fileNames: "giaitich.docx",
-        quantity: 3,
-        page_Quantity: { A4: 140, A3: 0 },
-      },
-    ],
-  },
-];
+import { activities } from "./FixedData";
+import { ActivityFilter } from "../../Modals/ActivitiesFilterModal/ActivitiesFilterModal";
+import { getStudents, getDetailStudent } from "../../APIs/SpsoAPI/SpsoAPI";
+import { useSocket } from "../../Contexts/SocketIOContenxt";
 
 const Activities = () => {
+  const [renderList, setRenderList] = useState(true);
+  const [stID, setStID] = useState("");
+  const [stName, setStName] = useState("");
+  var [name, setName] = useState(null);
+  var [id, setId] = useState(null);
   const navigate = useNavigate();
+  const [fetchAct, setFetchAct] = useState(activities);
+  const UserSocket = useSocket();
+
+  const handleGetStudents = async (params) => {
+    const response = await getStudents(params);
+    // console.log(response?.data?.data);
+    setFetchAct(response?.data?.data);
+  };
+
+  const fetchDataAndUpdate = async (params) => {
+    await handleGetStudents(params);
+  };
+
   useEffect(() => {
+    const params = {
+      studentId: id !== "" ? id : null,
+      studentName: name !== "" ? name : null,
+      sortName: ActivityFilter.sortName,
+      sortPayment: ActivityFilter.sortPayment,
+    };
+    //console.log(params);
+    setFetchAct(activities);
+    handleGetStudents(params);
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Login");
     }
-  }, []);
+  }, [renderList]);
+
+  UserSocket?.socket?.on("update-printer-list", (params) => {
+    console.log("Received update-printer-list Manage SPSO", params);
+    fetchDataAndUpdate(params);
+  });
+
+  UserSocket?.socket?.on("update-student-history", (params) => {
+    console.log("Received update-student-history signal");
+    fetchDataAndUpdate(params);
+  });
+
   return (
     <div className="Activities max-w-[1280px] px-[10px] md:px-[20px] bg-[white] mx-auto shadow-sm mb-5 min-h-[93vh]">
       <h2 className="text-2xl lg:text-3xl font-semibold mt-3  printing-title border-b-4 border-[#066DCC] pb-2 md:pb-3  text-[#066DCC]">
@@ -275,26 +61,48 @@ const Activities = () => {
       </h2>
       <div className="w-[100%] flex flex-col items-start md:flex-row mt-3 gap-3">
         <div className="flex flex-col md:flex-row w-[90%] mx-auto gap-3 md:w-[70%] activity-inner-flex-input">
-          <div className="w-[100%] border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white">
+          <form
+            className="w-[100%] border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white"
+            onSubmit={(e) => {
+              e.preventDefault();
+              setId(stID);
+              setRenderList(!renderList);
+            }}
+          >
             <input
               type="text"
               placeholder="Tìm theo ID sinh viên"
               className="w-full outline-none border-none"
+              onChange={(e) => setStID(e.target.value)}
             />
-            <SearchIcon></SearchIcon>
-          </div>
-          <div className="w-[100%]  mx-auto border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white">
+            <button type="submit">
+              <SearchIcon></SearchIcon>
+            </button>
+          </form>
+          <form
+            className="w-[100%]  mx-auto border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white"
+            onSubmit={(e) => {
+              e.preventDefault();
+              setName(stName);
+              setRenderList(!renderList);
+            }}
+          >
             <input
               type="text"
               placeholder="Tìm theo Tên sinh viên"
               className="w-full outline-none border-none"
+              onChange={(e) => setStName(e.target.value)}
             />
-            <SearchIcon></SearchIcon>
-          </div>
+            <button type="submit">
+              <SearchIcon></SearchIcon>
+            </button>
+          </form>
         </div>
 
         <div className="w-[90%] md:w-[30%] mx-auto">
-          <ActivitiesFilterModal>
+          <ActivitiesFilterModal
+            functionSetRenderList={() => setRenderList(!renderList)}
+          >
             <div className="w-full border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white">
               <input
                 type="text"
@@ -322,9 +130,11 @@ const Activities = () => {
             LỊCH SỬ
           </div>
         </div>
-        {activities.map((activity, index) => (
-          <ActivityItem key={index} activity={activity} />
-        ))}
+        <div className="max-h-[79vh] md:max-h-[87vh] lg:max-h-[79vh] min-w-[800px] md:w-full overflow-y-scroll">
+          {fetchAct?.map((activity, index) => (
+            <ActivityItem key={index} activity={activity} />
+          ))}
+        </div>
       </div>
     </div>
   );

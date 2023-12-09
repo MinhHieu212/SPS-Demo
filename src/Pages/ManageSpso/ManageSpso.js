@@ -5,25 +5,27 @@ import ManageSpsoItem from "./ManageSpsoItem";
 import { AddPrinterModal } from "../../Modals/AddPrinterModal/AddPrinterModal";
 import { useNavigate } from "react-router";
 import { FIlterManagePriterModal } from "../../Modals";
-import { getPrintersList, editPrinter } from "../../APIs/SpsoAPI/SpsoAPI";
+import { getPrintersList, addPrinter } from "../../APIs/SpsoAPI/SpsoAPI";
 import { value } from "../../Modals/FIlterManagePriterModal/FIlterManagePriterModal";
-import { newData } from "../../Modals/SPSO_EditPrinter/SPSO_EditPrinter";
+import { PrintersData } from "./FixedData";
+import { useSocket } from "../../Contexts/SocketIOContenxt";
 
 const ManageSpso = () => {
   const [printersList, setPrintersList] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [renderList, setRenderList] = useState(true);
-  const [renderList1, setRenderList1] = useState(true);
 
+  let params = {};
   const navigate = useNavigate();
+  const Usersocket = useSocket();
+
+  const handleSPSOApi = async (params) => {
+    const response = await getPrintersList(params);
+    setPrintersList(response?.data?.data);
+  };
+
   useEffect(() => {
-    const handleSPSOApi = async (params) => {
-      const response = await getPrintersList(params);
-      console.log("reponse from get printers api: ", response?.data?.data);
-      //console.log(data);
-      setPrintersList(response?.data?.data);
-    };
-    const params = {};
+    params = {};
     if (value.status === "all") delete params.status;
     else if (value.status === "enable") params.status = 1;
     else params.status = 0;
@@ -36,23 +38,30 @@ const ManageSpso = () => {
     if (value.timeActive === "ascending") params.sortDirection = "1";
     else params.sortDirection = "-1";
     params.searchField = value.searchField;
+
+    setPrintersList([]);
     handleSPSOApi(params);
-    //console.log(params);
+
     if (localStorage.getItem("accessToken") === null) {
       navigate("/Login");
     }
   }, [renderList]);
 
-  useEffect(() => {
-    const handleEditAPI = async (newData) => {
-      const request = await editPrinter(newData);
-      setRenderList(!renderList);
-    };
-    handleEditAPI(newData);
-  }, [renderList1]);
-  //console.log(printersList);
-  const printers = printersList.printers;
-  //console.log(printers);
+  const fetchDataAndUpdate = async (params) => {
+    await handleSPSOApi(params);
+  };
+
+  Usersocket?.socket?.on("update-printer-list", (params) => {
+    console.log("Received update-printer-list Manage SPSO", params);
+    fetchDataAndUpdate(params);
+  });
+
+  Usersocket?.socket?.on("update-student-history", (params) => {
+    console.log("Received update-student-history signal");
+    fetchDataAndUpdate(params);
+  });
+
+  const printers = printersList?.printers;
 
   return (
     <div className="Manage mx-auto max-w-[1280px] w-full px-[10px] lg:px-[20px] bg-[white] shadow-sm pb-5 min-h-[93vh]">
@@ -61,7 +70,9 @@ const ManageSpso = () => {
           QUẢN LÝ HỆ THỐNG MÁY IN
         </h2>
         <div>
-          <AddPrinterModal>
+          <AddPrinterModal
+            functionRenderList={() => setRenderList(!renderList)}
+          >
             <button className="text-[14px] lg:text-[18px] text-white bg-[#3C8DBC] font-semibold md:px-[30px] px-[5px] mf:px-[10px] py-2 rounded-md">
               Thêm máy in
             </button>
@@ -76,30 +87,32 @@ const ManageSpso = () => {
           </div>
           <div className="bg-white flex flex-row text-base font-bold justify-center items-center text-center py-[14px]">
             <p className="text-base lg:text-xl w-[40%]">
-              {printersList.totalPrinter || 0}
+              {printersList?.totalPrinter || 0}
             </p>
             <p className="text-base lg:text-xl w-[60%]">
-              {printersList.activatedPrinter || 0}
+              {printersList?.activatedPrinter || 0}
             </p>
           </div>
         </div>
         <div className="w-full md:w-1/2 lg:w-2/3 flex flex-col lg:flex-row gap-3 ">
-          <div className="w-full lg:w-1/2 border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white">
+          <form
+            className="w-full lg:w-1/2 border h-[50px] border-black rounded-lg flex items-center justify-between pr-3 bg-white"
+            onSubmit={(e) => {
+              e.preventDefault();
+              setRenderList(!renderList);
+              value.searchField = inputValue;
+            }}
+          >
             <input
               type="text"
               placeholder="Tìm theo ID máy in"
               className="w-full outline-none border-none"
               onChange={(e) => setInputValue(e.target.value)}
             />
-            <div
-              onClick={(e) => {
-                setRenderList(!renderList);
-                value.searchField = inputValue;
-              }}
-            >
+            <button type="submit">
               <SearchIcon></SearchIcon>
-            </div>
-          </div>
+            </button>
+          </form>
           <div className="w-[100%] lg:w-1/2">
             <FIlterManagePriterModal
               functionRenderList={() => setRenderList(!renderList)}
@@ -121,32 +134,59 @@ const ManageSpso = () => {
         <div className=" min-w-[800px] md:w-full max-h-[60px]  flex flex-row mx-auto justify-between shadow-lg items-center bg-[#3C8DBC] text-[16px]  lg:text-[18px] font-bold py-3 px-4 mt-8 rounded-sm  text-white">
           <div className="text-center w-[10%]">ID MÁY IN</div>
           <div className="w-[15%] text-center">TRẠNG THÁI</div>
-          <div className="text-center w-[20%]">VỊ TRÍ</div>
+          <div className="text-center w-[14%]">VỊ TRÍ</div>
           <div className="text-center w-[15%]"> KÍCH HOẠT</div>
-          <div className="text-center w-[25%]">SỐ YÊU CẦU IN</div>
-          <div className="w-[15%] text-center">THIẾT LẬP</div>
+          <div className="text-center w-[9%]">ĐANG ĐỢI</div>
+          <div className="text-center w-[23%]">YÊU CẦU IN</div>
+          <div className="w-[14%] text-center">THIẾT LẬP</div>
         </div>
-        {printers?.map((printer, index) => (
-          <ManageSpsoItem
-            functionRenderList1={() => setRenderList1(!renderList1)}
-            functionRenderList={() => setRenderList(!renderList)}
-            model={printer.model}
-            description={printer.description}
-            brand={printer.brand}
-            key={index}
-            id={printer.printerId}
-            location={
-              printer.location.facility +
-              ", " +
-              printer.location.department +
-              ", " +
-              printer.location.room
-            }
-            date={printer.activatedTime.slice(0, 10)}
-            status={printer.status ? "Hoạt động" : "Không hoạt động"}
-            queue={printer.printingQueue.length}
-          />
-        ))}
+        <div className="max-h-[79vh] md:max-h-[87vh] lg:max-h-[79vh] min-w-[800px] md:w-full overflow-y-scroll">
+          {printers
+            ? printers?.map((printer, index) => (
+                <ManageSpsoItem
+                  functionRenderList={() => setRenderList(!renderList)}
+                  model={printer.model}
+                  description={printer.description}
+                  brand={printer.brand}
+                  key={index}
+                  id={printer.printerId}
+                  location={
+                    printer.location.facility +
+                    ", " +
+                    printer.location.department +
+                    ", " +
+                    printer.location.room
+                  }
+                  date={printer.activatedTime.slice(0, 10)}
+                  status={printer.status ? "Hoạt động" : "Tạm dừng"}
+                  queue={
+                    printer.printingQueue.length + printer.printingJob.length
+                  }
+                />
+              ))
+            : PrintersData?.map((printer, index) => (
+                <ManageSpsoItem
+                  functionRenderList={() => setRenderList(!renderList)}
+                  model={printer.model}
+                  description={printer.description}
+                  brand={printer.brand}
+                  key={index}
+                  id={printer.printerId}
+                  location={
+                    printer.location.facility +
+                    ", " +
+                    printer.location.department +
+                    ", " +
+                    printer.location.room
+                  }
+                  date={printer.activatedTime.slice(0, 10)}
+                  status={printer.status ? "Hoạt động" : "Tạm dừng"}
+                  queue={
+                    printer.printingQueue.length + printer.printingJob.length
+                  }
+                />
+              ))}
+        </div>
       </div>
     </div>
   );
