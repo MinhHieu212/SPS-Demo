@@ -4,6 +4,21 @@
 
 SPS-FE-Project is a front-end project. The project is currently deployed at [GitHub Pages](https://minhhieu212.github.io/SPS-FE-Project/).
 
+Login credentials for testing
+
+1. Student Role:
+   Email: student1@gmail.com
+   Password: 1
+   
+3. SPSO Role:
+   Email: spso1@gmail.com
+   Password: 1
+   
+5. Staff Role:
+   Email: staff1@gmail.com
+   Password: 1
+   
+
 ## Installation
 
 To run the project locally, follow these steps:
