@@ -4,6 +4,8 @@
 
 SPS-FE-Project is a front-end project developed for the Smart Printing System (SPS) at Đại học Bách Khoa. The project aims to provide a user-friendly interface for students, SPS operators (SPSO), and staff members to interact with the printing system efficiently. It is currently deployed at [GitHub Pages](https://minhhieu212.github.io/SPS-FE-Project/).
 
+Demo video of some features: [https://www.youtube.com/watch?v=deBfEeW0nEw](https://www.youtube.com/watch?v=deBfEeW0nEw) 
+
 ### Project Overview
 
 The SPS-FE-Project offers a comprehensive set of features to streamline the printing process and enhance user experience:
